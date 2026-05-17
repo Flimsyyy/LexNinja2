@@ -169,11 +169,26 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(IsDirty)' != 'true' and '$(_IsCleanTag)' == 'true'">
-      <JsonVersion>$([System.Text.RegularExpressions.Regex]::Match('$(GitDescribe)', '$(_CleanPattern)').Groups[1].Value)</JsonVersion>
+      <RawVersion>$([System.Text.RegularExpressions.Regex]::Match('$(GitDescribe)', '$(_CleanPattern)').Groups[1].Value)</RawVersion>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(JsonVersion)' == ''">
-      <JsonVersion>$(GitDescribe)</JsonVersion>
+    <PropertyGroup Condition="'$(RawVersion)' == ''">
+      <RawVersion>$(GitDescribe)</RawVersion>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <_IsSemVer>$([System.Text.RegularExpressions.Regex]::IsMatch('$(RawVersion)', '^v?\d+\.\d+\.\d+'))</_IsSemVer>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(_IsSemVer)' != 'true'">
+      <!-- 清除原始字符串中可能导致问题的字符（保留字母、数字、点、连字符） -->
+      <_Sanitized>$([System.Text.RegularExpressions.Regex]::Replace('$(RawVersion)', '[^a-zA-Z0-9\.-]', '-'))</_Sanitized>
+      <RawVersion>0.0.0-$(_Sanitized)</RawVersion>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <JsonVersion Condition="'$(RawVersion.StartsWith('v'))' == 'true'">$(RawVersion)</JsonVersion>
+      <JsonVersion Condition="'$(JsonVersion)' == ''">v$(RawVersion)</JsonVersion>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -184,6 +199,7 @@
     <Message Text="Final JsonVersion: $(JsonVersion)" Importance="High" />
     <Message Text="MSBuild Version: $(Version)" Importance="High" />
   </Target>
+
   <Target
     Name="GenerateVersionedManifest"
     BeforeTargets="BeforeBuild"
