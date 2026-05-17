@@ -139,37 +139,42 @@
 
   <Target Name="GetGitVersion" BeforeTargets="GenerateVersionedManifest">
     <Exec
-      Command="git describe --tags --abbrev=0"
+      Command="git describe --tags --long --match &quot;v*&quot; --always"
       ConsoleToMSBuild="true"
       StandardOutputImportance="high"
       IgnoreExitCode="true"
     >
-      <Output TaskParameter="ConsoleOutput" PropertyName="GitTagRaw" />
+      <Output TaskParameter="ConsoleOutput" PropertyName="GitDescribe" />
       <Output TaskParameter="ExitCode" PropertyName="GitExitCode" />
     </Exec>
 
-    <Message Text="Git exit code: $(GitExitCode)" Importance="High" />
-    <Message Text="Git raw output: '$(GitTagRaw)'" Importance="High" />
+    <PropertyGroup>
+      <GitDescribe>$(GitDescribe.Trim())</GitDescribe>
+    </PropertyGroup>
 
-    <PropertyGroup Condition="'$(GitExitCode)' != '0' Or '$(GitTagRaw)' == ''">
-      <GitTagRaw>0.0.0</GitTagRaw>
+    <PropertyGroup Condition="'$(GitExitCode)' != '0' or '$(GitDescribe)' == ''">
+      <GitDescribe>v0.0.0-0-unknown</GitDescribe>
     </PropertyGroup>
 
     <PropertyGroup>
-      <GitVersion>$([System.Text.RegularExpressions.Regex]::Replace($(GitTagRaw.Trim()), '^v', ''))</GitVersion>
+      <HasDash>$([System.Text.RegularExpressions.Regex]::IsMatch('$(GitDescribe)', '-'))</HasDash>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(HasDash)' == 'false'">
+      <GitVersionBase>$(GitDescribe.TrimStart('v'))</GitVersionBase>
+      <JsonVersion>v$(GitVersionBase)</JsonVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(HasDash)' == 'true'">
+      <JsonVersion>$(GitDescribe)</JsonVersion>
     </PropertyGroup>
 
     <PropertyGroup>
-      <JsonVersion>v$(GitVersion)</JsonVersion>
+      <Version>$(JsonVersion.TrimStart('v'))</Version>
+      <FileVersion>$(Version)</FileVersion>
     </PropertyGroup>
 
-    <Message Text="Extracted version: $(GitVersion)" Importance="High" />
-    <Message Text="JSON version: $(JsonVersion)" Importance="High" />
-
-    <PropertyGroup>
-      <Version>$(GitVersion)</Version>
-      <FileVersion>$(GitVersion)</FileVersion>
-    </PropertyGroup>
+    <Message Text="Mod Version: $(JsonVersion)" Importance="High" />
   </Target>
 
   <Target
@@ -222,7 +227,7 @@
           Log.LogError($"Failed to generate versioned JSON: {ex.Message}");
           return false;
       }
-      return true;
+      Success = true;
       ]]>
       </Code>
     </Task>
@@ -243,7 +248,7 @@
     </ItemGroup>
     <Copy SourceFiles="@(BaseLibFiles)" DestinationFolder="$(ModsPath)BaseLib/" />
     <Copy
-      Condition="'$(DebugMode)' == 'true'"
+      Condition="'$(Configuration)' != 'ExportRelease'"
       SourceFiles="$(TargetDir)$(TargetName).pdb"
       DestinationFolder="$(ModsPath)$(MSBuildProjectName)/"
     />
