@@ -21,7 +21,7 @@ jobs:
       - name: Check formatting with CSharpier
         run: dotnet csharpier check .
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore LexNinja2.csproj
       - name: Setup Godot Action
         uses: chickensoft-games/setup-godot@v2.4.1
         with:
@@ -46,12 +46,12 @@ jobs:
           ModsPath: ${{ github.workspace }}/mods_output/
       - name: Package Release Artifacts
         run: |
-          cd mods_output/LittleWizard
-          zip -r ../../LittleWizard-v${{ steps.version.outputs.version }}.zip .
+          cd mods_output/LexNinja2
+          zip -r ../../LexNinja2-v${{ steps.version.outputs.version }}.zip .
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: LittleWizard-v${{ steps.version.outputs.version }}.zip
+          files: LexNinja2-v${{ steps.version.outputs.version }}.zip
           generate_release_notes: true
           draft: false
           prerelease: false
