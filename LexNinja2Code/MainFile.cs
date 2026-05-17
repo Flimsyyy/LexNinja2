@@ -15,8 +15,7 @@ public partial class MainFile : Node
     public const string ModId = "LexNinja2"; //Used for resource filepath
     private static bool _audioInitTriggered = false;
 
-    public static Logger Logger { get; } =
-        new(ModId, LogType.Generic);
+    public static Logger Logger { get; } = new(ModId, LogType.Generic);
 
     public static void Initialize()
     {
