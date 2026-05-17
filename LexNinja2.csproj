@@ -138,10 +138,12 @@
   </ItemGroup>
 
   <Target Name="GetGitVersion" BeforeTargets="GenerateVersionedManifest">
-    <Exec Command="git describe --tags --long --match &quot;v*&quot; --always --dirty"
-          ConsoleToMSBuild="true"
-          StandardOutputImportance="high"
-          IgnoreExitCode="true">
+    <Exec
+      Command="git describe --tags --long --match &quot;v*&quot; --always --dirty"
+      ConsoleToMSBuild="true"
+      StandardOutputImportance="high"
+      IgnoreExitCode="true"
+    >
       <Output TaskParameter="ConsoleOutput" PropertyName="GitDescribe" />
       <Output TaskParameter="ExitCode" PropertyName="GitExitCode" />
     </Exec>
@@ -149,37 +151,40 @@
     <PropertyGroup>
       <GitDescribe>$(GitDescribe.Trim())</GitDescribe>
     </PropertyGroup>
-    
+
     <PropertyGroup Condition="'$(GitExitCode)' != '0' or '$(GitDescribe)' == ''">
       <GitDescribe>v0.0.0-0-unknown</GitDescribe>
     </PropertyGroup>
-    
+
     <PropertyGroup>
-      <IsDirty Condition="$([System.Text.RegularExpressions.Regex]::IsMatch('$(GitDescribe)', '-dirty$'))">true</IsDirty>
+      <IsDirty
+        Condition="$([System.Text.RegularExpressions.Regex]::IsMatch('$(GitDescribe)', '-dirty$'))"
+        >true</IsDirty
+      >
     </PropertyGroup>
-    
+
     <PropertyGroup Condition="'$(IsDirty)' != 'true'">
       <_CleanPattern>^(v[0-9]+\.[0-9]+\.[0-9]+)-0-g[a-f0-9]+$</_CleanPattern>
       <_IsCleanTag>$([System.Text.RegularExpressions.Regex]::IsMatch('$(GitDescribe)', '$(_CleanPattern)'))</_IsCleanTag>
     </PropertyGroup>
-    
+
     <PropertyGroup Condition="'$(IsDirty)' != 'true' and '$(_IsCleanTag)' == 'true'">
       <RawVersion>$([System.Text.RegularExpressions.Regex]::Match('$(GitDescribe)', '$(_CleanPattern)').Groups[1].Value)</RawVersion>
     </PropertyGroup>
-    
+
     <PropertyGroup Condition="'$(RawVersion)' == ''">
       <RawVersion>$(GitDescribe)</RawVersion>
     </PropertyGroup>
-    
+
     <PropertyGroup>
       <_IsSemVer>$([System.Text.RegularExpressions.Regex]::IsMatch('$(RawVersion)', '^v?\d+\.\d+\.\d+'))</_IsSemVer>
     </PropertyGroup>
-    
+
     <PropertyGroup Condition="'$(_IsSemVer)' != 'true'">
       <_Sanitized>$([System.Text.RegularExpressions.Regex]::Replace('$(RawVersion)', '[^a-zA-Z0-9\.-]', '-'))</_Sanitized>
       <RawVersion>0.0.0-$(_Sanitized)</RawVersion>
     </PropertyGroup>
-    
+
     <PropertyGroup>
       <_StartsWithV>$([System.Text.RegularExpressions.Regex]::IsMatch('$(RawVersion)', '^v'))</_StartsWithV>
     </PropertyGroup>
@@ -189,7 +194,7 @@
     <PropertyGroup Condition="'$(_StartsWithV)' != 'true'">
       <JsonVersion>v$(RawVersion)</JsonVersion>
     </PropertyGroup>
-    
+
     <PropertyGroup>
       <Version>$(JsonVersion.TrimStart('v'))</Version>
       <FileVersion>$(Version)</FileVersion>
@@ -198,7 +203,7 @@
     <Message Text="Final JsonVersion: $(JsonVersion)" Importance="High" />
     <Message Text="MSBuild Version: $(Version)" Importance="High" />
   </Target>
-  
+
   <Target
     Name="GenerateVersionedManifest"
     BeforeTargets="BeforeBuild"
