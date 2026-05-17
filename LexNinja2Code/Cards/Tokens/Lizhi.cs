@@ -1,6 +1,5 @@
 ﻿using BaseLib.Extensions;
 using BaseLib.Utils;
-using LexNinja2.LexNinja2Code.Cards;
 using LexNinja2.LexNinja2Code.Cmd;
 using LexNinja2.LexNinja2Code.Extensions;
 using MegaCrit.Sts2.Core.Commands;

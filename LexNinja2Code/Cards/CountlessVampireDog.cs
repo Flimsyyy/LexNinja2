@@ -1,5 +1,4 @@
-﻿using LexNinja2.LexNinja2Code.Cards;
-using LexNinja2.LexNinja2Code.Extensions;
+﻿using LexNinja2.LexNinja2Code.Extensions;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;

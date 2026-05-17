@@ -1,20 +1,10 @@
 ﻿using BaseLib.Abstracts;
-using Godot;
 using LexNinja2.LexNinja2Code.Extensions;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Models.Relics;
-using MegaCrit.Sts2.Core.Nodes.Rooms;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
-using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Rooms;
 
 namespace LexNinja2.LexNinja2Code.Powers;
@@ -26,7 +16,7 @@ public class BecomeNongPower : CustomPowerModel
     public override PowerStackType StackType => PowerStackType.Counter;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
-    protected override object InitInternalData() => (object)new BecomeNongPower.Data();
+    protected override object InitInternalData() => (object)new Data();
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar("Card", "滚木")];
     private string name = "nong";
@@ -80,9 +70,9 @@ public class BecomeNongPower : CustomPowerModel
 
     public void SetSelectedCard(CardModel card)
     {
-        this.GetInternalData<BecomeNongPower.Data>().selectedCard = card.CreateClone();
+        this.GetInternalData<Data>().selectedCard = card.CreateClone();
         ((StringVar)this.DynamicVars["Card"]).StringValue =
-            this.GetInternalData<BecomeNongPower.Data>().selectedCard.Title;
+            this.GetInternalData<Data>().selectedCard.Title;
     }
 
     private class Data
