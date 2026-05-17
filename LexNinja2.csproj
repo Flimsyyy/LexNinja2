@@ -139,7 +139,7 @@
 
   <Target Name="GetGitVersion" BeforeTargets="GenerateVersionedManifest">
     <Exec
-      Command="git describe --tags --long --match &quot;v*&quot; --always"
+      Command="git describe --tags --long --match &quot;v*&quot; --always --dirty"
       ConsoleToMSBuild="true"
       StandardOutputImportance="high"
       IgnoreExitCode="true"
@@ -157,15 +157,22 @@
     </PropertyGroup>
 
     <PropertyGroup>
-      <HasDash>$([System.Text.RegularExpressions.Regex]::IsMatch('$(GitDescribe)', '-'))</HasDash>
+      <IsDirty
+        Condition="$([System.Text.RegularExpressions.Regex]::IsMatch('$(GitDescribe)', '-dirty$'))"
+        >true</IsDirty
+      >
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(HasDash)' == 'false'">
-      <GitVersionBase>$(GitDescribe.TrimStart('v'))</GitVersionBase>
-      <JsonVersion>v$(GitVersionBase)</JsonVersion>
+    <PropertyGroup Condition="'$(IsDirty)' != 'true'">
+      <_CleanPattern>^(v[0-9]+\.[0-9]+\.[0-9]+)-0-g[a-f0-9]+$</_CleanPattern>
+      <_IsCleanTag>$([System.Text.RegularExpressions.Regex]::IsMatch('$(GitDescribe)', '$(_CleanPattern)'))</_IsCleanTag>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(HasDash)' == 'true'">
+    <PropertyGroup Condition="'$(IsDirty)' != 'true' and '$(_IsCleanTag)' == 'true'">
+      <JsonVersion>$([System.Text.RegularExpressions.Regex]::Match('$(GitDescribe)', '$(_CleanPattern)').Groups[1].Value)</JsonVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(JsonVersion)' == ''">
       <JsonVersion>$(GitDescribe)</JsonVersion>
     </PropertyGroup>
 
@@ -174,9 +181,9 @@
       <FileVersion>$(Version)</FileVersion>
     </PropertyGroup>
 
-    <Message Text="Mod Version: $(JsonVersion)" Importance="High" />
+    <Message Text="Final JsonVersion: $(JsonVersion)" Importance="High" />
+    <Message Text="MSBuild Version: $(Version)" Importance="High" />
   </Target>
-
   <Target
     Name="GenerateVersionedManifest"
     BeforeTargets="BeforeBuild"
