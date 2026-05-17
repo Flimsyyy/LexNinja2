@@ -40,7 +40,7 @@ jobs:
       - name: Import Godot project
         run: godot --headless --editor --quit --path . --import
       - name: Publish
-        run: dotnet publish -c Release
+        run: dotnet publish -c ExportRelease
         env:
           GodotPath: ${{ steps.godot-path.outputs.GODOT_EXE }}
           ModsPath: ${{ github.workspace }}/mods_output/
