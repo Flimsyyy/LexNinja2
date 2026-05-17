@@ -21,7 +21,7 @@ jobs:
       - name: Check formatting with CSharpier
         run: dotnet csharpier check .
       - name: Restore dependencies
-        run: dotnet restore LexNinja2.csproj
+        run: dotnet restore
       - name: Setup Godot Action
         uses: chickensoft-games/setup-godot@v2.4.1
         with:
