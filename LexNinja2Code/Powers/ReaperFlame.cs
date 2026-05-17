@@ -9,7 +9,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -21,7 +20,7 @@ public class ReaperFlame : CustomPowerModel
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    protected override object InitInternalData() => (object)new ReaperFlame.Data();
+    protected override object InitInternalData() => (object)new Data();
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(Amount, ValueProp.Unblockable | ValueProp.Unpowered)];

@@ -1,16 +1,10 @@
 ﻿using BaseLib.Abstracts;
-using BaseLib.Utils;
 using Godot;
-using HarmonyLib;
 using LexNinja2.LexNinja2Code.Cards;
 using LexNinja2.LexNinja2Code.Extensions;
 using LexNinja2.LexNinja2Code.Relics;
 using MegaCrit.Sts2.Core.Entities.Characters;
-using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Cards;
-using MegaCrit.Sts2.Core.Models.Relics;
 
 namespace LexNinja2.LexNinja2Code.Character;
 

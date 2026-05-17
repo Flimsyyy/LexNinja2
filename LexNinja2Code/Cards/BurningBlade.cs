@@ -1,10 +1,8 @@
 ﻿using Godot;
-using LexNinja2.LexNinja2Code.Cards;
 using LexNinja2.LexNinja2Code.Cmd;
 using LexNinja2.LexNinja2Code.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;

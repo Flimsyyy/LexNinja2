@@ -1,4 +1,4 @@
-﻿using LexNinja2.LexNinja2Code.Cards;
+﻿using Godot;
 using LexNinja2.LexNinja2Code.Cmd;
 using LexNinja2.LexNinja2Code.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -44,7 +44,7 @@ public class TakeYourHeart()
             {
                 if (instance != null)
                     instance.CombatVfxContainer.AddChildSafely(
-                        (Godot.Node)NGroundFireVfx.Create(Owner.Creature, VfxColor.Purple)
+                        (Node)NGroundFireVfx.Create(Owner.Creature, VfxColor.Purple)
                     );
             }
             await MegaCrit.Sts2.Core.Commands.Cmd.Wait(1F);

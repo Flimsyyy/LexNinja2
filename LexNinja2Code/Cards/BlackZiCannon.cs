@@ -1,4 +1,4 @@
-﻿using LexNinja2.LexNinja2Code.Cards;
+﻿using Godot;
 using LexNinja2.LexNinja2Code.Cmd;
 using LexNinja2.LexNinja2Code.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -31,9 +31,9 @@ public class BlackZiCannon()
         {
             NLargeMagicMissileVfx child = NLargeMagicMissileVfx.Create(
                 creatureNode.GetBottomOfHitbox(),
-                new Godot.Color("50b598")
+                new Color("50b598")
             );
-            NCombatRoom.Instance.CombatVfxContainer.AddChildSafely((Godot.Node)child);
+            NCombatRoom.Instance.CombatVfxContainer.AddChildSafely((Node)child);
             await MegaCrit.Sts2.Core.Commands.Cmd.Wait(child.WaitTime);
         }
         await DamageCmd

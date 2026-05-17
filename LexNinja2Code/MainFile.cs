@@ -3,8 +3,9 @@ using BaseLib.Utils;
 using Godot;
 using Godot.Bridge;
 using HarmonyLib;
-using LexNinja2.LexNinja2Code.Extensions;
+using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
+using Logger = MegaCrit.Sts2.Core.Logging.Logger;
 
 namespace LexNinja2.LexNinja2Code;
 
@@ -14,8 +15,8 @@ public partial class MainFile : Node
     public const string ModId = "LexNinja2"; //Used for resource filepath
     private static bool _audioInitTriggered = false;
 
-    public static MegaCrit.Sts2.Core.Logging.Logger Logger { get; } =
-        new(ModId, MegaCrit.Sts2.Core.Logging.LogType.Generic);
+    public static Logger Logger { get; } =
+        new(ModId, LogType.Generic);
 
     public static void Initialize()
     {

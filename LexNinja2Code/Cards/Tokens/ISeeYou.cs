@@ -1,7 +1,5 @@
 ﻿using BaseLib.Utils;
-using LexNinja2.LexNinja2Code.Cards;
 using LexNinja2.LexNinja2Code.Extensions;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -12,7 +10,6 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Saves.Runs;
-using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Cards;
 

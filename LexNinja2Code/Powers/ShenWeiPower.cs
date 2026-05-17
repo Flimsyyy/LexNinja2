@@ -1,5 +1,4 @@
 ﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Cmd;
 using LexNinja2.LexNinja2Code.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
