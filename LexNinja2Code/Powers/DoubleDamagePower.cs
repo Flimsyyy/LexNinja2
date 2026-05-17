@@ -1,6 +1,5 @@
 ﻿using BaseLib.Abstracts;
 using LexNinja2.LexNinja2Code.Extensions;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -8,7 +7,6 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Powers;
@@ -22,7 +20,7 @@ public class DoubleDamagePower : CustomPowerModel
     public override string CustomPackedIconPath => "DoubleDamagePower.png".PowerImagePath();
     public override string? CustomBigIconPath => "DoubleDamagePower.png".BigPowerImagePath();
 
-    protected override object InitInternalData() => (object)new DoubleDamagePower.Data();
+    protected override object InitInternalData() => (object)new Data();
 
     public override Task BeforeAttack(AttackCommand command)
     {
@@ -33,7 +31,7 @@ public class DoubleDamagePower : CustomPowerModel
             || !command.DamageProps.IsPoweredAttack()
         )
             return Task.CompletedTask;
-        DoubleDamagePower.Data internalData = this.GetInternalData<DoubleDamagePower.Data>();
+        Data internalData = this.GetInternalData<Data>();
         if (internalData.commandToModify != null)
             return Task.CompletedTask;
         internalData.commandToModify = command;
@@ -54,7 +52,7 @@ public class DoubleDamagePower : CustomPowerModel
             || !props.IsPoweredAttack()
         )
             return 1M;
-        DoubleDamagePower.Data internalData = this.GetInternalData<DoubleDamagePower.Data>();
+        Data internalData = this.GetInternalData<Data>();
         return
             internalData.commandToModify != null
             && cardSource != internalData.commandToModify.ModelSource
@@ -65,7 +63,7 @@ public class DoubleDamagePower : CustomPowerModel
     public override async Task AfterAttack(PlayerChoiceContext choiceContext, AttackCommand command)
     {
         DoubleDamagePower power = this;
-        DoubleDamagePower.Data internalData = power.GetInternalData<DoubleDamagePower.Data>();
+        Data internalData = power.GetInternalData<Data>();
         if (command != internalData.commandToModify)
             return;
         internalData.commandToModify = (AttackCommand)null;

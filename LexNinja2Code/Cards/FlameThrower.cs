@@ -1,6 +1,5 @@
 ﻿using BaseLib.Extensions;
 using Godot;
-using LexNinja2.LexNinja2Code.Cards;
 using LexNinja2.LexNinja2Code.Cmd;
 using LexNinja2.LexNinja2Code.Extensions;
 using LexNinja2.LexNinja2Code.Powers;

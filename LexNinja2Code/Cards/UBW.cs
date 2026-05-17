@@ -1,13 +1,10 @@
-﻿using BaseLib.Extensions;
-using Godot;
-using LexNinja2.LexNinja2Code.Cards;
+﻿using Godot;
 using LexNinja2.LexNinja2Code.Cmd;
 using LexNinja2.LexNinja2Code.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -57,7 +54,7 @@ public class UBW() : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetTy
             NCombatRoom instance = NCombatRoom.Instance;
             if (instance != null)
                 instance.CombatVfxContainer.AddChildSafely(
-                    (Godot.Node)NHellraiserVfx.Create(Owner.Creature)
+                    (Node)NHellraiserVfx.Create(Owner.Creature)
                 );
             await MegaCrit.Sts2.Core.Commands.Cmd.Wait(1);
             await DamageCmd

@@ -52,7 +52,7 @@ public class NuclearDragonPower : CustomPowerModel
         child.Scale = Vector2.One * scale;
         NCombatRoom instance = NCombatRoom.Instance;
         if (instance != null)
-            instance.CombatVfxContainer.AddChildSafely((Godot.Node)child);
+            instance.CombatVfxContainer.AddChildSafely((Node)child);
     }
 
     public override async Task BeforeHandDraw(
@@ -77,7 +77,7 @@ public class NuclearDragonPower : CustomPowerModel
         child.Scale = Vector2.One * scale;
         NCombatRoom instance = NCombatRoom.Instance;
         if (instance != null)
-            instance.CombatVfxContainer.AddChildSafely((Godot.Node)child);
+            instance.CombatVfxContainer.AddChildSafely((Node)child);
     }
 
     /*public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)

@@ -1,5 +1,4 @@
 ﻿using Godot;
-using LexNinja2.LexNinja2Code.Cards;
 using LexNinja2.LexNinja2Code.Cmd;
 using LexNinja2.LexNinja2Code.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -11,12 +10,8 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes;
-using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
-using MegaCrit.Sts2.Core.Saves;
-using MegaCrit.Sts2.Core.Settings;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Cards;
@@ -73,7 +68,7 @@ public class HandIonDestruction()
                 NCombatRoom instance = NCombatRoom.Instance;
                 if (instance != null)
                     instance.CombatVfxContainer.AddChildSafely(
-                        (Godot.Node)NGroundFireVfx.Create(hittableEnemy)
+                        (Node)NGroundFireVfx.Create(hittableEnemy)
                     );
             }
         }
