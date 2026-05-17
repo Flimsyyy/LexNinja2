@@ -18,21 +18,38 @@ public class ScarePower : CustomPowerModel
 
     public override string CustomPackedIconPath => "ScarePower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "ScarePower84.png".BigPowerImagePath();
-    
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+
+    public override async Task AfterPlayerTurnStart(
+        PlayerChoiceContext choiceContext,
+        Player player
+    )
     {
         if (player != Owner.Player)
             return;
         NinjaAudio.Play("res://LexNinja2/audio/吓我一跳释放忍术.mp3");
         for (int i = 0; i < Amount; i++)
         {
-            CardModel card = CardFactory.GetDistinctForCombat(Owner.Player, Owner.Player.Character.CardPool.GetUnlockedCards(Owner.Player.UnlockState, Owner.Player.RunState.CardMultiplayerConstraint).Where<CardModel>((Func<CardModel, bool>) (c => c.Tags.Contains(NinjaTags.Ninjutsu))), 1, Owner.Player.RunState.Rng.CombatCardGeneration).FirstOrDefault<CardModel>();
+            CardModel card = CardFactory
+                .GetDistinctForCombat(
+                    Owner.Player,
+                    Owner
+                        .Player.Character.CardPool.GetUnlockedCards(
+                            Owner.Player.UnlockState,
+                            Owner.Player.RunState.CardMultiplayerConstraint
+                        )
+                        .Where<CardModel>(
+                            (Func<CardModel, bool>)(c => c.Tags.Contains(NinjaTags.Ninjutsu))
+                        ),
+                    1,
+                    Owner.Player.RunState.Rng.CombatCardGeneration
+                )
+                .FirstOrDefault<CardModel>();
             if (card == null)
                 return;
             card.AddKeyword(NinjaKeyword.FreeNinjutsu);
             // if (!(Owner.HasPower<WePeacePower>()&&card.Type==CardType.Attack))
             // {
-                await CardCmd.AutoPlay(choiceContext,card.CreateDupe(),null);
+            await CardCmd.AutoPlay(choiceContext, card.CreateDupe(), null);
             // }
         }
     }

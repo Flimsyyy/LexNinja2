@@ -14,24 +14,29 @@ public class GetAllHandsPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
-    protected override object InitInternalData() => (object) new Data();
+
+    protected override object InitInternalData() => (object)new Data();
 
     public override string CustomPackedIconPath => "GetAllHandsPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "GetAllHandsPower84.png".BigPowerImagePath();
-    
+
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if (GetInternalData<Data>().amountsForPlayedCards.Remove(cardPlay.Card, out var value)&&cardPlay.Card.Owner==Owner.Player)
+        if (
+            GetInternalData<Data>().amountsForPlayedCards.Remove(cardPlay.Card, out var value)
+            && cardPlay.Card.Owner == Owner.Player
+        )
         {
             if (!cardPlay.Card.Keywords.Contains(NinjaKeyword.Hand))
             {
                 await PowerCmd.Remove(this);
                 return;
             }
-            await CardPileCmd.Draw(context,1,Owner.Player);
+            await CardPileCmd.Draw(context, 1, Owner.Player);
             await PlayerCmd.GainEnergy(1, Owner.Player);
         }
     }
+
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
         GetInternalData<Data>().amountsForPlayedCards.Add(cardPlay.Card, base.Amount);
@@ -50,6 +55,7 @@ public class GetAllHandsPower : CustomPowerModel
 
     private class Data
     {
-        public readonly Dictionary<CardModel, int> amountsForPlayedCards = new Dictionary<CardModel, int>();
+        public readonly Dictionary<CardModel, int> amountsForPlayedCards =
+            new Dictionary<CardModel, int>();
     }
 }

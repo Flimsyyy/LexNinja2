@@ -12,20 +12,23 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 namespace LexNinja2.LexNinja2Code.Cards;
 
 [Pool(typeof(TokenCardPool))]
-public class AlanWalker() : LexNinja2Card(3,
-    CardType.Power, CardRarity.Event,
-    TargetType.Self)
+public class AlanWalker() : LexNinja2Card(3, CardType.Power, CardRarity.Event, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.Static(StaticHoverTip.Block)];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        NinjaAudio.Stop("res://LexNinja2/audio/Faded.mp3",5f);
+        NinjaAudio.Stop("res://LexNinja2/audio/Faded.mp3", 5f);
         NinjaAudio.Play("res://LexNinja2/audio/AlanWalker.mp3");
-        await PowerCmd.Apply<AlanWalkerPower>(choiceContext,Owner.Creature, 1, Owner.Creature, this);
+        await PowerCmd.Apply<AlanWalkerPower>(
+            choiceContext,
+            Owner.Creature,
+            1,
+            Owner.Creature,
+            this
+        );
         await MegaCrit.Sts2.Core.Commands.Cmd.Wait(0.5f);
         NinjaAudio.PlayLooped("res://LexNinja2/audio/Faded.mp3");
     }
@@ -34,6 +37,7 @@ public class AlanWalker() : LexNinja2Card(3,
     {
         AddKeyword(CardKeyword.Innate);
     }
+
     public override string CustomPortraitPath => $"AlanWalker.png".BigCardImagePath();
     public override string PortraitPath => $"AlanWalker.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/AlanWalker.png".CardImagePath();

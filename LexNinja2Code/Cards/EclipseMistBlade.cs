@@ -12,37 +12,49 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Cards;
 
-public class EclipseMistBlade() : LexNinja2Card(1,
-    CardType.Skill, CardRarity.Uncommon,
-    TargetType.Self)
+public class EclipseMistBlade()
+    : LexNinja2Card(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(8,ValueProp.Move),new LexKelaVar(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new BlockVar(8, ValueProp.Move), new LexKelaVar(1)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/EclipseMistBlade.mp3");
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
         foreach (CardModel card in GetCards().ToList<CardModel>())
         {
             await CardCmd.Exhaust(choiceContext, card);
-            await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner.Creature, DynamicVars["Kela"].BaseValue, Owner.Creature, this);
+            await PowerCmd.Apply<Lexkela>(
+                new ThrowingPlayerChoiceContext(),
+                Owner.Creature,
+                DynamicVars["Kela"].BaseValue,
+                Owner.Creature,
+                this
+            );
         }
     }
 
     public override string CustomPortraitPath => $"EclipseMistBlade_p.png".BigCardImagePath();
     public override string PortraitPath => $"EclipseMistBlade.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/EclipseMistBlade.png".CardImagePath();
-    
+
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(4);
     }
+
     private IEnumerable<CardModel> GetCards()
     {
-        return PileType.Hand.GetPile(this.Owner).Cards.Where<CardModel>((Func<CardModel, bool>) (c => !c.Keywords.Contains(NinjaKeyword.Blade)&&!c.Tags.Contains(CardTag.Shiv)));
+        return PileType
+            .Hand.GetPile(this.Owner)
+            .Cards.Where<CardModel>(
+                (Func<CardModel, bool>)(
+                    c => !c.Keywords.Contains(NinjaKeyword.Blade) && !c.Tags.Contains(CardTag.Shiv)
+                )
+            );
     }
 }

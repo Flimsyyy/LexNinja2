@@ -15,10 +15,10 @@ public class FreeNinjutsuPower : CustomPowerModel
 
     public override string CustomPackedIconPath => "DimDeadTreePower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "DimDeadTreePower84.png".BigPowerImagePath();
-    
+
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Owner!=Owner.Player)
+        if (cardPlay.Card.Owner != Owner.Player)
         {
             return;
         }

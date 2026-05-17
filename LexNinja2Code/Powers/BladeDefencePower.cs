@@ -16,27 +16,32 @@ public class BladeDefencePower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    
+
     public override string CustomPackedIconPath => "ParryPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "ParryPower84.png".BigPowerImagePath();
-    
+
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
         if (side == Owner.Side)
             return;
         await PowerCmd.Remove(this);
     }
-    
+
     public override async Task AfterDamageReceived(
         PlayerChoiceContext choiceContext,
         Creature target,
         DamageResult result,
         ValueProp props,
         Creature? dealer,
-        CardModel? cardSource)
+        CardModel? cardSource
+    )
     {
-
-        if (target != Owner  || !props.IsPoweredAttack() || dealer == null || !result.WasFullyBlocked)
+        if (
+            target != Owner
+            || !props.IsPoweredAttack()
+            || dealer == null
+            || !result.WasFullyBlocked
+        )
             return;
         NinjaAudio.Play("res://LexNinja2/audio/BladeDefence.mp3");
         await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner, 1, Owner, null);
@@ -48,11 +53,16 @@ public class BladeDefencePower : CustomPowerModel
         DamageResult result,
         ValueProp props,
         Creature target,
-        CardModel? cardSource)
+        CardModel? cardSource
+    )
     {
-        if (dealer == null || dealer !=Owner && dealer.PetOwner?.Creature != Owner || !props.IsPoweredAttack() || result.TotalDamage <= 0)
+        if (
+            dealer == null
+            || dealer != Owner && dealer.PetOwner?.Creature != Owner
+            || !props.IsPoweredAttack()
+            || result.TotalDamage <= 0
+        )
             return;
         await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Unpowered, null);
     }
-
 }

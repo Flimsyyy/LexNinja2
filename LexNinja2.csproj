@@ -1,211 +1,208 @@
 <Project Sdk="Godot.NET.Sdk/4.5.1">
-    <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>true</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <!--Makes code analysis regarding null values stricter.-->
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <DefaultItemExcludes>packages/**</DefaultItemExcludes>
-        <AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
-        <PathMap>$(AppOutputBase)=.\</PathMap>
-        <Authors>Flimsy</Authors>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>true</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!--Makes code analysis regarding null values stricter.-->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefaultItemExcludes>packages/**</DefaultItemExcludes>
+    <AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
+    <PathMap>$(AppOutputBase)=.\</PathMap>
+    <Authors>Flimsy</Authors>
+  </PropertyGroup>
 
-    <!-- OS Detection -->
-    <PropertyGroup>
-        <IsWindows>false</IsWindows>
-        <IsLinux>false</IsLinux>
-        <IsOSX>false</IsOSX>
-        <IsWindows Condition="$([MSBuild]::IsOSPlatform('Windows'))">true</IsWindows>
-        <IsLinux Condition="$([MSBuild]::IsOSPlatform('Linux'))">true</IsLinux>
-        <IsOSX Condition="$([MSBuild]::IsOSPlatform('OSX'))">true</IsOSX>
-    </PropertyGroup>
+  <!-- OS Detection -->
+  <PropertyGroup>
+    <IsWindows>false</IsWindows>
+    <IsLinux>false</IsLinux>
+    <IsOSX>false</IsOSX>
+    <IsWindows Condition="$([MSBuild]::IsOSPlatform('Windows'))">true</IsWindows>
+    <IsLinux Condition="$([MSBuild]::IsOSPlatform('Linux'))">true</IsLinux>
+    <IsOSX Condition="$([MSBuild]::IsOSPlatform('OSX'))">true</IsOSX>
+  </PropertyGroup>
 
-    <!-- // NOTE: Megadot is version 4.5.1, and the game won't load your .pck if the Godot version used is newer. -->
+  <!-- // NOTE: Megadot is version 4.5.1, and the game won't load your .pck if the Godot version used is newer. -->
 
-    <!-- Windows -->
-    <PropertyGroup Condition="'$(IsWindows)' == 'true'">
-        <AutoSteamPath>$(registry:HKEY_CURRENT_USER\Software\Valve\Steam@SteamPath)\steamapps</AutoSteamPath>
-        <SteamLibraryPath
-            Condition="'$(SteamLibraryPath)' == '' and Exists('$(AutoSteamPath)/common/Slay the Spire 2')"
-            >$(AutoSteamPath)
+  <!-- Windows -->
+  <PropertyGroup Condition="'$(IsWindows)' == 'true'">
+    <AutoSteamPath>$(registry:HKEY_CURRENT_USER\Software\Valve\Steam@SteamPath)\steamapps</AutoSteamPath>
+    <SteamLibraryPath
+      Condition="'$(SteamLibraryPath)' == '' and Exists('$(AutoSteamPath)/common/Slay the Spire 2')"
+      >$(AutoSteamPath)
         </SteamLibraryPath>
 
-        <GodotPath Condition="'$(GodotPath)' == ''"
-            >C:/megadot/MegaDot_v4.5.1-stable_mono_win64.exe
+    <GodotPath Condition="'$(GodotPath)' == ''"
+      >C:/megadot/MegaDot_v4.5.1-stable_mono_win64.exe
         </GodotPath>
-        <!-- If on Windows and Slay the Spire 2 is not installed in your default steam library, adjust the following.-->
-        <SteamLibraryPath Condition="'$(SteamLibraryPath)' == ''"
-            >C:/Program Files (x86)/Steam/steamapps
+    <!-- If on Windows and Slay the Spire 2 is not installed in your default steam library, adjust the following.-->
+    <SteamLibraryPath Condition="'$(SteamLibraryPath)' == ''"
+      >C:/Program Files (x86)/Steam/steamapps
         </SteamLibraryPath>
 
-        <!-- The below should not need to be changed. -->
-        <Sts2Path Condition="'$(Sts2Path)' == ''"
-            >$(SteamLibraryPath)/common/Slay the Spire 2</Sts2Path
-        >
-        <ModsPath Condition="'$(ModsPath)' == ''">$(Sts2Path)/mods/</ModsPath>
-        <Sts2DataDir Condition="'$(Sts2DataDir)' == ''"
-            >$(Sts2Path)/data_sts2_windows_x86_64
+    <!-- The below should not need to be changed. -->
+    <Sts2Path Condition="'$(Sts2Path)' == ''">$(SteamLibraryPath)/common/Slay the Spire 2</Sts2Path>
+    <ModsPath Condition="'$(ModsPath)' == ''">$(Sts2Path)/mods/</ModsPath>
+    <Sts2DataDir Condition="'$(Sts2DataDir)' == ''"
+      >$(Sts2Path)/data_sts2_windows_x86_64
         </Sts2DataDir>
-    </PropertyGroup>
+  </PropertyGroup>
 
-    <!-- Linux -->
-    <PropertyGroup Condition="'$(IsLinux)' == 'true'">
-        <SteamLibraryPath Condition="'$(SteamLibraryPath)' == ''"
-            >$(HOME)/.local/share/Steam/steamapps
+  <!-- Linux -->
+  <PropertyGroup Condition="'$(IsLinux)' == 'true'">
+    <SteamLibraryPath Condition="'$(SteamLibraryPath)' == ''"
+      >$(HOME)/.local/share/Steam/steamapps
         </SteamLibraryPath>
-        <!-- Change the path here if using a downloaded binary instead of the Steam version-->
-        <GodotPath Condition="'$(GodotPath)' == ''"
-            >$(SteamLibraryPath)/common/Godot Engine/godot.x11.opt.tools.64
+    <!-- Change the path here if using a downloaded binary instead of the Steam version-->
+    <GodotPath Condition="'$(GodotPath)' == ''"
+      >$(SteamLibraryPath)/common/Godot Engine/godot.x11.opt.tools.64
         </GodotPath>
 
-        <!-- The below should not need to be changed. -->
-        <Sts2Path Condition="'$(Sts2Path)' == ''"
-            >$(SteamLibraryPath)/common/Slay the Spire 2</Sts2Path
-        >
-        <ModsPath Condition="'$(ModsPath)' == ''">$(Sts2Path)/mods/</ModsPath>
-        <Sts2DataDir Condition="'$(Sts2DataDir)' == ''"
-            >$(Sts2Path)/data_sts2_linuxbsd_x86_64
+    <!-- The below should not need to be changed. -->
+    <Sts2Path Condition="'$(Sts2Path)' == ''">$(SteamLibraryPath)/common/Slay the Spire 2</Sts2Path>
+    <ModsPath Condition="'$(ModsPath)' == ''">$(Sts2Path)/mods/</ModsPath>
+    <Sts2DataDir Condition="'$(Sts2DataDir)' == ''"
+      >$(Sts2Path)/data_sts2_linuxbsd_x86_64
         </Sts2DataDir>
-    </PropertyGroup>
+  </PropertyGroup>
 
-    <!-- macOS -->
-    <PropertyGroup Condition="'$(IsOSX)' == 'true'">
-        <SteamLibraryPath Condition="'$(SteamLibraryPath)' == ''"
-            >$(HOME)/Library/Application Support/Steam/steamapps
+  <!-- macOS -->
+  <PropertyGroup Condition="'$(IsOSX)' == 'true'">
+    <SteamLibraryPath Condition="'$(SteamLibraryPath)' == ''"
+      >$(HOME)/Library/Application Support/Steam/steamapps
         </SteamLibraryPath>
-        <GodotPath Condition="'$(GodotPath)' == ''"
-            >$(HOME)/Applications/Godot_mono.app/Contents/MacOS/Godot
+    <GodotPath Condition="'$(GodotPath)' == ''"
+      >$(HOME)/Applications/Godot_mono.app/Contents/MacOS/Godot
         </GodotPath>
 
-        <!-- The below should not need to be changed. -->
-        <Sts2Path Condition="'$(Sts2Path)' == ''"
-            >$(SteamLibraryPath)/common/Slay the Spire 2</Sts2Path
-        >
-        <ModsPath Condition="'$(ModsPath)' == ''"
-            >$(Sts2Path)/SlayTheSpire2.app/Contents/MacOS/mods/
+    <!-- The below should not need to be changed. -->
+    <Sts2Path Condition="'$(Sts2Path)' == ''">$(SteamLibraryPath)/common/Slay the Spire 2</Sts2Path>
+    <ModsPath Condition="'$(ModsPath)' == ''"
+      >$(Sts2Path)/SlayTheSpire2.app/Contents/MacOS/mods/
         </ModsPath>
-        <Sts2DataDir Condition="'$(Sts2DataDir)' == ''"
-            >$(Sts2Path)/SlayTheSpire2.app/Contents/Resources/data_sts2_macos_x86_64
+    <Sts2DataDir Condition="'$(Sts2DataDir)' == ''"
+      >$(Sts2Path)/SlayTheSpire2.app/Contents/Resources/data_sts2_macos_x86_64
         </Sts2DataDir>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Diasble architecture mismatch warning; mods are ideally built for all platforms (MSIL)
+                     while your local StS2 version will be for your specific platform. -->
+    <NoWarn>$(NoWarn);MSB3270</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.1.3" PrivateAssets="All" />
+    <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.9" />
+    <AdditionalFiles Include="LexNinja2/localization/**/*.json" />
+    <PackageReference Include="CSharpier.MsBuild" Version="1.2.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="LexNinja2/**" />
+    <Compile Remove="materials/**" />
+    <Compile Remove="shaders/**" />
+    <Compile Remove="images/**" />
+    <EmbeddedResource Remove="LexNinja2/**" />
+    <EmbeddedResource Remove="materials/**" />
+    <EmbeddedResource Remove="shaders/**" />
+    <EmbeddedResource Remove="images/**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="LexNinja2.json" />
+    <None Include="project.godot" />
+    <None Include="LexNinja2/**" />
+  </ItemGroup>
+
+  <ItemGroup Condition="Exists('$(Sts2DataDir)/sts2.dll')">
+    <Reference Include="sts2">
+      <HintPath>$(Sts2DataDir)/sts2.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(Sts2DataDir)/0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="GodotSharp">
+      <HintPath>$(Sts2DataDir)/GodotSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition="!Exists('$(Sts2DataDir)/sts2.dll')">
+    <PackageReference Include="Book.StS2.RefLib" Version="0.105.1-beta" />
+  </ItemGroup>
+
+  <Target Name="GetGitVersion" BeforeTargets="GenerateVersionedManifest">
+    <Exec
+      Command="git describe --tags --abbrev=0"
+      ConsoleToMSBuild="true"
+      StandardOutputImportance="high"
+      IgnoreExitCode="true"
+    >
+      <Output TaskParameter="ConsoleOutput" PropertyName="GitTagRaw" />
+      <Output TaskParameter="ExitCode" PropertyName="GitExitCode" />
+    </Exec>
+
+    <Message Text="Git exit code: $(GitExitCode)" Importance="High" />
+    <Message Text="Git raw output: '$(GitTagRaw)'" Importance="High" />
+
+    <PropertyGroup Condition="'$(GitExitCode)' != '0' Or '$(GitTagRaw)' == ''">
+      <GitTagRaw>0.0.0</GitTagRaw>
     </PropertyGroup>
 
     <PropertyGroup>
-        <!-- Diasble architecture mismatch warning; mods are ideally built for all platforms (MSIL)
-                     while your local StS2 version will be for your specific platform. -->
-        <NoWarn>$(NoWarn);MSB3270</NoWarn>
+      <GitVersion>$([System.Text.RegularExpressions.Regex]::Replace($(GitTagRaw.Trim()), '^v', ''))</GitVersion>
     </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.1.3" PrivateAssets="All" />
-        <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.9" />
-        <AdditionalFiles Include="LexNinja2/localization/**/*.json" />
-        <PackageReference Include="Book.StS2.RefLib" Version="0.105.1-beta" />
-        <PackageReference Include="CSharpier.MsBuild" Version="1.2.6">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-    </ItemGroup>
+    <PropertyGroup>
+      <JsonVersion>v$(GitVersion)</JsonVersion>
+    </PropertyGroup>
 
-    <ItemGroup>
-        <Compile Remove="LexNinja2/**" />
-        <Compile Remove="materials/**" />
-        <Compile Remove="shaders/**" />
-        <Compile Remove="images/**" />
-        <EmbeddedResource Remove="LexNinja2/**" />
-        <EmbeddedResource Remove="materials/**" />
-        <EmbeddedResource Remove="shaders/**" />
-        <EmbeddedResource Remove="images/**" />
-    </ItemGroup>
+    <Message Text="Extracted version: $(GitVersion)" Importance="High" />
+    <Message Text="JSON version: $(JsonVersion)" Importance="High" />
 
-    <ItemGroup>
-        <None Include=".gitignore" />
-        <None Include="LexNinja2.json" />
-        <None Include="project.godot" />
-        <None Include="LexNinja2/**" />
-    </ItemGroup>
+    <PropertyGroup>
+      <Version>$(GitVersion)</Version>
+      <FileVersion>$(GitVersion)</FileVersion>
+    </PropertyGroup>
+  </Target>
 
-    <ItemGroup Condition="Exists('$(Sts2DataDir)/sts2.dll')">
-        <Reference Include="sts2">
-            <HintPath>$(Sts2DataDir)/sts2.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="0Harmony">
-            <HintPath>$(Sts2DataDir)/0Harmony.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="GodotSharp">
-            <HintPath>$(Sts2DataDir)/GodotSharp.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
-    </ItemGroup>
+  <Target
+    Name="GenerateVersionedManifest"
+    BeforeTargets="BeforeBuild"
+    DependsOnTargets="GetGitVersion"
+  >
+    <PropertyGroup>
+      <GeneratedJsonPath>$(OutputPath)LexNinja2.json</GeneratedJsonPath>
+    </PropertyGroup>
 
-    <Target Name="GetGitVersion" BeforeTargets="GenerateVersionedManifest">
-        <Exec
-            Command="git describe --tags --abbrev=0"
-            ConsoleToMSBuild="true"
-            StandardOutputImportance="high"
-            IgnoreExitCode="true"
-        >
-            <Output TaskParameter="ConsoleOutput" PropertyName="GitTagRaw" />
-            <Output TaskParameter="ExitCode" PropertyName="GitExitCode" />
-        </Exec>
+    <GenerateJsonWithVersion
+      SourceFile="LexNinja2.json"
+      DestFile="$(GeneratedJsonPath)"
+      NewVersion="$(JsonVersion)"
+    />
+  </Target>
 
-        <Message Text="Git exit code: $(GitExitCode)" Importance="High" />
-        <Message Text="Git raw output: '$(GitTagRaw)'" Importance="High" />
-
-        <PropertyGroup Condition="'$(GitExitCode)' != '0' Or '$(GitTagRaw)' == ''">
-            <GitTagRaw>0.0.0</GitTagRaw>
-        </PropertyGroup>
-
-        <PropertyGroup>
-            <GitVersion>$([System.Text.RegularExpressions.Regex]::Replace($(GitTagRaw.Trim()), '^v', ''))</GitVersion>
-        </PropertyGroup>
-
-        <PropertyGroup>
-            <JsonVersion>v$(GitVersion)</JsonVersion>
-        </PropertyGroup>
-
-        <Message Text="Extracted version: $(GitVersion)" Importance="High" />
-        <Message Text="JSON version: $(JsonVersion)" Importance="High" />
-
-        <PropertyGroup>
-            <Version>$(GitVersion)</Version>
-            <FileVersion>$(GitVersion)</FileVersion>
-        </PropertyGroup>
-    </Target>
-
-    <Target
-        Name="GenerateVersionedManifest"
-        BeforeTargets="BeforeBuild"
-        DependsOnTargets="GetGitVersion"
-    >
-        <PropertyGroup>
-            <GeneratedJsonPath>$(OutputPath)LexNinja2.json</GeneratedJsonPath>
-        </PropertyGroup>
-
-        <GenerateJsonWithVersion
-            SourceFile="LexNinja2.json"
-            DestFile="$(GeneratedJsonPath)"
-            NewVersion="$(JsonVersion)"
-        />
-    </Target>
-
-    <UsingTask
-        TaskName="GenerateJsonWithVersion"
-        TaskFactory="RoslynCodeTaskFactory"
-        AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll"
-    >
-        <ParameterGroup>
-            <SourceFile ParameterType="System.String" Required="true" />
-            <DestFile ParameterType="System.String" Required="true" />
-            <NewVersion ParameterType="System.String" Required="true" />
-        </ParameterGroup>
-        <Task>
-            <Using Namespace="System.IO" />
-            <Using Namespace="System.Text" />
-            <Code Type="Fragment" Language="cs">
-                <![CDATA[
+  <UsingTask
+    TaskName="GenerateJsonWithVersion"
+    TaskFactory="RoslynCodeTaskFactory"
+    AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll"
+  >
+    <ParameterGroup>
+      <SourceFile ParameterType="System.String" Required="true" />
+      <DestFile ParameterType="System.String" Required="true" />
+      <NewVersion ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Text" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
       try
       {
           string destDir = Path.GetDirectoryName(DestFile);
@@ -227,52 +224,52 @@
       }
       return true;
       ]]>
-            </Code>
-        </Task>
-    </UsingTask>
+      </Code>
+    </Task>
+  </UsingTask>
 
-    <Target Name="CopyToModsFolderOnBuild" AfterTargets="PostBuildEvent">
-        <Message Text="Copying .dll and manifest to mods folder." Importance="high" />
-        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/" />
+  <Target Name="CopyToModsFolderOnBuild" AfterTargets="PostBuildEvent">
+    <Message Text="Copying .dll and manifest to mods folder." Importance="high" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModsPath)$(MSBuildProjectName)/" />
 
-        <Copy
-            SourceFiles="$(OutputPath)LexNinja2.json"
-            DestinationFolder="$(ModsPath)$(MSBuildProjectName)/"
-        />
+    <Copy
+      SourceFiles="$(OutputPath)LexNinja2.json"
+      DestinationFolder="$(ModsPath)$(MSBuildProjectName)/"
+    />
 
-        <Message Text="Copying BaseLib to mods folder." Importance="high" />
-        <ItemGroup>
-            <BaseLibFiles Include="packages/alchyr.sts2.baselib/**/lib/**/BaseLib.dll;packages/alchyr.sts2.baselib/**/Content/BaseLib.pck;packages/alchyr.sts2.baselib/**/Content/BaseLib.json;" />
-        </ItemGroup>
-        <Copy SourceFiles="@(BaseLibFiles)" DestinationFolder="$(ModsPath)BaseLib/" />
-        <Copy
-            Condition="'$(DebugMode)' == 'true'"
-            SourceFiles="$(TargetDir)$(TargetName).pdb"
-            DestinationFolder="$(ModsPath)$(MSBuildProjectName)/"
-        />
-    </Target>
+    <Message Text="Copying BaseLib to mods folder." Importance="high" />
+    <ItemGroup>
+      <BaseLibFiles Include="packages/alchyr.sts2.baselib/**/lib/**/BaseLib.dll;packages/alchyr.sts2.baselib/**/Content/BaseLib.pck;packages/alchyr.sts2.baselib/**/Content/BaseLib.json;" />
+    </ItemGroup>
+    <Copy SourceFiles="@(BaseLibFiles)" DestinationFolder="$(ModsPath)BaseLib/" />
+    <Copy
+      Condition="'$(DebugMode)' == 'true'"
+      SourceFiles="$(TargetDir)$(TargetName).pdb"
+      DestinationFolder="$(ModsPath)$(MSBuildProjectName)/"
+    />
+  </Target>
 
-    <Target
-        Name="GodotPublish"
-        AfterTargets="Publish"
-        Condition="'$(GodotPath)' != '' and Exists('$(GodotPath)') and '$(IsInnerGodotExport)' != 'true'"
-    >
-        <Message Text="Exporting Godot .pck to mods folder" Importance="high" />
-        <Exec
-            Command="&quot;$(GodotPath)&quot; --headless --no-csharp-build --export-pack &quot;BasicExport&quot; &quot;$(ModsPath)$(MSBuildProjectName)/$(MSBuildProjectName).pck&quot;"
-            EnvironmentVariables="IsInnerGodotExport=true;MSBUILDDISABLENODEREUSE=1"
-            ContinueOnError="WarnAndContinue"
-        />
-    </Target>
+  <Target
+    Name="GodotPublish"
+    AfterTargets="Publish"
+    Condition="'$(GodotPath)' != '' and Exists('$(GodotPath)') and '$(IsInnerGodotExport)' != 'true'"
+  >
+    <Message Text="Exporting Godot .pck to mods folder" Importance="high" />
+    <Exec
+      Command="&quot;$(GodotPath)&quot; --headless --no-csharp-build --export-pack &quot;BasicExport&quot; &quot;$(ModsPath)$(MSBuildProjectName)/$(MSBuildProjectName).pck&quot;"
+      EnvironmentVariables="IsInnerGodotExport=true;MSBUILDDISABLENODEREUSE=1"
+      ContinueOnError="WarnAndContinue"
+    />
+  </Target>
 
-    <Target
-        Name="GodotPublishSkipped"
-        AfterTargets="Publish"
-        Condition="'$(GodotPath)' == '' or !Exists('$(GodotPath)')"
-    >
-        <Message
-            Text="Skipping Godot .pck export because GodotPath is not configured."
-            Importance="high"
-        />
-    </Target>
+  <Target
+    Name="GodotPublishSkipped"
+    AfterTargets="Publish"
+    Condition="'$(GodotPath)' == '' or !Exists('$(GodotPath)')"
+  >
+    <Message
+      Text="Skipping Godot .pck export because GodotPath is not configured."
+      Importance="high"
+    />
+  </Target>
 </Project>

@@ -10,8 +10,6 @@ public static class UnderdocksAllEventsPatch
 {
     static void Postfix(ref IEnumerable<EventModel> __result)
     {
-        __result = __result
-            .Concat([ ModelDb.Event<TheSpectre>() ])
-            .Distinct();
+        __result = __result.Concat([ModelDb.Event<TheSpectre>()]).Distinct();
     }
 }

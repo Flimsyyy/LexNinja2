@@ -1,5 +1,4 @@
-﻿using LexNinja2.LexNinja2Code.Cards;
-using LexNinja2.LexNinja2Code.Cmd;
+﻿using LexNinja2.LexNinja2Code.Cmd;
 using LexNinja2.LexNinja2Code.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -11,17 +10,15 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Cards;
 
-public class PlayHearthStone() : LexNinja2Card(4,
-    CardType.Skill, CardRarity.Common,
-    TargetType.Self)
+public class PlayHearthStone()
+    : LexNinja2Card(4, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(14,ValueProp.Move)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(14, ValueProp.Move)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromPower<Lexkela>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Science];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/PlayHearthStone.mp3");
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
@@ -31,7 +28,7 @@ public class PlayHearthStone() : LexNinja2Card(4,
     {
         DynamicVars.Block.UpgradeValueBy(4);
     }
-    
+
     public override string CustomPortraitPath => $"PlayHearthStone_p.png".BigCardImagePath();
     public override string PortraitPath => $"PlayHearthStone.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/PlayHearthStone.png".CardImagePath();

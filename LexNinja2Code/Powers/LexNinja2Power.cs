@@ -1,7 +1,7 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
-using LexNinja2.LexNinja2Code.Extensions;
 using Godot;
+using LexNinja2.LexNinja2Code.Extensions;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 

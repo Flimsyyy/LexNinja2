@@ -13,18 +13,19 @@ public class InfernoDragonPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new ("dian",0)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<Lexkela>()];
-    
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new("dian", 0)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromPower<Lexkela>()];
+
     public override string CustomPackedIconPath => "InfernoDragonPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "InfernoDragonPower.png".BigPowerImagePath();
 
     private decimal CalculateExtraDamage()
     {
-        if (Owner.GetPower<Lexkela>()!=null)
+        if (Owner.GetPower<Lexkela>() != null)
         {
             decimal kela = Owner.GetPower<Lexkela>().Amount;
-            DynamicVars["dian"].BaseValue = Amount*kela;
+            DynamicVars["dian"].BaseValue = Amount * kela;
         }
         else
         {
@@ -32,14 +33,21 @@ public class InfernoDragonPower : CustomPowerModel
         }
         return DynamicVars["dian"].BaseValue;
     }
+
     public override Decimal ModifyDamageMultiplicative(
         Creature? target,
         Decimal amount,
         ValueProp props,
         Creature? dealer,
-        CardModel? cardSource)
+        CardModel? cardSource
+    )
     {
-        decimal extraDamage = CalculateExtraDamage()/100;
-        return dealer != this.Owner && !this.Owner.Pets.Contains<Creature>(dealer) || !props.IsPoweredAttack() || cardSource == null ? 1 : 1+extraDamage;
+        decimal extraDamage = CalculateExtraDamage() / 100;
+        return
+            dealer != this.Owner && !this.Owner.Pets.Contains<Creature>(dealer)
+            || !props.IsPoweredAttack()
+            || cardSource == null
+            ? 1
+            : 1 + extraDamage;
     }
 }

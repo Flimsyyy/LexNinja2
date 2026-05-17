@@ -21,12 +21,14 @@ public class AlanWalkerPower : CustomPowerModel
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
+
     // protected override object InitInternalData() => (object) new Data();
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(7,ValueProp.Unpowered)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new BlockVar(7, ValueProp.Unpowered)];
     public override string CustomPackedIconPath => "AlanWalkerPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "AlanWalkerPower.png".BigPowerImagePath();
-    
+
     // public override Task BeforeCardPlayed(CardPlay cardPlay)
     // {
     //     this.GetInternalData<Data>().amountsForPlayedCards.Add(cardPlay.Card, this.Amount);
@@ -35,14 +37,15 @@ public class AlanWalkerPower : CustomPowerModel
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        
-        // if (GetInternalData<Data>().amountsForPlayedCards.Remove(cardPlay.Card, out var value)&&cardPlay.Card.Owner==Owner.Player) 
-        if (cardPlay.Card.Owner==Owner.Player)
+        // if (GetInternalData<Data>().amountsForPlayedCards.Remove(cardPlay.Card, out var value)&&cardPlay.Card.Owner==Owner.Player)
+        if (cardPlay.Card.Owner == Owner.Player)
         {
             Flash();
             NCombatRoom instance = NCombatRoom.Instance;
-            List<Creature> enemies = base.CombatState.HittableEnemies.Where((Creature e) => e.IsAlive).ToList();
-            if (enemies.LastOrDefault()==null)
+            List<Creature> enemies = base
+                .CombatState.HittableEnemies.Where((Creature e) => e.IsAlive)
+                .ToList();
+            if (enemies.LastOrDefault() == null)
             {
                 return;
             }
@@ -54,7 +57,10 @@ public class AlanWalkerPower : CustomPowerModel
             }
             foreach (Creature item in enemies)
             {
-                NHyperbeamImpactVfx nHyperbeamImpactVfx = NHyperbeamImpactVfx.Create(base.Owner, item);
+                NHyperbeamImpactVfx nHyperbeamImpactVfx = NHyperbeamImpactVfx.Create(
+                    base.Owner,
+                    item
+                );
                 if (nHyperbeamImpactVfx != null)
                 {
                     NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(nHyperbeamImpactVfx);
@@ -63,7 +69,7 @@ public class AlanWalkerPower : CustomPowerModel
             }
             // foreach (Creature enemy in CombatState.HittableEnemies)
             // {
-            //     
+            //
             // }
             await CreatureCmd.GainBlock(Owner, DynamicVars.Block, null);
         }
@@ -71,7 +77,7 @@ public class AlanWalkerPower : CustomPowerModel
 
     public override async Task AfterCombatEnd(CombatRoom room)
     {
-        NinjaAudio.Stop("res://LexNinja2/audio/Faded.mp3",12f);
+        NinjaAudio.Stop("res://LexNinja2/audio/Faded.mp3", 12f);
     }
 
     // private class Data

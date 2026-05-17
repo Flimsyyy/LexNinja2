@@ -12,23 +12,23 @@ public class Radiation : CustomPowerModel
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new ("dian",0)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new("dian", 0)];
 
     public override string CustomPackedIconPath => "Radiation32.png".PowerImagePath();
     public override string? CustomBigIconPath => "Radiation84.png".BigPowerImagePath();
-    
+
     public override async Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
     {
-        if (side!=this.Owner.Side)
+        if (side != this.Owner.Side)
             return;
-        Flash(); 
-        decimal Radiation =(decimal) Owner.MaxHp*Amount/100;
-        await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(),Owner,Radiation,false);
+        Flash();
+        decimal Radiation = (decimal)Owner.MaxHp * Amount / 100;
+        await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), Owner, Radiation, false);
     }
 
     private decimal CalculateMaxHp()
     {
-        DynamicVars["dian"].BaseValue=25*Amount;
+        DynamicVars["dian"].BaseValue = 25 * Amount;
         return DynamicVars["dian"].BaseValue;
     }
 }

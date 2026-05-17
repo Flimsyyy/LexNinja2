@@ -14,18 +14,16 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Cards;
 
-public class GetPeopleTax() : LexNinja2Card(2,
-    CardType.Attack, CardRarity.Rare,
-    TargetType.AllEnemies)
+public class GetPeopleTax()
+    : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(15,ValueProp.Move),new ("Gold",12),new NinjutsuVar(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new DamageVar(15, ValueProp.Move), new("Gold", 12), new NinjutsuVar(2)];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     public override bool CanBeGeneratedInCombat => false;
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         if (Ninjutsu())
         {
@@ -36,11 +34,20 @@ public class GetPeopleTax() : LexNinja2Card(2,
                 if (TestMode.IsOff)
                     monsterPos = NCombatRoom.Instance.GetCreatureNode(enemy)?.VfxSpawnPosition;
                 if (monsterPos.HasValue)
-                    VfxCmd.PlayVfx(monsterPos.Value, "vfx/vfx_coin_explosion_regular", NCombatRoom.Instance?.CombatVfxContainer);
+                    VfxCmd.PlayVfx(
+                        monsterPos.Value,
+                        "vfx/vfx_coin_explosion_regular",
+                        NCombatRoom.Instance?.CombatVfxContainer
+                    );
                 await PlayerCmd.GainGold(DynamicVars["Gold"].IntValue, Owner);
             }
         }
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState).WithHitFx("vfx/vfx_attack_slash",tmpSfx:"heavy_attack.mp3").Execute(choiceContext);
+        await DamageCmd
+            .Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .TargetingAllOpponents(CombatState)
+            .WithHitFx("vfx/vfx_attack_slash", tmpSfx: "heavy_attack.mp3")
+            .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
@@ -48,7 +55,7 @@ public class GetPeopleTax() : LexNinja2Card(2,
         DynamicVars.Damage.UpgradeValueBy(5);
         DynamicVars["Gold"].UpgradeValueBy(3);
     }
-    
+
     public override string CustomPortraitPath => $"GetPeopleTax_p.png".BigCardImagePath();
     public override string PortraitPath => $"GetPeopleTax.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/GetPeopleTax.png".CardImagePath();
@@ -63,13 +70,19 @@ public class GetPeopleTax() : LexNinja2Card(2,
         {
             if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
             {
-                PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner.Creature,-DynamicVars["Renshu"].BaseValue, Owner.Creature, this);
+                PowerCmd.Apply<Lexkela>(
+                    new ThrowingPlayerChoiceContext(),
+                    Owner.Creature,
+                    -DynamicVars["Renshu"].BaseValue,
+                    Owner.Creature,
+                    this
+                );
                 return true;
             }
         }
         return false;
     }
-    
+
     private Boolean CanCastNinjutsu()
     {
         if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
@@ -87,5 +100,6 @@ public class GetPeopleTax() : LexNinja2Card(2,
 
         return false;
     }
+
     protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }
