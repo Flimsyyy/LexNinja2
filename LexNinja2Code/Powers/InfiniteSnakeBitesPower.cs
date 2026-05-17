@@ -18,15 +18,17 @@ public class InfiniteSnakeBitesPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<AngrySnakeBite>(true)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromCard<AngrySnakeBite>(true)];
 
     public override string CustomPackedIconPath => "InfiniteSnakeBitesPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "InfiniteSnakeBitesPower.png".BigPowerImagePath();
-    
+
     public override async Task BeforeHandDraw(
         Player player,
         PlayerChoiceContext choiceContext,
-        ICombatState combatState)
+        ICombatState combatState
+    )
     {
         if (player != Owner.Player)
             return;
@@ -36,7 +38,7 @@ public class InfiniteSnakeBitesPower : CustomPowerModel
         {
             CardModel card = CombatState.CreateCard<AngrySnakeBite>(Owner.Player);
             CardCmd.Upgrade(card);
-            await CardPileCmd.AddGeneratedCardToCombat(card,PileType.Hand,player);
+            await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, player);
         }
     }
 }

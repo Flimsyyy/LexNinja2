@@ -11,19 +11,22 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Cards;
 
-public class GetAllHands() : LexNinja2Card(2,
-    CardType.Skill, CardRarity.Rare,
-    TargetType.Self)
+public class GetAllHands() : LexNinja2Card(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand,CardKeyword.Exhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+        [NinjaKeyword.Hand, CardKeyword.Exhaust];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/GetAllHands.mp3");
-        await PowerCmd.Apply<GetAllHandsPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, 1, Owner.Creature, this);
+        await PowerCmd.Apply<GetAllHandsPower>(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            1,
+            Owner.Creature,
+            this
+        );
         // if (Ninjutsu())
         // {
         //     for (int i = 0; i < DynamicVars.Cards.BaseValue; i++)
@@ -39,8 +42,8 @@ public class GetAllHands() : LexNinja2Card(2,
     protected override void OnUpgrade()
     {
         RemoveKeyword(CardKeyword.Exhaust);
-    }    
-    
+    }
+
     // private Boolean Ninjutsu()
     // {
     //     if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
@@ -57,7 +60,7 @@ public class GetAllHands() : LexNinja2Card(2,
     //     }
     //     return false;
     // }
-    
+
     // private Boolean CanCastNinjutsu()
     // {
     //     if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
@@ -76,9 +79,8 @@ public class GetAllHands() : LexNinja2Card(2,
     //     return false;
     // }
     // protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
-    
+
     public override string CustomPortraitPath => $"GetAllHands_p.png".BigCardImagePath();
     public override string PortraitPath => $"GetAllHands.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/GetAllHands.png".CardImagePath();
-
 }

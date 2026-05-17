@@ -20,13 +20,15 @@ public class ReaperFlame : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    protected override object InitInternalData() => (object) new ReaperFlame.Data();
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(Amount,ValueProp.Unblockable|ValueProp.Unpowered)];
 
+    protected override object InitInternalData() => (object)new ReaperFlame.Data();
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new DamageVar(Amount, ValueProp.Unblockable | ValueProp.Unpowered)];
 
     public override string CustomPackedIconPath => "DeathGodFlame32.png".PowerImagePath();
     public override string? CustomBigIconPath => "DeathGodFlame84.png".BigPowerImagePath();
-    
+
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
         this.GetInternalData<Data>().amountsForPlayedCards.Add(cardPlay.Card, this.Amount);
@@ -35,24 +37,35 @@ public class ReaperFlame : CustomPowerModel
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        
-        if (GetInternalData<Data>().amountsForPlayedCards.Remove(cardPlay.Card, out var value)&&cardPlay.Card.Owner==Owner.Player)
+        if (
+            GetInternalData<Data>().amountsForPlayedCards.Remove(cardPlay.Card, out var value)
+            && cardPlay.Card.Owner == Owner.Player
+        )
         {
             Flash();
             NCombatRoom instance = NCombatRoom.Instance;
             foreach (Creature enemy in CombatState.HittableEnemies)
             {
-                if (instance != null && enemy!=null)
-                    instance.CombatVfxContainer.AddChildSafely((Node) NGroundFireVfx.Create(enemy,VfxColor.Purple)); 
+                if (instance != null && enemy != null)
+                    instance.CombatVfxContainer.AddChildSafely(
+                        (Node)NGroundFireVfx.Create(enemy, VfxColor.Purple)
+                    );
                 SfxCmd.Play("event:/sfx/characters/attack_fire");
-                await CreatureCmd.Damage(context, enemy, Amount, ValueProp.Unblockable | ValueProp.Unpowered, null, null);
+                await CreatureCmd.Damage(
+                    context,
+                    enemy,
+                    Amount,
+                    ValueProp.Unblockable | ValueProp.Unpowered,
+                    null,
+                    null
+                );
             }
         }
     }
 
-
     private class Data
     {
-        public readonly Dictionary<CardModel, int> amountsForPlayedCards = new Dictionary<CardModel, int>();
+        public readonly Dictionary<CardModel, int> amountsForPlayedCards =
+            new Dictionary<CardModel, int>();
     }
 }

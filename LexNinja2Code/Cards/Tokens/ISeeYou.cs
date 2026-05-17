@@ -17,24 +17,20 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards;
 
 [Pool(typeof(TokenCardPool))]
-public class ISeeYou() : LexNinja2Card(-1,
-    CardType.Quest, CardRarity.Quest,
-    TargetType.Self)
+public class ISeeYou() : LexNinja2Card(-1, CardType.Quest, CardRarity.Quest, TargetType.Self)
 {
     private int _cardsInHand;
     private int _combatsSeen;
     public override int MaxUpgradeLevel => 0;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new ("boss",2),new DynamicVar("Frail", 1m)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<FrailPower>()];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new("boss", 2), new DynamicVar("Frail", 1m)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromPower<FrailPower>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Unplayable];
 
-    
     private int CardsInHand
     {
-        get
-        {
-            return _cardsInHand;
-        }
+        get { return _cardsInHand; }
         set
         {
             AssertMutable();
@@ -43,7 +39,7 @@ public class ISeeYou() : LexNinja2Card(-1,
     }
 
     public override bool HasTurnEndInHandEffect => true;
-    
+
     // public override Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     // {
     //     if (side != CombatSide.Player)
@@ -57,7 +53,7 @@ public class ISeeYou() : LexNinja2Card(-1,
     //     CardsInHand = base.Pile.Cards.Count;
     //     return Task.CompletedTask;
     // }
-    
+
     [SavedProperty]
     public int CombatsSeen
     {
@@ -66,7 +62,7 @@ public class ISeeYou() : LexNinja2Card(-1,
         {
             this.AssertMutable();
             this._combatsSeen = value;
-            this.DynamicVars["boss"].BaseValue = (Decimal) (2 - this.CombatsSeen);
+            this.DynamicVars["boss"].BaseValue = (Decimal)(2 - this.CombatsSeen);
         }
     }
 
@@ -74,7 +70,13 @@ public class ISeeYou() : LexNinja2Card(-1,
     {
         bool alreadyHasFrail = base.Owner.Creature.HasPower<FrailPower>();
         NinjaAudio.Play("res://LexNinja2/audio/ISeeYou.mp3");
-        PowerModel powerModel = await PowerCmd.Apply<FrailPower>(choiceContext, base.Owner.Creature, base.DynamicVars["Frail"].BaseValue, null, this);
+        PowerModel powerModel = await PowerCmd.Apply<FrailPower>(
+            choiceContext,
+            base.Owner.Creature,
+            base.DynamicVars["Frail"].BaseValue,
+            null,
+            this
+        );
         if (powerModel != null && !alreadyHasFrail)
         {
             powerModel.SkipNextDurationTick = true;
@@ -84,17 +86,17 @@ public class ISeeYou() : LexNinja2Card(-1,
     public override async Task AfterCombatEnd(CombatRoom room)
     {
         CardPile? pile = base.Pile;
-        
+
         if (room.RoomType != RoomType.Boss)
         {
-            return ;
+            return;
         }
         CombatsSeen++;
 
-        if (DynamicVars["boss"].BaseValue>0)
+        if (DynamicVars["boss"].BaseValue > 0)
         {
             NinjaAudio.Stop("res://LexNinja2/audio/WhereRUNow.mp3");
-            NinjaAudio.Play("res://LexNinja2/audio/WhereRUNow.mp3",0.15f);
+            NinjaAudio.Play("res://LexNinja2/audio/WhereRUNow.mp3", 0.15f);
             return;
         }
         if (pile != null && pile.Type == PileType.Deck)
@@ -103,10 +105,11 @@ public class ISeeYou() : LexNinja2Card(-1,
             NinjaAudio.Play("res://LexNinja2/audio/Fadeded.mp3");
             CardModel aW = Owner.RunState.CreateCard<AlanWalker>(Owner);
             CardCmd.Upgrade(aW);
-            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(aW,PileType.Deck));
+            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(aW, PileType.Deck));
             await CardPileCmd.RemoveFromDeck(this);
         }
     }
+
     public override string CustomPortraitPath => $"ISeeYou.png".BigCardImagePath();
     public override string PortraitPath => $"ISeeYou.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/ISeeYou.png".CardImagePath();

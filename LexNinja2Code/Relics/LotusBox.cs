@@ -19,31 +19,42 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Relics;
 
-
 [Pool(typeof(LexNinja2RelicPool))]
 public class LotusBox() : LexNinja2Relic
 {
-    public override RelicRarity Rarity =>
-        RelicRarity.Starter;
+    public override RelicRarity Rarity => RelicRarity.Starter;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<Lexkela>()];
-    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromPower<Lexkela>()];
+
     public override async Task AfterRoomEntered(AbstractRoom room)
     {
         if (!(room is CombatRoom))
             return;
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/LotusBox.mp3");
-        await PowerCmd.Apply<Pain>(new ThrowingPlayerChoiceContext(), Owner.Creature,1,null,null);
-        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner.Creature,2,null,null);
+        await PowerCmd.Apply<Pain>(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            1,
+            null,
+            null
+        );
+        await PowerCmd.Apply<Lexkela>(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            2,
+            null,
+            null
+        );
     }
 
     public override string PackedIconPath => "LotusBox.png".RelicImagePath();
     protected override string PackedIconOutlinePath => "/outline/LotusBox.png".RelicImagePath();
     protected override string BigIconPath => "LotusBox.png".BigRelicImagePath();
-    
+
     public override RelicModel? GetUpgradeReplacement() => ModelDb.Relic<XiangPiaoPiao>();
-    
+
     public override Task BeforeDeath(Creature creature)
     {
         if (creature != this.Owner.Creature)

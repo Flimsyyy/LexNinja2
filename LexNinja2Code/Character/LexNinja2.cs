@@ -1,9 +1,9 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Utils;
-using LexNinja2.LexNinja2Code.Extensions;
 using Godot;
 using HarmonyLib;
 using LexNinja2.LexNinja2Code.Cards;
+using LexNinja2.LexNinja2Code.Extensions;
 using LexNinja2.LexNinja2Code.Relics;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -13,8 +13,6 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Relics;
 
 namespace LexNinja2.LexNinja2Code.Character;
-
-  
 
 public class LexNinja2 : PlaceholderCharacterModel
 {
@@ -28,24 +26,20 @@ public class LexNinja2 : PlaceholderCharacterModel
     public override int StartingHp => 68;
 
     public override IEnumerable<CardModel> StartingDeck =>
-    [
-        ModelDb.Card<StrikeNinja>(),
-        ModelDb.Card<StrikeNinja>(),
-        ModelDb.Card<StrikeNinja>(),
-        ModelDb.Card<StrikeNinja>(),
-        ModelDb.Card<DefendNinja>(),
-        ModelDb.Card<DefendNinja>(),
-        ModelDb.Card<DefendNinja>(),
-        ModelDb.Card<DefendNinja>(),
-        ModelDb.Card<YiCut>(),
-        ModelDb.Card<ShakeShakeHands>()
-    ];
+        [
+            ModelDb.Card<StrikeNinja>(),
+            ModelDb.Card<StrikeNinja>(),
+            ModelDb.Card<StrikeNinja>(),
+            ModelDb.Card<StrikeNinja>(),
+            ModelDb.Card<DefendNinja>(),
+            ModelDb.Card<DefendNinja>(),
+            ModelDb.Card<DefendNinja>(),
+            ModelDb.Card<DefendNinja>(),
+            ModelDb.Card<YiCut>(),
+            ModelDb.Card<ShakeShakeHands>(),
+        ];
 
-    public override IReadOnlyList<RelicModel> StartingRelics =>
-    [
-        ModelDb.Relic<LotusBox>()
-    ];
-    
+    public override IReadOnlyList<RelicModel> StartingRelics => [ModelDb.Relic<LotusBox>()];
 
     public override CardPoolModel CardPool => ModelDb.CardPool<LexNinja2CardPool>();
     public override RelicPoolModel RelicPool => ModelDb.RelicPool<LexNinja2RelicPool>();
@@ -57,11 +51,13 @@ public class LexNinja2 : PlaceholderCharacterModel
         You don't have to, but you're suggested to rename these images. */
     //public override string CustomIconTexturePath => "character_icon_char_name.png".CharacterUiPath();
     public override string CustomIconTexturePath => "Ninja2.png".CharacterUiPath();
-    public override string CustomCharacterSelectIconPath => "char_select_Ninja.png".CharacterUiPath();
-    public override string CustomCharacterSelectLockedIconPath => "char_select_char_name_locked.png".CharacterUiPath();
+    public override string CustomCharacterSelectIconPath =>
+        "char_select_Ninja.png".CharacterUiPath();
+    public override string CustomCharacterSelectLockedIconPath =>
+        "char_select_char_name_locked.png".CharacterUiPath();
     public override string CustomMapMarkerPath => "map_marker_char_name.png".CharacterUiPath();
     public override string CustomCharacterSelectBg => "res://LexNinja2/scenes/Ninja_bg.tscn";
-    public override string CustomIconPath=>"res://LexNinja2/scenes/Ninja_icon.tscn";
+    public override string CustomIconPath => "res://LexNinja2/scenes/Ninja_icon.tscn";
     public override string CustomMerchantAnimPath => "res://LexNinja2/scenes/Ninja_merchant.tscn";
     public override string CustomRestSiteAnimPath => "res://LexNinja2/scenes/Ninja_rest_site.tscn";
 
@@ -70,10 +66,11 @@ public class LexNinja2 : PlaceholderCharacterModel
     public override string CustomArmRockTexturePath => "Rock.png".CharacterUiPath();
     public override string CustomArmScissorsTexturePath => "Scissors.png".CharacterUiPath();
     public override string CustomArmPointingTexturePath => "Point.png".CharacterUiPath();
-    
+
     //音效
     // public override string CustomAttackSfx => "blunt_attack.mp3";
     public override string CharacterTransitionSfx => "event:/sfx/ui/wipe_ironclad";
+
     // public override string CustomDeathSfx => "res://LexNinja2/audio/Cry.mp3";
     public override string CharacterSelectSfx => "res://LexNinja2/audio/pick.mp3";
     // public override Task BeforeDeath(Creature creature)
@@ -83,7 +80,7 @@ public class LexNinja2 : PlaceholderCharacterModel
     //     NinjaAudio.Play("res://LexNinja2/audio/Cry.mp3");
     //     return Task.CompletedTask;
     // }
-    // SpireField<Godot.Node, Func<string[],bool?>> spireField = 
+    // SpireField<Godot.Node, Func<string[],bool?>> spireField =
     //     (SpireField<Godot.Node, Func<string[],bool?>>)AccessTools.Field(typeof(CustomAnimation), "_animHandler").GetValue(null);//object
     // spireField[this] = (_ => null);
 }

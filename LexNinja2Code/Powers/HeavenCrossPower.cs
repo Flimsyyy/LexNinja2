@@ -13,16 +13,23 @@ public class HeavenCrossPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<Lexkela>(),HoverTipFactory.FromKeyword(NinjaKeyword.Renshu)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromPower<Lexkela>(), HoverTipFactory.FromKeyword(NinjaKeyword.Renshu)];
 
     public override string CustomPackedIconPath => "HeavenCrossPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "HeavenCrossPower84.png".BigPowerImagePath();
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Tags.Contains(NinjaTags.Ninjutsu)&&cardPlay.Card.Owner==Owner.Player)
+        if (cardPlay.Card.Tags.Contains(NinjaTags.Ninjutsu) && cardPlay.Card.Owner == Owner.Player)
         {
-            await PowerCmd.Apply <Lexkela> (new ThrowingPlayerChoiceContext(),Owner, Amount, null, null);
+            await PowerCmd.Apply<Lexkela>(
+                new ThrowingPlayerChoiceContext(),
+                Owner,
+                Amount,
+                null,
+                null
+            );
         }
     }
 }

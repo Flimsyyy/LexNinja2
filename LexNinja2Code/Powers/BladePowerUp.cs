@@ -16,18 +16,29 @@ public class BladePowerUp : CustomPowerModel
     public override PowerStackType StackType => PowerStackType.Counter;
     public override bool AllowNegative => true;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(NinjaKeyword.Blade)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(NinjaKeyword.Blade)];
 
     public override string CustomPackedIconPath => "BladePowerUp32.png".PowerImagePath();
     public override string? CustomBigIconPath => "BladePowerUp84.png".BigPowerImagePath();
-    
+
     public override Decimal ModifyDamageAdditive(
         Creature? target,
         Decimal amount,
         ValueProp props,
         Creature? dealer,
-        CardModel? cardSource)
+        CardModel? cardSource
+    )
     {
-        return this.Owner != dealer || !props.IsPoweredAttack() || cardSource == null || (!cardSource.Keywords.Contains(NinjaKeyword.Blade) && !cardSource.Tags.Contains(CardTag.Shiv)) ? 0M : (Decimal) this.Amount;
+        return
+            this.Owner != dealer
+            || !props.IsPoweredAttack()
+            || cardSource == null
+            || (
+                !cardSource.Keywords.Contains(NinjaKeyword.Blade)
+                && !cardSource.Tags.Contains(CardTag.Shiv)
+            )
+            ? 0M
+            : (Decimal)this.Amount;
     }
 }

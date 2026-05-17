@@ -15,22 +15,24 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Cards;
 
-public class ShadeCrossSlash() : LexNinja2Card(0,
-    CardType.Attack, CardRarity.Ancient,
-    TargetType.AllEnemies)
+public class ShadeCrossSlash()
+    : LexNinja2Card(0, CardType.Attack, CardRarity.Ancient, TargetType.AllEnemies)
 {
-   
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new NinjutsuVar(2),new PowerVar<VulnerablePower>(2),new DamageVar(10,ValueProp.Move)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<VulnerablePower>(),HoverTipFactory.FromKeyword(NinjaKeyword.Blade),HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new NinjutsuVar(2), new PowerVar<VulnerablePower>(2), new DamageVar(10, ValueProp.Move)];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [
+            HoverTipFactory.FromPower<VulnerablePower>(),
+            HoverTipFactory.FromKeyword(NinjaKeyword.Blade),
+            HoverTipFactory.FromPower<Lexkela>(),
+        ];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         decimal Renshu = DynamicVars["Renshu"].BaseValue;
-        Lexkela kela= Owner.Creature.GetPower<Lexkela>();
+        Lexkela kela = Owner.Creature.GetPower<Lexkela>();
         if (Ninjutsu())
         {
             NinjaAudio.Play("res://LexNinja2/audio/ShadeCrossSlash.mp3");
@@ -38,18 +40,38 @@ public class ShadeCrossSlash() : LexNinja2Card(0,
             if (nGrandFinaleVfx != null)
             {
                 NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(nGrandFinaleVfx);
-                await MegaCrit.Sts2.Core.Commands.Cmd.Wait(NGrandFinaleVfx.totalAnticipationDuration);
+                await MegaCrit.Sts2.Core.Commands.Cmd.Wait(
+                    NGrandFinaleVfx.totalAnticipationDuration
+                );
             }
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(3).FromCard(this).TargetingAllOpponents(CombatState).WithHitVfxNode(NGrandFinaleImpactVfx.Create).WithHitFx(null, null, "heavy_attack.mp3").Execute(choiceContext);
+            await DamageCmd
+                .Attack(DynamicVars.Damage.BaseValue)
+                .WithHitCount(3)
+                .FromCard(this)
+                .TargetingAllOpponents(CombatState)
+                .WithHitVfxNode(NGrandFinaleImpactVfx.Create)
+                .WithHitFx(null, null, "heavy_attack.mp3")
+                .Execute(choiceContext);
         }
         else
         {
             NinjaAudio.Play("res://LexNinja2/audio/YiCut.mp3");
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState).WithHitFx("vfx/vfx_giant_horizontal_slash", tmpSfx: "slash_attack.mp3").Execute(choiceContext);
+            await DamageCmd
+                .Attack(DynamicVars.Damage.BaseValue)
+                .FromCard(this)
+                .TargetingAllOpponents(CombatState)
+                .WithHitFx("vfx/vfx_giant_horizontal_slash", tmpSfx: "slash_attack.mp3")
+                .Execute(choiceContext);
         }
-        await PowerCmd.Apply<VulnerablePower>(new ThrowingPlayerChoiceContext(), CombatState.HittableEnemies,DynamicVars.Vulnerable.BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<VulnerablePower>(
+            new ThrowingPlayerChoiceContext(),
+            CombatState.HittableEnemies,
+            DynamicVars.Vulnerable.BaseValue,
+            Owner.Creature,
+            this
+        );
     }
-    
+
     private Boolean Ninjutsu()
     {
         if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
@@ -60,13 +82,19 @@ public class ShadeCrossSlash() : LexNinja2Card(0,
         {
             if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
             {
-                PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner.Creature,-DynamicVars["Renshu"].BaseValue, Owner.Creature, this);
+                PowerCmd.Apply<Lexkela>(
+                    new ThrowingPlayerChoiceContext(),
+                    Owner.Creature,
+                    -DynamicVars["Renshu"].BaseValue,
+                    Owner.Creature,
+                    this
+                );
                 return true;
             }
         }
         return false;
     }
-    
+
     private Boolean CanCastNinjutsu()
     {
         if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
@@ -84,14 +112,15 @@ public class ShadeCrossSlash() : LexNinja2Card(0,
 
         return false;
     }
+
     protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
-    
+
     protected override void OnUpgrade()
     {
         DynamicVars["Renshu"].UpgradeValueBy(-1);
         DynamicVars.Vulnerable.UpgradeValueBy(1);
     }
-    
+
     public override string CustomPortraitPath => "ShadeCrossSlash_p.png".BigCardImagePath();
     public override string PortraitPath => "ShadeCrossSlash.png".CardImagePath();
     public override string BetaPortraitPath => "beta/ShadeCrossSlash.png".CardImagePath();

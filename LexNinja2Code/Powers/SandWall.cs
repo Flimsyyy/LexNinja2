@@ -14,23 +14,38 @@ public class SandWall : CustomPowerModel
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
-    
+
     public override string CustomPackedIconPath => "SandWall.png".PowerImagePath();
     public override string? CustomBigIconPath => "SandWall.png".BigPowerImagePath();
 
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+    public override async Task AfterPlayerTurnStart(
+        PlayerChoiceContext choiceContext,
+        Player player
+    )
     {
         if (player != Owner.Player)
             return;
         Flash();
-        await CreatureCmd.GainBlock(Owner,Amount, ValueProp.Unpowered, null);
-        if (Owner.GetPower<BuildSandWallPower>()!= null)
+        await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Unpowered, null);
+        if (Owner.GetPower<BuildSandWallPower>() != null)
         {
             NinjaAudio.Play("res://LexNinja2/audio/BigSandWall.mp3");
-            await PowerCmd.Apply<SandWall>(new ThrowingPlayerChoiceContext(), Owner, -1, null, null);
+            await PowerCmd.Apply<SandWall>(
+                new ThrowingPlayerChoiceContext(),
+                Owner,
+                -1,
+                null,
+                null
+            );
             return;
         }
         NinjaAudio.Play("res://LexNinja2/audio/SandWall.mp3");
-        await PowerCmd.Apply<SandWall>(new ThrowingPlayerChoiceContext(), Owner, -(Amount / 2), null, null);
+        await PowerCmd.Apply<SandWall>(
+            new ThrowingPlayerChoiceContext(),
+            Owner,
+            -(Amount / 2),
+            null,
+            null
+        );
     }
 }

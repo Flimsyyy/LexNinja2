@@ -12,30 +12,49 @@ using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace LexNinja2.LexNinja2Code.Cards;
 
-public class ManTooWeak() : LexNinja2Card(2,
-    CardType.Power, CardRarity.Uncommon,
-    TargetType.Self)
+public class ManTooWeak() : LexNinja2Card(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<StrengthPower>(5),new PowerVar<DexterityPower>(5),new PowerVar<ManTooWeakPower>(2)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [
+            new PowerVar<StrengthPower>(5),
+            new PowerVar<DexterityPower>(5),
+            new PowerVar<ManTooWeakPower>(2),
+        ];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromPower<Lexkela>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
-    
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/ManTooWeak.mp3");
-        await PowerCmd.Apply<ManTooWeakPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, DynamicVars.Power<ManTooWeakPower>().BaseValue, Owner.Creature, this);
-        await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, DynamicVars.Strength.BaseValue, Owner.Creature, this); 
-        await PowerCmd.Apply<DexterityPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, DynamicVars.Strength.BaseValue, Owner.Creature, this);
-
+        await PowerCmd.Apply<ManTooWeakPower>(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            DynamicVars.Power<ManTooWeakPower>().BaseValue,
+            Owner.Creature,
+            this
+        );
+        await PowerCmd.Apply<StrengthPower>(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            DynamicVars.Strength.BaseValue,
+            Owner.Creature,
+            this
+        );
+        await PowerCmd.Apply<DexterityPower>(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            DynamicVars.Strength.BaseValue,
+            Owner.Creature,
+            this
+        );
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Power<ManTooWeakPower>().UpgradeValueBy(-1);
     }
-    
+
     public override string CustomPortraitPath => $"ManTooWeak_p.png".BigCardImagePath();
     public override string PortraitPath => $"ManTooWeak.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/ManTooWeak.png".CardImagePath();

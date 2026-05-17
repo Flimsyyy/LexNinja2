@@ -21,11 +21,17 @@ public class DoubleDamagePower : CustomPowerModel
 
     public override string CustomPackedIconPath => "DoubleDamagePower.png".PowerImagePath();
     public override string? CustomBigIconPath => "DoubleDamagePower.png".BigPowerImagePath();
-    protected override object InitInternalData() => (object) new DoubleDamagePower.Data();
+
+    protected override object InitInternalData() => (object)new DoubleDamagePower.Data();
 
     public override Task BeforeAttack(AttackCommand command)
     {
-        if (!(command.ModelSource is CardModel modelSource) || modelSource.Owner.Creature != this.Owner || modelSource.Type != CardType.Attack || !command.DamageProps.IsPoweredAttack())
+        if (
+            !(command.ModelSource is CardModel modelSource)
+            || modelSource.Owner.Creature != this.Owner
+            || modelSource.Type != CardType.Attack
+            || !command.DamageProps.IsPoweredAttack()
+        )
             return Task.CompletedTask;
         DoubleDamagePower.Data internalData = this.GetInternalData<DoubleDamagePower.Data>();
         if (internalData.commandToModify != null)
@@ -39,24 +45,31 @@ public class DoubleDamagePower : CustomPowerModel
         Decimal amount,
         ValueProp props,
         Creature? dealer,
-        CardModel? cardSource)
+        CardModel? cardSource
+    )
     {
-        if (cardSource == null || cardSource.Owner.Creature != this.Owner || !props.IsPoweredAttack())
+        if (
+            cardSource == null
+            || cardSource.Owner.Creature != this.Owner
+            || !props.IsPoweredAttack()
+        )
             return 1M;
         DoubleDamagePower.Data internalData = this.GetInternalData<DoubleDamagePower.Data>();
-        return internalData.commandToModify != null && cardSource != internalData.commandToModify.ModelSource ? 1 : 2;
+        return
+            internalData.commandToModify != null
+            && cardSource != internalData.commandToModify.ModelSource
+            ? 1
+            : 2;
     }
 
-    public override async Task AfterAttack(
-        PlayerChoiceContext choiceContext,
-        AttackCommand command)
+    public override async Task AfterAttack(PlayerChoiceContext choiceContext, AttackCommand command)
     {
         DoubleDamagePower power = this;
         DoubleDamagePower.Data internalData = power.GetInternalData<DoubleDamagePower.Data>();
         if (command != internalData.commandToModify)
             return;
-        internalData.commandToModify = (AttackCommand) null;
-        await PowerCmd.Remove((PowerModel) power);
+        internalData.commandToModify = (AttackCommand)null;
+        await PowerCmd.Remove((PowerModel)power);
     }
 
     private class Data

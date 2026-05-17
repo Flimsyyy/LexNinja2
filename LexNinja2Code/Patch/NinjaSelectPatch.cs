@@ -17,10 +17,7 @@ public static class NinjaSelectPatch
         // if (characterModel==ModelDb.Character<Character.LexNinja2>())
         // {
         //     MegaCrit.Sts2.Core.Commands.Cmd.Wait(0.3f);
-        //     NinjaAudio.Play("res://LexNinja2/audio/pick.mp3"); 
+        //     NinjaAudio.Play("res://LexNinja2/audio/pick.mp3");
         // }
     }
 }
-    
-    
-    

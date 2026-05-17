@@ -10,8 +10,6 @@ public static class GloryAllEventsPatch
 {
     static void Postfix(ref IEnumerable<EventModel> __result)
     {
-        __result = __result
-            .Concat([ ModelDb.Event<TheGreatSeal>() ])
-            .Distinct();
+        __result = __result.Concat([ModelDb.Event<TheGreatSeal>()]).Distinct();
     }
 }

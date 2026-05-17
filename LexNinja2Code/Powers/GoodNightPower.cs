@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class GoodNightPower :CustomPowerModel
+public class GoodNightPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -19,11 +19,12 @@ public class GoodNightPower :CustomPowerModel
 
     public override string CustomPackedIconPath => "GoodNightPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "GoodNightPower84.png".BigPowerImagePath();
+
     public override async Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
     {
         if (side != Owner.Side)
             return;
-        await CreatureCmd.Heal(Owner,Amount);
+        await CreatureCmd.Heal(Owner, Amount);
         Flash();
     }
 
@@ -40,7 +41,7 @@ public class GoodNightPower :CustomPowerModel
         }
         PowerCmd.Remove(this);
     }
-    
+
     public override bool ShouldPlay(CardModel card, AutoPlayType _)
     {
         if (card.Owner == this.Owner.Player)

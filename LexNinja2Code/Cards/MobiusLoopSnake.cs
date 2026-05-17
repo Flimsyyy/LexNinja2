@@ -1,8 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Cards;
-using LexNinja2.LexNinja2Code.Cmd;
+﻿using LexNinja2.LexNinja2Code.Cmd;
 using LexNinja2.LexNinja2Code.Extensions;
-using LexNinja2.LexNinja2Code.Powers;
-using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
@@ -10,35 +7,31 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace LexNinja2.LexNinja2Code.Cards;
 
-public class MobiusLoopSnake() : LexNinja2Card(3,
-    CardType.Skill, CardRarity.Uncommon,
-    TargetType.RandomEnemy)
+public class MobiusLoopSnake()
+    : LexNinja2Card(3, CardType.Skill, CardRarity.Uncommon, TargetType.RandomEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<PoisonPower>(7)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Snake];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         if (LastCard() != null)
         {
             NinjaAudio.Play("res://LexNinja2/audio/MobiusLoopSnake.mp3");
-            NinjaAudio.Play("res://LexNinja2/audio/Mobius.mp3",0.15f);
+            NinjaAudio.Play("res://LexNinja2/audio/Mobius.mp3", 0.15f);
             await MegaCrit.Sts2.Core.Commands.Cmd.Wait(1f);
             // if (LastCard().Tags.Contains(NinjaTags.Ninjutsu))
             // {
             //     await PowerCmd.Apply<FreeNinjutsuPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, 1, Owner.Creature, this);
             // }
-            await CardCmd.AutoPlay(choiceContext,LastCard().CreateDupe(),null);
+            await CardCmd.AutoPlay(choiceContext, LastCard().CreateDupe(), null);
         }
     }
 
@@ -46,36 +39,45 @@ public class MobiusLoopSnake() : LexNinja2Card(3,
     {
         EnergyCost.UpgradeBy(-1);
     }
-    
+
     public override string CustomPortraitPath => $"MobiusLoopSnake.png".BigCardImagePath();
     public override string PortraitPath => $"MobiusLoopSnake.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/MobiusLoopSnake.png".CardImagePath();
-    
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+
+    public override async Task AfterPlayerTurnStart(
+        PlayerChoiceContext choiceContext,
+        Player player
+    )
     {
         CardPile pile = Pile;
         if ((pile != null ? (pile.Type != PileType.Exhaust ? 1 : 0) : 1) != 0 || player != Owner)
             return;
-        await CardCmd.AutoPlay(choiceContext, (CardModel) this, (Creature) null);
+        await CardCmd.AutoPlay(choiceContext, (CardModel)this, (Creature)null);
     }
 
     private CardModel LastCard()
     {
-        CardModel card = CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(delegate(CardPlayFinishedEntry e)
-        {
-            bool flag = e.CardPlay.Card.Owner == base.Owner && !e.CardPlay.Card.Tags.Contains(NinjaTags.Snake);
-            bool flag2 = flag;
-            // if (flag2)
-            // {
-            //     CardType type = e.CardPlay.Card.Type;
-            //     bool flag3 = (uint)(type - 1) <= 1u;
-            //     flag2 = flag3;
-            // }
-            return flag2 && !e.CardPlay.Card.IsDupe;
-        })?.CardPlay.Card;
-        return  card;
+        CardModel card = CombatManager
+            .Instance.History.CardPlaysFinished.LastOrDefault(
+                delegate(CardPlayFinishedEntry e)
+                {
+                    bool flag =
+                        e.CardPlay.Card.Owner == base.Owner
+                        && !e.CardPlay.Card.Tags.Contains(NinjaTags.Snake);
+                    bool flag2 = flag;
+                    // if (flag2)
+                    // {
+                    //     CardType type = e.CardPlay.Card.Type;
+                    //     bool flag3 = (uint)(type - 1) <= 1u;
+                    //     flag2 = flag3;
+                    // }
+                    return flag2 && !e.CardPlay.Card.IsDupe;
+                }
+            )
+            ?.CardPlay.Card;
+        return card;
     }
-    
+
     // public override async Task AfterCardDrawn(
     //     PlayerChoiceContext choiceContext,
     //     CardModel card,
@@ -86,5 +88,4 @@ public class MobiusLoopSnake() : LexNinja2Card(3,
     //         await CardPileCmd.AutoPlayFromDrawPile(choiceContext, Owner, 1, CardPilePosition.Top, false);
     //     }
     // }
-
 }
