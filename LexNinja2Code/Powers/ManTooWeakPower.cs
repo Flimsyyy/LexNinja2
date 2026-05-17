@@ -14,23 +14,29 @@ public class ManTooWeakPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<Lexkela>()];
-
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromPower<Lexkela>()];
 
     public override string CustomPackedIconPath => "ManTooWeakPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "ManTooWeakPower.png".BigPowerImagePath();
-    
+
     public override async Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
     {
         if (side != Owner.Side)
             return;
-        if (Owner.GetPower<Lexkela>()==null)
+        if (Owner.GetPower<Lexkela>() == null)
         {
             return;
         }
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/ManTooWeak.mp3");
-        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner,-Amount,Owner,null);
+        await PowerCmd.Apply<Lexkela>(
+            new ThrowingPlayerChoiceContext(),
+            Owner,
+            -Amount,
+            Owner,
+            null
+        );
         // await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Owner, Amount, Owner, null);
         // await PowerCmd.Apply<DexterityPower>(new ThrowingPlayerChoiceContext(), Owner, Amount, Owner, null);
     }

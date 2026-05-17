@@ -1,6 +1,6 @@
 ﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Extensions;
 using Godot;
+using LexNinja2.LexNinja2Code.Extensions;
 
 namespace LexNinja2.LexNinja2Code.Character;
 

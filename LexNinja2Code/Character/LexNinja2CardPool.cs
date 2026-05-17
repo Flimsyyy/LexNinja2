@@ -1,6 +1,6 @@
 ﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Extensions;
 using Godot;
+using LexNinja2.LexNinja2Code.Extensions;
 
 namespace LexNinja2.LexNinja2Code.Character;
 
@@ -10,7 +10,6 @@ public class LexNinja2CardPool : CustomCardPoolModel
 
     public override string BigEnergyIconPath => "charui/NINJAOrb.png".ImagePath();
     public override string TextEnergyIconPath => "charui/energyOrb.png".ImagePath();
-
 
     /* These HSV values will determine the color of your card back.
     They are applied as a shader onto an already colored image,

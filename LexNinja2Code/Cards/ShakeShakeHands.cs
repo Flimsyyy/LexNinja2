@@ -14,29 +14,47 @@ using MegaCrit.Sts2.Core.Nodes.Audio;
 
 namespace LexNinja2.LexNinja2Code.Cards;
 
-public class ShakeShakeHands() : LexNinja2Card(0,
-    CardType.Skill, CardRarity.Basic,
-    TargetType.AllEnemies)
+public class ShakeShakeHands()
+    : LexNinja2Card(0, CardType.Skill, CardRarity.Basic, TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<WeakPower>(1),new LexKelaVar(1)];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [ CardKeyword.Innate ,NinjaKeyword.Hand];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<WeakPower>(),HoverTipFactory.FromKeyword(NinjaKeyword.Hand)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new PowerVar<WeakPower>(1), new LexKelaVar(1)];
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+        [CardKeyword.Innate, NinjaKeyword.Hand];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromPower<WeakPower>(), HoverTipFactory.FromKeyword(NinjaKeyword.Hand)];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/ShakeShakeHand.mp3");
-        await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, DynamicVars.Weak.BaseValue, Owner.Creature, this);
-        await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), CombatState.HittableEnemies, DynamicVars.Weak.BaseValue, Owner.Creature, this);
-        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner.Creature, DynamicVars["Kela"].BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<WeakPower>(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            DynamicVars.Weak.BaseValue,
+            Owner.Creature,
+            this
+        );
+        await PowerCmd.Apply<WeakPower>(
+            new ThrowingPlayerChoiceContext(),
+            CombatState.HittableEnemies,
+            DynamicVars.Weak.BaseValue,
+            Owner.Creature,
+            this
+        );
+        await PowerCmd.Apply<Lexkela>(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            DynamicVars["Kela"].BaseValue,
+            Owner.Creature,
+            this
+        );
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars["Kela"].UpgradeValueBy(1);
     }
-    
+
     public override string CustomPortraitPath => $"ShakeShakeHands_p.png".BigCardImagePath();
     public override string PortraitPath => $"ShakeShakeHands.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/ShakeShakeHands.png".CardImagePath();

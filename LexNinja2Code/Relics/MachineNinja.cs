@@ -1,12 +1,8 @@
 ﻿using BaseLib.Utils;
-using Godot;
 using LexNinja2.LexNinja2Code.Character;
 using LexNinja2.LexNinja2Code.Cmd;
 using LexNinja2.LexNinja2Code.Extensions;
-using LexNinja2.LexNinja2Code.Powers;
-using LexNinja2.LexNinja2Code.Relics;
 using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
@@ -19,14 +15,12 @@ namespace LexNinja2.LexNinja2Code.Relics;
 [Pool(typeof(LexNinja2RelicPool))]
 public class MachineNinja() : LexNinja2Relic
 {
-
-    public override RelicRarity Rarity =>
-        RelicRarity.Rare;
+    public override RelicRarity Rarity => RelicRarity.Rare;
 
     public override string PackedIconPath => "MachineNinja.png".RelicImagePath();
     protected override string PackedIconOutlinePath => "/outline/MachineNinja.png".RelicImagePath();
     protected override string BigIconPath => "MachineNinja.png".BigRelicImagePath();
-    
+
     // public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
     // {
     //     if (side != Owner.Creature.Side)
@@ -39,10 +33,7 @@ public class MachineNinja() : LexNinja2Relic
     private CardModel? _cardBeingPlayed;
     private bool WasUsedThisTurn
     {
-        get
-        {
-            return _wasUsedThisTurn;
-        }
+        get { return _wasUsedThisTurn; }
         set
         {
             AssertMutable();
@@ -52,10 +43,7 @@ public class MachineNinja() : LexNinja2Relic
 
     private CardModel? CardBeingPlayed
     {
-        get
-        {
-            return _cardBeingPlayed;
-        }
+        get { return _cardBeingPlayed; }
         set
         {
             AssertMutable();
@@ -85,7 +73,6 @@ public class MachineNinja() : LexNinja2Relic
         return Task.CompletedTask;
     }
 
-   
     public override int ModifyCardPlayCount(CardModel card, Creature? target, int playCount)
     {
         if (card.Owner != base.Owner)
@@ -102,9 +89,9 @@ public class MachineNinja() : LexNinja2Relic
             return playCount;
         }
         Flash();
-        NinjaAudio.Play("res://LexNinja2/audio/machine.mp3",0.7f);
+        NinjaAudio.Play("res://LexNinja2/audio/machine.mp3", 0.7f);
         WasUsedThisTurn = true;
-        CardBeingPlayed = (CardModel) null;
+        CardBeingPlayed = (CardModel)null;
         this.Status = RelicStatus.Normal;
         return playCount + 1;
     }
@@ -117,8 +104,12 @@ public class MachineNinja() : LexNinja2Relic
     //
     //
     // }
-    
-    public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, ICombatState combatState)
+
+    public override Task BeforeSideTurnStart(
+        PlayerChoiceContext choiceContext,
+        CombatSide side,
+        ICombatState combatState
+    )
     {
         if (side != base.Owner.Creature.Side)
         {

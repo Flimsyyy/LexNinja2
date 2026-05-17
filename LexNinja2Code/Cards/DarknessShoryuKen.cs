@@ -14,22 +14,29 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Cards;
 
-public class DarknessShoryuKen() : LexNinja2Card(0,
-    CardType.Attack, CardRarity.Uncommon,
-    TargetType.AnyEnemy)
+public class DarknessShoryuKen()
+    : LexNinja2Card(0, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new NinjutsuVar(1),new DamageVar(8,ValueProp.Move),new PowerVar<WeakPower>(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new NinjutsuVar(1), new DamageVar(8, ValueProp.Move), new PowerVar<WeakPower>(2)];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/DarknessShoryuKen.mp3");
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target)
+        await DamageCmd
+            .Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .Targeting(play.Target)
             .Execute(choiceContext);
-        await PowerCmd.Apply<WeakPower>(new ThrowingPlayerChoiceContext(), play.Target, DynamicVars.Power<WeakPower>().BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<WeakPower>(
+            new ThrowingPlayerChoiceContext(),
+            play.Target,
+            DynamicVars.Power<WeakPower>().BaseValue,
+            Owner.Creature,
+            this
+        );
         if (Ninjutsu())
         {
             CardPile pile = PileType.Hand.GetPile(base.Owner);
@@ -51,7 +58,13 @@ public class DarknessShoryuKen() : LexNinja2Card(0,
         {
             if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
             {
-                PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner.Creature,-DynamicVars["Renshu"].BaseValue, Owner.Creature, this);
+                PowerCmd.Apply<Lexkela>(
+                    new ThrowingPlayerChoiceContext(),
+                    Owner.Creature,
+                    -DynamicVars["Renshu"].BaseValue,
+                    Owner.Creature,
+                    this
+                );
                 return true;
             }
         }
@@ -62,12 +75,13 @@ public class DarknessShoryuKen() : LexNinja2Card(0,
     {
         DynamicVars.Damage.UpgradeValueBy(4);
     }
-    
+
     public override string CustomPortraitPath => $"DarknessShoryuKen_p.png".BigCardImagePath();
     public override string PortraitPath => $"DarknessShoryuKen.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/DarknessShoryuKen.png".CardImagePath();
 
     protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
+
     private Boolean CanCastNinjutsu()
     {
         if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)

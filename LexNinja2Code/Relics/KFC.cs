@@ -20,8 +20,7 @@ namespace LexNinja2.LexNinja2Code.Relics;
 [Pool(typeof(LexNinja2RelicPool))]
 public class KFC() : LexNinja2Relic
 {
-    public override RelicRarity Rarity =>
-        RelicRarity.Common;
+    public override RelicRarity Rarity => RelicRarity.Common;
 
     public const int turnsThreshold = 3;
     private const string _turnsKey = "Turns";
@@ -64,20 +63,34 @@ public class KFC() : LexNinja2Relic
             this.InvokeDisplayAmountChanged();
         }
     }
-    
+
     public override async Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
     {
         if (side == base.Owner.Creature.Side)
         {
             TurnsSeen = (TurnsSeen + 1) % base.DynamicVars["Turns"].IntValue;
-            base.Status = ((TurnsSeen == base.DynamicVars["Turns"].IntValue - 1) ? RelicStatus.Active : RelicStatus.Normal);
+            base.Status = (
+                (TurnsSeen == base.DynamicVars["Turns"].IntValue - 1)
+                    ? RelicStatus.Active
+                    : RelicStatus.Normal
+            );
             if (TurnsSeen == 0)
             {
                 TaskHelper.RunSafely(DoActivateVisuals());
                 NinjaAudio.Play("res://LexNinja2/audio/KFC.mp3");
-                IEnumerable<CardModel> distinctForCombat = CardFactory.GetDistinctForCombat(base.Owner, from c in ModelDb.CardPool<TokenCardPool>().GetUnlockedCards(base.Owner.UnlockState, base.Owner.RunState.CardMultiplayerConstraint)
+                IEnumerable<CardModel> distinctForCombat = CardFactory.GetDistinctForCombat(
+                    base.Owner,
+                    from c in ModelDb
+                        .CardPool<TokenCardPool>()
+                        .GetUnlockedCards(
+                            base.Owner.UnlockState,
+                            base.Owner.RunState.CardMultiplayerConstraint
+                        )
                     where (c.Tags.Contains(NinjaTags.Food))
-                    select c, 1, base.Owner.RunState.Rng.CombatCardGeneration);
+                    select c,
+                    1,
+                    base.Owner.RunState.Rng.CombatCardGeneration
+                );
                 foreach (CardModel item in distinctForCombat.ToList())
                 {
                     await CardPileCmd.AddGeneratedCardToCombat(item, PileType.Hand, Owner);
@@ -85,7 +98,7 @@ public class KFC() : LexNinja2Relic
             }
         }
     }
-    
+
     private async Task DoActivateVisuals()
     {
         IsActivating = true;
@@ -99,7 +112,7 @@ public class KFC() : LexNinja2Relic
         base.Status = RelicStatus.Normal;
         return Task.CompletedTask;
     }
-    
+
     public override string PackedIconPath => "KFC.png".RelicImagePath();
     protected override string PackedIconOutlinePath => "/outline/KFC.png".RelicImagePath();
     protected override string BigIconPath => "KFC.png".BigRelicImagePath();

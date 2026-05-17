@@ -11,20 +11,24 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Cards;
 
-public class WildSnakeGod() : LexNinja2Card(2,
-    CardType.Power, CardRarity.Uncommon,
-    TargetType.Self)
+public class WildSnakeGod() : LexNinja2Card(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2),new NinjutsuVar(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new CardsVar(2), new NinjutsuVar(1)];
+
     // protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<AngrySnakeBite>(),HoverTipFactory.Static(StaticHoverTip.Block)];
     // protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/WildSnakeGod.mp3");
-        await PowerCmd.Apply<WildSnakeGodPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, DynamicVars.Cards.BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<WildSnakeGodPower>(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            DynamicVars.Cards.BaseValue,
+            Owner.Creature,
+            this
+        );
         // if (Ninjutsu())
         // {
         //     for (int i = 0; i < DynamicVars.Cards.BaseValue; i++)
@@ -40,7 +44,7 @@ public class WildSnakeGod() : LexNinja2Card(2,
     {
         EnergyCost.UpgradeBy(-1);
     }
-    
+
     public override string CustomPortraitPath => $"WildSnakeGod.png".BigCardImagePath();
     public override string PortraitPath => $"WildSnakeGod.png".CardImagePath();
     // public override string BetaPortraitPath => $"beta/DefendNinja.png".CardImagePath();

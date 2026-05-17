@@ -21,27 +21,37 @@ public class DamageNextTurnPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(Amount, ValueProp.Unpowered)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new DamageVar(Amount, ValueProp.Unpowered)];
 
     public override string CustomPackedIconPath => "power.png".PowerImagePath();
     public override string? CustomBigIconPath => "power.png".BigPowerImagePath();
-    
-    
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext,Player player)
+
+    public override async Task AfterPlayerTurnStart(
+        PlayerChoiceContext choiceContext,
+        Player player
+    )
     {
         if (player != Owner.Player)
             return;
         this.Flash();
-        await CreatureCmd.TriggerAnim(Owner, "Attack",0.5F);
+        await CreatureCmd.TriggerAnim(Owner, "Attack", 0.5F);
         await MegaCrit.Sts2.Core.Commands.Cmd.CustomScaledWait(0.2f, 0.4f);
-        foreach (Creature hittableEnemy in (IEnumerable<Creature>) this.CombatState.HittableEnemies)
+        foreach (Creature hittableEnemy in (IEnumerable<Creature>)this.CombatState.HittableEnemies)
         {
             NCombatRoom instance = NCombatRoom.Instance;
             if (instance != null)
-                instance.CombatVfxContainer.AddChildSafely((Node) NBigSlashVfx.Create(hittableEnemy));
+                instance.CombatVfxContainer.AddChildSafely(
+                    (Node)NBigSlashVfx.Create(hittableEnemy)
+                );
         }
         await MegaCrit.Sts2.Core.Commands.Cmd.CustomScaledWait(0.2f, 0.4f);
-        IEnumerable<DamageResult> damageResults = await CreatureCmd.Damage(choiceContext, (IEnumerable<Creature>) this.CombatState.HittableEnemies, this.DynamicVars.Damage, this.Owner);
-        await PowerCmd.Remove((PowerModel) this); 
+        IEnumerable<DamageResult> damageResults = await CreatureCmd.Damage(
+            choiceContext,
+            (IEnumerable<Creature>)this.CombatState.HittableEnemies,
+            this.DynamicVars.Damage,
+            this.Owner
+        );
+        await PowerCmd.Remove((PowerModel)this);
     }
 }

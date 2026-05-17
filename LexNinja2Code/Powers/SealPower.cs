@@ -22,22 +22,30 @@ public class SealPower : CustomPowerModel
 
     public override string CustomPackedIconPath => "SealPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "SealPower84.png".BigPowerImagePath();
-    
+
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
         if (side != this.Owner.Side)
         {
-            return;    
+            return;
         }
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/SouthCrossSeal.wav");
         await CreatureCmd.Stun(Owner);
-        await CreatureCmd.GainBlock(Owner,50,ValueProp.Unpowered,null);
+        await CreatureCmd.GainBlock(Owner, 50, ValueProp.Unpowered, null);
         await PowerCmd.Decrement(this);
     }
-    public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
+
+    public override async Task AfterDamageReceived(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        DamageResult result,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource
+    )
     {
-        if (target == base.Owner&& result.UnblockedDamage != 0)
+        if (target == base.Owner && result.UnblockedDamage != 0)
         {
             // Creature creature = dealer;
             // if (dealer.Monster is Osty)
@@ -46,10 +54,9 @@ public class SealPower : CustomPowerModel
             // }
             // if (creature.Player != null||props.IsPoweredAttack())
             // {
-                Flash();
-                await PowerCmd.Remove(this);
+            Flash();
+            await PowerCmd.Remove(this);
             // }
         }
     }
-    
 }

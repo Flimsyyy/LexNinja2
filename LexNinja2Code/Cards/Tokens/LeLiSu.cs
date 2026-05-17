@@ -11,27 +11,24 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 namespace LexNinja2.LexNinja2Code.Cards;
 
 [Pool(typeof(TokenCardPool))]
-public class LeLiSu() : LexNinja2Card(0,
-    CardType.Skill, CardRarity.Token,
-    TargetType.Self)
+public class LeLiSu() : LexNinja2Card(0, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Food];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust,CardKeyword.Retain];
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+        [CardKeyword.Exhaust, CardKeyword.Retain];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/LeLiSu.mp3");
-        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue,Owner);
+        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Cards.UpgradeValueBy(1);
     }
-    
+
     public override string CustomPortraitPath => $"LeLiSu_p.png".BigCardImagePath();
     public override string PortraitPath => $"LeLiSu.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/LeLiSu.png".CardImagePath();

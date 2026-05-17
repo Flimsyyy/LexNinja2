@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class MummyPower :CustomPowerModel
+public class MummyPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -18,16 +18,23 @@ public class MummyPower :CustomPowerModel
 
     public override string CustomPackedIconPath => "MummyPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "MummyPower84.png".BigPowerImagePath();
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromPower<Lexkela>()];
 
-    public override  async Task AfterPowerAmountChanged(
+    public override async Task AfterPowerAmountChanged(
         PlayerChoiceContext choiceContext,
         PowerModel power,
         Decimal amount,
         Creature? applier,
-        CardModel? cardSource)
+        CardModel? cardSource
+    )
     {
-        if (power.Owner == Owner && Owner.HasPower<Lexkela>() && power is Lexkela  && (amount < 0m|| -amount == Owner.GetPowerAmount<Lexkela>()) )
+        if (
+            power.Owner == Owner
+            && Owner.HasPower<Lexkela>()
+            && power is Lexkela
+            && (amount < 0m || -amount == Owner.GetPowerAmount<Lexkela>())
+        )
         {
             await ExecuteMummyEffect();
         }
@@ -39,6 +46,7 @@ public class MummyPower :CustomPowerModel
         //     await CreatureCmd.GainBlock(Owner,this.Amount,ValueProp.Unpowered,null);
         // }
     }
+
     private async Task ExecuteMummyEffect()
     {
         Flash();

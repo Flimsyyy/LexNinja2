@@ -9,28 +9,29 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class IRepresentShinobiPower:CustomPowerModel
+public class IRepresentShinobiPower : CustomPowerModel
 {
-    
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips=>[HoverTipFactory.Static(StaticHoverTip.Energy),HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.Static(StaticHoverTip.Energy), HoverTipFactory.FromPower<Lexkela>()];
 
     public override string CustomPackedIconPath => "IRepresentShinobiPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "IRepresentShinobiPower84.png".BigPowerImagePath();
-    
-    public override  async Task AfterPowerAmountChanged(
+
+    public override async Task AfterPowerAmountChanged(
         PlayerChoiceContext choiceContext,
         PowerModel power,
         Decimal amount,
         Creature? applier,
-        CardModel? cardSource)
+        CardModel? cardSource
+    )
     {
         Lexkela lexkela = power as Lexkela;
-        if (power == lexkela && amount<0 && power.Owner == Owner )
+        if (power == lexkela && amount < 0 && power.Owner == Owner)
         {
             NinjaAudio.Play("res://LexNinja2/audio/IRepresentShinobi.mp3");
-            PlayerCmd.GainEnergy(this.Amount,Owner.Player);
+            PlayerCmd.GainEnergy(this.Amount, Owner.Player);
         }
     }
 }

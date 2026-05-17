@@ -14,7 +14,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class Pain :CustomPowerModel
+public class Pain : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
@@ -22,14 +22,15 @@ public class Pain :CustomPowerModel
 
     public override string CustomPackedIconPath => "PainPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "PainPower.png".BigPowerImagePath();
-    
+
     private int flag = 0;
-    
+
     public override async Task BeforeApplied(
         Creature target,
         Decimal amount,
         Creature? applier,
-        CardModel? cardSource)
+        CardModel? cardSource
+    )
     {
         if (this._shouldIgnoreNextInstance)
         {
@@ -41,36 +42,53 @@ public class Pain :CustomPowerModel
         }
     }
 
-    
-    
-    public override  async Task AfterPowerAmountChanged(
+    public override async Task AfterPowerAmountChanged(
         PlayerChoiceContext choiceContext,
         PowerModel power,
         Decimal amount,
         Creature? applier,
-        CardModel? cardSource)
+        CardModel? cardSource
+    )
     {
         Lexkela lexkela = power as Lexkela;
-        if (Owner.GetPower<Lexkela>()!=null && power == lexkela && amount<0&& power.Owner == Owner)
+        if (
+            Owner.GetPower<Lexkela>() != null
+            && power == lexkela
+            && amount < 0
+            && power.Owner == Owner
+        )
         {
             flag = 1;
         }
     }
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+
+    public override async Task AfterPlayerTurnStart(
+        PlayerChoiceContext choiceContext,
+        Player player
+    )
     {
         if (player != Owner.Player)
             return;
-        flag=0;
+        flag = 0;
     }
+
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (side!=this.Owner.Side)
+        if (side != this.Owner.Side)
             return;
-        if (flag==1)
+        if (flag == 1)
             return;
-        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner,1,null,null);
+        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner, 1, null, null);
     }
-    public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
+
+    public override async Task AfterDamageReceived(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        DamageResult result,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource
+    )
     {
         if (target == base.Owner && result.UnblockedDamage > 0)
         {
@@ -79,5 +97,4 @@ public class Pain :CustomPowerModel
         }
         return;
     }
-    
 }

@@ -13,7 +13,6 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-
 public class Lexkela : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
@@ -25,32 +24,34 @@ public class Lexkela : CustomPowerModel
     public override bool TryModifyEnergyCostInCombat(
         CardModel card,
         Decimal originalCost,
-        out Decimal modifiedCost)
+        out Decimal modifiedCost
+    )
     {
         if (card.Owner.Creature != this.Owner || !card.Keywords.Contains(NinjaKeyword.Science))
         {
             modifiedCost = originalCost;
             return false;
         }
-        modifiedCost = originalCost-Amount;
+        modifiedCost = originalCost - Amount;
         return true;
     }
-    
+
     public override async Task AfterDamageGiven(
         PlayerChoiceContext choiceContext,
         Creature? dealer,
         DamageResult result,
         ValueProp props,
         Creature target,
-        CardModel? cardSource)
+        CardModel? cardSource
+    )
     {
-        if (dealer!=Owner||cardSource==null)
+        if (dealer != Owner || cardSource == null)
         {
             return;
         }
         if (cardSource.Tags.Contains(NinjaTags.Holy))
         {
-            NinjaAudio.Play("res://LexNinja2/audio/YEEART.mp3",0.5f);
+            NinjaAudio.Play("res://LexNinja2/audio/YEEART.mp3", 0.5f);
         }
         else
         {
@@ -60,41 +61,62 @@ public class Lexkela : CustomPowerModel
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Keywords.Contains(NinjaKeyword.Science)&&cardPlay.Card.Owner==Owner.Player)
+        if (
+            cardPlay.Card.Keywords.Contains(NinjaKeyword.Science)
+            && cardPlay.Card.Owner == Owner.Player
+        )
         {
-            await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(),Owner, -1, Owner, null);
+            await PowerCmd.Apply<Lexkela>(
+                new ThrowingPlayerChoiceContext(),
+                Owner,
+                -1,
+                Owner,
+                null
+            );
         }
     }
 
     private int flag = 0;
-    public override  async Task AfterPowerAmountChanged(
+
+    public override async Task AfterPowerAmountChanged(
         PlayerChoiceContext choiceContext,
         PowerModel power,
         Decimal amount,
         Creature? applier,
-        CardModel? cardSource)
+        CardModel? cardSource
+    )
     {
         Lexkela lexkela = power as Lexkela;
-        if (Owner.GetPower<Lexkela>()!=null && power == lexkela && amount<0&& power.Owner == Owner)
+        if (
+            Owner.GetPower<Lexkela>() != null
+            && power == lexkela
+            && amount < 0
+            && power.Owner == Owner
+        )
         {
             flag = 1;
         }
     }
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+
+    public override async Task AfterPlayerTurnStart(
+        PlayerChoiceContext choiceContext,
+        Player player
+    )
     {
         if (player != Owner.Player)
             return;
-        flag=0;
+        flag = 0;
     }
+
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (side!=this.Owner.Side)
+        if (side != this.Owner.Side)
             return;
-        if (flag==1)
+        if (flag == 1)
             return;
         if (Owner.HasPower<Pain>())
             return;
         Flash();
-        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner,1,null,null);
+        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner, 1, null, null);
     }
 }

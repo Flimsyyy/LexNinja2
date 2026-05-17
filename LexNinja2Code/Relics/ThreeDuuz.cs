@@ -14,89 +14,87 @@ using MegaCrit.Sts2.Core.Rooms;
 namespace LexNinja2.LexNinja2Code.Relics;
 
 [Pool(typeof(LexNinja2RelicPool))]
-public class ThreeDuuz() : LexNinja2Relic {
-public override RelicRarity Rarity =>
-    RelicRarity.Shop;
-
-private bool _wasUsedThisTurn;
-private CardModel? _cardBeingPlayed;
-private bool WasUsedThisTurn
+public class ThreeDuuz() : LexNinja2Relic
 {
-    get
-    {
-        return _wasUsedThisTurn;
-    }
-    set
-    {
-        AssertMutable();
-        _wasUsedThisTurn = value;
-    }
-}
+    public override RelicRarity Rarity => RelicRarity.Shop;
 
-private CardModel? CardBeingPlayed
-{
-    get
+    private bool _wasUsedThisTurn;
+    private CardModel? _cardBeingPlayed;
+    private bool WasUsedThisTurn
     {
-        return _cardBeingPlayed;
+        get { return _wasUsedThisTurn; }
+        set
+        {
+            AssertMutable();
+            _wasUsedThisTurn = value;
+        }
     }
-    set
-    {
-        AssertMutable();
-        _cardBeingPlayed = value;
-    }
-}
 
-public override Task BeforeCardPlayed(CardPlay cardPlay)
-{
-    if (CardBeingPlayed != null)
+    private CardModel? CardBeingPlayed
     {
+        get { return _cardBeingPlayed; }
+        set
+        {
+            AssertMutable();
+            _cardBeingPlayed = value;
+        }
+    }
+
+    public override Task BeforeCardPlayed(CardPlay cardPlay)
+    {
+        if (CardBeingPlayed != null)
+        {
+            return Task.CompletedTask;
+        }
+        if (cardPlay.Card.Owner != base.Owner)
+        {
+            return Task.CompletedTask;
+        }
+        if (WasUsedThisTurn)
+        {
+            return Task.CompletedTask;
+        }
+        if (!cardPlay.Card.Tags.Contains(NinjaTags.Ninjutsu))
+        {
+            return Task.CompletedTask;
+        }
+        CardBeingPlayed = cardPlay.Card;
         return Task.CompletedTask;
     }
-    if (cardPlay.Card.Owner != base.Owner)
+
+    public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
+        if (cardPlay.Card == CardBeingPlayed)
+        {
+            Flash();
+            NinjaAudio.Play("res://LexNinja2/audio/3Duuz.mp3");
+            await CardPileCmd.Draw(context, 2, cardPlay.Card.Owner);
+            WasUsedThisTurn = true;
+            CardBeingPlayed = null;
+        }
+    }
+
+    public override Task BeforeSideTurnStart(
+        PlayerChoiceContext choiceContext,
+        CombatSide side,
+        ICombatState combatState
+    )
+    {
+        if (side != base.Owner.Creature.Side)
+        {
+            return Task.CompletedTask;
+        }
+        WasUsedThisTurn = false;
         return Task.CompletedTask;
     }
-    if (WasUsedThisTurn)
+
+    public override Task AfterCombatEnd(CombatRoom _)
     {
+        WasUsedThisTurn = false;
         return Task.CompletedTask;
     }
-    if (!cardPlay.Card.Tags.Contains(NinjaTags.Ninjutsu))
-    {
-        return Task.CompletedTask;
-    }
-    CardBeingPlayed = cardPlay.Card;
-    return Task.CompletedTask;
-}
 
-public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
-{
-    if (cardPlay.Card == CardBeingPlayed)
-    {
-        Flash();
-        NinjaAudio.Play("res://LexNinja2/audio/3Duuz.mp3");
-        await CardPileCmd.Draw(context,2,cardPlay.Card.Owner);
-        WasUsedThisTurn = true;
-        CardBeingPlayed = null;
-    }
-}
-
-public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, ICombatState combatState)
-{
-    if (side != base.Owner.Creature.Side)
-    {
-        return Task.CompletedTask;
-    }
-    WasUsedThisTurn = false;
-    return Task.CompletedTask;
-}
-
-public override Task AfterCombatEnd(CombatRoom _)
-{
-    WasUsedThisTurn = false;
-    return Task.CompletedTask;
-}
-
-public override string PackedIconPath => "3Duuz.png".RelicImagePath();
-protected override string PackedIconOutlinePath => "/outline/3Duuz.png".RelicImagePath();
-protected override string BigIconPath => "3Duuz.png".BigRelicImagePath();
+    public override string PackedIconPath => "3Duuz.png".RelicImagePath();
+    protected override string PackedIconOutlinePath => "/outline/3Duuz.png".RelicImagePath();
+    protected override string BigIconPath => "3Duuz.png".BigRelicImagePath();
 }

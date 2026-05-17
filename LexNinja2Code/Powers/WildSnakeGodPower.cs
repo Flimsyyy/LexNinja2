@@ -19,14 +19,18 @@ public class WildSnakeGodPower : CustomPowerModel
 
     public override string CustomPackedIconPath => "WildSnakeGodPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "WildSnakeGodPower.png".BigPowerImagePath();
-    
+
     public override async Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
     {
         if (side != Owner.Side)
             return;
         NinjaAudio.Play("res://LexNinja2/audio/WildSnakeGod.mp3");
         Flash();
-        foreach (CardModel card in PileType.Hand.GetPile(Owner.Player).Cards.Where<CardModel>((Func<CardModel, bool>) (c => !c.EnergyCost.CostsX)))
+        foreach (
+            CardModel card in PileType
+                .Hand.GetPile(Owner.Player)
+                .Cards.Where<CardModel>((Func<CardModel, bool>)(c => !c.EnergyCost.CostsX))
+        )
         {
             if (card.EnergyCost.GetWithModifiers(CostModifiers.None) >= 0)
             {
@@ -40,11 +44,12 @@ public class WildSnakeGodPower : CustomPowerModel
         // int amount = (int) ((Decimal) cards.Count * Amount);
         // await CreatureCmd.GainBlock(Owner, amount, ValueProp.Unpowered, null);
     }
+
     public override Decimal ModifyHandDraw(Player player, Decimal count)
     {
         return player != this.Owner.Player ? count : count + Amount;
     }
-    
+
     private int _testEnergyCostOverride = -1;
 
     public int TestEnergyCostOverride
@@ -57,8 +62,11 @@ public class WildSnakeGodPower : CustomPowerModel
             this._testEnergyCostOverride = value;
         }
     }
+
     private int NextEnergyCost()
     {
-        return this.TestEnergyCostOverride >= 0 ? this.TestEnergyCostOverride : this.Owner.Player.RunState.Rng.CombatEnergyCosts.NextInt(4);
+        return this.TestEnergyCostOverride >= 0
+            ? this.TestEnergyCostOverride
+            : this.Owner.Player.RunState.Rng.CombatEnergyCosts.NextInt(4);
     }
 }

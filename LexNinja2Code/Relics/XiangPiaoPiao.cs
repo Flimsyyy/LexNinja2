@@ -16,19 +16,32 @@ namespace LexNinja2.LexNinja2Code.Relics;
 [Pool(typeof(LexNinja2RelicPool))]
 public class XiangPiaoPiao() : LexNinja2Relic
 {
-    public override RelicRarity Rarity =>
-        RelicRarity.Ancient;
+    public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<Lexkela>()];
-    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromPower<Lexkela>()];
+
     public override async Task AfterRoomEntered(AbstractRoom room)
     {
         if (!(room is CombatRoom))
             return;
         Flash();
-        await PowerCmd.Apply<Pain>(new ThrowingPlayerChoiceContext(), Owner.Creature,1,null,null);
-        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner.Creature,2,null,null);
+        await PowerCmd.Apply<Pain>(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            1,
+            null,
+            null
+        );
+        await PowerCmd.Apply<Lexkela>(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            2,
+            null,
+            null
+        );
     }
+
     public override async Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
     {
         if (side != Owner.Creature.Side)
@@ -41,7 +54,7 @@ public class XiangPiaoPiao() : LexNinja2Relic
     public override string PackedIconPath => "XiangPiaoPiao.png".RelicImagePath();
     protected override string PackedIconOutlinePath => "XiangPiaoPiao.png".RelicImagePath();
     protected override string BigIconPath => "XiangPiaoPiao.png".BigRelicImagePath();
-    
+
     public override Task BeforeDeath(Creature creature)
     {
         if (creature != this.Owner.Creature)

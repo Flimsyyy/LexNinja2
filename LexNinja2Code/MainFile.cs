@@ -22,10 +22,9 @@ public partial class MainFile : Node
         var harmony = new Harmony(ModId);
 
         harmony.PatchAll();
-        
+
         ScriptManagerBridge.LookupScriptsInAssembly(typeof(MainFile).Assembly);
-        
-        
+
         try
         {
             var animHandlerField = AccessTools.Field(typeof(CustomAnimation), "animHandler");
@@ -35,7 +34,7 @@ public partial class MainFile : Node
                 Logger.Info("CustomAnimation.animHandler not found, skipping disable.");
                 return;
             }
-        
+
             var dict = animHandlerField.GetValue(null) as IDictionary;
             if (dict != null)
             {
@@ -63,7 +62,6 @@ public partial class MainFile : Node
         //         sceneTree.ProcessFrame += OnFirstProcessFrame;
         //     }
         // }
-
     }
     // private static void OnFirstProcessFrame()
     // {
@@ -89,5 +87,4 @@ public partial class MainFile : Node
     //     var instance = NinjaAudio.Instance;
     //     GD.Print($"[MainFile] NinjaAudio 单例创建结果：{(instance != null ? "成功" : "失败")}");
     // }
-    
 }

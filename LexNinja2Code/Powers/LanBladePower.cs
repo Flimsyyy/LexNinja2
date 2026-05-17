@@ -13,34 +13,47 @@ namespace LexNinja2.LexNinja2Code.Powers;
 
 public class LanBladePower : CustomPowerModel
 {
-    protected override object InitInternalData() => (object) new Data();
+    protected override object InitInternalData() => (object)new Data();
+
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(NinjaKeyword.Blade),HoverTipFactory.FromCard<LanBlade>()];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipFactory.FromKeyword(NinjaKeyword.Blade), HoverTipFactory.FromCard<LanBlade>()];
 
-    
     public override string CustomPackedIconPath => "LanBladePower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "LanBladePower84.png".BigPowerImagePath();
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if (GetInternalData<Data>().amountsForPlayedCards.Remove(cardPlay.Card, out var value)&& ((cardPlay.Card.Keywords.Contains(NinjaKeyword.Blade)&& !cardPlay.Card.Tags.Contains(NinjaTags.LanBlade))||cardPlay.Card.Tags.Contains(CardTag.Shiv))&&cardPlay.Card.Owner==Owner.Player)
+        if (
+            GetInternalData<Data>().amountsForPlayedCards.Remove(cardPlay.Card, out var value)
+            && (
+                (
+                    cardPlay.Card.Keywords.Contains(NinjaKeyword.Blade)
+                    && !cardPlay.Card.Tags.Contains(NinjaTags.LanBlade)
+                ) || cardPlay.Card.Tags.Contains(CardTag.Shiv)
+            )
+            && cardPlay.Card.Owner == Owner.Player
+        )
         {
             NinjaAudio.Play("res://LexNinja2/audio/LanBlade.mp3");
             for (int i = 0; i < Amount; i++)
             {
                 CardModel card = CombatState.CreateCard<LanBlade>(Owner.Player);
-                await CardPileCmd.AddGeneratedCardToCombat(card,PileType.Hand,Owner.Player);
+                await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner.Player);
             }
         }
     }
+
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
         GetInternalData<Data>().amountsForPlayedCards.Add(cardPlay.Card, base.Amount);
         return Task.CompletedTask;
     }
+
     private class Data
     {
-        public readonly Dictionary<CardModel, int> amountsForPlayedCards = new Dictionary<CardModel, int>();
+        public readonly Dictionary<CardModel, int> amountsForPlayedCards =
+            new Dictionary<CardModel, int>();
     }
 }

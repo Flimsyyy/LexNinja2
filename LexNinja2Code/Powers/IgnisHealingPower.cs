@@ -16,16 +16,25 @@ public class IgnisHealingPower : CustomPowerModel
     public override PowerStackType StackType => PowerStackType.Single;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new HpLossVar(5)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new HpLossVar(5)];
 
     public override string CustomPackedIconPath => "IgnisHealingPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "IgnisHealingPower84.png".BigPowerImagePath();
-    
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+
+    public override async Task AfterPlayerTurnStart(
+        PlayerChoiceContext choiceContext,
+        Player player
+    )
     {
         if (player != Owner.Player)
             return;
         NinjaAudio.Play("res://LexNinja2/audio/Die!Worm.ogg");
-        await CreatureCmd.Damage(choiceContext, Owner, DynamicVars.HpLoss.BaseValue, ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, Owner);    }
+        await CreatureCmd.Damage(
+            choiceContext,
+            Owner,
+            DynamicVars.HpLoss.BaseValue,
+            ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
+            Owner
+        );
+    }
 }

@@ -1,9 +1,9 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
+using Godot;
 using LexNinja2.LexNinja2Code.Character;
 using LexNinja2.LexNinja2Code.Extensions;
-using Godot;
 
 namespace LexNinja2.LexNinja2Code.Relics;
 

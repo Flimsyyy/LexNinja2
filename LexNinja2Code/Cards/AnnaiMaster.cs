@@ -12,26 +12,38 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Cards;
 
-public class AnnaiMaster() : LexNinja2Card(1,
-    CardType.Skill, CardRarity.Uncommon,
-    TargetType.Self)
+public class AnnaiMaster() : LexNinja2Card(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-    [
-        HoverTipFactory.FromPower<Lexkela>(), HoverTipFactory.FromKeyword(NinjaKeyword.Renshu),HoverTipFactory.FromKeyword(NinjaKeyword.FreeNinjutsu)
-    ];
+        [
+            HoverTipFactory.FromPower<Lexkela>(),
+            HoverTipFactory.FromKeyword(NinjaKeyword.Renshu),
+            HoverTipFactory.FromKeyword(NinjaKeyword.FreeNinjutsu),
+        ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/AnnaiMaster.mp3");
         // await PowerCmd.Apply<FreeNinjutsuPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, 1, Owner.Creature, this);
-        CardModel card = CardFactory.GetDistinctForCombat(Owner, Owner.Character.CardPool.GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint).Where<CardModel>((Func<CardModel, bool>) (c => c.Tags.Contains(NinjaTags.Ninjutsu))), 1, Owner.RunState.Rng.CombatCardGeneration).FirstOrDefault<CardModel>();
+        CardModel card = CardFactory
+            .GetDistinctForCombat(
+                Owner,
+                Owner
+                    .Character.CardPool.GetUnlockedCards(
+                        Owner.UnlockState,
+                        Owner.RunState.CardMultiplayerConstraint
+                    )
+                    .Where<CardModel>(
+                        (Func<CardModel, bool>)(c => c.Tags.Contains(NinjaTags.Ninjutsu))
+                    ),
+                1,
+                Owner.RunState.Rng.CombatCardGeneration
+            )
+            .FirstOrDefault<CardModel>();
         if (card == null)
             return;
         card.SetToFreeThisTurn();
@@ -43,7 +55,7 @@ public class AnnaiMaster() : LexNinja2Card(1,
     {
         EnergyCost.UpgradeBy(-1);
     }
-    
+
     public override string CustomPortraitPath => $"AnnaiMaster_p.png".BigCardImagePath();
     public override string PortraitPath => $"AnnaiMaster.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/AnnaiMaster.png".CardImagePath();

@@ -11,20 +11,29 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Cards;
 
-public class SharpenToKill() : LexNinja2Card(1,
-    CardType.Attack, CardRarity.Uncommon,
-    TargetType.AnyEnemy)
+public class SharpenToKill()
+    : LexNinja2Card(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(9,ValueProp.Move),new PowerVar<BladePowerUp>(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new DamageVar(9, ValueProp.Move), new PowerVar<BladePowerUp>(2)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/SharpenToKill.mp3");
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
-        await PowerCmd.Apply<BladePowerUp>(new ThrowingPlayerChoiceContext(), Owner.Creature, DynamicVars.Power<BladePowerUp>().BaseValue, Owner.Creature, this);
+        await DamageCmd
+            .Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .Targeting(play.Target)
+            .WithHitFx("vfx/vfx_attack_slash")
+            .Execute(choiceContext);
+        await PowerCmd.Apply<BladePowerUp>(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            DynamicVars.Power<BladePowerUp>().BaseValue,
+            Owner.Creature,
+            this
+        );
     }
 
     protected override void OnUpgrade()
@@ -32,7 +41,7 @@ public class SharpenToKill() : LexNinja2Card(1,
         DynamicVars.Damage.UpgradeValueBy(1);
         DynamicVars.Power<BladePowerUp>().UpgradeValueBy(1);
     }
-    
+
     public override string CustomPortraitPath => $"SharpenToKill_p.png".BigCardImagePath();
     public override string PortraitPath => $"SharpenToKill.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/SharpenToKill.png".CardImagePath();

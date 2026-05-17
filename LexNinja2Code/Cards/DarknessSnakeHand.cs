@@ -12,22 +12,31 @@ using MegaCrit.Sts2.Core.TestSupport;
 
 namespace LexNinja2.LexNinja2Code.Cards;
 
-public class DarknessSnakeHand() : LexNinja2Card(0,
-    CardType.Skill, CardRarity.Common,
-    TargetType.Self)
+public class DarknessSnakeHand()
+    : LexNinja2Card(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     private int _testEnergyCostOverride = -1;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(5),new LexKelaVar(1)];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust,NinjaKeyword.Hand];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new CardsVar(5), new LexKelaVar(1)];
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+        [CardKeyword.Exhaust, NinjaKeyword.Hand];
 
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/DarknessSnakeHand.mp3");
-        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner.Creature, DynamicVars["Kela"].BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<Lexkela>(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            DynamicVars["Kela"].BaseValue,
+            Owner.Creature,
+            this
+        );
         await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
-        foreach (CardModel card in PileType.Hand.GetPile(Owner).Cards.Where<CardModel>((Func<CardModel, bool>) (c => !c.EnergyCost.CostsX)))
+        foreach (
+            CardModel card in PileType
+                .Hand.GetPile(Owner)
+                .Cards.Where<CardModel>((Func<CardModel, bool>)(c => !c.EnergyCost.CostsX))
+        )
         {
             if (card.EnergyCost.GetWithModifiers(CostModifiers.None) >= 0)
             {
@@ -41,7 +50,7 @@ public class DarknessSnakeHand() : LexNinja2Card(0,
     {
         DynamicVars["Kela"].UpgradeValueBy(1);
     }
-    
+
     public int TestEnergyCostOverride
     {
         get => this._testEnergyCostOverride;
@@ -52,12 +61,14 @@ public class DarknessSnakeHand() : LexNinja2Card(0,
             this._testEnergyCostOverride = value;
         }
     }
-    
+
     private int NextEnergyCost()
     {
-        return this.TestEnergyCostOverride >= 0 ? this.TestEnergyCostOverride : this.Owner.RunState.Rng.CombatEnergyCosts.NextInt(4);
+        return this.TestEnergyCostOverride >= 0
+            ? this.TestEnergyCostOverride
+            : this.Owner.RunState.Rng.CombatEnergyCosts.NextInt(4);
     }
-    
+
     public override string CustomPortraitPath => $"DarknessSnakeHand_p.png".BigCardImagePath();
     public override string PortraitPath => $"DarknessSnakeHand.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/DarknessSnakeHand.png".CardImagePath();
