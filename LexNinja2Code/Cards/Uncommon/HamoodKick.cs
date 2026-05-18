@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using BaseLib.Utils;
+using Godot;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -24,17 +25,13 @@ public class HamoodKick()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/HamoodKick.mp3");
-        await DamageCmd
-            .Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .TargetingAllOpponents(CombatState)
-            .WithHitFx(tmpSfx: "blunt_attack.mp3")
-            .WithHitVfxNode((Func<Creature, Node2D>)(t => (Node2D)NBigSlashImpactVfx.Create(t)))
-            .Execute(choiceContext);
-        if (Ninjutsu())
+        await CommonActions.CardAttack(this, play, tmpSfx: "blunt_attack.mp3")
+            .WithHitVfxNode((Func<Creature, Node2D>)(t => NBigSlashImpactVfx.Create(t)!)).Execute(choiceContext);
+        if (!Ninjutsu(choiceContext))
         {
-            EnergyCost.AddThisCombat(-1);
+            return;
         }
+        EnergyCost.AddThisCombat(-1);
     }
 
     public override Task AfterCardDrawn(
@@ -45,33 +42,9 @@ public class HamoodKick()
     {
         if (card != this)
             return Task.CompletedTask;
-        this.EnergyCost.AddThisCombat(1);
+        EnergyCost.AddThisCombat(1);
         return Task.CompletedTask;
     }
-
-    private Boolean Ninjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                PowerCmd.Apply<Lexkela>(
-                    new ThrowingPlayerChoiceContext(),
-                    Owner.Creature,
-                    -DynamicVars["Renshu"].BaseValue,
-                    Owner.Creature,
-                    this
-                );
-                return true;
-            }
-        }
-        return false;
-    }
-
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(5);
@@ -82,22 +55,5 @@ public class HamoodKick()
     public override string BetaPortraitPath => "beta/HamoodKick2.png".CardImagePath();
 
     protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
-
-    private Boolean CanCastNinjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    
 }
