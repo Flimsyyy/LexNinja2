@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -33,28 +34,10 @@ public class GammaBlade()
     {
         NinjaAudio.Play("res://LexNinja2/audio/GammaBlade.mp3");
         VfxCmd.PlayOnCreature(Owner.Creature, "vfx/vfx_sweeping_beam");
-        await MegaCrit.Sts2.Core.Commands.Cmd.Wait(0.1f);
-        await DamageCmd
-            .Attack(DynamicVars.Damage.BaseValue)
-            .WithHitCount(2)
-            .FromCard(this)
-            .TargetingAllOpponents(CombatState)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
-        await PowerCmd.Apply<WeakPower>(
-            new ThrowingPlayerChoiceContext(),
-            CombatState.HittableEnemies,
-            DynamicVars.Weak.BaseValue,
-            Owner.Creature,
-            this
-        );
-        await PowerCmd.Apply<VulnerablePower>(
-            new ThrowingPlayerChoiceContext(),
-            CombatState.HittableEnemies,
-            DynamicVars.Weak.BaseValue,
-            Owner.Creature,
-            this
-        );
+        await Cmd.Wait(0.1f);
+        await CommonActions.CardAttack(this, play, hitCount: 2, vfx: "vfx/vfx_attack_slash").Execute(choiceContext);
+        await CommonActionsExtensions.Apply<WeakPower>(choiceContext, this, play);
+        await CommonActionsExtensions.Apply<VulnerablePower>(choiceContext, this, play);
     }
 
     protected override void OnUpgrade()
