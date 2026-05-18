@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -24,89 +25,14 @@ public class HolyLittleStorm()
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [NinjaKeyword.Hand, NinjaKeyword.Blade];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu, NinjaTags.Holy];
-    protected override bool ShouldGlowGoldInternal => IsGlowed();
+    protected override bool ShouldGlowGoldInternal => CanCastNinjutsuX();
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/HolyLittleStorm.mp3");
-        await MegaCrit.Sts2.Core.Commands.Cmd.Wait(1f);
-        int amount = 0;
-        if (Owner.GetRelic<ChemicalX>() != null)
-        {
-            amount += 2;
-            Owner.GetRelic<ChemicalX>().Flash();
-        }
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            amount += Owner.Creature.GetPower<Lexkela>().Amount;
-            await DamageCmd
-                .Attack(DynamicVars.Damage.BaseValue)
-                .WithHitCount(amount + 1)
-                .FromCard(this)
-                .TargetingRandomOpponents(this.CombatState)
-                .WithHitFx("vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3")
-                .Execute(choiceContext);
-            if (BaseReplayCount > 1)
-            {
-                return;
-            }
-            if (Keywords.Contains(NinjaKeyword.FreeNinjutsu))
-            {
-                RemoveKeyword(NinjaKeyword.FreeNinjutsu);
-                return;
-            }
-            if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-            {
-                return;
-            }
-            await PowerCmd.Apply<Lexkela>(
-                new ThrowingPlayerChoiceContext(),
-                Owner.Creature,
-                -Owner.Creature.GetPower<Lexkela>().Amount,
-                Owner.Creature,
-                this
-            );
-        }
-        else
-        {
-            await DamageCmd
-                .Attack(DynamicVars.Damage.BaseValue)
-                .WithHitCount(1)
-                .FromCard(this)
-                .TargetingRandomOpponents(this.CombatState)
-                .WithHitFx("vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3")
-                .Execute(choiceContext);
-        }
-    }
-
-    private Boolean Ninjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private Boolean IsGlowed()
-    {
-        if (this.Keywords.Contains(NinjaKeyword.FreeNinjutsu))
-        {
-            return true;
-        }
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            return true;
-        }
-        return false;
+        await Cmd.Wait(1f);
+        var hitCount = ResolveLexkelaXValue() + 1;
+        await CommonActions.CardAttack(this, play, hitCount: hitCount, vfx: "vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3").Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
@@ -118,7 +44,7 @@ public class HolyLittleStorm()
     public override string PortraitPath => $"HolyLittleStorm.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/HolyLittleStorm.png".CardImagePath();
 
-    public override async Task AfterDamageGiven(
+    public override Task AfterDamageGiven(
         PlayerChoiceContext choiceContext,
         Creature? dealer,
         DamageResult result,
@@ -129,15 +55,12 @@ public class HolyLittleStorm()
     {
         if (dealer != Owner.Creature || cardSource == null)
         {
-            return;
+            return Task.CompletedTask;
         }
         if (cardSource == this)
         {
             NinjaAudio.Play("res://LexNinja2/audio/YEEART.mp3", 0.5f);
         }
-        else
-        {
-            return;
-        }
+        return Task.CompletedTask;
     }
 }
