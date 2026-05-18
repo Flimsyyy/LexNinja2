@@ -65,7 +65,7 @@ public sealed class TheSpectre : CustomEventModel
         // NinjaAudio.Stop("res://LexNinja2/audio/TheSpectre.mp3",15f);
         NinjaAudio.Play("res://LexNinja2/audio/ISeeYou.mp3");
         CardCmd.PreviewCardPileAdd(
-            await CardPileCmd.Add(Owner.RunState.CreateCard<ISeeYou>(base.Owner), PileType.Deck)
+            await CardPileCmd.Add(Owner!.RunState.CreateCard<ISeeYou>(base.Owner), PileType.Deck)
         );
         SetEventFinished(PageDescription("KITTEN_CHOSEN"));
     }
@@ -75,7 +75,7 @@ public sealed class TheSpectre : CustomEventModel
         NinjaAudio.Stop("res://LexNinja2/audio/TheSpectre.mp3", 15f);
         NinjaAudio.Play("res://LexNinja2/audio/ICantImagine.mp3");
         CardCmd.PreviewCardPileAdd(
-            await CardPileCmd.Add(Owner.RunState.CreateCard<Impatience>(base.Owner), PileType.Deck)
+            await CardPileCmd.Add(Owner!.RunState.CreateCard<Impatience>(base.Owner), PileType.Deck)
         );
         SetEventFinished(PageDescription("STOP_CHOSEN"));
     }
