@@ -1,4 +1,5 @@
 ﻿using BaseLib.Extensions;
+using BaseLib.Utils;
 using Godot;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -38,54 +39,15 @@ public class FlameThrower()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/FlameThrower.mp3");
-        NCombatRoom instance = NCombatRoom.Instance;
-        if (instance != null)
-            instance.CombatVfxContainer.AddChildSafely((Node)NGroundFireVfx.Create(play.Target));
-        await DamageCmd
-            .Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(play.Target)
-            .Execute(choiceContext);
-        await PowerCmd.Apply<WeakPower>(
-            new ThrowingPlayerChoiceContext(),
-            play.Target,
-            DynamicVars.Power<WeakPower>().BaseValue,
-            Owner.Creature,
-            this
-        );
-        if (Ninjutsu())
+        var instance = NCombatRoom.Instance;
+        instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(play.Target!)!);
+        await CommonActions.CardAttack(this, play).Execute(choiceContext);
+        await CommonActionsExtensions.Apply<WeakPower>(choiceContext, this, play);
+        if (!Ninjutsu(choiceContext))
         {
-            await PowerCmd.Apply<PoisonPower>(
-                new ThrowingPlayerChoiceContext(),
-                play.Target,
-                DynamicVars.Poison.BaseValue,
-                Owner.Creature,
-                this
-            );
+            return;
         }
-    }
-
-    private Boolean Ninjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                PowerCmd.Apply<Lexkela>(
-                    new ThrowingPlayerChoiceContext(),
-                    Owner.Creature,
-                    -DynamicVars["Renshu"].BaseValue,
-                    Owner.Creature,
-                    this
-                );
-                return true;
-            }
-        }
-        return false;
+        await CommonActionsExtensions.Apply<PoisonPower>(choiceContext, this, play);
     }
 
     protected override void OnUpgrade()
@@ -99,22 +61,4 @@ public class FlameThrower()
     public override string BetaPortraitPath => $"beta/FlameThrower.png".CardImagePath();
 
     protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
-
-    private Boolean CanCastNinjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
 }
