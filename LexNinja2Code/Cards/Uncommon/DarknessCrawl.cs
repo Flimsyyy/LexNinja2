@@ -20,25 +20,17 @@ public class DarknessCrawl()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/DarknessCrawl.mp3");
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        int evokeCount = ResolveEnergyXValue();
+        await NinjaAnim.TriggerCastAnim(this);
+        var evokeCount = ResolveEnergyXValue();
         if (IsUpgraded)
-            evokeCount = evokeCount + 1;
-        for (int i = 0; i < evokeCount; ++i)
+            evokeCount += 1;
+        for (var i = 0; i < evokeCount; ++i)
         {
-            NinjaAudio.Play("res://LexNinja2/audio/Crawl.mp3", 1);
+            NinjaAudio.Play("res://LexNinja2/audio/Crawl.mp3");
             await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
-            await PowerCmd.Apply<Lexkela>(
-                new ThrowingPlayerChoiceContext(),
-                Owner.Creature,
-                DynamicVars["Kela"].BaseValue,
-                Owner.Creature,
-                this
-            );
+            await NinjaHelper.AddLexKela(choiceContext, this);
         }
     }
-
-    protected override void OnUpgrade() { }
 
     public override string CustomPortraitPath => $"DarknessCrawl_p.png".BigCardImagePath();
     public override string PortraitPath => $"DarknessCrawl.png".CardImagePath();
