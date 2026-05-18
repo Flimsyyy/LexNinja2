@@ -22,18 +22,13 @@ public class SouthCrossSeal()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/SouthCrossSeal.wav");
-        await CreatureCmd.Stun(play.Target);
-        await CreatureCmd.GainBlock(play.Target, 50, ValueProp.Unpowered, play);
-        if (Ninjutsu())
+        await CreatureCmd.Stun(play.Target!);
+        await CreatureCmd.GainBlock(play.Target!, 50, ValueProp.Unpowered, play);
+        if (!Ninjutsu(choiceContext))
         {
-            await PowerCmd.Apply<SealPower>(
-                new ThrowingPlayerChoiceContext(),
-                play.Target,
-                DynamicVars.Power<SealPower>().BaseValue,
-                Owner.Creature,
-                this
-            );
+            return;
         }
+        await CommonActionsExtensions.Apply<SealPower>(choiceContext, this, play);
     }
 
     protected override void OnUpgrade()
@@ -44,47 +39,6 @@ public class SouthCrossSeal()
     public override string CustomPortraitPath => $"SouthCrossSeal_p.png".BigCardImagePath();
     public override string PortraitPath => $"SouthCrossSeal.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/SouthCrossSeal.png".CardImagePath();
-
-    private Boolean Ninjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                PowerCmd.Apply<Lexkela>(
-                    new ThrowingPlayerChoiceContext(),
-                    Owner.Creature,
-                    -DynamicVars["Renshu"].BaseValue,
-                    Owner.Creature,
-                    this
-                );
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private Boolean CanCastNinjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }
