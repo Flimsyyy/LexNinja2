@@ -196,7 +196,7 @@
   "LEXNINJA2-REAPER_FLAME_BLADE.description": "获得{IntangiblePower:diff()}层[gold]无实体[/gold]。\n你每出一张牌，所有敌人失去{ReaperFlame:diff()}点生命。\n你每[gold]消耗[/gold]一张牌，此牌的耗能就减少{energyPrefix:energyIcons(1)}。",
   "LEXNINJA2-REAPER_FLAME_BLADE.title": "死神火焰刀",
 
-  "LEXNINJA2-PAST_HAS_GONE_HAND.description": "[gold]消耗[/gold]你的[gold]弃牌堆[/gold]。\n每[gold]消耗[/gold]一张牌，获得{Block:diff()}点[gold]格挡[/gold]和1点[gold]蕾克拉[/gold]。",
+  "LEXNINJA2-PAST_HAS_GONE_HAND.description": "[gold]消耗[/gold]你的[gold]弃牌堆[/gold]。\n每[gold]消耗[/gold]一张牌，获得{CalculationExtra:diff()}点[gold]格挡[/gold]和1点[gold]蕾克拉[/gold]。{InCombat:\n（获得{CalculatedBlock:diff()}点格挡）|}",
   "LEXNINJA2-PAST_HAS_GONE_HAND.title": "往事如烟手",
 
   "LEXNINJA2-OH_FUCK_FLASH.description": "阻止下1次你受到的生命值损伤。\n[gold]忍术[/gold]{Renshu:diff()}：结束你的回合。\n进行一个额外回合。",
