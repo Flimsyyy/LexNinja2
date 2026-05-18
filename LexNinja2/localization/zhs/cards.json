@@ -217,7 +217,7 @@
   "LEXNINJA2-SCARE_FORM.description": "[gold]忍术[/gold]{Renshu:diff()}：回合开始时，随机释放{ScarePower:diff()}个[gold]忍术[/gold]。",
   "LEXNINJA2-SCARE_FORM.title": "受惊形态",
 
-  "LEXNINJA2-TAKE_YOUR_HEART.description": "造成{Damage:diff()}点伤害。\n[gold]忍术[/gold]{Renshu:diff()}：[gold]负面效果[/gold]总层数不小于{Amount:diff()}层的目标敌人死亡。",
+  "LEXNINJA2-TAKE_YOUR_HEART.description": "造成{Damage:diff()}点伤害。\n[gold]忍术[/gold]{Renshu:diff()}：[gold]负面效果[/gold]总层数不小于{DebuffAmount:diff()}层的目标敌人死亡。",
   "LEXNINJA2-TAKE_YOUR_HEART.title": "我夺取心脏",
 
   "LEXNINJA2-FOUR_NIGHTS_LIGHTNING.description": "对随机敌人造成{Damage:diff()}点伤害4次。\n抽1张牌。\n获得{energyPrefix:energyIcons(1)}。\n[gold]忍术[/gold]{Renshu:diff()}：重复{Repeat:diff()}次。",

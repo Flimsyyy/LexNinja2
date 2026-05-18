@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -11,7 +12,7 @@ namespace LexNinja2.LexNinja2Code.Cards;
 
 public class Turbine() : LexNinja2Card(5, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<TurbinePower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<Lexkela>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Science];
@@ -19,13 +20,7 @@ public class Turbine() : LexNinja2Card(5, CardType.Power, CardRarity.Uncommon, T
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/Turbine.mp3");
-        await PowerCmd.Apply<TurbinePower>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            1,
-            Owner.Creature,
-            this
-        );
+        await CommonActions.ApplySelf<TurbinePower>(choiceContext, this);
     }
 
     protected override void OnUpgrade()
