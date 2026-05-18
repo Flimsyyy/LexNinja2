@@ -223,7 +223,7 @@
   "LEXNINJA2-FOUR_NIGHTS_LIGHTNING.description": "对随机敌人造成{Damage:diff()}点伤害4次。\n抽1张牌。\n获得{energyPrefix:energyIcons(1)}。\n[gold]忍术[/gold]{Renshu:diff()}：重复{Repeat:diff()}次。",
   "LEXNINJA2-FOUR_NIGHTS_LIGHTNING.title": "四夜雷电光",
 
-  "LEXNINJA2-IGNIS_HEALING.description": "恢复最大生命值的{bili:diff()}%。\n回合开始时，失去5点生命值。",
+  "LEXNINJA2-IGNIS_HEALING.description": "恢复最大生命值的{bili:diff()}%。\n回合开始时，失去{IgnisHealingPower:diff()}点生命值。",
   "LEXNINJA2-IGNIS_HEALING.title": "火神医疗功",
 
   "LEXNINJA2-NAMI_YOYO.description": "给予{PoisonPower:diff()}层[gold]中毒[/gold]。\n给予一个随机敌人该名敌人身上的[gold]中毒[/gold]。",

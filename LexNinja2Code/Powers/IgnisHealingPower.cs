@@ -13,10 +13,7 @@ namespace LexNinja2.LexNinja2Code.Powers;
 public class IgnisHealingPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Debuff;
-    public override PowerStackType StackType => PowerStackType.Single;
-    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
-
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new HpLossVar(5)];
+    public override PowerStackType StackType => PowerStackType.Counter;
 
     public override string CustomPackedIconPath => "IgnisHealingPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "IgnisHealingPower84.png".BigPowerImagePath();
@@ -32,7 +29,7 @@ public class IgnisHealingPower : CustomPowerModel
         await CreatureCmd.Damage(
             choiceContext,
             Owner,
-            DynamicVars.HpLoss.BaseValue,
+            Amount,
             ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
             Owner
         );
