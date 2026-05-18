@@ -24,32 +24,27 @@ public class NamiYoyo() : LexNinja2Card(4, CardType.Skill, CardRarity.Uncommon, 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/NamiYoyo.mp3");
-        NCombatRoom instance = NCombatRoom.Instance;
-        if (instance != null)
-            instance.CombatVfxContainer.AddChildSafely(
-                (Node)NBolasVfx.Create(Owner.Creature, play.Target)
-            );
+        var instance = NCombatRoom.Instance;
+        instance?.CombatVfxContainer.AddChildSafely(
+            NBolasVfx.Create(Owner.Creature, play.Target!)!
+        );
+        await CommonActionsExtensions.Apply<PoisonPower>(choiceContext, this, play);
+        await Cmd.Wait(0.25f);
+        
+        var poisonPower = play.Target!.GetPower<PoisonPower>();
+        if (poisonPower == null)
+        {
+            return;
+        }
+        var enemy = CombatState!.HittableEnemies.ToList();
+        var target = Owner.RunState.Rng.CombatTargets.NextItem(enemy);
         await PowerCmd.Apply<PoisonPower>(
-            new ThrowingPlayerChoiceContext(),
-            play.Target,
-            DynamicVars.Poison.BaseValue,
+            choiceContext,
+            target!,
+            poisonPower.Amount,
             Owner.Creature,
             this
         );
-        await MegaCrit.Sts2.Core.Commands.Cmd.Wait(0.25f);
-
-        if (play.Target.GetPower<PoisonPower>() != null)
-        {
-            List<Creature> enemy = CombatState.HittableEnemies.ToList();
-            Creature target = Owner.RunState.Rng.CombatTargets.NextItem(enemy);
-            await PowerCmd.Apply<PoisonPower>(
-                new ThrowingPlayerChoiceContext(),
-                target,
-                (Decimal)play.Target.GetPower<PoisonPower>().Amount,
-                Owner.Creature,
-                this
-            );
-        }
     }
 
     /*public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
