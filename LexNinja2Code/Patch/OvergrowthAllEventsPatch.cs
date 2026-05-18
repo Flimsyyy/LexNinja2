@@ -8,8 +8,8 @@ namespace LexNinja2.LexNinja2Code.Patch;
 [HarmonyPatch(typeof(Overgrowth), nameof(Overgrowth.AllEvents), MethodType.Getter)]
 public static class OvergrowthAllEventsPatch
 {
-    static void Postfix(ref IEnumerable<EventModel> __result)
+    static void Postfix(ref IEnumerable<EventModel> result)
     {
-        __result = __result.Concat([ModelDb.Event<TheSpectre>()]).Distinct();
+        result = result.Concat([ModelDb.Event<TheSpectre>()]).Distinct();
     }
 }
