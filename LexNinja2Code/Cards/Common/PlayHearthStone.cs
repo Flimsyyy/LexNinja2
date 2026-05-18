@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -21,7 +22,7 @@ public class PlayHearthStone()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/PlayHearthStone.mp3");
-        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
+        await CommonActions.CardBlock(this, play);
     }
 
     protected override void OnUpgrade()
