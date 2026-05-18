@@ -1,4 +1,5 @@
 ﻿using BaseLib.Extensions;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -19,13 +20,7 @@ public class ScareForm() : LexNinja2Card(3, CardType.Power, CardRarity.Rare, Tar
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/pick.mp3");
-        await PowerCmd.Apply<ScarePower>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars.Power<ScarePower>().BaseValue,
-            Owner.Creature,
-            this
-        );
+        await CommonActions.ApplySelf<ScarePower>(choiceContext, this);
     }
 
     protected override void OnUpgrade()
