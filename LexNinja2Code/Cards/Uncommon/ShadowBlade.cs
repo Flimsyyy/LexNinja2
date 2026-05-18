@@ -1,4 +1,5 @@
 ﻿using BaseLib.Extensions;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.CardSelection;
@@ -26,42 +27,17 @@ public class ShadowBlade()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/ShadowBlade.mp3");
-        await DamageCmd
-            .Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(play.Target)
-            .WithHitFx("vfx/vfx_attack_slash", tmpSfx: "heavy_attack.mp3")
+        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_slash", tmpSfx: "heavy_attack.mp3")
             .Execute(choiceContext);
-        await PowerCmd.Apply<VulnerablePower>(
-            new ThrowingPlayerChoiceContext(),
-            play.Target,
-            DynamicVars.Power<VulnerablePower>().BaseValue,
-            Owner.Creature,
-            this
-        );
-        CardSelectorPrefs prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1)
-        {
-            PretendCardsCanBePlayed = true,
-        };
-        CardModel card = (
-            await CardSelectCmd.FromHand(
-                choiceContext,
-                Owner,
-                prefs,
-                (Func<CardModel, bool>)null,
-                this
-            )
-        ).FirstOrDefault();
+        await CommonActionsExtensions.Apply<VulnerablePower>(choiceContext, this, play);
+        var card = CommonActions.SelectSingleCard(this, SelectionScreenPrompt, choiceContext, PileType.Hand).Result;
         if (card == null)
         {
-            card = (CardModel)null;
+            return;
         }
-        else
-        {
-            CardCmd.ApplyKeyword(card, NinjaKeyword.Blade);
-            await CardCmd.AutoPlay(choiceContext, card, (Creature)null);
-            await CardCmd.Exhaust(choiceContext, card);
-        }
+        CardCmd.ApplyKeyword(card, NinjaKeyword.Blade);
+        await CardCmd.AutoPlay(choiceContext, card, null);
+        await CardCmd.Exhaust(choiceContext, card);
     }
 
     protected override void OnUpgrade()
