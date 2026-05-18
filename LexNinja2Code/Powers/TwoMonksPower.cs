@@ -26,7 +26,10 @@ public class TwoMonksPower : CustomPowerModel
         {
             return playCount;
         }
-        card.AddKeyword(NinjaKeyword.FreeNinjutsu);
+        if (card is LexNinja2Card lexNinjaCard)
+        {
+            lexNinjaCard.SetLexkelaToFreeUntilPlayed();
+        }
         return playCount + 1;
     }
 

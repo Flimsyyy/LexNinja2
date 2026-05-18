@@ -87,4 +87,9 @@ public abstract class LexNinja2Card(int cost, CardType type, CardRarity rarity, 
         }
         return value;
     }
+
+    public void SetLexkelaToFreeUntilPlayed()
+    {
+        AddKeyword(NinjaKeyword.FreeNinjutsu);
+    }
 }
