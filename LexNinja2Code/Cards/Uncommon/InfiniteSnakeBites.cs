@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -12,7 +13,7 @@ namespace LexNinja2.LexNinja2Code.Cards;
 public class InfiniteSnakeBites()
     : LexNinja2Card(0, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<InfiniteSnakeBitesPower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<AngrySnakeBite>(true)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
@@ -20,13 +21,7 @@ public class InfiniteSnakeBites()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/SheBuJin.mp3");
-        await PowerCmd.Apply<InfiniteSnakeBitesPower>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            1,
-            Owner.Creature,
-            this
-        );
+        await CommonActions.ApplySelf<InfiniteSnakeBitesPower>(choiceContext, this);
     }
 
     protected override void OnUpgrade()
