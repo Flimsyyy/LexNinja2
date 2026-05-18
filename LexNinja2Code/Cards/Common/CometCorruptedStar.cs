@@ -21,11 +21,11 @@ public class CometCorruptedStar()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/CometCorruptedStar.mp3");
-        Lexkela kela = Owner.Creature.GetPower<Lexkela>();
-        if (kela != null && kela.Amount > 2)
+        var kela = Owner.Creature.GetPower<Lexkela>();
+        if (kela is { Amount: > 2 })
         {
             await PowerCmd.Apply<Lexkela>(
-                new ThrowingPlayerChoiceContext(),
+                choiceContext,
                 Owner.Creature,
                 -1,
                 Owner.Creature,
@@ -36,9 +36,9 @@ public class CometCorruptedStar()
         else
         {
             await PowerCmd.Apply<Lexkela>(
-                new ThrowingPlayerChoiceContext(),
+                choiceContext,
                 Owner.Creature,
-                DynamicVars["Kela"].BaseValue,
+                DynamicVars.LexKela().BaseValue,
                 Owner.Creature,
                 this
             );
@@ -47,7 +47,7 @@ public class CometCorruptedStar()
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Kela"].UpgradeValueBy(1);
+        DynamicVars.LexKela().UpgradeValueBy(1);
     }
 
     public override string CustomPortraitPath => $"CometCorruptedStar_p.png".BigCardImagePath();
