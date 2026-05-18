@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
@@ -18,28 +19,22 @@ public class CountlessVampireDog()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        CardModel original = (
-            await CardSelectCmd.FromHand(
+        var original = CommonActions
+            .SelectSingleCard(
+                this,
+                CardSelectorPrefs.TransformSelectionPrompt,
                 choiceContext,
-                Owner,
-                new CardSelectorPrefs(CardSelectorPrefs.TransformSelectionPrompt, 1),
-                null,
-                this
+                PileType.Hand
             )
-        ).FirstOrDefault();
-        if (original != null)
+            .Result;
+        if (original == null)
         {
-            int num = 10 - CardPile.GetCards(Owner, PileType.Hand).Count<CardModel>();
-            List<CardModel> cards = new List<CardModel>();
-            for (int index = 0; index < num; ++index)
-                cards.Add((CardModel)original.CreateClone());
-            NinjaAudio.Play("res://LexNinja2/audio/CountlessVampireDog.mp3");
-            IReadOnlyList<CardPileAddResult> combat = await CardPileCmd.AddGeneratedCardsToCombat(
-                (IEnumerable<CardModel>)cards,
-                PileType.Hand,
-                Owner
-            );
+            return;
         }
+        NinjaAudio.Play("res://LexNinja2/audio/CountlessVampireDog.mp3");
+        var num = 10 - CardPile.GetCards(Owner, PileType.Hand).Count();
+        for (var index = 0; index < num; ++index)
+            await CardPileCmd.AddGeneratedCardToCombat(original.CreateClone(), PileType.Hand, Owner);
     }
 
     protected override void OnUpgrade()
