@@ -23,8 +23,8 @@ public class Lexkela : CustomPowerModel
 
     public override bool TryModifyEnergyCostInCombat(
         CardModel card,
-        Decimal originalCost,
-        out Decimal modifiedCost
+        decimal originalCost,
+        out decimal modifiedCost
     )
     {
         if (card.Owner.Creature != this.Owner || !card.Keywords.Contains(NinjaKeyword.Science))
@@ -53,10 +53,6 @@ public class Lexkela : CustomPowerModel
         {
             NinjaAudio.Play("res://LexNinja2/audio/YEEART.mp3", 0.5f);
         }
-        else
-        {
-            return;
-        }
     }
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
@@ -81,12 +77,12 @@ public class Lexkela : CustomPowerModel
     public override async Task AfterPowerAmountChanged(
         PlayerChoiceContext choiceContext,
         PowerModel power,
-        Decimal amount,
+        decimal amount,
         Creature? applier,
         CardModel? cardSource
     )
     {
-        Lexkela lexkela = power as Lexkela;
+        var lexkela = power as Lexkela;
         if (
             Owner.GetPower<Lexkela>() != null
             && power == lexkela
