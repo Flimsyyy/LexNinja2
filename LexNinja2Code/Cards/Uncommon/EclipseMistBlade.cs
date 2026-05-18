@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -24,17 +25,11 @@ public class EclipseMistBlade()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/EclipseMistBlade.mp3");
-        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
-        foreach (CardModel card in GetCards().ToList<CardModel>())
+        await CommonActions.CardBlock(this, play);
+        foreach (var card in GetCards().ToList())
         {
             await CardCmd.Exhaust(choiceContext, card);
-            await PowerCmd.Apply<Lexkela>(
-                new ThrowingPlayerChoiceContext(),
-                Owner.Creature,
-                DynamicVars["Kela"].BaseValue,
-                Owner.Creature,
-                this
-            );
+            await NinjaHelper.AddLexKela(choiceContext, card);
         }
     }
 
@@ -50,11 +45,9 @@ public class EclipseMistBlade()
     private IEnumerable<CardModel> GetCards()
     {
         return PileType
-            .Hand.GetPile(this.Owner)
-            .Cards.Where<CardModel>(
-                (Func<CardModel, bool>)(
-                    c => !c.Keywords.Contains(NinjaKeyword.Blade) && !c.Tags.Contains(CardTag.Shiv)
-                )
+            .Hand.GetPile(Owner)
+            .Cards.Where(
+                c => !c.Keywords.Contains(NinjaKeyword.Blade) && !c.Tags.Contains(CardTag.Shiv)
             );
     }
 }
