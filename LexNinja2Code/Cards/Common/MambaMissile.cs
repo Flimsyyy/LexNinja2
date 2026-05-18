@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -27,22 +28,17 @@ public class MambaMissile()
     {
         NinjaAudio.Play("res://LexNinja2/audio/MambaMissile.mp3", 1.5f);
         await Cmd.Wait(0.5f);
-        await DamageCmd
-            .Attack(DynamicVars.Damage.BaseValue)
-            .WithHitCount(DynamicVars.Repeat.IntValue)
-            .FromCard(this)
-            .TargetingRandomOpponents(CombatState)
-            .WithHitFx("vfx/vfx_rock_shatter", tmpSfx: "blunt_attack.mp3")
-            .WithHitVfxSpawnedAtBase()
-            .Execute(choiceContext);
-        foreach (var enemy in CombatState.HittableEnemies)
+        await CommonActions
+            .CardAttack(this, play, hitCount: DynamicVars.Repeat.IntValue, vfx: "vfx/vfx_rock_shatter",
+                tmpSfx: "blunt_attack.mp3").WithHitVfxSpawnedAtBase().Execute(choiceContext);
+        foreach (var enemy in CombatState!.HittableEnemies)
         {
-            if (enemy.GetPower<SoarPower>() != null)
+            if (enemy.HasPower<SoarPower>())
             {
                 await PowerCmd.Remove<SoarPower>(enemy);
                 NinjaAudio.Play("res://LexNinja2/audio/MambaOut.mp3");
             }
-            if (enemy.GetPower<FlutterPower>() != null)
+            if (enemy.HasPower<FlutterPower>())
             {
                 NinjaAudio.Play("res://LexNinja2/audio/MambaOut.mp3");
             }
