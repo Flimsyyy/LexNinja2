@@ -24,13 +24,7 @@ public class CometCorruptedStar()
         var kela = Owner.Creature.GetPower<Lexkela>();
         if (kela is { Amount: > 2 })
         {
-            await PowerCmd.Apply<Lexkela>(
-                choiceContext,
-                Owner.Creature,
-                -1,
-                Owner.Creature,
-                this
-            );
+            await PowerCmd.Apply<Lexkela>(choiceContext, Owner.Creature, -1, Owner.Creature, this);
             await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
         }
         else
