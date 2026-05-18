@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Cards.Tokens;
 using MegaCrit.Sts2.Core.Commands;
@@ -23,25 +24,19 @@ public class ItalySilverSlash()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/ItalySilverSlash.mp3");
-        await MegaCrit.Sts2.Core.Commands.Cmd.Wait(0.5f);
-        await DamageCmd
-            .Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .WithHitCount(DynamicVars.Repeat.IntValue)
-            .TargetingRandomOpponents(CombatState)
-            .WithHitFx("vfx/vfx_attack_slash", tmpSfx: "heavy_attack.mp3")
-            .Execute(choiceContext);
-        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
-        for (int i = 0; i < DynamicVars.Cards.BaseValue; ++i)
+        await Cmd.Wait(0.5f);
+        await CommonActions.CardAttack(this, play, hitCount: DynamicVars.Repeat.IntValue, vfx: "vfx/vfx_attack_slash", tmpSfx: "heavy_attack.mp3").Execute(choiceContext);
+        await CommonActions.Draw(this, choiceContext);
+        for (var i = 0; i < DynamicVars.Cards.BaseValue; ++i)
             CardCmd.PreviewCardPileAdd(
                 await CardPileCmd.AddGeneratedCardToCombat(
-                    (CardModel)CombatState.CreateCard<LanBlade>(Owner),
+                    CombatState!.CreateCard<LanBlade>(Owner),
                     PileType.Draw,
                     Owner,
                     CardPilePosition.Random
                 )
             );
-        await MegaCrit.Sts2.Core.Commands.Cmd.Wait(0.5f);
+        await Cmd.Wait(0.5f);
     }
 
     protected override void OnUpgrade()
