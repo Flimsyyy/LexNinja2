@@ -37,7 +37,9 @@ public class TakeYourHeart()
     {
         if (!IsEnoughDebuff(play.Target!) || !Ninjutsu(choiceContext))
         {
-            await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3").Execute(choiceContext);
+            await CommonActions
+                .CardAttack(this, play, vfx: "vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3")
+                .Execute(choiceContext);
             return;
         }
         NinjaAudio.Play("res://LexNinja2/audio/TakeYourHeart.mp3", 0.25f);
@@ -53,7 +55,8 @@ public class TakeYourHeart()
         await Cmd.Wait(1F);
         if (LocalContext.IsMe(Owner))
             VfxCmd.PlayFullScreenInCombat("vfx/vfx_adrenaline", Owner.Creature);
-        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_molten_fist", tmpSfx: "blunt_attack.mp3")
+        await CommonActions
+            .CardAttack(this, play, vfx: "vfx/vfx_molten_fist", tmpSfx: "blunt_attack.mp3")
             .Execute(choiceContext);
         await CreatureCmd.Kill(play.Target!, true);
     }
@@ -69,7 +72,9 @@ public class TakeYourHeart()
 
     private bool IsEnoughDebuff(Creature target)
     {
-        var debuffAmount = target.Powers.Where(p => p.TypeForCurrentAmount == PowerType.Debuff).Sum(p => p.Amount);
+        var debuffAmount = target
+            .Powers.Where(p => p.TypeForCurrentAmount == PowerType.Debuff)
+            .Sum(p => p.Amount);
         return debuffAmount >= DynamicVars[DebuffAmount].IntValue;
     }
 

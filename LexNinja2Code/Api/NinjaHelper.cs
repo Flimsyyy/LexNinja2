@@ -24,7 +24,7 @@ public static class NinjaHelper
     {
         await CardPileCmd.Draw(ctx, card.DynamicVars.ExtraCard().IntValue, card.Owner);
     }
-    
+
     public static CardModel? LastCard(CardModel card)
     {
         var cardLast = CombatManager

@@ -27,7 +27,7 @@ public class SandDefendHand() : LexNinja2Card(1, CardType.Skill, CardRarity.Comm
         await CommonActions.CardBlock(this, play);
         if (!Ninjutsu(choiceContext))
         {
-           return;
+            return;
         }
         await CommonActions.ApplySelf<SandWall>(choiceContext, this);
     }

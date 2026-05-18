@@ -22,8 +22,16 @@ public class PenglaiCan() : LexNinja2Card(0, CardType.Skill, CardRarity.Token, T
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/PenglaiCan.mp3");
-        var cards = CommonActions.SelectCards(this, SelectionScreenPrompt, choiceContext,  PileType.Hand, 0,
-            DynamicVars.Cards.IntValue).Result;
+        var cards = CommonActions
+            .SelectCards(
+                this,
+                SelectionScreenPrompt,
+                choiceContext,
+                PileType.Hand,
+                0,
+                DynamicVars.Cards.IntValue
+            )
+            .Result;
         foreach (var card in cards)
             await CardCmd.Exhaust(choiceContext, card);
     }

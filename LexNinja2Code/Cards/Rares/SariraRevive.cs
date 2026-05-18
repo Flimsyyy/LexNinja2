@@ -56,11 +56,7 @@ public class SariraRevive() : LexNinja2Card(0, CardType.Skill, CardRarity.Rare, 
         else if (Owner.GetRelicById(ModelDb.GetId<Sarira>()) == null)
         {
             NinjaAudio.Play("res://LexNinja2/audio/SariraRevive.mp3");
-            await RelicCmd.Obtain(
-                ModelDb.Relic<Sarira>().ToMutable(),
-                Owner,
-                Owner.Relics.Count
-            );
+            await RelicCmd.Obtain(ModelDb.Relic<Sarira>().ToMutable(), Owner, Owner.Relics.Count);
             MainFile.Logger.Info("[SariraRevive] Granted Sarira relic after deck removal.");
         }
     }

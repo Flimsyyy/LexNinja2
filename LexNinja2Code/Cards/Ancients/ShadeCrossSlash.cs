@@ -39,17 +39,23 @@ public class ShadeCrossSlash()
             if (nGrandFinaleVfx != null)
             {
                 NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(nGrandFinaleVfx);
-                await Cmd.Wait(
-                    NGrandFinaleVfx.totalAnticipationDuration
-                );
+                await Cmd.Wait(NGrandFinaleVfx.totalAnticipationDuration);
             }
-            await CommonActions.CardAttack(this, play, hitCount: 3, tmpSfx: "heavy_attack.mp3").WithHitVfxNode(NGrandFinaleImpactVfx.Create).Execute(choiceContext);
+            await CommonActions
+                .CardAttack(this, play, hitCount: 3, tmpSfx: "heavy_attack.mp3")
+                .WithHitVfxNode(NGrandFinaleImpactVfx.Create)
+                .Execute(choiceContext);
         }
         else
         {
             NinjaAudio.Play("res://LexNinja2/audio/YiCut.mp3");
             await CommonActions
-                .CardAttack(this, play, vfx: "vfx/vfx_giant_horizontal_slash", tmpSfx: "slash_attack.mp3")
+                .CardAttack(
+                    this,
+                    play,
+                    vfx: "vfx/vfx_giant_horizontal_slash",
+                    tmpSfx: "slash_attack.mp3"
+                )
                 .Execute(choiceContext);
         }
         await CommonActionsExtensions.Apply<VulnerablePower>(choiceContext, this, play);

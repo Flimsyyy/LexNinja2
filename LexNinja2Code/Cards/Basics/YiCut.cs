@@ -32,12 +32,17 @@ public class YiCut()
         if (Ninjutsu(choiceContext))
         {
             await CommonActions
-                .CardAttack(this, play, vfx: "vfx/vfx_giant_horizontal_slash", tmpSfx: "slash_attack.mp3")
+                .CardAttack(
+                    this,
+                    play,
+                    vfx: "vfx/vfx_giant_horizontal_slash",
+                    tmpSfx: "slash_attack.mp3"
+                )
                 .Execute(choiceContext);
         }
         await CommonActionsExtensions.Apply<VulnerablePower>(choiceContext, this, play);
     }
-    
+
     protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 
     protected override void OnUpgrade()

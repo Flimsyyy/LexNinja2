@@ -19,8 +19,15 @@ public class WaterSandStorm()
     : LexNinja2Card(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new NinjutsuVar(2), new PowerVar<SandWall>(10),
-        new CalculationBaseVar(0), new CalculationExtraVar(1), new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, _) => card.Owner.Creature.GetPowerAmount<SandWall>())];
+        [
+            new NinjutsuVar(2),
+            new PowerVar<SandWall>(10),
+            new CalculationBaseVar(0),
+            new CalculationExtraVar(1),
+            new CalculatedDamageVar(ValueProp.Move).WithMultiplier(
+                (card, _) => card.Owner.Creature.GetPowerAmount<SandWall>()
+            ),
+        ];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -44,9 +51,12 @@ public class WaterSandStorm()
         }
         nRollingBoulderVfx.Connect(
             NRollingBoulderVfx.SignalName.HitCreature,
-            Callable.From(async delegate(NCreature _)
+            Callable.From(
+                async delegate(NCreature _)
                 {
-                    await CommonActions.CardAttack(this, play, tmpSfx: "blunt_attack.mp3").Execute(choiceContext);
+                    await CommonActions
+                        .CardAttack(this, play, tmpSfx: "blunt_attack.mp3")
+                        .Execute(choiceContext);
                 }
             )
         );

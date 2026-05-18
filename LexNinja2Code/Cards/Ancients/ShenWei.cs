@@ -13,7 +13,8 @@ namespace LexNinja2.LexNinja2Code.Cards.Ancients;
 
 public class ShenWei() : LexNinja2Card(3, CardType.Power, CardRarity.Ancient, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new NinjutsuVar(3), new PowerVar<IntangiblePower>(1), new PowerVar<ShenWeiPower>(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new NinjutsuVar(3), new PowerVar<IntangiblePower>(1), new PowerVar<ShenWeiPower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<IntangiblePower>()];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];

@@ -29,8 +29,15 @@ public class SnakeSwitch() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncommo
         //     await CardPileCmd.AddGeneratedCardToCombat(original.CreateClone(),PileType.Hand,true);
         //     CardPileAddResult? nullable = await CardCmd.TransformTo<AngrySnakeBite>(original);
         // }
-        var cards = CommonActions.SelectCards(this, CardSelectorPrefs.TransformSelectionPrompt, choiceContext,
-            PileType.Hand, count: DynamicVars.Cards.IntValue).Result;
+        var cards = CommonActions
+            .SelectCards(
+                this,
+                CardSelectorPrefs.TransformSelectionPrompt,
+                choiceContext,
+                PileType.Hand,
+                count: DynamicVars.Cards.IntValue
+            )
+            .Result;
         foreach (var cardModel in cards)
         {
             NinjaAudio.Play("res://LexNinja2/audio/SnakeSwitch.mp3");

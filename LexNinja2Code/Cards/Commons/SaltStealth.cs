@@ -21,7 +21,9 @@ public class SaltStealth() : LexNinja2Card(1, CardType.Skill, CardRarity.Common,
     {
         NinjaAudio.Play("res://LexNinja2/audio/Salt.mp3");
         await NinjaHelper.AddLexKela(choiceContext, this);
-        var selectedCard = CommonActions.SelectSingleCard(this, SelectionScreenPrompt, choiceContext, PileType.Hand).Result;
+        var selectedCard = CommonActions
+            .SelectSingleCard(this, SelectionScreenPrompt, choiceContext, PileType.Hand)
+            .Result;
         if (selectedCard != null)
         {
             await CardCmd.TransformToRandom(selectedCard, RunState!.Rng.CombatCardSelection);

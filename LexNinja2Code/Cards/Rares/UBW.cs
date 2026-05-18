@@ -26,13 +26,12 @@ public class UBW() : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetTy
             new CalculationExtraVar(1),
             new CalculatedVar(Hitcounts).WithMultiplier(
                 (card, _) =>
-                    CombatManager.Instance.History.CardPlaysFinished.Count(
-                        e =>
-                            e.CardPlay.Card.Owner == card.Owner
-                            && (
-                                e.CardPlay.Card.Keywords.Contains(NinjaKeyword.Blade)
-                                || e.CardPlay.Card.Tags.Contains(CardTag.Shiv)
-                            )
+                    CombatManager.Instance.History.CardPlaysFinished.Count(e =>
+                        e.CardPlay.Card.Owner == card.Owner
+                        && (
+                            e.CardPlay.Card.Keywords.Contains(NinjaKeyword.Blade)
+                            || e.CardPlay.Card.Tags.Contains(CardTag.Shiv)
+                        )
                     )
             ),
         ];
@@ -48,14 +47,21 @@ public class UBW() : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetTy
         NinjaAudio.Play("res://LexNinja2/audio/UBW.mp3");
         await NinjaAnim.TriggerCastAnim(this);
         var instance = NCombatRoom.Instance;
-        instance?.CombatVfxContainer.AddChildSafely(
-            NHellraiserVfx.Create(Owner.Creature)!
-        );
+        instance?.CombatVfxContainer.AddChildSafely(NHellraiserVfx.Create(Owner.Creature)!);
         await Cmd.Wait(1);
         var hitCount = (int)((CalculatedVar)this.DynamicVars[Hitcounts]).Calculate(play.Target);
-        await CommonActions.CardAttack(this, play, hitCount: hitCount, vfx: "vfx/hellraiser_attack_vfx", tmpSfx: "heavy_attack.mp3").SpawningHitVfxOnEachCreature()
+        await CommonActions
+            .CardAttack(
+                this,
+                play,
+                hitCount: hitCount,
+                vfx: "vfx/hellraiser_attack_vfx",
+                tmpSfx: "heavy_attack.mp3"
+            )
+            .SpawningHitVfxOnEachCreature()
             .WithHitVfxSpawnedAtBase()
-            .Execute(choiceContext);; 
+            .Execute(choiceContext);
+        ;
     }
 
     protected override void OnUpgrade()

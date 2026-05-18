@@ -20,7 +20,9 @@ public class SharpenToKill()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/SharpenToKill.mp3");
-        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_slash").Execute(choiceContext);
+        await CommonActions
+            .CardAttack(this, play, vfx: "vfx/vfx_attack_slash")
+            .Execute(choiceContext);
         await CommonActions.ApplySelf<BladePowerUp>(choiceContext, this);
     }
 

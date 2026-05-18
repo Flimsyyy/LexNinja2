@@ -28,9 +28,7 @@ public class HamoodKillAll() : LexNinja2Card(1, CardType.Curse, CardRarity.Curse
         NinjaAudio.Play("res://LexNinja2/audio/KillAll.mp3");
         await CreatureCmd.Damage(
             choiceContext,
-            Owner.Creature.CombatState.Creatures.Where(
-                c => !c.IsPet
-            ),
+            Owner.Creature.CombatState.Creatures.Where(c => !c.IsPet),
             DynamicVars.Damage,
             Owner.Creature // need not null
         );

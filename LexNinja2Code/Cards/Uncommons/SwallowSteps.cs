@@ -14,7 +14,8 @@ public class SwallowSteps() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncomm
 {
     protected override bool ShouldGlowGoldInternal
     {
-        get {
+        get
+        {
             var card = NinjaHelper.LastCard(this);
             return card != null && card.Tags.Contains(NinjaTags.Ninjutsu);
         }

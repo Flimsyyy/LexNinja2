@@ -24,10 +24,13 @@ public class ShadowBlade()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/ShadowBlade.mp3");
-        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_slash", tmpSfx: "heavy_attack.mp3")
+        await CommonActions
+            .CardAttack(this, play, vfx: "vfx/vfx_attack_slash", tmpSfx: "heavy_attack.mp3")
             .Execute(choiceContext);
         await CommonActionsExtensions.Apply<VulnerablePower>(choiceContext, this, play);
-        var card = CommonActions.SelectSingleCard(this, SelectionScreenPrompt, choiceContext, PileType.Hand).Result;
+        var card = CommonActions
+            .SelectSingleCard(this, SelectionScreenPrompt, choiceContext, PileType.Hand)
+            .Result;
         if (card == null)
         {
             return;

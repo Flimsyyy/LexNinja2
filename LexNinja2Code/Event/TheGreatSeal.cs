@@ -117,10 +117,7 @@ public class TheGreatSeal : CustomEventModel
         NinjaAudio.Play("res://LexNinja2/audio/Hamood.mp3");
         NinjaAudio.Play("res://LexNinja2/audio/KillAll.mp3");
         CardCmd.PreviewCardPileAdd(
-            await CardPileCmd.Add(
-                Owner!.RunState.CreateCard<HamoodKillAll>(Owner),
-                PileType.Deck
-            )
+            await CardPileCmd.Add(Owner!.RunState.CreateCard<HamoodKillAll>(Owner), PileType.Deck)
         );
         SetEventFinished(PageDescription("OPTION_3"));
     }
