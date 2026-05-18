@@ -22,7 +22,7 @@ public class MobiusLoopSnake()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        var card = LastCard();
+        var card = NinjaHelper.LastCard(this);
         if (card == null)
         {
             return;
@@ -55,28 +55,6 @@ public class MobiusLoopSnake()
         if ((pile != null ? (pile.Type != PileType.Exhaust ? 1 : 0) : 1) != 0 || player != Owner)
             return;
         await CardCmd.AutoPlay(choiceContext, this, Owner.Creature);
-    }
-
-    private CardModel? LastCard()
-    {
-        var card = CombatManager
-            .Instance.History.CardPlaysFinished.LastOrDefault(
-                delegate(CardPlayFinishedEntry e)
-                {
-                    var flag =
-                        e.CardPlay.Card.Owner == Owner
-                        && !e.CardPlay.Card.Tags.Contains(NinjaTags.Snake);
-                    // if (flag2)
-                    // {
-                    //     CardType type = e.CardPlay.Card.Type;
-                    //     bool flag3 = (uint)(type - 1) <= 1u;
-                    //     flag2 = flag3;
-                    // }
-                    return flag && !e.CardPlay.Card.IsDupe;
-                }
-            )
-            ?.CardPlay.Card;
-        return card;
     }
 
     // public override async Task AfterCardDrawn(

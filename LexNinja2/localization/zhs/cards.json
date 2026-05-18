@@ -28,7 +28,7 @@
   "LEXNINJA2-SAND_DEFEND_HAND.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n[gold]忍术[/gold]{Renshu:diff()}：获得{Power:diff()}层[gold]沙壁[/gold]",
   "LEXNINJA2-SAND_DEFEND_HAND.title": "沙防掩意手",
 
-  "LEXNINJA2-SWALLOW_STEPS.description": "抽{Cards:diff()}张牌。\n如果打出的上一张牌是[gold]忍术[/gold]牌，额外抽{Extra:diff()}张。",
+  "LEXNINJA2-SWALLOW_STEPS.description": "抽{Cards:diff()}张牌。\n如果打出的上一张牌是[gold]忍术[/gold]牌，额外抽{ExtraCards:diff()}张。",
   "LEXNINJA2-SWALLOW_STEPS.title": "寒泥挪燕步",
 
   "LEXNINJA2-STONE_STRONG.description": "回合结束时，获得{Power:diff()}层[gold]沙壁[/gold]\n[gold]忍术[/gold]{Renshu:diff()}：获得{Power:diff()}层[gold]沙壁[/gold]",
@@ -52,7 +52,7 @@
   "LEXNINJA2-DARKNESS_SNAKE_HAND.description": "获得{Kela:diff()}点[gold]蕾克拉[/gold]，抽{Cards:diff()}张牌，随机化你[gold]手牌[/gold]中所有牌的耗能。",
   "LEXNINJA2-DARKNESS_SNAKE_HAND.title": "暗秽蛇手",
   
-  "LEXNINJA2-RACING_AGAINST_MESSI.description": "抽2张牌。\n[gold]忍术[/gold]{Renshu:diff()}：打出后再抽{Cards:diff()}张",
+  "LEXNINJA2-RACING_AGAINST_MESSI.description": "抽{Cards:diff()}张牌。\n[gold]忍术[/gold]{Renshu:diff()}：打出后再抽{ExtraCards:diff()}张",
   "LEXNINJA2-RACING_AGAINST_MESSI.title": "我和梅西赛跑",
 
   "LEXNINJA2-GONNA_EAT_SHIT.description": "使自身失去{Damage:diff()}点生命。（受[gold]易伤[/gold]等效果影响）\n获得{Kela:diff()}点[gold]蕾克拉[/gold]和{Energy:energyIcons()}，下回合再获得一次。",
