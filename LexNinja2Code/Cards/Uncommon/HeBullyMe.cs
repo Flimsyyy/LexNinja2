@@ -19,23 +19,21 @@ public class HeBullyMe()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        IEnumerable<Creature> enumerable =
-            from c in base.CombatState.GetTeammatesOf(base.Owner.Creature)
-            where c != null && c.IsAlive && c.IsPlayer
+        IEnumerable<Creature> players =
+            from c in CombatState?.GetTeammatesOf(Owner.Creature)
+            where c is { IsAlive: true, IsPlayer: true }
             select c;
-        foreach (Creature item in enumerable)
+        foreach (var player in players)
         {
-            if (item != Owner.Creature)
-            {
-                await PlayerCmd.GainEnergy(base.DynamicVars.Energy.IntValue, item.Player);
-                await PowerCmd.Apply<FlexPotionPower>(
-                    new ThrowingPlayerChoiceContext(),
-                    item.Player.Creature,
-                    DynamicVars.Strength.BaseValue,
-                    Owner.Creature,
-                    this
-                );
-            }
+            if (player == Owner.Creature) continue;
+            await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, player.Player!);
+            await PowerCmd.Apply<FlexPotionPower>(
+                choiceContext,
+                player.Player!.Creature,
+                DynamicVars.Strength.BaseValue,
+                Owner.Creature,
+                this
+            );
         }
         NinjaAudio.Play("res://LexNinja2/audio/HeBullyMe.mp3");
         PlayerCmd.EndTurn(Owner, false);

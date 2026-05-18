@@ -29,16 +29,16 @@ public class GenshinStorm()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/GenshinStorm.mp3");
-        IEnumerable<Creature> teammates =
+        IEnumerable<Creature> players =
             from c in CombatState?.GetTeammatesOf(Owner.Creature)
             where c is { IsAlive: true, IsPlayer: true }
             select c;
         var amount = ResolveLexkelaXValue();
-        foreach (var teammate in teammates)
+        foreach (var player in players)
         {
-            if (teammate == Owner.Creature)
+            if (player == Owner.Creature)
                 continue;
-            var card = CombatState?.CreateCard<HolyLittleStorm>(teammate.Player!);
+            var card = CombatState?.CreateCard<HolyLittleStorm>(player.Player!);
             if (card != null)
             {
                 CardCmd.Upgrade(card);
@@ -46,11 +46,11 @@ public class GenshinStorm()
                 card.AddKeyword(CardKeyword.Ethereal);
                 await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
             }
-            if (teammate != Owner.Creature)
+            if (player != Owner.Creature)
             {
                 await PowerCmd.Apply<Lexkela>(
                     choiceContext,
-                    teammate.Player!.Creature,
+                    player.Player!.Creature,
                     amount,
                     Owner.Creature,
                     this
