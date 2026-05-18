@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -10,21 +11,15 @@ namespace LexNinja2.LexNinja2Code.Cards;
 
 public class GetAllHands() : LexNinja2Card(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2), new PowerVar<GetAllHandsPower>(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [NinjaKeyword.Hand, CardKeyword.Exhaust];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/GetAllHands.mp3");
-        await PowerCmd.Apply<GetAllHandsPower>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            1,
-            Owner.Creature,
-            this
-        );
-        // if (Ninjutsu())
+        await CommonActions.ApplySelf<GetAllHandsPower>(choiceContext, this);
+        // if (Ninjutsu(choiceContext))
         // {
         //     for (int i = 0; i < DynamicVars.Cards.BaseValue; i++)
         //     {
@@ -40,41 +35,7 @@ public class GetAllHands() : LexNinja2Card(2, CardType.Skill, CardRarity.Rare, T
     {
         RemoveKeyword(CardKeyword.Exhaust);
     }
-
-    // private Boolean Ninjutsu()
-    // {
-    //     if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-    //     {
-    //         return true;
-    //     }
-    //     if (Owner.Creature.GetPower<Lexkela>() != null)
-    //     {
-    //         if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-    //         {
-    //             PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner.Creature,-DynamicVars["Renshu"].BaseValue, Owner.Creature, this);
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-
-    // private Boolean CanCastNinjutsu()
-    // {
-    //     if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-    //     {
-    //         return true;
-    //     }
-    //
-    //     if (Owner.Creature.GetPower<Lexkela>() != null)
-    //     {
-    //         if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-    //         {
-    //             return true;
-    //         }
-    //     }
-    //
-    //     return false;
-    // }
+    
     // protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 
     public override string CustomPortraitPath => $"GetAllHands_p.png".BigCardImagePath();
