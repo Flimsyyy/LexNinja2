@@ -38,7 +38,8 @@ public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, T
         {
             await CommonActions.CardBlock(this, play);
         }
-        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3")
+        await CommonActions
+            .CardAttack(this, play, vfx: "vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3")
             .Execute(choiceContext);
     }
 

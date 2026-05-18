@@ -30,7 +30,7 @@ public class NamiYoyo() : LexNinja2Card(4, CardType.Skill, CardRarity.Uncommon, 
         );
         await CommonActionsExtensions.Apply<PoisonPower>(choiceContext, this, play);
         await Cmd.Wait(0.25f);
-        
+
         var poisonPower = play.Target!.GetPower<PoisonPower>();
         if (poisonPower == null)
         {

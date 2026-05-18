@@ -13,7 +13,8 @@ namespace LexNinja2.LexNinja2Code.Cards;
 public class InfiniteSnakeBites()
     : LexNinja2Card(0, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<InfiniteSnakeBitesPower>(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new PowerVar<InfiniteSnakeBitesPower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<AngrySnakeBite>(true)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];

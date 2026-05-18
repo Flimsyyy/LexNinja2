@@ -25,7 +25,15 @@ public class ItalySilverSlash()
     {
         NinjaAudio.Play("res://LexNinja2/audio/ItalySilverSlash.mp3");
         await Cmd.Wait(0.5f);
-        await CommonActions.CardAttack(this, play, hitCount: DynamicVars.Repeat.IntValue, vfx: "vfx/vfx_attack_slash", tmpSfx: "heavy_attack.mp3").Execute(choiceContext);
+        await CommonActions
+            .CardAttack(
+                this,
+                play,
+                hitCount: DynamicVars.Repeat.IntValue,
+                vfx: "vfx/vfx_attack_slash",
+                tmpSfx: "heavy_attack.mp3"
+            )
+            .Execute(choiceContext);
         await CommonActions.Draw(this, choiceContext);
         for (var i = 0; i < DynamicVars.Cards.BaseValue; ++i)
             CardCmd.PreviewCardPileAdd(

@@ -13,7 +13,8 @@ namespace LexNinja2.LexNinja2Code.Cards;
 
 public class OhFuckFlash() : LexNinja2Card(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new NinjutsuVar(3), new PowerVar<BufferPower>(1), new PowerVar<OhFuckFlashPower>(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new NinjutsuVar(3), new PowerVar<BufferPower>(1), new PowerVar<OhFuckFlashPower>(1)];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 

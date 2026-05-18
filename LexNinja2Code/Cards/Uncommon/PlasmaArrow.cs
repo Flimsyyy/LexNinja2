@@ -17,17 +17,17 @@ namespace LexNinja2.LexNinja2Code.Cards;
 public class PlasmaArrow()
     : LexNinja2Card(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12, ValueProp.Move), new PowerVar<PlasmaArrowPower>(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new DamageVar(12, ValueProp.Move), new PowerVar<PlasmaArrowPower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(NinjaKeyword.Renshu)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/PlasmaArrow.mp3");
-        await CommonActions.CardAttack(this, play)
-            .WithHitVfxNode(
-                t => NShivThrowVfx.Create(base.Owner.Creature, t, Colors.Aqua)
-            )
+        await CommonActions
+            .CardAttack(this, play)
+            .WithHitVfxNode(t => NShivThrowVfx.Create(base.Owner.Creature, t, Colors.Aqua))
             .Execute(choiceContext);
         await CommonActions.ApplySelf<PlasmaArrowPower>(choiceContext, this);
     }

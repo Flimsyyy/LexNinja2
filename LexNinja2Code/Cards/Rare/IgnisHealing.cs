@@ -12,7 +12,8 @@ namespace LexNinja2.LexNinja2Code.Cards;
 public class IgnisHealing() : LexNinja2Card(2, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     private const string Percent = "bili";
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar(Percent, 30), new PowerVar<IgnisHealingPower>(5)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new DynamicVar(Percent, 30), new PowerVar<IgnisHealingPower>(5)];
     public override bool CanBeGeneratedInCombat => false;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
