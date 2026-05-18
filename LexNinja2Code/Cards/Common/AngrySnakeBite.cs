@@ -28,7 +28,7 @@ public class AngrySnakeBite()
             await CardPileCmd.AddGeneratedCardToCombat(CreateClone(), PileType.Discard, Owner),
             1f
         );
-        if (NinjutsuCmd.Ninjutsu(this, choiceContext))
+        if (Ninjutsu(choiceContext))
         {
             NinjaAudio.Play("res://LexNinja2/audio/AngrySnakeBite.mp3");
             VfxCmd.PlayOnCreatureCenter(play.Target!, "vfx/vfx_bite");
@@ -44,5 +44,5 @@ public class AngrySnakeBite()
     public override string CustomPortraitPath => $"AngrySnakeBite.png".BigCardImagePath();
     public override string PortraitPath => $"AngrySnakeBite.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/AngrySnakeBite.png".CardImagePath();
-    protected override bool ShouldGlowGoldInternal => NinjutsuCmd.CanCastNinjutsu(this);
+    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

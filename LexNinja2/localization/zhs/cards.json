@@ -142,7 +142,7 @@
   "LEXNINJA2-DISAPPOINTED_AFTER_BOCCHI.description": "你打出的下一张攻击牌将会造成三倍伤害。\n你打出下一张攻击牌后，获得1层[gold]虚弱[/gold]。",
   "LEXNINJA2-DISAPPOINTED_AFTER_BOCCHI.title": "我很失望，看完孤独摇滚",
 
-  "LEXNINJA2-BLACK_DRAGON_HAND.description": "给予{WeakPower:diff()}层[gold]虚弱[/gold]，去除敌人身上的[gold]无实体[/gold]。\n[gold]忍术[/gold]{Renshu:diff()}：偷取{HP:diff()}点最大生命值",
+  "LEXNINJA2-BLACK_DRAGON_HAND.description": "给予{WeakPower:diff()}层[gold]虚弱[/gold]，去除敌人身上的[gold]无实体[/gold]。\n[gold]忍术[/gold]{Renshu:diff()}：偷取{HpLoss:diff()}点最大生命值",
   "LEXNINJA2-BLACK_DRAGON_HAND.title": "暗龙夺魂手",
 
   "LEXNINJA2-GOOD_NIGHT.description": "获得{Kela:diff()}点[gold]蕾克拉[/gold]。\n结束你的回合。\n下个回合开始时，恢复最大生命值的30％且无法打出卡牌。",

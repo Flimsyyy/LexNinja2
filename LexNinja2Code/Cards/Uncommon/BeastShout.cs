@@ -39,7 +39,7 @@ public class BeastShout()
                 tmpSfx: "lightning_orb_evoke.mp3"
             )
             .Execute(choiceContext);
-        if (NinjutsuCmd.Ninjutsu(this, choiceContext))
+        if (Ninjutsu(choiceContext))
         {
             NinjaAudio.Play("res://LexNinja2/audio/BeastVoice.mp3");
             await PowerCmd.Apply<StrengthPower>(
@@ -62,5 +62,5 @@ public class BeastShout()
     public override string PortraitPath => "BeastShout.png".CardImagePath();
     public override string BetaPortraitPath => "beta/BeastShout.png".CardImagePath();
 
-    protected override bool ShouldGlowGoldInternal => NinjutsuCmd.CanCastNinjutsu(this);
+    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

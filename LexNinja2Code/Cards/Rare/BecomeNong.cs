@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
@@ -12,46 +13,22 @@ namespace LexNinja2.LexNinja2Code.Cards;
 
 public class BecomeNong() : LexNinja2Card(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<BecomeNongPower>(1)];
     public override bool CanBeGeneratedInCombat => false;
     public override CardMultiplayerConstraint MultiplayerConstraint =>
         CardMultiplayerConstraint.SingleplayerOnly;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        await CreatureCmd.TriggerAnim(
-            this.Owner.Creature,
-            "Cast",
-            this.Owner.Character.CastAnimDelay
-        );
-        CardSelectorPrefs prefs = new CardSelectorPrefs(this.SelectionScreenPrompt, 1);
+        await NinjaAnim.TriggerCastAnim(this);
         NinjaAudio.Play("res://LexNinja2/audio/BecomeNong.mp3");
-        CardModel selectedCard = (
-            await CardSelectCmd.FromHand(
-                choiceContext,
-                this.Owner,
-                prefs,
-                (Func<CardModel, bool>)null,
-                (AbstractModel)this
-            )
-        ).FirstOrDefault<CardModel>();
-        if (selectedCard == null)
+        var card = await CommonActions.SelectSingleCard(this, SelectionScreenPrompt, choiceContext, PileType.Hand);
+        if (card == null)
         {
-            selectedCard = (CardModel)null;
+            return;
         }
-        else
-        {
-            (
-                await PowerCmd.Apply<BecomeNongPower>(
-                    new ThrowingPlayerChoiceContext(),
-                    Owner.Creature,
-                    1,
-                    this.Owner.Creature,
-                    (CardModel)this
-                )
-            ).SetSelectedCard(selectedCard);
-            selectedCard = (CardModel)null;
-        }
+        await CommonActions.ApplySelf<BecomeNongPower>(choiceContext, this);
+        Owner.Creature.GetPower<BecomeNongPower>()!.SetSelectedCard(card); 
     }
 
     protected override void OnUpgrade()
