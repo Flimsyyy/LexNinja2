@@ -20,11 +20,7 @@ public class BeastShout()
     private const string StrengthLoss = "StrengthLoss";
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new DamageVar(11, ValueProp.Move),
-            new(StrengthLoss, 1),
-            new NinjutsuVar(1),
-        ];
+        [new DamageVar(11, ValueProp.Move), new(StrengthLoss, 1), new NinjutsuVar(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<StrengthPower>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
