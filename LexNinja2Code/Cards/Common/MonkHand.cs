@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -21,7 +22,7 @@ public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, T
             new CalculationBaseVar(0),
             new BlockVar(6, ValueProp.Move),
             new CalculatedDamageVar(ValueProp.Move).WithMultiplier(
-                (Func<CardModel, Creature, Decimal>)((card, _) => card.Owner.Creature.Block)
+                (card, _) => card.Owner.Creature.Block
             ),
             new ExtraDamageVar(1M),
         ];
@@ -33,39 +34,12 @@ public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, T
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/MonkHand.mp3");
-        if (Ninjutsu())
+        if (Ninjutsu(choiceContext))
         {
-            await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
+            await CommonActions.CardBlock(this, play);
         }
-        await DamageCmd
-            .Attack(DynamicVars.CalculatedDamage)
-            .FromCard(this)
-            .Targeting(play.Target)
-            .WithHitFx("vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3")
+        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3")
             .Execute(choiceContext);
-    }
-
-    private Boolean Ninjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                PowerCmd.Apply<Lexkela>(
-                    new ThrowingPlayerChoiceContext(),
-                    Owner.Creature,
-                    -DynamicVars["Renshu"].BaseValue,
-                    Owner.Creature,
-                    this
-                );
-                return true;
-            }
-        }
-        return false;
     }
 
     protected override void OnUpgrade()
@@ -78,22 +52,4 @@ public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, T
     public override string BetaPortraitPath => $"beta/MonkHand.png".CardImagePath();
 
     protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
-
-    private Boolean CanCastNinjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
 }
