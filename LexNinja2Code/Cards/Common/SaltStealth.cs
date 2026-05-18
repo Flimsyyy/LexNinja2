@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -22,33 +23,18 @@ public class SaltStealth() : LexNinja2Card(1, CardType.Skill, CardRarity.Common,
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/Salt.mp3");
-        await PowerCmd.Apply<Lexkela>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars["Kela"].BaseValue,
-            Owner.Creature,
-            this
-        );
-        CardSelectorPrefs prefs = new CardSelectorPrefs(this.SelectionScreenPrompt, 1);
-        CardModel selectedCard = (
-            await CardSelectCmd.FromHand(
-                choiceContext,
-                this.Owner,
-                prefs,
-                (Func<CardModel, bool>)null,
-                (AbstractModel)this
-            )
-        ).FirstOrDefault<CardModel>();
+        await NinjaHelper.AddLexKela(choiceContext, this);
+        var selectedCard = CommonActions.SelectSingleCard(this, SelectionScreenPrompt, choiceContext, PileType.Hand).Result;
         if (selectedCard != null)
         {
-            await CardCmd.TransformToRandom(selectedCard, RunState.Rng.CombatCardSelection);
+            await CardCmd.TransformToRandom(selectedCard, RunState!.Rng.CombatCardSelection);
         }
         // await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block,play);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Kela"].UpgradeValueBy(1);
+        DynamicVars.LexKela().UpgradeValueBy(1);
     }
 
     public override string CustomPortraitPath => $"Salt.png".BigCardImagePath();
