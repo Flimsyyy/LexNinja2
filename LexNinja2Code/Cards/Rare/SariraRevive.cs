@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -26,14 +27,8 @@ public class SariraRevive() : LexNinja2Card(0, CardType.Skill, CardRarity.Rare, 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/SariraRevive.mp3");
-        await PowerCmd.Apply<Lexkela>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars["Kela"].BaseValue,
-            Owner.Creature,
-            this
-        );
-        await CardPileCmd.Draw(choiceContext, Owner);
+        await NinjaHelper.AddLexKela(choiceContext, this);
+        await CommonActions.Draw(this, choiceContext);
         // if (isHitPointLow())
         // {
         //     await CardPileCmd.Draw(choiceContext,DynamicVars.Cards.BaseValue,Owner);
@@ -44,41 +39,37 @@ public class SariraRevive() : LexNinja2Card(0, CardType.Skill, CardRarity.Rare, 
     protected override void OnUpgrade()
     {
         // DynamicVars.Cards.UpgradeValueBy(2);
-        DynamicVars["Kela"].UpgradeValueBy(1);
+        DynamicVars.LexKela().UpgradeValueBy(1);
     }
 
     public override async Task BeforeCardRemoved(CardModel card)
     {
-        if ((object)card == this && card.Owner != null)
+        if (card != this)
         {
-            Player owner = card.Owner;
-            if (!owner.Deck.Cards.Contains(card))
-            {
-                MainFile.Logger.Warn(
-                    "[SariraRevive] Skip relic grant because the card is not present in the owner's deck.",
-                    1
-                );
-            }
-            else if (owner.GetRelicById(ModelDb.GetId<Sarira>()) == null)
-            {
-                NinjaAudio.Play("res://LexNinja2/audio/SariraRevive.mp3");
-                await RelicCmd.Obtain(
-                    ((RelicModel)ModelDb.Relic<Sarira>()).ToMutable(),
-                    owner,
-                    owner.Relics.Count
-                );
-                MainFile.Logger.Info("[SariraRevive] Granted Sarira relic after deck removal.", 1);
-            }
+            return;
+        }
+        if (!Owner.Deck.Cards.Contains(card))
+        {
+            MainFile.Logger.Warn(
+                "[SariraRevive] Skip relic grant because the card is not present in the owner's deck.",
+                1
+            );
+        }
+        else if (Owner.GetRelicById(ModelDb.GetId<Sarira>()) == null)
+        {
+            NinjaAudio.Play("res://LexNinja2/audio/SariraRevive.mp3");
+            await RelicCmd.Obtain(
+                ModelDb.Relic<Sarira>().ToMutable(),
+                Owner,
+                Owner.Relics.Count
+            );
+            MainFile.Logger.Info("[SariraRevive] Granted Sarira relic after deck removal.");
         }
     }
 
     private bool isHitPointLow()
     {
-        if (Owner.Creature.CurrentHp <= Owner.Creature.MaxHp / 2)
-        {
-            return true;
-        }
-        return false;
+        return Owner.Creature.CurrentHp <= Owner.Creature.MaxHp / 2;
     }
 
     public override string CustomPortraitPath => $"SariraRevive_p.png".BigCardImagePath();
