@@ -22,17 +22,19 @@ public class MobiusLoopSnake()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        if (LastCard() != null)
+        var card = LastCard();
+        if (card == null)
         {
-            NinjaAudio.Play("res://LexNinja2/audio/MobiusLoopSnake.mp3");
-            NinjaAudio.Play("res://LexNinja2/audio/Mobius.mp3", 0.15f);
-            await MegaCrit.Sts2.Core.Commands.Cmd.Wait(1f);
-            // if (LastCard().Tags.Contains(NinjaTags.Ninjutsu))
-            // {
-            //     await PowerCmd.Apply<FreeNinjutsuPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, 1, Owner.Creature, this);
-            // }
-            await CardCmd.AutoPlay(choiceContext, LastCard().CreateDupe(), null);
+            return;
         }
+        NinjaAudio.Play("res://LexNinja2/audio/MobiusLoopSnake.mp3");
+        NinjaAudio.Play("res://LexNinja2/audio/Mobius.mp3", 0.15f);
+        await Cmd.Wait(1f);
+        // if (LastCard().Tags.Contains(NinjaTags.Ninjutsu))
+        // {
+        //     await PowerCmd.Apply<FreeNinjutsuPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, 1, Owner.Creature, this);
+        // }
+        await CardCmd.AutoPlay(choiceContext, card.CreateDupe(), null);
     }
 
     protected override void OnUpgrade()
@@ -49,29 +51,28 @@ public class MobiusLoopSnake()
         Player player
     )
     {
-        CardPile pile = Pile;
+        var pile = Pile;
         if ((pile != null ? (pile.Type != PileType.Exhaust ? 1 : 0) : 1) != 0 || player != Owner)
             return;
-        await CardCmd.AutoPlay(choiceContext, (CardModel)this, (Creature)null);
+        await CardCmd.AutoPlay(choiceContext, this, Owner.Creature);
     }
 
-    private CardModel LastCard()
+    private CardModel? LastCard()
     {
-        CardModel card = CombatManager
+        var card = CombatManager
             .Instance.History.CardPlaysFinished.LastOrDefault(
                 delegate(CardPlayFinishedEntry e)
                 {
-                    bool flag =
-                        e.CardPlay.Card.Owner == base.Owner
+                    var flag =
+                        e.CardPlay.Card.Owner == Owner
                         && !e.CardPlay.Card.Tags.Contains(NinjaTags.Snake);
-                    bool flag2 = flag;
                     // if (flag2)
                     // {
                     //     CardType type = e.CardPlay.Card.Type;
                     //     bool flag3 = (uint)(type - 1) <= 1u;
                     //     flag2 = flag3;
                     // }
-                    return flag2 && !e.CardPlay.Card.IsDupe;
+                    return flag && !e.CardPlay.Card.IsDupe;
                 }
             )
             ?.CardPlay.Card;
