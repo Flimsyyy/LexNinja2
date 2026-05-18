@@ -1,4 +1,5 @@
 ﻿using BaseLib.Extensions;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -21,23 +22,11 @@ public class ReaperFlameBlade()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/DeadBurningBladeSmog.mp3");
-        await PowerCmd.Apply<IntangiblePower>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars.Power<IntangiblePower>().BaseValue,
-            Owner.Creature,
-            this
-        );
-        await PowerCmd.Apply<ReaperFlame>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars.Power<ReaperFlame>().BaseValue,
-            Owner.Creature,
-            this
-        );
+        await CommonActions.ApplySelf<IntangiblePower>(choiceContext, this);
+        await CommonActions.ApplySelf<ReaperFlame>(choiceContext, this);
     }
 
-    public override async Task AfterCardExhausted(
+    public override Task AfterCardExhausted(
         PlayerChoiceContext choiceContext,
         CardModel card,
         bool causedByEthereal
@@ -45,9 +34,10 @@ public class ReaperFlameBlade()
     {
         if (card.Owner != Owner)
         {
-            return;
+            return Task.CompletedTask;
         }
-        this.EnergyCost.AddThisCombat(-1);
+        EnergyCost.AddThisCombat(-1);
+        return Task.CompletedTask;
     }
 
     protected override void OnUpgrade()

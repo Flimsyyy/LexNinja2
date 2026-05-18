@@ -13,7 +13,8 @@ namespace LexNinja2.LexNinja2Code.Cards;
 public class IRepresentShinobi()
     : LexNinja2Card(3, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<IRepresentShinobiPower>(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new PowerVar<IRepresentShinobiPower>(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<Lexkela>(), HoverTipFactory.Static(StaticHoverTip.Energy)];

@@ -12,7 +12,8 @@ namespace LexNinja2.LexNinja2Code.Cards;
 
 public class NuclearDragon() : LexNinja2Card(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<NuclearDragonPower>(5)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new PowerVar<NuclearDragonPower>(5)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<Lexkela>()];
 

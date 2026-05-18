@@ -12,15 +12,9 @@ public static class NinjaHelper
     {
         await AddLexKela(ctx, card, card.DynamicVars.LexKela().BaseValue);
     }
-    
+
     public static async Task AddLexKela(PlayerChoiceContext ctx, CardModel card, decimal amount)
     {
-        await PowerCmd.Apply<Lexkela>(
-            ctx,
-            card.Owner.Creature,
-            amount,
-            card.Owner.Creature,
-            card
-        );
+        await PowerCmd.Apply<Lexkela>(ctx, card.Owner.Creature, amount, card.Owner.Creature, card);
     }
 }

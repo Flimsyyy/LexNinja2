@@ -22,7 +22,8 @@ public class OiShengLong()
     {
         NinjaAudio.Play("res://LexNinja2/audio/OiShoryuKen.mp3");
         await NinjaHelper.AddLexKela(choiceContext, this);
-        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_thrash", tmpSfx: "blunt_attack.mp3")
+        await CommonActions
+            .CardAttack(this, play, vfx: "vfx/vfx_thrash", tmpSfx: "blunt_attack.mp3")
             .Execute(choiceContext);
     }
 

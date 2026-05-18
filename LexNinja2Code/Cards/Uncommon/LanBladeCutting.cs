@@ -17,7 +17,8 @@ namespace LexNinja2.LexNinja2Code.Cards;
 public class LanBladeCutting()
     : LexNinja2Card(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new NinjutsuVar(1), new PowerVar<LanBladePower>(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new NinjutsuVar(1), new PowerVar<LanBladePower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<LanBlade>(IsUpgraded)];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
@@ -40,7 +41,7 @@ public class LanBladeCutting()
         {
             await CommonActions.ApplySelf<LanBladePower>(choiceContext, this);
         }
-        
+
         if (!Ninjutsu(choiceContext))
         {
             return;

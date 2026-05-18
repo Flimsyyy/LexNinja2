@@ -25,7 +25,8 @@ public class HeBullyMe()
             select c;
         foreach (var player in players)
         {
-            if (player == Owner.Creature) continue;
+            if (player == Owner.Creature)
+                continue;
             await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, player.Player!);
             await PowerCmd.Apply<FlexPotionPower>(
                 choiceContext,
