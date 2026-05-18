@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using BaseLib.Utils;
+using Godot;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -26,22 +27,17 @@ public class BlackZiCannon()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/BlackZiCannon.mp3");
-        NCreature creatureNode = NCombatRoom.Instance?.GetCreatureNode(play.Target);
+        var creatureNode = NCombatRoom.Instance?.GetCreatureNode(play.Target);
         if (creatureNode != null)
         {
-            NLargeMagicMissileVfx child = NLargeMagicMissileVfx.Create(
+            var child = NLargeMagicMissileVfx.Create(
                 creatureNode.GetBottomOfHitbox(),
                 new Color("50b598")
             );
-            NCombatRoom.Instance.CombatVfxContainer.AddChildSafely((Node)child);
-            await MegaCrit.Sts2.Core.Commands.Cmd.Wait(child.WaitTime);
+            NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(child!);
+            await Cmd.Wait(child!.WaitTime);
         }
-        await DamageCmd
-            .Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(play.Target)
-            .WithHitFx(tmpSfx: "blunt_attack.mp3")
-            .Execute(choiceContext);
+        await CommonActions.CardAttack(this, play, tmpSfx: "blunt_attack.mp3").Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
