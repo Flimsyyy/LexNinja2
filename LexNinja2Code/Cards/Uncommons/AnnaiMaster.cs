@@ -42,7 +42,10 @@ public class AnnaiMaster() : LexNinja2Card(1, CardType.Skill, CardRarity.Uncommo
         if (card == null)
             return;
         card.SetToFreeThisTurn();
-        card.AddKeyword(NinjaKeyword.FreeNinjutsu);
+        if (card is LexNinja2Card lexNinjaCard)
+        {
+            lexNinjaCard.SetLexkelaToFreeUntilPlayed();
+        }
         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
     }
 

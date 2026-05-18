@@ -45,7 +45,10 @@ public class ScarePower : CustomPowerModel
                 .FirstOrDefault<CardModel>();
             if (card == null)
                 return;
-            card.AddKeyword(NinjaKeyword.FreeNinjutsu);
+            if (card is LexNinja2Card lexNinjaCard)
+            {
+                lexNinjaCard.SetLexkelaToFreeUntilPlayed();
+            }
             // if (!(Owner.HasPower<WePeacePower>()&&card.Type==CardType.Attack))
             // {
             await CardCmd.AutoPlay(choiceContext, card.CreateDupe(), null);
