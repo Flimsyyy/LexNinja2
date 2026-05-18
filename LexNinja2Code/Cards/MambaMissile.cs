@@ -26,7 +26,7 @@ public class MambaMissile()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/MambaMissile.mp3", 1.5f);
-        await MegaCrit.Sts2.Core.Commands.Cmd.Wait(0.5f);
+        await Cmd.Wait(0.5f);
         await DamageCmd
             .Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(DynamicVars.Repeat.IntValue)
@@ -35,7 +35,7 @@ public class MambaMissile()
             .WithHitFx("vfx/vfx_rock_shatter", tmpSfx: "blunt_attack.mp3")
             .WithHitVfxSpawnedAtBase()
             .Execute(choiceContext);
-        foreach (Creature enemy in CombatState.HittableEnemies)
+        foreach (var enemy in CombatState.HittableEnemies)
         {
             if (enemy.GetPower<SoarPower>() != null)
             {
