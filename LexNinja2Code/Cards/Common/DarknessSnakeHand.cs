@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -15,7 +16,7 @@ namespace LexNinja2.LexNinja2Code.Cards;
 public class DarknessSnakeHand()
     : LexNinja2Card(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
-    private int _testEnergyCostOverride = -1;
+    // private int _testEnergyCostOverride = -1;
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new CardsVar(5), new LexKelaVar(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
@@ -24,49 +25,42 @@ public class DarknessSnakeHand()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/DarknessSnakeHand.mp3");
-        await PowerCmd.Apply<Lexkela>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars["Kela"].BaseValue,
-            Owner.Creature,
-            this
-        );
-        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
+        await NinjaHelper.AddLexKela(choiceContext, this);
+        await CommonActions.Draw(this, choiceContext);
         foreach (
-            CardModel card in PileType
+            var card in PileType
                 .Hand.GetPile(Owner)
-                .Cards.Where<CardModel>((Func<CardModel, bool>)(c => !c.EnergyCost.CostsX))
+                .Cards.Where(c => !c.EnergyCost.CostsX)
         )
         {
-            if (card.EnergyCost.GetWithModifiers(CostModifiers.None) >= 0)
-            {
-                card.EnergyCost.SetThisCombat(NextEnergyCost());
-                NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
-            }
+            if (card.EnergyCost.GetWithModifiers(CostModifiers.None) < 0) continue;
+            card.EnergyCost.SetThisCombat(NextEnergyCost());
+            NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
         }
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Kela"].UpgradeValueBy(1);
+        DynamicVars.LexKela().UpgradeValueBy(1);
     }
 
-    public int TestEnergyCostOverride
-    {
-        get => this._testEnergyCostOverride;
-        set
-        {
-            TestMode.AssertOn();
-            this.AssertMutable();
-            this._testEnergyCostOverride = value;
-        }
-    }
+    // public int TestEnergyCostOverride
+    // {
+    //     get => _testEnergyCostOverride;
+    //     set
+    //     {
+    //         TestMode.AssertOn();
+    //         AssertMutable();
+    //         _testEnergyCostOverride = value;
+    //     }
+    // }
 
     private int NextEnergyCost()
     {
-        return this.TestEnergyCostOverride >= 0
-            ? this.TestEnergyCostOverride
-            : this.Owner.RunState.Rng.CombatEnergyCosts.NextInt(4);
+        // return TestEnergyCostOverride >= 0
+            // ? TestEnergyCostOverride
+            // : Owner.RunState.Rng.CombatEnergyCosts.NextInt(4);
+            return Owner.RunState.Rng.CombatEnergyCosts.NextInt(4);
     }
 
     public override string CustomPortraitPath => $"DarknessSnakeHand_p.png".BigCardImagePath();
