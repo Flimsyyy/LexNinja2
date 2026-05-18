@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 
-namespace LexNinja2.LexNinja2Code.Cards.Tokens;
+namespace LexNinja2.LexNinja2Code.Cards.Curses;
 
 [Pool(typeof(CurseCardPool))]
 public class MosquitoHand() : LexNinja2Card(-1, CardType.Curse, CardRarity.Curse, TargetType.Self)

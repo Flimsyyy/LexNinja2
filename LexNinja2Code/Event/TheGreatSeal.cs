@@ -1,6 +1,7 @@
 ﻿using BaseLib.Abstracts;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Cards;
+using LexNinja2.LexNinja2Code.Cards.Curses;
 using LexNinja2.LexNinja2Code.Cards.Tokens;
 using MegaCrit.Sts2.Core.Audio.Debug;
 using MegaCrit.Sts2.Core.CardSelection;

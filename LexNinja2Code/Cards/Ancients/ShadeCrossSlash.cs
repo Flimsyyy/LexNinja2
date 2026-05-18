@@ -14,7 +14,7 @@ using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace LexNinja2.LexNinja2Code.Cards;
+namespace LexNinja2.LexNinja2Code.Cards.Ancients;
 
 public class ShadeCrossSlash()
     : LexNinja2Card(0, CardType.Attack, CardRarity.Ancient, TargetType.AllEnemies)

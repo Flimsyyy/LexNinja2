@@ -1,7 +1,6 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
-using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Character;
 using LexNinja2.LexNinja2Code.Powers;
@@ -10,7 +9,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Hooks;
 
-namespace LexNinja2.LexNinja2Code.Cards;
+namespace LexNinja2.LexNinja2Code.Api;
 
 [Pool(typeof(LexNinja2CardPool))]
 public abstract class LexNinja2Card(int cost, CardType type, CardRarity rarity, TargetType target)

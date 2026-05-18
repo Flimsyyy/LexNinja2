@@ -1,6 +1,7 @@
 ﻿using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Cards.Events;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -12,7 +13,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Saves.Runs;
 
-namespace LexNinja2.LexNinja2Code.Cards.Tokens;
+namespace LexNinja2.LexNinja2Code.Cards.Quests;
 
 [Pool(typeof(TokenCardPool))]
 public class ISeeYou() : LexNinja2Card(-1, CardType.Quest, CardRarity.Quest, TargetType.Self)

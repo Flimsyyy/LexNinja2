@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
 
-namespace LexNinja2.LexNinja2Code.Cards.Tokens;
+namespace LexNinja2.LexNinja2Code.Cards.Events;
 
 [Pool(typeof(TokenCardPool))]
 public class AlanWalker() : LexNinja2Card(3, CardType.Power, CardRarity.Event, TargetType.Self)
