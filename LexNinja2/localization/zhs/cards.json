@@ -235,7 +235,7 @@
   "LEXNINJA2-GET_ALL_HANDS.description": "打出此牌后，你在这个回合内每打出一张[gold]手系忍术[/gold]牌，抽1张牌，获得{energyPrefix:energyIcons(1)}，直到你打出非[gold]手系忍术[/gold]牌为止。",
   "LEXNINJA2-GET_ALL_HANDS.title": "得到所有手",
 
-  "LEXNINJA2-BLADE_DEFENCE.description": "打出此牌后，你在这个回合内每次攻击后获得{gedang:diff()}点[gold]格挡[/gold]。\n[gold]格挡[/gold]攻击时获得1点[gold]蕾克拉[/gold]",
+  "LEXNINJA2-BLADE_DEFENCE.description": "打出此牌后，你在这个回合内每次攻击后获得{BladeDefencePower:diff()}点[gold]格挡[/gold]。\n[gold]格挡[/gold]攻击时获得1点[gold]蕾克拉[/gold]",
   "LEXNINJA2-BLADE_DEFENCE.title": "拿刀防卫",
 
   "LEXNINJA2-PLASMA_ARROW.description": "造成{Damage:diff()}点伤害。\n你的下一张[gold]忍术[/gold]牌可以免费打出。",

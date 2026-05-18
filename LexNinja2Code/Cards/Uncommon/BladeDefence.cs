@@ -1,4 +1,6 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Extensions;
+using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -10,24 +12,18 @@ namespace LexNinja2.LexNinja2Code.Cards;
 
 public class BladeDefence() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new("gedang", 2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<BladeDefencePower>(2)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/BladeDefence.mp3");
-        await PowerCmd.Apply<BladeDefencePower>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars["gedang"].BaseValue,
-            Owner.Creature,
-            this
-        );
+        await CommonActions.ApplySelf<BladeDefencePower>(choiceContext, this);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["gedang"].UpgradeValueBy(1);
+        DynamicVars.Power<BladeDefencePower>().UpgradeValueBy(1);
     }
 
     public override string CustomPortraitPath => $"BladeDefence_p.png".BigCardImagePath();
