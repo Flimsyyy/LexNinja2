@@ -32,13 +32,18 @@ public class FrogFrogGo() : LexNinja2Card(0, CardType.Skill, CardRarity.Common, 
         {
             await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
         }
-        var card = await CommonActions.SelectSingleCard(this, CardSelectorPrefs.ExhaustSelectionPrompt, choiceContext,
-            PileType.Hand);
+        var card = await CommonActions.SelectSingleCard(
+            this,
+            CardSelectorPrefs.ExhaustSelectionPrompt,
+            choiceContext,
+            PileType.Hand
+        );
         if (card != null)
         {
             await CardCmd.Exhaust(choiceContext, card);
         }
     }
+
     protected override void OnUpgrade()
     {
         DynamicVars.Energy.UpgradeValueBy(1);

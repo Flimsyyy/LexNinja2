@@ -14,7 +14,8 @@ namespace LexNinja2.LexNinja2Code.Cards;
 public class DisappointedAfterBocchi()
     : LexNinja2Card(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<GigantificationPower>(1), new PowerVar<DisappointedPower>(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new PowerVar<GigantificationPower>(1), new PowerVar<DisappointedPower>(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<WeakPower>()];
