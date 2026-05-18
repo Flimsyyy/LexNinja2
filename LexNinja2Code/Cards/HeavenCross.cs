@@ -1,5 +1,6 @@
-﻿using LexNinja2.LexNinja2Code.Cmd;
-using LexNinja2.LexNinja2Code.Extensions;
+﻿using LexNinja2.LexNinja2Code.Api;
+using LexNinja2.LexNinja2Code.Api.DynamicVars;
+using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -18,6 +19,7 @@ public class HeavenCross() : LexNinja2Card(2, CardType.Power, CardRarity.Uncommo
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/HeavenCross.mp3");
+        new NinjutsuVar(3).ResetToBase();
         await PowerCmd.Apply<HeavenCrossPower>(
             new ThrowingPlayerChoiceContext(),
             Owner.Creature,

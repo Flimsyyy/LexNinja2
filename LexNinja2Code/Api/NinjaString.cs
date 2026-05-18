@@ -1,4 +1,4 @@
-﻿namespace LexNinja2.LexNinja2Code.Cmd;
+﻿namespace LexNinja2.LexNinja2Code.Api;
 
 public static class NinjaString
 {

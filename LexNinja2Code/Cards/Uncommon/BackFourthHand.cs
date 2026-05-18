@@ -1,5 +1,6 @@
-﻿using LexNinja2.LexNinja2Code.Cmd;
-using LexNinja2.LexNinja2Code.Extensions;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
+using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -20,38 +21,30 @@ public class BackFourthHand()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/BackFourthHand.mp3");
-        BackFourthHand dredge = this;
-        await CreatureCmd.TriggerAnim(
-            dredge.Owner.Creature,
-            "Cast",
-            dredge.Owner.Character.CastAnimDelay
-        );
-        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
-        int selectCount = Math.Min(
-            dredge.DynamicVars.Cards.IntValue,
-            10 - PileType.Hand.GetPile(dredge.Owner).Cards.Count
+        await NinjaAnim.TriggerCastAnim(this);
+        await CommonActions.CardBlock(this, play);
+        var selectCount = Math.Min(
+            DynamicVars.Cards.IntValue,
+            10 - PileType.Hand.GetPile(Owner).Cards.Count
         );
         if (selectCount <= 0)
             return;
-        IReadOnlyList<CardPileAddResult> cardPileAddResultList = await CardPileCmd.Add(
-            await CardSelectCmd.FromSimpleGrid(
-                choiceContext,
-                PileType.Discard.GetPile(dredge.Owner).Cards,
-                dredge.Owner,
-                new CardSelectorPrefs(dredge.SelectionScreenPrompt, selectCount)
-            ),
-            PileType.Hand
-        );
-        await CardCmd.Discard(
+        var cardsToDraw = await CommonActions.SelectCards(
+            this,
+            SelectionScreenPrompt,
             choiceContext,
-            await CardSelectCmd.FromHandForDiscard(
-                choiceContext,
-                Owner,
-                new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 2),
-                (Func<CardModel, bool>)null,
-                (AbstractModel)this
-            )
+            PileType.Discard,
+            count: selectCount
         );
+        await CardPileCmd.Add(cardsToDraw, PileType.Hand);
+        var cardsToDiscard = await CommonActions.SelectCards(
+            this,
+            CardSelectorPrefs.DiscardSelectionPrompt,
+            choiceContext,
+            PileType.Hand,
+            count: 2
+        );
+        await CardCmd.Discard(choiceContext, cardsToDiscard);
     }
 
     protected override void OnUpgrade()

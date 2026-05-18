@@ -1,6 +1,7 @@
 ﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
+using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Character;
-using LexNinja2.LexNinja2Code.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;

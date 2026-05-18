@@ -1,5 +1,6 @@
-﻿using LexNinja2.LexNinja2Code.Cmd;
-using LexNinja2.LexNinja2Code.Extensions;
+﻿using LexNinja2.LexNinja2Code.Api;
+using LexNinja2.LexNinja2Code.Api.DynamicVars;
+using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -19,14 +20,14 @@ public class BeastShout()
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<StrengthPower>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
-        new CardKeyword[1] { CardKeyword.Exhaust };
+        [CardKeyword.Exhaust];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        await NinjaAnim.TriggerCastAnim(this);
         NinjaAudio.Play("res://LexNinja2/audio/BeastShout.mp3");
-        await MegaCrit.Sts2.Core.Commands.Cmd.Wait(0.5f);
+        await Cmd.Wait(0.5f);
         await DamageCmd
             .Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)

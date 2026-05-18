@@ -1,5 +1,6 @@
-﻿using LexNinja2.LexNinja2Code.Cmd;
-using LexNinja2.LexNinja2Code.Extensions;
+﻿using LexNinja2.LexNinja2Code.Api;
+using LexNinja2.LexNinja2Code.Api.DynamicVars;
+using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using LexNinja2.LexNinja2Code.Relics;
 using MegaCrit.Sts2.Core.Commands;

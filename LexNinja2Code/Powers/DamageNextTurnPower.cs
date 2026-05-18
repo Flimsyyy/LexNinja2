@@ -1,6 +1,6 @@
 ﻿using BaseLib.Abstracts;
 using Godot;
-using LexNinja2.LexNinja2Code.Extensions;
+using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;

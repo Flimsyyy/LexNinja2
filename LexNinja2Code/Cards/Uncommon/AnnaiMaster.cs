@@ -1,5 +1,6 @@
-﻿using LexNinja2.LexNinja2Code.Cmd;
-using LexNinja2.LexNinja2Code.Extensions;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
+using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -27,8 +28,7 @@ public class AnnaiMaster() : LexNinja2Card(1, CardType.Skill, CardRarity.Uncommo
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/AnnaiMaster.mp3");
-        // await PowerCmd.Apply<FreeNinjutsuPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, 1, Owner.Creature, this);
-        CardModel card = CardFactory
+        var card = CardFactory
             .GetDistinctForCombat(
                 Owner,
                 Owner
@@ -36,13 +36,11 @@ public class AnnaiMaster() : LexNinja2Card(1, CardType.Skill, CardRarity.Uncommo
                         Owner.UnlockState,
                         Owner.RunState.CardMultiplayerConstraint
                     )
-                    .Where<CardModel>(
-                        (Func<CardModel, bool>)(c => c.Tags.Contains(NinjaTags.Ninjutsu))
-                    ),
+                    .Where(c => c.Tags.Contains(NinjaTags.Ninjutsu)),
                 1,
                 Owner.RunState.Rng.CombatCardGeneration
             )
-            .FirstOrDefault<CardModel>();
+            .FirstOrDefault();
         if (card == null)
             return;
         card.SetToFreeThisTurn();

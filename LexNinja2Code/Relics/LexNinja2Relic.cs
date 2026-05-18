@@ -2,8 +2,8 @@
 using BaseLib.Extensions;
 using BaseLib.Utils;
 using Godot;
+using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Character;
-using LexNinja2.LexNinja2Code.Extensions;
 
 namespace LexNinja2.LexNinja2Code.Relics;
 

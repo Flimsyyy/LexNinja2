@@ -1,6 +1,6 @@
 using Godot;
 
-namespace LexNinja2.LexNinja2Code.Extensions;
+namespace LexNinja2.LexNinja2Code.Api;
 
 public static class NinjaAudio
 {

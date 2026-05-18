@@ -1,5 +1,7 @@
-﻿using LexNinja2.LexNinja2Code.Cmd;
-using LexNinja2.LexNinja2Code.Extensions;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
+using LexNinja2.LexNinja2Code.Api.DynamicVars;
+using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -26,17 +28,11 @@ public class AngrySnakeBite()
             await CardPileCmd.AddGeneratedCardToCombat(CreateClone(), PileType.Discard, Owner),
             1f
         );
-        if (Ninjutsu())
+        if (NinjutsuCmd.Ninjutsu(this, choiceContext))
         {
             NinjaAudio.Play("res://LexNinja2/audio/AngrySnakeBite.mp3");
-            VfxCmd.PlayOnCreatureCenter(play.Target, "vfx/vfx_bite");
-            await PowerCmd.Apply<PoisonPower>(
-                new ThrowingPlayerChoiceContext(),
-                play.Target,
-                DynamicVars.Poison.BaseValue,
-                Owner.Creature,
-                this
-            );
+            VfxCmd.PlayOnCreatureCenter(play.Target!, "vfx/vfx_bite");
+            await CommonActionsExtensions.Apply<PoisonPower>(choiceContext, this, play);
         }
     }
 
@@ -45,49 +41,8 @@ public class AngrySnakeBite()
         DynamicVars.Poison.UpgradeValueBy(3);
     }
 
-    private Boolean Ninjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                PowerCmd.Apply<Lexkela>(
-                    new ThrowingPlayerChoiceContext(),
-                    Owner.Creature,
-                    -DynamicVars["Renshu"].BaseValue,
-                    Owner.Creature,
-                    this
-                );
-                return true;
-            }
-        }
-        return false;
-    }
-
     public override string CustomPortraitPath => $"AngrySnakeBite.png".BigCardImagePath();
     public override string PortraitPath => $"AngrySnakeBite.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/AngrySnakeBite.png".CardImagePath();
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
-
-    private Boolean CanCastNinjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    protected override bool ShouldGlowGoldInternal => NinjutsuCmd.CanCastNinjutsu(this);
 }

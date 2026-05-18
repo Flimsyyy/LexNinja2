@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using HarmonyLib;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Cards;
-using LexNinja2.LexNinja2Code.Cmd;
 
 namespace LexNinja2.LexNinja2Code.Patch
 {

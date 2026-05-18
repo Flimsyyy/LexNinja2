@@ -1,5 +1,5 @@
 ﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Extensions;
+using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
 
