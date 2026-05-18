@@ -18,22 +18,22 @@ public class GodAndBuddha() : LexNinja2Card(0, CardType.Skill, CardRarity.Common
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/GodAndBuddha.mp3");
-        IEnumerable<CardModel> distinctForCombat = CardFactory.GetDistinctForCombat(
-            base.Owner,
+        var food = CardFactory.GetDistinctForCombat(
+            Owner,
             from c in ModelDb
                 .CardPool<TokenCardPool>()
                 .GetUnlockedCards(
-                    base.Owner.UnlockState,
-                    base.Owner.RunState.CardMultiplayerConstraint
+                    Owner.UnlockState,
+                    Owner.RunState.CardMultiplayerConstraint
                 )
             where (c.Tags.Contains(NinjaTags.Food))
             select c,
             1,
-            base.Owner.RunState.Rng.CombatCardGeneration
-        );
-        foreach (CardModel item in distinctForCombat.ToList())
+            Owner.RunState.Rng.CombatCardGeneration
+        ).FirstOrDefault();
+        if (food != null)
         {
-            await CardPileCmd.AddGeneratedCardToCombat(item, PileType.Hand, Owner);
+            await CardPileCmd.AddGeneratedCardToCombat(food, PileType.Hand, Owner);
         }
     }
 
