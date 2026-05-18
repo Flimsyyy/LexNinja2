@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -14,7 +15,7 @@ namespace LexNinja2.LexNinja2Code.Cards;
 public class BuddhaHand()
     : LexNinja2Card(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
-    private Decimal _extraDamage;
+    // private decimal _extraDamage;
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new PowerVar<VulnerablePower>(2),
@@ -39,20 +40,9 @@ public class BuddhaHand()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/BuddhaHand.mp3");
-        await DamageCmd
-            .Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(play.Target)
-            .WithHitFx("vfx/vfx_attack_blunt")
-            .Execute(choiceContext);
-        await PowerCmd.Apply<VulnerablePower>(
-            new ThrowingPlayerChoiceContext(),
-            play.Target,
-            DynamicVars.Vulnerable.BaseValue,
-            Owner.Creature,
-            this
-        );
-        if (Ninjutsu())
+        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_blunt").Execute(choiceContext);
+        await CommonActionsExtensions.Apply<VulnerablePower>(choiceContext, this, play);
+        if (Ninjutsu(choiceContext))
         {
             await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
         }
@@ -72,29 +62,6 @@ public class BuddhaHand()
     //     return Task.CompletedTask;
     // }
     //
-    private Boolean Ninjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                PowerCmd.Apply<Lexkela>(
-                    new ThrowingPlayerChoiceContext(),
-                    Owner.Creature,
-                    -DynamicVars["Renshu"].BaseValue,
-                    Owner.Creature,
-                    this
-                );
-                return true;
-            }
-        }
-        return false;
-    }
-
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2);
@@ -119,22 +86,4 @@ public class BuddhaHand()
     public override string PortraitPath => "BuddhaHand.png".CardImagePath();
     public override string BetaPortraitPath => "beta/BuddhaHand.png".CardImagePath();
     protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
-
-    private Boolean CanCastNinjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
 }
