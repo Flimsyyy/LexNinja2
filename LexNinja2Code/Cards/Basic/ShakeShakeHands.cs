@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -24,32 +25,14 @@ public class ShakeShakeHands()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/ShakeShakeHand.mp3");
-        await PowerCmd.Apply<WeakPower>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars.Weak.BaseValue,
-            Owner.Creature,
-            this
-        );
-        await PowerCmd.Apply<WeakPower>(
-            new ThrowingPlayerChoiceContext(),
-            CombatState.HittableEnemies,
-            DynamicVars.Weak.BaseValue,
-            Owner.Creature,
-            this
-        );
-        await PowerCmd.Apply<Lexkela>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars["Kela"].BaseValue,
-            Owner.Creature,
-            this
-        );
+        await CommonActions.ApplySelf<WeakPower>(choiceContext, this);
+        await CommonActionsExtensions.Apply<WeakPower>(choiceContext, this, play);
+        await NinjaHelper.AddLexKela(choiceContext, this);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Kela"].UpgradeValueBy(1);
+        DynamicVars.LexKela().UpgradeValueBy(1);
     }
 
     public override string CustomPortraitPath => $"ShakeShakeHands_p.png".BigCardImagePath();
