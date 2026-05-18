@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -20,7 +21,7 @@ public class NamiLightning()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/NamiLightning.mp3");
-        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
+        await CommonActions.Draw(this, choiceContext);
     }
 
     protected override void OnUpgrade()
