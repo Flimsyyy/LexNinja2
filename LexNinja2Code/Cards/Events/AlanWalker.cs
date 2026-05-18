@@ -14,7 +14,7 @@ namespace LexNinja2.LexNinja2Code.Cards.Tokens;
 [Pool(typeof(TokenCardPool))]
 public class AlanWalker() : LexNinja2Card(3, CardType.Power, CardRarity.Event, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<AlanWalkerPower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(StaticHoverTip.Block)];
 
@@ -22,14 +22,8 @@ public class AlanWalker() : LexNinja2Card(3, CardType.Power, CardRarity.Event, T
     {
         NinjaAudio.Stop("res://LexNinja2/audio/Faded.mp3", 5f);
         NinjaAudio.Play("res://LexNinja2/audio/AlanWalker.mp3");
-        await PowerCmd.Apply<AlanWalkerPower>(
-            choiceContext,
-            Owner.Creature,
-            1,
-            Owner.Creature,
-            this
-        );
-        await MegaCrit.Sts2.Core.Commands.Cmd.Wait(0.5f);
+        await CommonActions.ApplySelf<AlanWalkerPower>(choiceContext, this);
+        await Cmd.Wait(0.5f);
         NinjaAudio.PlayLooped("res://LexNinja2/audio/Faded.mp3");
     }
 

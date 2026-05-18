@@ -17,7 +17,7 @@ namespace LexNinja2.LexNinja2Code.Cards.Tokens;
 [Pool(typeof(TokenCardPool))]
 public class ISeeYou() : LexNinja2Card(-1, CardType.Quest, CardRarity.Quest, TargetType.Self)
 {
-    private int _cardsInHand;
+    // private int _cardsInHand;
     private int _combatsSeen;
     public override int MaxUpgradeLevel => 0;
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -26,15 +26,15 @@ public class ISeeYou() : LexNinja2Card(-1, CardType.Quest, CardRarity.Quest, Tar
         [HoverTipFactory.FromPower<FrailPower>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Unplayable];
 
-    private int CardsInHand
-    {
-        get { return _cardsInHand; }
-        set
-        {
-            AssertMutable();
-            _cardsInHand = value;
-        }
-    }
+    // private int CardsInHand
+    // {
+    //     get { return _cardsInHand; }
+    //     set
+    //     {
+    //         AssertMutable();
+    //         _cardsInHand = value;
+    //     }
+    // }
 
     public override bool HasTurnEndInHandEffect => true;
 
@@ -53,26 +53,26 @@ public class ISeeYou() : LexNinja2Card(-1, CardType.Quest, CardRarity.Quest, Tar
     // }
 
     [SavedProperty]
-    public int CombatsSeen
+    private int CombatsSeen
     {
-        get => this._combatsSeen;
+        get => _combatsSeen;
         set
         {
-            this.AssertMutable();
-            this._combatsSeen = value;
-            this.DynamicVars["boss"].BaseValue = (Decimal)(2 - this.CombatsSeen);
+            AssertMutable();
+            _combatsSeen = value;
+            DynamicVars["boss"].BaseValue = 2 - CombatsSeen;
         }
     }
 
     protected override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
     {
-        bool alreadyHasFrail = base.Owner.Creature.HasPower<FrailPower>();
+        var alreadyHasFrail = Owner.Creature.HasPower<FrailPower>();
         NinjaAudio.Play("res://LexNinja2/audio/ISeeYou.mp3");
-        PowerModel powerModel = await PowerCmd.Apply<FrailPower>(
+        var powerModel = await PowerCmd.Apply<FrailPower>(
             choiceContext,
-            base.Owner.Creature,
-            base.DynamicVars["Frail"].BaseValue,
-            null,
+            Owner.Creature,
+            DynamicVars["Frail"].BaseValue,
+            Owner.Creature, //why it's null
             this
         );
         if (powerModel != null && !alreadyHasFrail)
@@ -83,7 +83,7 @@ public class ISeeYou() : LexNinja2Card(-1, CardType.Quest, CardRarity.Quest, Tar
 
     public override async Task AfterCombatEnd(CombatRoom room)
     {
-        CardPile? pile = base.Pile;
+        var pile = Pile;
 
         if (room.RoomType != RoomType.Boss)
         {
@@ -97,7 +97,7 @@ public class ISeeYou() : LexNinja2Card(-1, CardType.Quest, CardRarity.Quest, Tar
             NinjaAudio.Play("res://LexNinja2/audio/WhereRUNow.mp3", 0.15f);
             return;
         }
-        if (pile != null && pile.Type == PileType.Deck)
+        if (pile is { Type: PileType.Deck })
         {
             NinjaAudio.Stop("res://LexNinja2/audio/Fadeded.mp3");
             NinjaAudio.Play("res://LexNinja2/audio/Fadeded.mp3");

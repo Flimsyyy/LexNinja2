@@ -22,13 +22,7 @@ public class SpicyChicken() : LexNinja2Card(0, CardType.Skill, CardRarity.Token,
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/SpicyChicken.mp3");
-        await PowerCmd.Apply<FlexPotionPower>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars.Power<FlexPotionPower>().BaseValue,
-            Owner.Creature,
-            this
-        );
+        await CommonActions.ApplySelf<FlexPotionPower>(choiceContext, this);
     }
 
     protected override void OnUpgrade()

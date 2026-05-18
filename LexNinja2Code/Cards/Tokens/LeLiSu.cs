@@ -20,7 +20,7 @@ public class LeLiSu() : LexNinja2Card(0, CardType.Skill, CardRarity.Token, Targe
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/LeLiSu.mp3");
-        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
+        await CommonActions.Draw(this, choiceContext);
     }
 
     protected override void OnUpgrade()

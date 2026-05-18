@@ -21,18 +21,12 @@ public class YeSuanMilk() : LexNinja2Card(0, CardType.Skill, CardRarity.Token, T
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/YeSuanMilk.mp3");
-        await PowerCmd.Apply<Lexkela>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars["Kela"].BaseValue,
-            Owner.Creature,
-            this
-        );
+        await NinjaHelper.AddLexKela(choiceContext, this);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Kela"].UpgradeValueBy(2);
+        DynamicVars.Ninjutsu().UpgradeValueBy(2);
     }
 
     public override string CustomPortraitPath => $"YeSuanMilk_p.png".BigCardImagePath();

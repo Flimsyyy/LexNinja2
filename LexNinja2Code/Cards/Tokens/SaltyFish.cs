@@ -20,19 +20,12 @@ public class SaltyFish() : LexNinja2Card(0, CardType.Skill, CardRarity.Token, Ta
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        CardModel card = (
-            await CardSelectCmd.FromSimpleGrid(
-                choiceContext,
-                PileType.Discard.GetPile(Owner).Cards,
-                Owner,
-                new CardSelectorPrefs(SelectionScreenPrompt, 1)
-            )
-        ).FirstOrDefault<CardModel>();
+        var card = CommonActions.SelectSingleCard(this, SelectionScreenPrompt, choiceContext, PileType.Discard).Result;
         if (card == null)
             return;
         NinjaAudio.Play("res://LexNinja2/audio/SaltyFish.mp3");
         card.SetToFreeThisTurn();
-        CardPileAddResult cardPileAddResult = await CardPileCmd.Add(card, PileType.Hand);
+        await CardPileCmd.Add(card, PileType.Hand);
     }
 
     protected override void OnUpgrade()

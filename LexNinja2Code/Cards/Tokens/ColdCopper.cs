@@ -21,7 +21,7 @@ public class ColdCopper() : LexNinja2Card(0, CardType.Skill, CardRarity.Token, T
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/ColdCopper.mp3");
-        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
+        await CommonActions.CardBlock(this, play);
     }
 
     protected override void OnUpgrade()

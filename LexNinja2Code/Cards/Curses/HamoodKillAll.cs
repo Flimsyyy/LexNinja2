@@ -20,7 +20,7 @@ public class HamoodKillAll() : LexNinja2Card(1, CardType.Curse, CardRarity.Curse
 
     protected override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
     {
-        for (int i = 1; i < Owner.Creature.CombatState.RunState.Players.Count; i++)
+        for (var i = 1; i < Owner.Creature.CombatState!.RunState.Players.Count; i++)
         {
             DynamicVars.Damage.BaseValue *= 10;
             DynamicVars.Damage.BaseValue += 9;
@@ -29,11 +29,11 @@ public class HamoodKillAll() : LexNinja2Card(1, CardType.Curse, CardRarity.Curse
         NinjaAudio.Play("res://LexNinja2/audio/KillAll.mp3");
         await CreatureCmd.Damage(
             choiceContext,
-            Owner.Creature.CombatState.Creatures.Where<Creature>(
-                (Func<Creature, bool>)(c => !c.IsPet)
+            Owner.Creature.CombatState.Creatures.Where(
+                c => !c.IsPet
             ),
             DynamicVars.Damage,
-            null
+            Owner.Creature // need not null
         );
         NinjaAudio.Play("res://LexNinja2/audio/Kill!@#A%ll.mp3");
     }

@@ -17,16 +17,17 @@ public class MosquitoHand() : LexNinja2Card(-1, CardType.Curse, CardRarity.Curse
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [NinjaKeyword.Hand, CardKeyword.Retain, CardKeyword.Unplayable];
 
-    public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
+    public override Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
         if (cardPlay.Card.Owner != Owner)
         {
-            return;
+            return Task.CompletedTask;
         }
         NinjaAudio.Play("res://LexNinja2/audio/Mosquito2.mp3");
+        return Task.CompletedTask;
     }
 
-    public override async Task AfterCardDrawn(
+    public override Task AfterCardDrawn(
         PlayerChoiceContext choiceContext,
         CardModel card,
         bool fromHandDraw
@@ -34,9 +35,10 @@ public class MosquitoHand() : LexNinja2Card(-1, CardType.Curse, CardRarity.Curse
     {
         if (card != this)
         {
-            return;
+            return Task.CompletedTask;
         }
         NinjaAudio.Play("res://LexNinja2/audio/MosquitoHand.mp3");
+        return Task.CompletedTask;
     }
 
     public override string CustomPortraitPath => $"MosquitoHand_p.png".BigCardImagePath();
