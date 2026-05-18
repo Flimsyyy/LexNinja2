@@ -13,7 +13,8 @@ namespace LexNinja2.LexNinja2Code.Cards;
 
 public class BlackSnakeHeart() : LexNinja2Card(4, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<BlackSnakeHeartPower>(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new PowerVar<BlackSnakeHeartPower>(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<IntangiblePower>()];

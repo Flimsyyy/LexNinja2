@@ -29,7 +29,7 @@ public abstract class LexNinja2Card(int cost, CardType type, CardRarity rarity, 
         $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
     public override string BetaPortraitPath =>
         $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
-    
+
     protected bool Ninjutsu(PlayerChoiceContext choiceContext)
     {
         var player = Owner;
@@ -59,10 +59,7 @@ public abstract class LexNinja2Card(int cost, CardType type, CardRarity rarity, 
     protected bool CanCastNinjutsu()
     {
         var player = Owner;
-        if (
-            player.HasPower<FreeNinjutsuPower>()
-            || Keywords.Contains(NinjaKeyword.FreeNinjutsu)
-        )
+        if (player.HasPower<FreeNinjutsuPower>() || Keywords.Contains(NinjaKeyword.FreeNinjutsu))
         {
             return true;
         }

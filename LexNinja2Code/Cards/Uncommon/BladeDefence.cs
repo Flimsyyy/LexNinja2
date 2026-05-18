@@ -12,7 +12,8 @@ namespace LexNinja2.LexNinja2Code.Cards;
 
 public class BladeDefence() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<BladeDefencePower>(2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new PowerVar<BladeDefencePower>(2)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

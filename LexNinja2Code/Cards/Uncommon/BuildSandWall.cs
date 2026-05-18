@@ -14,7 +14,8 @@ namespace LexNinja2.LexNinja2Code.Cards;
 public class BuildSandWall()
     : LexNinja2Card(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new NinjutsuVar(1), new PowerVar<BuildSandWallPower>(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new NinjutsuVar(1), new PowerVar<BuildSandWallPower>(1)];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -26,11 +27,7 @@ public class BuildSandWall()
         {
             return;
         }
-        await CreatureCmd.GainBlock(
-            Owner.Creature,
-            sandWallPower.Amount,
-            ValueProp.Move,
-            play);
+        await CreatureCmd.GainBlock(Owner.Creature, sandWallPower.Amount, ValueProp.Move, play);
     }
 
     protected override void OnUpgrade()

@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using BaseLib.Utils;
+using Godot;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -30,51 +31,20 @@ public class BurningBlade()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         // bool shouldTriggerFatal = play.Target.Powers.All<PowerModel>((Func<PowerModel, bool>) (p => p.ShouldOwnerDeathTriggerFatal()));
-        NCombatRoom instance = NCombatRoom.Instance;
-        if (instance != null)
-            instance.CombatVfxContainer.AddChildSafely((Node)NGroundFireVfx.Create(play.Target));
+        var instance = NCombatRoom.Instance;
+        instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(play.Target!)!);
 
-        await DamageCmd
-            .Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(play.Target)
-            .Execute(choiceContext);
+        await CommonActions.CardAttack(this, play).Execute(choiceContext);
         // if (!shouldTriggerFatal || !attackCommand.Results.Any<DamageResult>((Func<DamageResult, bool>) (r => r.WasTargetKilled)))
 
-        if (Ninjutsu())
+        if (!Ninjutsu(choiceContext))
         {
-            if (Owner.PlayerCombatState.AllCards.OfType<BurningBlade>() == null)
-            {
-                return;
-            }
-            foreach (CardModel card in this.Owner.PlayerCombatState.AllCards.OfType<BurningBlade>())
-            {
-                ++card.BaseReplayCount;
-            }
+            return;
         }
-    }
-
-    private Boolean Ninjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
+        foreach (var card in Owner.PlayerCombatState!.AllCards.OfType<BurningBlade>())
         {
-            return true;
+            ++card.BaseReplayCount;
         }
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                PowerCmd.Apply<Lexkela>(
-                    new ThrowingPlayerChoiceContext(),
-                    Owner.Creature,
-                    -DynamicVars["Renshu"].BaseValue,
-                    Owner.Creature,
-                    this
-                );
-                return true;
-            }
-        }
-        return false;
     }
 
     protected override void OnUpgrade()
@@ -87,25 +57,7 @@ public class BurningBlade()
     public override string BetaPortraitPath => "beta/OverBurningBlade.png".CardImagePath();
     protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 
-    private Boolean CanCastNinjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public override async Task AfterDamageGiven(
+    public override Task AfterDamageGiven(
         PlayerChoiceContext choiceContext,
         Creature? dealer,
         DamageResult result,
@@ -114,17 +66,11 @@ public class BurningBlade()
         CardModel? cardSource
     )
     {
-        if (dealer != Owner.Creature || cardSource == null)
+        if (dealer != Owner.Creature || cardSource == null || cardSource != this)
         {
-            return;
+            return Task.CompletedTask;
         }
-        if (cardSource == this)
-        {
-            NinjaAudio.Play("res://LexNinja2/audio/OverBurningBlade.mp3");
-        }
-        else
-        {
-            return;
-        }
+        NinjaAudio.Play("res://LexNinja2/audio/OverBurningBlade.mp3");
+        return Task.CompletedTask;
     }
 }

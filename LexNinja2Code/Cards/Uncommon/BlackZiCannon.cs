@@ -37,7 +37,9 @@ public class BlackZiCannon()
             NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(child!);
             await Cmd.Wait(child!.WaitTime);
         }
-        await CommonActions.CardAttack(this, play, tmpSfx: "blunt_attack.mp3").Execute(choiceContext);
+        await CommonActions
+            .CardAttack(this, play, tmpSfx: "blunt_attack.mp3")
+            .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()

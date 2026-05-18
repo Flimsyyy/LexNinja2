@@ -22,13 +22,18 @@ public class BecomeNong() : LexNinja2Card(1, CardType.Power, CardRarity.Rare, Ta
     {
         await NinjaAnim.TriggerCastAnim(this);
         NinjaAudio.Play("res://LexNinja2/audio/BecomeNong.mp3");
-        var card = await CommonActions.SelectSingleCard(this, SelectionScreenPrompt, choiceContext, PileType.Hand);
+        var card = await CommonActions.SelectSingleCard(
+            this,
+            SelectionScreenPrompt,
+            choiceContext,
+            PileType.Hand
+        );
         if (card == null)
         {
             return;
         }
         await CommonActions.ApplySelf<BecomeNongPower>(choiceContext, this);
-        Owner.Creature.GetPower<BecomeNongPower>()!.SetSelectedCard(card); 
+        Owner.Creature.GetPower<BecomeNongPower>()!.SetSelectedCard(card);
     }
 
     protected override void OnUpgrade()

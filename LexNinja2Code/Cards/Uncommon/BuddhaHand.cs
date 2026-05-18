@@ -40,7 +40,9 @@ public class BuddhaHand()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/BuddhaHand.mp3");
-        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_blunt").Execute(choiceContext);
+        await CommonActions
+            .CardAttack(this, play, vfx: "vfx/vfx_attack_blunt")
+            .Execute(choiceContext);
         await CommonActionsExtensions.Apply<VulnerablePower>(choiceContext, this, play);
         if (!Ninjutsu(choiceContext))
         {
