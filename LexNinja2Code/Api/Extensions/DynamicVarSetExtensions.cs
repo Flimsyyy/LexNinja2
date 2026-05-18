@@ -14,4 +14,9 @@ public static class DynamicVarSetExtensions
     {
         return (NinjutsuVar)vars[NinjutsuVar.Key];
     }
+
+    public static ExtraCards ExtraCard(this DynamicVarSet vars)
+    {
+        return (ExtraCards)vars[ExtraCards.Key];
+    }
 }

@@ -15,7 +15,7 @@ public class RacingAgainstMessi()
     : LexNinja2Card(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new NinjutsuVar(1), new CardsVar(1)];
+        [new NinjutsuVar(1), new CardsVar(2), new ExtraCards(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<Lexkela>()];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
@@ -24,6 +24,7 @@ public class RacingAgainstMessi()
     {
         NinjaAudio.Play("res://LexNinja2/audio/RacingAgainstMessi.mp3");
         await CardPileCmd.Draw(choiceContext, 2, Owner);
+        await CommonActions.Draw(this, choiceContext);
     }
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -32,12 +33,12 @@ public class RacingAgainstMessi()
         {
             return;
         }
-        await CommonActions.Draw(this, choiceContext);
+        await NinjaHelper.DrawExtra(this, choiceContext);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars.ExtraCard().UpgradeValueBy(1);
     }
 
     public override string CustomPortraitPath => $"RacingAgainstMessi_p.png".BigCardImagePath();
