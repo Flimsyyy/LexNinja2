@@ -53,60 +53,59 @@ public class PowerJesus() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/PowerJesus.mp3");
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        await NinjaAnim.TriggerCastAnim(this);
 
         var originalBuffs = Owner
             .Creature.Powers.Where(p => p.TypeForCurrentAmount == PowerType.Buff)
             .Select(p => (PowerModel)p.ClonePreservingMutability())
             .ToList();
 
-        foreach (PowerModel item in originalBuffs)
+        foreach (var power in originalBuffs)
         {
-            PowerModel livePower = Owner.Creature.Powers.FirstOrDefault(p =>
-                p == item || (p.Id == item.Id && p.InstanceType == PowerInstanceType.None)
+            var livePower = Owner.Creature.Powers.FirstOrDefault(p =>
+                p == power || (p.Id == power.Id && p.InstanceType == PowerInstanceType.None)
             );
-            PowerModel powerById = Owner.Creature.GetPowerById(item.Id);
-            PowerModel Nong = Owner.Creature.GetPower<BecomeNongPower>();
+            var powerById = Owner.Creature.GetPowerById(power.Id);
+            var nong = Owner.Creature.GetPower<BecomeNongPower>();
 
-            if (livePower != null && livePower.InstanceType == PowerInstanceType.None)
+            if (livePower is { InstanceType: PowerInstanceType.None })
             {
                 DoHackyThingsForSpecificPowers(livePower);
                 await PowerCmd.ModifyAmount(
-                    new ThrowingPlayerChoiceContext(),
+                    choiceContext,
                     livePower,
-                    item.Amount,
+                    power.Amount,
                     Owner.Creature,
                     this
                 );
+                return;
             }
-            else
+            
+            var newPower = (PowerModel)power.ClonePreservingMutability();
+            DoHackyThingsForSpecificPowers(newPower);
+            if (nong != null && powerById == nong)
             {
-                PowerModel newPower = (PowerModel)item.ClonePreservingMutability();
-                DoHackyThingsForSpecificPowers(newPower);
-                if (Nong != null && powerById == Nong)
-                {
-                    BecomeNongPower nongPower = (BecomeNongPower)powerById;
-                    GD.Print("难道说根本没走过这条路径？");
-                    (
-                        await PowerCmd.Apply<BecomeNongPower>(
-                            new ThrowingPlayerChoiceContext(),
-                            Owner.Creature,
-                            1,
-                            Owner.Creature,
-                            this
-                        )
-                    ).SetSelectedCard(nongPower.GetNongCard());
-                }
-                else
-                    await PowerCmd.Apply(
+                var nongPower = (BecomeNongPower)powerById;
+                GD.Print("难道说根本没走过这条路径？");
+                (
+                    await PowerCmd.Apply<BecomeNongPower>(
                         new ThrowingPlayerChoiceContext(),
-                        newPower,
                         Owner.Creature,
-                        item.Amount,
+                        1,
                         Owner.Creature,
                         this
-                    );
+                    )
+                )?.SetSelectedCard(nongPower.GetNongCard());
+                return;
             }
+            await PowerCmd.Apply(
+                choiceContext,
+                newPower,
+                Owner.Creature,
+                power.Amount,
+                Owner.Creature,
+                this
+            );
         }
     }
 
