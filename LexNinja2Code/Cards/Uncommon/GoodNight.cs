@@ -17,8 +17,8 @@ public class GoodNight() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncommon,
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/GoodNight.mp3");
-        float amount = Owner.Creature.MaxHp * 0.3f;
-        decimal healPoint = (decimal)amount;
+        var amount = Owner.Creature.MaxHp * 0.3f;
+        var healPoint = (decimal)amount;
         await PowerCmd.Apply<GoodNightPower>(
             new ThrowingPlayerChoiceContext(),
             Owner.Creature,
@@ -26,19 +26,13 @@ public class GoodNight() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncommon,
             Owner.Creature,
             this
         );
-        await PowerCmd.Apply<Lexkela>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars["Kela"].BaseValue,
-            Owner.Creature,
-            this
-        );
+        await NinjaHelper.AddLexKela(choiceContext, this);
         PlayerCmd.EndTurn(Owner, false);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Kela"].UpgradeValueBy(2);
+        DynamicVars.LexKela().UpgradeValueBy(2);
     }
 
     public override string CustomPortraitPath => $"GoodNight_p.png".BigCardImagePath();
