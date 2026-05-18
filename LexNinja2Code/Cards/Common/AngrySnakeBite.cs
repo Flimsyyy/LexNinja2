@@ -28,12 +28,13 @@ public class AngrySnakeBite()
             await CardPileCmd.AddGeneratedCardToCombat(CreateClone(), PileType.Discard, Owner),
             1f
         );
-        if (Ninjutsu(choiceContext))
+        if (!Ninjutsu(choiceContext))
         {
-            NinjaAudio.Play("res://LexNinja2/audio/AngrySnakeBite.mp3");
-            VfxCmd.PlayOnCreatureCenter(play.Target!, "vfx/vfx_bite");
-            await CommonActionsExtensions.Apply<PoisonPower>(choiceContext, this, play);
+            return;
         }
+        NinjaAudio.Play("res://LexNinja2/audio/AngrySnakeBite.mp3");
+        VfxCmd.PlayOnCreatureCenter(play.Target!, "vfx/vfx_bite");
+        await CommonActionsExtensions.Apply<PoisonPower>(choiceContext, this, play);
     }
 
     protected override void OnUpgrade()

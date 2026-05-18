@@ -34,18 +34,19 @@ public class BlackDragonHand()
             await PowerCmd.Remove<IntangiblePower>(play.Target);
         }
 
-        if (Ninjutsu(choiceContext))
+        if (!Ninjutsu(choiceContext))
         {
-            VfxCmd.PlayOnCreatureCenter(play.Target, "vfx/vfx_attack_lightning");
-            SfxCmd.Play("lightning_orb_evoke.mp3");
-            await CreatureCmd.LoseMaxHp(
-                choiceContext,
-                play.Target,
-                DynamicVars.HpLoss.BaseValue,
-                true
-            );
-            await CreatureCmd.GainMaxHp(Owner.Creature, DynamicVars.HpLoss.BaseValue);
+            return;
         }
+        VfxCmd.PlayOnCreatureCenter(play.Target, "vfx/vfx_attack_lightning");
+        SfxCmd.Play("lightning_orb_evoke.mp3");
+        await CreatureCmd.LoseMaxHp(
+            choiceContext,
+            play.Target,
+            DynamicVars.HpLoss.BaseValue,
+            true
+        );
+        await CreatureCmd.GainMaxHp(Owner.Creature, DynamicVars.HpLoss.BaseValue);
     }
 
     protected override void OnUpgrade()

@@ -39,17 +39,18 @@ public class BeastShout()
                 tmpSfx: "lightning_orb_evoke.mp3"
             )
             .Execute(choiceContext);
-        if (Ninjutsu(choiceContext))
+        if (!Ninjutsu(choiceContext))
         {
-            NinjaAudio.Play("res://LexNinja2/audio/BeastVoice.mp3");
-            await PowerCmd.Apply<StrengthPower>(
-                choiceContext,
-                CombatState!.HittableEnemies,
-                -DynamicVars[StrengthLoss].BaseValue,
-                Owner.Creature,
-                this
-            );
+            return;
         }
+        NinjaAudio.Play("res://LexNinja2/audio/BeastVoice.mp3");
+        await PowerCmd.Apply<StrengthPower>(
+            choiceContext,
+            CombatState!.HittableEnemies,
+            -DynamicVars[StrengthLoss].BaseValue,
+            Owner.Creature,
+            this
+        );
     }
 
     protected override void OnUpgrade()

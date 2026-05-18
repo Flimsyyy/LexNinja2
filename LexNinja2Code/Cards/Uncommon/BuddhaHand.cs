@@ -42,10 +42,11 @@ public class BuddhaHand()
         NinjaAudio.Play("res://LexNinja2/audio/BuddhaHand.mp3");
         await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_blunt").Execute(choiceContext);
         await CommonActionsExtensions.Apply<VulnerablePower>(choiceContext, this, play);
-        if (Ninjutsu(choiceContext))
+        if (!Ninjutsu(choiceContext))
         {
-            await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
+            return;
         }
+        await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
     }
 
     // public override Task AfterCardDrawn(
