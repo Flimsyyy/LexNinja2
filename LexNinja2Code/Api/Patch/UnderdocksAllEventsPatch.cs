@@ -3,10 +3,10 @@ using LexNinja2.LexNinja2Code.Event;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Acts;
 
-namespace LexNinja2.LexNinja2Code.Patch;
+namespace LexNinja2.LexNinja2Code.Api.Patch;
 
-[HarmonyPatch(typeof(Overgrowth), nameof(Overgrowth.AllEvents), MethodType.Getter)]
-public static class OvergrowthAllEventsPatch
+[HarmonyPatch(typeof(Underdocks), nameof(Underdocks.AllEvents), MethodType.Getter)]
+public static class UnderdocksAllEventsPatch
 {
     static void Postfix(ref IEnumerable<EventModel> result)
     {
