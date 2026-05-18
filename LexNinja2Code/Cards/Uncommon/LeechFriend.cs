@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -22,34 +23,22 @@ public class LeechFriend()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        if (play.Target.GetPower<WeakPower>() != null)
+        if (play.Target!.HasPower<WeakPower>())
         {
             NinjaAudio.Play("res://LexNinja2/audio/LeechFriend.mp3");
+            await CommonActions.ApplySelf<StrengthPower>(choiceContext, this);
+            await CommonActions.ApplySelf<DexterityPower>(choiceContext, this);
             await PowerCmd.Apply<StrengthPower>(
-                new ThrowingPlayerChoiceContext(),
-                Owner.Creature,
-                DynamicVars.Strength.BaseValue,
-                Owner.Creature,
-                this
-            );
-            await PowerCmd.Apply<DexterityPower>(
-                new ThrowingPlayerChoiceContext(),
-                Owner.Creature,
-                DynamicVars.Strength.BaseValue,
-                Owner.Creature,
-                this
-            );
-            await PowerCmd.Apply<StrengthPower>(
-                new ThrowingPlayerChoiceContext(),
+                choiceContext,
                 play.Target,
                 -DynamicVars.Strength.BaseValue,
                 Owner.Creature,
                 this
             );
             await PowerCmd.Apply<DexterityPower>(
-                new ThrowingPlayerChoiceContext(),
+                choiceContext,
                 play.Target,
-                -DynamicVars.Strength.BaseValue,
+                -DynamicVars.Dexterity.BaseValue,
                 Owner.Creature,
                 this
             );
@@ -64,14 +53,7 @@ public class LeechFriend()
 
     private bool IfWeakened()
     {
-        foreach (Creature enemy in CombatState.HittableEnemies)
-        {
-            if (enemy.HasPower<WeakPower>())
-            {
-                return true;
-            }
-        }
-        return false;
+        return CombatState!.HittableEnemies.Any(enemy => enemy.HasPower<WeakPower>());
     }
 
     public override string CustomPortraitPath => $"LeechFriend_p.png".BigCardImagePath();
