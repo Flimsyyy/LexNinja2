@@ -2,7 +2,7 @@
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 
-namespace LexNinja2.LexNinja2Code.Patch;
+namespace LexNinja2.LexNinja2Code.Api.Patch;
 
 [HarmonyPatch(typeof(NCharacterSelectScreen), "SelectCharacter")]
 public static class NinjaSelectPatch
