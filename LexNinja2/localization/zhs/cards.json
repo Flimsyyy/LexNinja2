@@ -25,19 +25,19 @@
   "LEXNINJA2-PLASMA_HAND.description": "抽{Cards:diff()}张牌。\n获得{Kela}点[gold]蕾克拉[/gold]。",
   "LEXNINJA2-PLASMA_HAND.title": "离子手",
 
-  "LEXNINJA2-SAND_DEFEND_HAND.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n[gold]忍术[/gold]{Renshu:diff()}：获得{Power:diff()}层[gold]沙壁[/gold]",
+  "LEXNINJA2-SAND_DEFEND_HAND.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n[gold]忍术[/gold]{Renshu:diff()}：获得{SandWall:diff()}层[gold]沙壁[/gold]",
   "LEXNINJA2-SAND_DEFEND_HAND.title": "沙防掩意手",
 
   "LEXNINJA2-SWALLOW_STEPS.description": "抽{Cards:diff()}张牌。\n如果打出的上一张牌是[gold]忍术[/gold]牌，额外抽{ExtraCards:diff()}张。",
   "LEXNINJA2-SWALLOW_STEPS.title": "寒泥挪燕步",
 
-  "LEXNINJA2-STONE_STRONG.description": "回合结束时，获得{Power:diff()}层[gold]沙壁[/gold]\n[gold]忍术[/gold]{Renshu:diff()}：获得{Power:diff()}层[gold]沙壁[/gold]",
+  "LEXNINJA2-STONE_STRONG.description": "回合结束时，获得{StoneStrongPower:diff()}层[gold]沙壁[/gold]\n[gold]忍术[/gold]{Renshu:diff()}：获得{StoneStrongPower:diff()}层[gold]沙壁[/gold]",
   "LEXNINJA2-STONE_STRONG.title": "牢石耐击术",
 
   "LEXNINJA2-BEAST_SHOUT.description": "对所有敌人造成{Damage:diff()}点伤害。\n[gold]忍术[/gold]{Renshu:diff()}：使所有敌人失去{StrengthLoss:diff()}点[gold]力量[/gold]。",
   "LEXNINJA2-BEAST_SHOUT.title": "豪兽雷鸣",
   
-  "LEXNINJA2-NUCLEAR_DRAGON.description": "回合结束时，清空你的[gold]蕾克拉[/gold]。\n回合开始时，获得{Power:diff()}点[gold]蕾克拉[/gold]",
+  "LEXNINJA2-NUCLEAR_DRAGON.description": "回合结束时，清空你的[gold]蕾克拉[/gold]。\n回合开始时，获得{NuclearDragonPower:diff()}点[gold]蕾克拉[/gold]",
   "LEXNINJA2-NUCLEAR_DRAGON.title": "核子炎龙",
 
   "LEXNINJA2-MAMBA_MISSILE.description": "随机对敌人造成{Damage:diff()}点伤害{Repeat:diff()}次。",
@@ -101,7 +101,7 @@
   "LEXNINJA2-SHARPEN_TO_KILL.description": "造成{Damage:diff()}点伤害。\n[gold]刀系忍术[/gold]额外造成{BladePowerUp:diff()}点伤害。",
   "LEXNINJA2-SHARPEN_TO_KILL.title": "磨刀我杀他去",
 
-  "LEXNINJA2-MUMMY_MUMMY.description": "减少[gold]蕾克拉[/gold]时，获得{Power:diff()}点[gold]格挡[/gold]。",
+  "LEXNINJA2-MUMMY_MUMMY.description": "减少[gold]蕾克拉[/gold]时，获得{MummyPower:diff()}点[gold]格挡[/gold]。",
   "LEXNINJA2-MUMMY_MUMMY.title": "啊木乃伊啊木乃伊",
 
   "LEXNINJA2-WATER_SAND_STORM.description": "对所有敌人造成等同于你[gold]沙壁[/gold]层数的伤害。\n[gold]忍术[/gold]{Renshu:diff()}：先获得{SandWall:diff()}层[gold]沙壁[/gold]。{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}",
