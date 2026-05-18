@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using BaseLib.Utils;
+using Godot;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -16,28 +17,19 @@ namespace LexNinja2.LexNinja2Code.Cards;
 public class PlasmaArrow()
     : LexNinja2Card(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(12, ValueProp.Move), new PowerVar<PlasmaArrowPower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(NinjaKeyword.Renshu)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/PlasmaArrow.mp3");
-        await DamageCmd
-            .Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(play.Target)
+        await CommonActions.CardAttack(this, play)
             .WithHitVfxNode(
-                (Creature t) => NShivThrowVfx.Create(base.Owner.Creature, t, Colors.Aqua)
+                t => NShivThrowVfx.Create(base.Owner.Creature, t, Colors.Aqua)
             )
             .Execute(choiceContext);
-        await PowerCmd.Apply<PlasmaArrowPower>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            1,
-            Owner.Creature,
-            this
-        );
+        await CommonActions.ApplySelf<PlasmaArrowPower>(choiceContext, this);
     }
 
     protected override void OnUpgrade()
