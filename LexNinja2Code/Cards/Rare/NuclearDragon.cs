@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -11,20 +12,14 @@ namespace LexNinja2.LexNinja2Code.Cards;
 
 public class NuclearDragon() : LexNinja2Card(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Power", 5)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<NuclearDragonPower>(5)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<Lexkela>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/NuclearDragon.mp3");
-        await PowerCmd.Apply<NuclearDragonPower>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars["Power"].BaseValue,
-            Owner.Creature,
-            this
-        );
+        await CommonActions.ApplySelf<NuclearDragonPower>(choiceContext, this);
     }
 
     protected override void OnUpgrade()
