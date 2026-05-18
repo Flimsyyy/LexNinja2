@@ -39,7 +39,7 @@ public class PastHasGoneHand() : LexNinja2Card(1, CardType.Skill, CardRarity.Rar
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(2);
+        DynamicVars.CalculationExtra.UpgradeValueBy(2);
     }
 
     public override string CustomPortraitPath => $"PastHasGoneHand_p.png".BigCardImagePath();
