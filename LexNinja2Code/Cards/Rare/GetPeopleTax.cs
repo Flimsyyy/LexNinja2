@@ -44,7 +44,8 @@ public class GetPeopleTax()
             }
         }
 
-        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_slash", tmpSfx: "heavy_attack.mp3")
+        await CommonActions
+            .CardAttack(this, play, vfx: "vfx/vfx_attack_slash", tmpSfx: "heavy_attack.mp3")
             .Execute(choiceContext);
     }
 

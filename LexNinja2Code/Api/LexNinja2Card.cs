@@ -62,12 +62,12 @@ public abstract class LexNinja2Card(int cost, CardType type, CardRarity rarity, 
             || Keywords.Contains(NinjaKeyword.FreeNinjutsu)
             || Owner.Creature.GetPowerAmount<Lexkela>() >= DynamicVars.Ninjutsu().BaseValue;
     }
-    
+
     protected bool CanCastNinjutsuX()
     {
         return Owner.HasPower<FreeNinjutsuPower>()
-               || Keywords.Contains(NinjaKeyword.FreeNinjutsu)
-               || Owner.HasPower<Lexkela>();
+            || Keywords.Contains(NinjaKeyword.FreeNinjutsu)
+            || Owner.HasPower<Lexkela>();
     }
 
     protected int ResolveLexkelaXValue()
@@ -77,9 +77,7 @@ public abstract class LexNinja2Card(int cost, CardType type, CardRarity rarity, 
             throw new InvalidOperationException("This card does not have an X-cost.");
         }
         var value = Hook.ModifyXValue(CombatState!, this, Owner.Creature.GetPowerAmount<Lexkela>());
-        if (Owner.HasPower<FreeNinjutsuPower>())
-        {
-        }
+        if (Owner.HasPower<FreeNinjutsuPower>()) { }
         else if (Keywords.Contains(NinjaKeyword.FreeNinjutsu))
         {
             RemoveKeyword(NinjaKeyword.FreeNinjutsu);

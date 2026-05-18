@@ -23,9 +23,7 @@ public class GoBackHands() : LexNinja2Card(2, CardType.Skill, CardRarity.Uncommo
     {
         NinjaAudio.Play("res://LexNinja2/audio/GoBackHands.mp3");
         var isNinjutsu = Ninjutsu(choiceContext);
-        foreach (
-            var card in PileType.Discard.GetPile(Owner).Cards.Where(Filter).ToList()
-        )
+        foreach (var card in PileType.Discard.GetPile(Owner).Cards.Where(Filter).ToList())
         {
             if (isNinjutsu)
             {
@@ -38,12 +36,15 @@ public class GoBackHands() : LexNinja2Card(2, CardType.Skill, CardRarity.Uncommo
     private static bool Filter(CardModel card)
     {
         var condition =
-            card.Keywords.Contains(NinjaKeyword.Hand) || card.Tags.Contains(CardTag.OstyAttack) || card is HandOfGreed;
-        if (!condition) return false;
+            card.Keywords.Contains(NinjaKeyword.Hand)
+            || card.Tags.Contains(CardTag.OstyAttack)
+            || card is HandOfGreed;
+        if (!condition)
+            return false;
         return card.Type switch
         {
             CardType.Attack or CardType.Skill or CardType.Power => true,
-            _ => false
+            _ => false,
         };
     }
 

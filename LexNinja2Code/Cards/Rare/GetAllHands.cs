@@ -11,7 +11,8 @@ namespace LexNinja2.LexNinja2Code.Cards;
 
 public class GetAllHands() : LexNinja2Card(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2), new PowerVar<GetAllHandsPower>(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new CardsVar(2), new PowerVar<GetAllHandsPower>(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [NinjaKeyword.Hand, CardKeyword.Exhaust];
 
@@ -35,7 +36,7 @@ public class GetAllHands() : LexNinja2Card(2, CardType.Skill, CardRarity.Rare, T
     {
         RemoveKeyword(CardKeyword.Exhaust);
     }
-    
+
     // protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 
     public override string CustomPortraitPath => $"GetAllHands_p.png".BigCardImagePath();

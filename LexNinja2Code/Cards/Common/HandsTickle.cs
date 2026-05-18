@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -13,38 +14,29 @@ namespace LexNinja2.LexNinja2Code.Cards;
 public class HandsTickle()
     : LexNinja2Card(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
+    private const string CalculatedHits = "CalculatedHits";
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new DamageVar(4, ValueProp.Move),
-            (DynamicVar)new CalculationBaseVar(0M),
-            (DynamicVar)new CalculationExtraVar(1M),
-            (DynamicVar)
-                new CalculatedVar("CalculatedHits").WithMultiplier(
-                    (Func<CardModel, Creature, Decimal>)(
-                        (card, _) =>
-                            (Decimal)
-                                card.Owner.PlayerCombatState.AllCards.Count<CardModel>(
-                                    (Func<CardModel, bool>)(
-                                        c => c.Keywords.Contains(NinjaKeyword.Hand)
-                                    )
-                                )
+            new CalculationBaseVar(0M),
+            new CalculationExtraVar(1M),
+            new CalculatedVar(CalculatedHits).WithMultiplier(
+                (card, _) =>
+                    card.Owner.PlayerCombatState!.AllCards.Count(c =>
+                        c.Keywords.Contains(NinjaKeyword.Hand)
                     )
-                ),
+            ),
         ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        NinjaAudio.Play("res://LexNinja2/audio/HandsTickle.mp3", 1);
-        await DamageCmd
-            .Attack(this.DynamicVars.Damage.BaseValue)
-            .WithHitCount(
-                (int)((CalculatedVar)this.DynamicVars["CalculatedHits"]).Calculate(play.Target)
-            )
-            .FromCard((CardModel)this)
-            .Targeting(play.Target)
-            .Execute(choiceContext);
+        NinjaAudio.Play("res://LexNinja2/audio/HandsTickle.mp3");
+        var hitCount = (int)((CalculatedVar)DynamicVars[CalculatedHits]).Calculate(play.Target);
+        //因为没有CalculatedDamageVar，所以可以这样使用
+        await CommonActions.CardAttack(this, play, hitCount: hitCount).Execute(choiceContext);
     }
 
     protected override void OnUpgrade()

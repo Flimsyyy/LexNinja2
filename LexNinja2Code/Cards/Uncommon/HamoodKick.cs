@@ -25,8 +25,10 @@ public class HamoodKick()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/HamoodKick.mp3");
-        await CommonActions.CardAttack(this, play, tmpSfx: "blunt_attack.mp3")
-            .WithHitVfxNode((Func<Creature, Node2D>)(t => NBigSlashImpactVfx.Create(t)!)).Execute(choiceContext);
+        await CommonActions
+            .CardAttack(this, play, tmpSfx: "blunt_attack.mp3")
+            .WithHitVfxNode((Func<Creature, Node2D>)(t => NBigSlashImpactVfx.Create(t)!))
+            .Execute(choiceContext);
         if (!Ninjutsu(choiceContext))
         {
             return;
@@ -45,6 +47,7 @@ public class HamoodKick()
         EnergyCost.AddThisCombat(1);
         return Task.CompletedTask;
     }
+
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(5);
@@ -55,5 +58,4 @@ public class HamoodKick()
     public override string BetaPortraitPath => "beta/HamoodKick2.png".CardImagePath();
 
     protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
-    
 }
