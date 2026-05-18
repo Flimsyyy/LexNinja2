@@ -23,24 +23,25 @@ public class HengheShui() : LexNinja2Card(1, CardType.Skill, CardRarity.Rare, Ta
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/HengheShui.mp3");
-        await MegaCrit.Sts2.Core.Commands.Cmd.Wait(1.5f);
+        await Cmd.Wait(1.5f);
         NinjaAudio.Play("res://LexNinja2/audio/ASan.mp3");
-        int healPoint = Owner.RunState.Rng.CombatEnergyCosts.NextInt(DynamicVars.Heal.IntValue);
-        int poisonPoint = Owner.RunState.Rng.CombatEnergyCosts.NextInt(
+        var healPoint = Owner.RunState.Rng.CombatEnergyCosts.NextInt(DynamicVars.Heal.IntValue);
+        var poisonPoint = Owner.RunState.Rng.CombatEnergyCosts.NextInt(
             DynamicVars.Power<PoisonPower>().IntValue
         );
-        if (play.Target != null)
+        if (play.Target == null)
         {
-            await CreatureCmd.Heal(play.Target, healPoint, true);
-            await PowerCmd.Apply<PoisonPower>(
-                choiceContext,
-                play.Target,
-                poisonPoint,
-                Owner.Creature,
-                this
-            );
-            // await CardPileCmd.AddGeneratedCardToCombat(CombatState.CreateCard<Infection>(play.Target.Player), PileType.Discard, Owner);
+            return;
         }
+        await CreatureCmd.Heal(play.Target, healPoint);
+        await PowerCmd.Apply<PoisonPower>(
+            choiceContext,
+            play.Target,
+            poisonPoint,
+            Owner.Creature,
+            this
+        );
+        // await CardPileCmd.AddGeneratedCardToCombat(CombatState.CreateCard<Infection>(play.Target.Player), PileType.Discard, Owner);
         // new Rng(this.Seed, StringHelper.SnakeCase(RunRngType.CombatTargets.ToString()));
     }
 
