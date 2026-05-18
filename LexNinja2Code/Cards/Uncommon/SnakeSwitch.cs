@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
@@ -27,32 +28,21 @@ public class SnakeSwitch() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncommo
         //     await CardPileCmd.AddGeneratedCardToCombat(original.CreateClone(),PileType.Hand,true);
         //     CardPileAddResult? nullable = await CardCmd.TransformTo<AngrySnakeBite>(original);
         // }
-
-        foreach (
-            CardModel cardModel in (
-                await CardSelectCmd.FromHand(
-                    choiceContext,
-                    Owner,
-                    new CardSelectorPrefs(
-                        CardSelectorPrefs.TransformSelectionPrompt,
-                        DynamicVars.Cards.IntValue
-                    ),
-                    (Func<CardModel, bool>)null,
-                    (AbstractModel)this
-                )
-            ).ToList<CardModel>()
-        )
+        var cards = CommonActions.SelectCards(this, CardSelectorPrefs.TransformSelectionPrompt, choiceContext,
+            PileType.Hand, count: DynamicVars.Cards.IntValue).Result;
+        foreach (var cardModel in cards)
         {
             NinjaAudio.Play("res://LexNinja2/audio/SnakeSwitch.mp3");
-            if (cardModel != null)
+            var angrySnakeBite = CombatState?.CreateCard<AngrySnakeBite>(Owner);
+            if (angrySnakeBite == null)
             {
-                CardModel cardModel2 = base.CombatState.CreateCard<AngrySnakeBite>(base.Owner);
-                if (base.IsUpgraded)
-                {
-                    CardCmd.Upgrade(cardModel2);
-                }
-                await CardCmd.Transform(cardModel, cardModel2);
+                continue;
             }
+            if (IsUpgraded)
+            {
+                CardCmd.Upgrade(angrySnakeBite);
+            }
+            await CardCmd.Transform(cardModel, angrySnakeBite);
         }
         await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
     }
