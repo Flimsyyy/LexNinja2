@@ -1,4 +1,6 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Extensions;
+using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -11,7 +13,7 @@ namespace LexNinja2.LexNinja2Code.Cards;
 
 public class InfernoDragon() : LexNinja2Card(5, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new("dian", 8)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<InfernoDragonPower>(8)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<Lexkela>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Science];
@@ -19,18 +21,12 @@ public class InfernoDragon() : LexNinja2Card(5, CardType.Power, CardRarity.Rare,
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/InfernoDragon.mp3");
-        await PowerCmd.Apply<InfernoDragonPower>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars["dian"].BaseValue,
-            Owner.Creature,
-            this
-        );
+        await CommonActions.ApplySelf<InfernoDragonPower>(choiceContext, this);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["dian"].UpgradeValueBy(4);
+        DynamicVars.Power<InfernoDragonPower>().UpgradeValueBy(4);
     }
 
     public override string CustomPortraitPath => $"InfernoDragon.png".BigCardImagePath();
