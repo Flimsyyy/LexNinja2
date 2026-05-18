@@ -1,4 +1,5 @@
 ﻿using BaseLib.Extensions;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -26,27 +27,9 @@ public class ManTooWeak() : LexNinja2Card(2, CardType.Power, CardRarity.Uncommon
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/ManTooWeak.mp3");
-        await PowerCmd.Apply<ManTooWeakPower>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars.Power<ManTooWeakPower>().BaseValue,
-            Owner.Creature,
-            this
-        );
-        await PowerCmd.Apply<StrengthPower>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars.Strength.BaseValue,
-            Owner.Creature,
-            this
-        );
-        await PowerCmd.Apply<DexterityPower>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars.Strength.BaseValue,
-            Owner.Creature,
-            this
-        );
+        await CommonActions.ApplySelf<StrengthPower>(choiceContext, this);
+        await CommonActions.ApplySelf<DexterityPower>(choiceContext, this);
+        await CommonActions.ApplySelf<ManTooWeakPower>(choiceContext, this);
     }
 
     protected override void OnUpgrade()
