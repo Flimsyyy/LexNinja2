@@ -136,7 +136,7 @@
   "LEXNINJA2-LEECH_FRIEND.title": "好友眼蛤十字吸",
 
   "LEXNINJA2-BECOME_NONG.selectionScreenPrompt": "选择一张牌，将其一张[gold]复制品[/gold]加入你的卡组。",
-  "LEXNINJA2-BECOME_NONG.description": "选择一张牌，在战斗结束时，将{BecomeNongPower:diff()}}张复制品加入你的[gold]牌组[/gold]。",
+  "LEXNINJA2-BECOME_NONG.description": "选择一张牌，在战斗结束时，将{BecomeNongPower:diff()}张复制品加入你的[gold]牌组[/gold]。",
   "LEXNINJA2-BECOME_NONG.title": "而我要现在成为农神",
 
   "LEXNINJA2-DISAPPOINTED_AFTER_BOCCHI.description": "你打出的下一张攻击牌将会造成三倍伤害。\n你打出下一张攻击牌后，获得1层[gold]虚弱[/gold]。",
@@ -241,7 +241,7 @@
   "LEXNINJA2-PLASMA_ARROW.description": "造成{Damage:diff()}点伤害。\n你的下一张[gold]忍术[/gold]牌可以免费打出。",
   "LEXNINJA2-PLASMA_ARROW.title": "射离子矢",
 
-  "LEXNINJA2-INFERNO_DRAGON.description": "每点[gold]蕾克拉[/gold]使你的攻击额外造成{dian:diff()}%的伤害。",
+  "LEXNINJA2-INFERNO_DRAGON.description": "每点[gold]蕾克拉[/gold]使你的攻击额外造成{InfernoDragonPower:diff()}%的伤害。",
   "LEXNINJA2-INFERNO_DRAGON.title": "火龙炎神",
 
   "LEXNINJA2-COUNTLESS_VAMPIRE_DOG.selectionScreenPrompt": "选择一张牌，将其[gold]复制品[/gold]填满你的手牌。",
