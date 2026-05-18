@@ -23,7 +23,9 @@ public class DragonPunch()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/DragonPunch.mp3");
-        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_thrash", tmpSfx: "blunt_attack.mp3").Execute(choiceContext);
+        await CommonActions
+            .CardAttack(this, play, vfx: "vfx/vfx_thrash", tmpSfx: "blunt_attack.mp3")
+            .Execute(choiceContext);
         if (!Ninjutsu(choiceContext))
         {
             return;

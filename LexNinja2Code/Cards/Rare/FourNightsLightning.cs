@@ -29,7 +29,15 @@ public class FourNightsLightning()
             repeatCount += DynamicVars.Repeat.BaseValue;
         }
         var hitCount = (int)(4 * repeatCount);
-        await CommonActions.CardAttack(this, play, hitCount: hitCount, vfx: "vfx/vfx_attack_lightning", tmpSfx: "lightning_orb_evoke.mp3").Execute(choiceContext);
+        await CommonActions
+            .CardAttack(
+                this,
+                play,
+                hitCount: hitCount,
+                vfx: "vfx/vfx_attack_lightning",
+                tmpSfx: "lightning_orb_evoke.mp3"
+            )
+            .Execute(choiceContext);
         await CardPileCmd.Draw(choiceContext, repeatCount, Owner);
         await PlayerCmd.GainEnergy(repeatCount, Owner);
     }
