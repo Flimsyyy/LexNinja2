@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -23,7 +24,7 @@ public class GonnaEatShit() : LexNinja2Card(0, CardType.Skill, CardRarity.Common
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/GonnaEatShit.mp3");
-        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        await NinjaAnim.TriggerCastAnim(this);
         await CreatureCmd.Damage(
             choiceContext,
             Owner.Creature,
@@ -32,17 +33,11 @@ public class GonnaEatShit() : LexNinja2Card(0, CardType.Skill, CardRarity.Common
             this
         );
         await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
-        await PowerCmd.Apply<Lexkela>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars["Kela"].BaseValue,
-            Owner.Creature,
-            this
-        );
+        await NinjaHelper.AddLexKela(choiceContext, this);
         await PowerCmd.Apply<ShitPower>(
-            new ThrowingPlayerChoiceContext(),
+            choiceContext,
             Owner.Creature,
-            DynamicVars["Kela"].BaseValue,
+            DynamicVars.LexKela().BaseValue,
             Owner.Creature,
             this
         );
@@ -50,7 +45,7 @@ public class GonnaEatShit() : LexNinja2Card(0, CardType.Skill, CardRarity.Common
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Kela"].UpgradeValueBy(1);
+        DynamicVars.LexKela().UpgradeValueBy(1);
     }
 
     public override string CustomPortraitPath => $"GonnaEatShit_p.png".BigCardImagePath();
