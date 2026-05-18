@@ -34,7 +34,11 @@ public class CountlessVampireDog()
         NinjaAudio.Play("res://LexNinja2/audio/CountlessVampireDog.mp3");
         var num = 10 - CardPile.GetCards(Owner, PileType.Hand).Count();
         for (var index = 0; index < num; ++index)
-            await CardPileCmd.AddGeneratedCardToCombat(original.CreateClone(), PileType.Hand, Owner);
+            await CardPileCmd.AddGeneratedCardToCombat(
+                original.CreateClone(),
+                PileType.Hand,
+                Owner
+            );
     }
 
     protected override void OnUpgrade()

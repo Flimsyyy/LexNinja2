@@ -46,8 +46,8 @@ public class EclipseMistBlade()
     {
         return PileType
             .Hand.GetPile(Owner)
-            .Cards.Where(
-                c => !c.Keywords.Contains(NinjaKeyword.Blade) && !c.Tags.Contains(CardTag.Shiv)
+            .Cards.Where(c =>
+                !c.Keywords.Contains(NinjaKeyword.Blade) && !c.Tags.Contains(CardTag.Shiv)
             );
     }
 }

@@ -27,13 +27,10 @@ public class DarknessSnakeHand()
         NinjaAudio.Play("res://LexNinja2/audio/DarknessSnakeHand.mp3");
         await NinjaHelper.AddLexKela(choiceContext, this);
         await CommonActions.Draw(this, choiceContext);
-        foreach (
-            var card in PileType
-                .Hand.GetPile(Owner)
-                .Cards.Where(c => !c.EnergyCost.CostsX)
-        )
+        foreach (var card in PileType.Hand.GetPile(Owner).Cards.Where(c => !c.EnergyCost.CostsX))
         {
-            if (card.EnergyCost.GetWithModifiers(CostModifiers.None) < 0) continue;
+            if (card.EnergyCost.GetWithModifiers(CostModifiers.None) < 0)
+                continue;
             card.EnergyCost.SetThisCombat(NextEnergyCost());
             NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
         }
@@ -58,9 +55,9 @@ public class DarknessSnakeHand()
     private int NextEnergyCost()
     {
         // return TestEnergyCostOverride >= 0
-            // ? TestEnergyCostOverride
-            // : Owner.RunState.Rng.CombatEnergyCosts.NextInt(4);
-            return Owner.RunState.Rng.CombatEnergyCosts.NextInt(4);
+        // ? TestEnergyCostOverride
+        // : Owner.RunState.Rng.CombatEnergyCosts.NextInt(4);
+        return Owner.RunState.Rng.CombatEnergyCosts.NextInt(4);
     }
 
     public override string CustomPortraitPath => $"DarknessSnakeHand_p.png".BigCardImagePath();

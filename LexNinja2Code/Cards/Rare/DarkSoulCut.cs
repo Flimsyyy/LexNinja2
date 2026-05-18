@@ -42,9 +42,7 @@ public class DarkSoulCut() : LexNinja2Card(0, CardType.Attack, CardRarity.Rare, 
         );
         SfxCmd.Play("event:/sfx/characters/attack_fire");
         NinjaAudio.Play("res://LexNinja2/audio/DarkSoulCut.mp3");
-        var shouldTriggerFatal = play.Target!.Powers.All(
-            p => p.ShouldOwnerDeathTriggerFatal()
-        );
+        var shouldTriggerFatal = play.Target!.Powers.All(p => p.ShouldOwnerDeathTriggerFatal());
         var hitPoint = play.Target.CurrentHp;
 
         await Cmd.Wait(1f);
@@ -56,9 +54,7 @@ public class DarkSoulCut() : LexNinja2Card(0, CardType.Attack, CardRarity.Rare, 
         await attackCommand.Execute(choiceContext);
         if (
             shouldTriggerFatal
-            && attackCommand
-                .Results.SelectMany(r => r)
-                .Any(r => r.WasTargetKilled)
+            && attackCommand.Results.SelectMany(r => r).Any(r => r.WasTargetKilled)
         )
         {
             await CreatureCmd.GainMaxHp(Owner.Creature, hitPoint);
