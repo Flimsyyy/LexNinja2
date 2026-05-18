@@ -1,4 +1,5 @@
 ﻿using BaseLib.Extensions;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -20,19 +21,8 @@ public class SharpenToKill()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/SharpenToKill.mp3");
-        await DamageCmd
-            .Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(play.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
-        await PowerCmd.Apply<BladePowerUp>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars.Power<BladePowerUp>().BaseValue,
-            Owner.Creature,
-            this
-        );
+        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_attack_slash").Execute(choiceContext);
+        await CommonActions.ApplySelf<BladePowerUp>(choiceContext, this);
     }
 
     protected override void OnUpgrade()
