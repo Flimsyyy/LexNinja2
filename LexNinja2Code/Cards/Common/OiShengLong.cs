@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using BaseLib.Utils;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
@@ -20,25 +21,15 @@ public class OiShengLong()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/OiShoryuKen.mp3");
-        await PowerCmd.Apply<Lexkela>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            DynamicVars["Kela"].BaseValue,
-            Owner.Creature,
-            this
-        );
-        await DamageCmd
-            .Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(play.Target)
-            .WithHitFx("vfx/vfx_thrash", tmpSfx: "blunt_attack.mp3")
+        await NinjaHelper.AddLexKela(choiceContext, this);
+        await CommonActions.CardAttack(this, play, vfx: "vfx/vfx_thrash", tmpSfx: "blunt_attack.mp3")
             .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(3);
-        DynamicVars["Kela"].UpgradeValueBy(1);
+        DynamicVars.LexKela().UpgradeValueBy(1);
     }
 
     public override string CustomPortraitPath => "OiShoryuKen_p.png".BigCardImagePath();
