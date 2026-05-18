@@ -29,8 +29,15 @@ public class MambaMissile()
         NinjaAudio.Play("res://LexNinja2/audio/MambaMissile.mp3", 1.5f);
         await Cmd.Wait(0.5f);
         await CommonActions
-            .CardAttack(this, play, hitCount: DynamicVars.Repeat.IntValue, vfx: "vfx/vfx_rock_shatter",
-                tmpSfx: "blunt_attack.mp3").WithHitVfxSpawnedAtBase().Execute(choiceContext);
+            .CardAttack(
+                this,
+                play,
+                hitCount: DynamicVars.Repeat.IntValue,
+                vfx: "vfx/vfx_rock_shatter",
+                tmpSfx: "blunt_attack.mp3"
+            )
+            .WithHitVfxSpawnedAtBase()
+            .Execute(choiceContext);
         foreach (var enemy in CombatState!.HittableEnemies)
         {
             if (enemy.HasPower<SoarPower>())

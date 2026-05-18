@@ -14,11 +14,14 @@ namespace LexNinja2.LexNinja2Code.Cards;
 
 public class PastHasGoneHand() : LexNinja2Card(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CalculationBaseVar(0),
-        new CalculationExtraVar(4),
-        new CalculatedBlockVar(ValueProp.Move).WithMultiplier((card, _) => PileType.Discard.GetPile(card.Owner).Cards.Count)
-    ];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [
+            new CalculationBaseVar(0),
+            new CalculationExtraVar(4),
+            new CalculatedBlockVar(ValueProp.Move).WithMultiplier(
+                (card, _) => PileType.Discard.GetPile(card.Owner).Cards.Count
+            ),
+        ];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(CardKeyword.Exhaust), HoverTipFactory.FromPower<Lexkela>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];

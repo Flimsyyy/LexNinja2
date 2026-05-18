@@ -13,7 +13,8 @@ namespace LexNinja2.LexNinja2Code.Cards;
 
 public class InfernoDragon() : LexNinja2Card(5, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<InfernoDragonPower>(8)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new PowerVar<InfernoDragonPower>(8)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<Lexkela>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Science];

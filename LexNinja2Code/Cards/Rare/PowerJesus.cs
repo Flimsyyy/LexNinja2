@@ -80,7 +80,7 @@ public class PowerJesus() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
                 );
                 return;
             }
-            
+
             var newPower = (PowerModel)power.ClonePreservingMutability();
             DoHackyThingsForSpecificPowers(newPower);
             if (nong != null && powerById == nong)
