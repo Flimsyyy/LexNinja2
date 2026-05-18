@@ -29,13 +29,7 @@ public class CometCorruptedStar()
         }
         else
         {
-            await PowerCmd.Apply<Lexkela>(
-                choiceContext,
-                Owner.Creature,
-                DynamicVars.LexKela().BaseValue,
-                Owner.Creature,
-                this
-            );
+            await NinjaHelper.AddLexKela(choiceContext, this);
         }
     }
 
