@@ -22,8 +22,7 @@ public partial class MainFile : Node
 
     public static void Initialize()
     {
-        Smart.Default.AddExtensions(new RenShuFormatter());
-
+        Harmony.DEBUG = true;
         var harmony = new Harmony(ModId);
 
         harmony.PatchAll();

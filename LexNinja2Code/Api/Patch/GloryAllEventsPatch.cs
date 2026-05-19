@@ -8,8 +8,8 @@ namespace LexNinja2.LexNinja2Code.Api.Patch;
 [HarmonyPatch(typeof(Glory), nameof(Glory.AllEvents), MethodType.Getter)]
 public static class GloryAllEventsPatch
 {
-    static void Postfix(ref IEnumerable<EventModel> result)
+    static void Postfix(ref IEnumerable<EventModel> __result)
     {
-        result = result.Concat([ModelDb.Event<TheGreatSeal>()]).Distinct();
+        __result = __result.Concat([ModelDb.Event<TheGreatSeal>()]).Distinct();
     }
 }

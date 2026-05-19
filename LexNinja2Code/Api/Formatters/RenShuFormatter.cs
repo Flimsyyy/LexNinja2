@@ -1,4 +1,6 @@
+using BaseLib.Abstracts;
 using BaseLib.Extensions;
+using Godot;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Models;
@@ -7,17 +9,18 @@ using SmartFormat.Core.Extensions;
 
 namespace LexNinja2.LexNinja2Code.Api.Formatters;
 
-public class RenShuFormatter : IFormatter
+public class RenShuFormatter : IAutoRegisterFormatSpecifier
 {
     public bool TryEvaluateFormat(IFormattingInfo formattingInfo)
     {
+        GD.Print(formattingInfo.CurrentValue);
         if (formattingInfo.CurrentValue is not NinjutsuVar renShu)
         {
             return false;
         }
         var owner = renShu.GetOwner();
         if (
-            owner is CardModel card
+            owner is { IsMutable: true } and CardModel card
             && (
                 card.Keywords.Contains(NinjaKeyword.FreeNinjutsu)
                 || card.Owner.HasPower<FreeNinjutsuPower>()
