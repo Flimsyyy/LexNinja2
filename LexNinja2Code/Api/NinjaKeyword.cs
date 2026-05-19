@@ -24,7 +24,7 @@ public class NinjaKeyword
     // 放在原版卡牌描述的位置，这里是卡牌描述的前面
     [KeywordProperties(AutoKeywordPosition.After)]
     public static CardKeyword Science;
-    
+
     [Obsolete]
     [CustomEnum("FreeNinjutsu")]
     // 放在原版卡牌描述的位置，这里是卡牌描述的前面
