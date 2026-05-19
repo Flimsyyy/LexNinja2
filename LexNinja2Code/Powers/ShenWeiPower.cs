@@ -32,7 +32,7 @@ public class ShenWeiPower : CustomPowerModel
         if (cardPlay.Card.Type == CardType.Attack)
         {
             await PowerCmd.Apply<IntangiblePower>(
-                new ThrowingPlayerChoiceContext(),
+                context,
                 Owner,
                 -1,
                 null,
