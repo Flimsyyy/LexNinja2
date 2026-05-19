@@ -83,9 +83,9 @@ public class PowerJesus() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
 
             var newPower = (PowerModel)power.ClonePreservingMutability();
             DoHackyThingsForSpecificPowers(newPower);
-            if (nong != null && powerById == nong)
+            var card = nong?.GetNongCard();
+            if (powerById == nong && card != null)
             {
-                var nongPower = (BecomeNongPower)powerById;
                 GD.Print("难道说根本没走过这条路径？");
                 (
                     await PowerCmd.Apply<BecomeNongPower>(
@@ -95,7 +95,7 @@ public class PowerJesus() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
                         Owner.Creature,
                         this
                     )
-                )?.SetSelectedCard(nongPower.GetNongCard());
+                )?.SetSelectedCard(card);
                 return;
             }
             await PowerCmd.Apply(
