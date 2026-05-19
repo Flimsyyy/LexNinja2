@@ -23,7 +23,7 @@ public class WaterSandStorm()
             new NinjutsuVar(2),
             new PowerVar<SandWall>(10),
             new CalculationBaseVar(0),
-            new CalculationExtraVar(1),
+            new ExtraDamageVar(1),
             new CalculatedDamageVar(ValueProp.Move).WithMultiplier(
                 (card, _) => card.Owner.Creature.GetPowerAmount<SandWall>()
             ),

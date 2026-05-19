@@ -29,8 +29,8 @@ public class BecomeNong() : LexNinja2Card(1, CardType.Power, CardRarity.Rare, Ta
         {
             return;
         }
-        await CommonActions.ApplySelf<BecomeNongPower>(choiceContext, this);
-        Owner.Creature.GetPower<BecomeNongPower>()!.SetSelectedCard(card);
+        var power = await CommonActions.ApplySelf<BecomeNongPower>(choiceContext, this);
+        power?.SetSelectedCard(card);
     }
 
     protected override void OnUpgrade()

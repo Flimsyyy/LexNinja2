@@ -1,3 +1,4 @@
+using System.Reflection;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Combat;
@@ -51,5 +52,20 @@ public static class NinjaHelper
     public static CardModel? LastCard(CardModel card)
     {
         return LastCard(card.Owner);
+    }
+
+    public static object? CloneData(object source)
+    {
+        var type = source.GetType();
+        var clone = Activator.CreateInstance(type);
+        var fields = type.GetFields(
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+        );
+        foreach (var field in fields)
+        {
+            var value = field.GetValue(source);
+            field.SetValue(clone, value);
+        }
+        return clone;
     }
 }

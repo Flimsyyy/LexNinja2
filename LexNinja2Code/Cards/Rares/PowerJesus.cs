@@ -1,7 +1,5 @@
-﻿using Godot;
-using LexNinja2.LexNinja2Code.Api;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -55,54 +53,40 @@ public class PowerJesus() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
         NinjaAudio.Play("res://LexNinja2/audio/PowerJesus.mp3");
         await NinjaAnim.TriggerCastAnim(this);
 
-        var originalBuffs = Owner
+        var buffs = Owner
             .Creature.Powers.Where(p => p.TypeForCurrentAmount == PowerType.Buff)
-            .Select(p => (PowerModel)p.ClonePreservingMutability())
+            .Where(p => p.StackType == PowerStackType.Counter)
             .ToList();
-
-        foreach (var power in originalBuffs)
+        foreach (var buff in buffs)
         {
-            var livePower = Owner.Creature.Powers.FirstOrDefault(p =>
-                p == power || (p.Id == power.Id && p.InstanceType == PowerInstanceType.None)
-            );
-            var powerById = Owner.Creature.GetPowerById(power.Id);
-            var nong = Owner.Creature.GetPower<BecomeNongPower>();
-
-            if (livePower is { InstanceType: PowerInstanceType.None })
+            var data = buff.GetInternalData();
+            if (buff.InstanceType == PowerInstanceType.None || data == null)
             {
-                DoHackyThingsForSpecificPowers(livePower);
-                await PowerCmd.ModifyAmount(
+                await PowerCmd.Apply(
                     choiceContext,
-                    livePower,
-                    power.Amount,
+                    buff,
+                    Owner.Creature,
+                    buff.Amount,
                     Owner.Creature,
                     this
                 );
-                return;
+                continue;
             }
-
-            var newPower = (PowerModel)power.ClonePreservingMutability();
-            DoHackyThingsForSpecificPowers(newPower);
-            var card = nong?.GetNongCard();
-            if (powerById == nong && card != null)
+            if (buff.ClonePreservingMutability() is not PowerModel buffClone)
             {
-                GD.Print("难道说根本没走过这条路径？");
-                (
-                    await PowerCmd.Apply<BecomeNongPower>(
-                        choiceContext,
-                        Owner.Creature,
-                        1,
-                        Owner.Creature,
-                        this
-                    )
-                )?.SetSelectedCard(card);
-                return;
+                continue;
             }
+            var dataClone = NinjaHelper.CloneData(data);
+            if (dataClone == null)
+            {
+                continue;
+            }
+            buffClone.SetInternalData(dataClone);
             await PowerCmd.Apply(
                 choiceContext,
-                newPower,
+                buffClone,
                 Owner.Creature,
-                power.Amount,
+                buff.Amount,
                 Owner.Creature,
                 this
             );

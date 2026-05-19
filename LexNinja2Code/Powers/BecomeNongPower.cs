@@ -54,34 +54,33 @@ public class BecomeNongPower : CustomPowerModel
         await Cmd.Wait(1f);
         NinjaAudio.Play("res://LexNinja2/audio/BingBong.mp3", 0.3f);
         var card = GetInternalData<Data>().SelectedCard;
-        if (card == null)
+        // 姑且先这么写？
+        if (card?.ClonePreservingMutability() is not CardModel clone)
         {
             return;
         }
+        card = clone;
 
         for (var i = 0; i < Amount; i++)
         {
             var cardModel = Owner.Player!.RunState.CloneCard(card);
+            // room.AddExtraReward(
+            //     Owner.Player,
+            //     new SpecialCardReward(cardModel.CreateClone(), Owner.Player)
+            // );
             CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(cardModel, PileType.Deck));
         }
     }
 
     public void SetSelectedCard(CardModel card)
     {
-        var targetCard = card.CreateClone();
-        GetInternalData<Data>().SelectedCard = targetCard;
-        ((StringVar)DynamicVars[CardKey]).StringValue = targetCard.Title;
+        GetInternalData<Data>().SelectedCard = card;
+        ((StringVar)DynamicVars[CardKey]).StringValue = card.Title;
     }
 
     private class Data
     {
         public CardModel? SelectedCard;
-    }
-
-    public CardModel? GetNongCard()
-    {
-        var card = GetInternalData<Data>().SelectedCard;
-        return card == null ? null : Owner.Player?.RunState.CloneCard(card);
     }
 
     // private HashSet<CardModel> CardsToSkip
