@@ -27,7 +27,7 @@ public class LanBladePower : CustomPowerModel
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
         if (
-            GetInternalData<Data>().amountsForPlayedCards.Remove(cardPlay.Card, out var value)
+            GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card, out var value)
             && (
                 (
                     cardPlay.Card.Keywords.Contains(NinjaKeyword.Blade)
@@ -38,7 +38,7 @@ public class LanBladePower : CustomPowerModel
         )
         {
             NinjaAudio.Play("res://LexNinja2/audio/LanBlade.mp3");
-            for (int i = 0; i < Amount; i++)
+            for (var i = 0; i < Amount; i++)
             {
                 CardModel card = CombatState.CreateCard<LanBlade>(Owner.Player);
                 await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner.Player);
@@ -48,13 +48,12 @@ public class LanBladePower : CustomPowerModel
 
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
-        GetInternalData<Data>().amountsForPlayedCards.Add(cardPlay.Card, base.Amount);
+        GetInternalData<Data>().AmountsForPlayedCards.Add(cardPlay.Card, base.Amount);
         return Task.CompletedTask;
     }
 
     private class Data
     {
-        public readonly Dictionary<CardModel, int> amountsForPlayedCards =
-            new Dictionary<CardModel, int>();
+        public readonly Dictionary<CardModel, int> AmountsForPlayedCards = new();
     }
 }
