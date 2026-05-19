@@ -32,24 +32,23 @@ public class DamageNextTurnPower : CustomPowerModel
     {
         if (player != Owner.Player)
             return;
-        this.Flash();
+        Flash();
         await CreatureCmd.TriggerAnim(Owner, "Attack", 0.5F);
-        await MegaCrit.Sts2.Core.Commands.Cmd.CustomScaledWait(0.2f, 0.4f);
-        foreach (Creature hittableEnemy in (IEnumerable<Creature>)this.CombatState.HittableEnemies)
+        await Cmd.CustomScaledWait(0.2f, 0.4f);
+        foreach (var hittableEnemy in CombatState.HittableEnemies)
         {
-            NCombatRoom instance = NCombatRoom.Instance;
-            if (instance != null)
-                instance.CombatVfxContainer.AddChildSafely(
-                    (Node)NBigSlashVfx.Create(hittableEnemy)
-                );
+            var instance = NCombatRoom.Instance;
+            instance?.CombatVfxContainer.AddChildSafely(
+                NBigSlashVfx.Create(hittableEnemy)!
+            );
         }
-        await MegaCrit.Sts2.Core.Commands.Cmd.CustomScaledWait(0.2f, 0.4f);
-        IEnumerable<DamageResult> damageResults = await CreatureCmd.Damage(
+        await Cmd.CustomScaledWait(0.2f, 0.4f);
+        await CreatureCmd.Damage(
             choiceContext,
-            (IEnumerable<Creature>)this.CombatState.HittableEnemies,
-            this.DynamicVars.Damage,
-            this.Owner
+            CombatState.HittableEnemies,
+            DynamicVars.Damage,
+            Owner
         );
-        await PowerCmd.Remove((PowerModel)this);
+        await PowerCmd.Remove(this);
     }
 }
