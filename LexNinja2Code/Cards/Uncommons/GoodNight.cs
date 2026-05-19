@@ -20,7 +20,7 @@ public class GoodNight() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncommon,
         var amount = Owner.Creature.MaxHp * 0.3f;
         var healPoint = (decimal)amount;
         await PowerCmd.Apply<GoodNightPower>(
-            new ThrowingPlayerChoiceContext(),
+            choiceContext,
             Owner.Creature,
             healPoint,
             Owner.Creature,

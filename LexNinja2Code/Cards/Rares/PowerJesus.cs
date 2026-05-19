@@ -89,7 +89,7 @@ public class PowerJesus() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
                 GD.Print("难道说根本没走过这条路径？");
                 (
                     await PowerCmd.Apply<BecomeNongPower>(
-                        new ThrowingPlayerChoiceContext(),
+                        choiceContext,
                         Owner.Creature,
                         1,
                         Owner.Creature,
