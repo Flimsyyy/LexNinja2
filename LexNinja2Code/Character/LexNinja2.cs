@@ -1,7 +1,6 @@
 ﻿using BaseLib.Abstracts;
 using Godot;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using LexNinja2.LexNinja2Code.Cards;
 using LexNinja2.LexNinja2Code.Cards.Basics;
 using LexNinja2.LexNinja2Code.Relics;
 using MegaCrit.Sts2.Core.Entities.Characters;
