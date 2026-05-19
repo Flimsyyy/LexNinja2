@@ -23,13 +23,13 @@ public class StoneStrongPower : CustomPowerModel
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (side != this.Owner.Side)
+        if (side != Owner.Side)
         {
             return;
         }
         NinjaAudio.Play("res://LexNinja2/audio/StoneStrong.mp3");
         await PowerCmd.Apply<SandWall>(
-            new ThrowingPlayerChoiceContext(),
+            choiceContext,
             Owner,
             Amount,
             null,
