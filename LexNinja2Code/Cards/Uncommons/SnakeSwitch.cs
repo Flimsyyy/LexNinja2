@@ -63,50 +63,7 @@ public class SnakeSwitch() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncommo
 
     private IEnumerable<CardModel> GetCards()
     {
-        CardModel card = CombatState.CreateCard<AngrySnakeBite>(Owner);
-        return PileType
-            .Hand.GetPile(this.Owner)
-            .Cards.Where<CardModel>((Func<CardModel, bool>)(c => c == card));
-    }
-
-    private Boolean Ninjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                PowerCmd.Apply<Lexkela>(
-                    new ThrowingPlayerChoiceContext(),
-                    Owner.Creature,
-                    -DynamicVars["Renshu"].BaseValue,
-                    Owner.Creature,
-                    this
-                );
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private Boolean CanCastNinjutsu()
-    {
-        if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-        {
-            return true;
-        }
-
-        if (Owner.Creature.GetPower<Lexkela>() != null)
-        {
-            if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        CardModel card = CombatState!.CreateCard<AngrySnakeBite>(Owner);
+        return PileType.Hand.GetPile(Owner).Cards.Where(c => c == card);
     }
 }
