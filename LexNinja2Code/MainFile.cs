@@ -22,7 +22,6 @@ public partial class MainFile : Node
 
     public static void Initialize()
     {
-        Harmony.DEBUG = true;
         var harmony = new Harmony(ModId);
 
         harmony.PatchAll();
