@@ -32,10 +32,11 @@ public class SandWall : CustomPowerModel
             NinjaAudio.Play("res://LexNinja2/audio/BigSandWall.mp3");
             await PowerCmd.Apply<SandWall>(
                 choiceContext,
-            Owner,
-            -(Amount / 2),
-            null,
-            null
-        );
+                Owner,
+                -(Amount / 2),
+                null,
+                null
+            );
+        }
     }
 }
