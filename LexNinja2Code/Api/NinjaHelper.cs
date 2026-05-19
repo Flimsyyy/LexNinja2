@@ -3,6 +3,7 @@ using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 
@@ -25,14 +26,14 @@ public static class NinjaHelper
         await CardPileCmd.Draw(ctx, card.DynamicVars.ExtraCard().IntValue, card.Owner);
     }
 
-    public static CardModel? LastCard(CardModel card)
+    public static CardModel? LastCard(Player player)
     {
         var cardLast = CombatManager
             .Instance.History.CardPlaysFinished.LastOrDefault(
                 delegate(CardPlayFinishedEntry e)
                 {
                     var flag =
-                        e.CardPlay.Card.Owner == card.Owner
+                        e.CardPlay.Card.Owner == player
                         && !e.CardPlay.Card.Tags.Contains(NinjaTags.Snake);
                     // if (flag2)
                     // {
@@ -45,5 +46,10 @@ public static class NinjaHelper
             )
             ?.CardPlay.Card;
         return cardLast;
+    }
+    
+    public static CardModel? LastCard(CardModel card)
+    {
+        return LastCard(card.Owner);
     }
 }
