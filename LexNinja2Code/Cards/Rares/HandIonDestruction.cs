@@ -37,7 +37,7 @@ public class HandIonDestruction()
         {
             await Cmd.Wait(1.2f);
             await PowerCmd.Apply<DoubleDamagePower>(
-                new ThrowingPlayerChoiceContext(),
+                choiceContext,
                 Owner.Creature,
                 1,
                 Owner.Creature,
