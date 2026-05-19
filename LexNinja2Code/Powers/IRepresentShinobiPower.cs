@@ -23,16 +23,15 @@ public class IRepresentShinobiPower : CustomPowerModel
     public override async Task AfterPowerAmountChanged(
         PlayerChoiceContext choiceContext,
         PowerModel power,
-        Decimal amount,
+        decimal amount,
         Creature? applier,
         CardModel? cardSource
     )
     {
-        Lexkela lexkela = power as Lexkela;
-        if (power == lexkela && amount < 0 && power.Owner == Owner)
+        if (power is Lexkela && amount < 0 && power.Owner == Owner)
         {
             NinjaAudio.Play("res://LexNinja2/audio/IRepresentShinobi.mp3");
-            PlayerCmd.GainEnergy(this.Amount, Owner.Player);
+            if (Owner.Player != null) await PlayerCmd.GainEnergy(Amount, Owner.Player);
         }
     }
 }
