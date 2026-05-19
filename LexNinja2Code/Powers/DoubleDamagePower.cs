@@ -26,7 +26,7 @@ public class DoubleDamagePower : CustomPowerModel
     {
         if (
             command.ModelSource is not CardModel modelSource
-            || modelSource.Owner.Creature != this.Owner
+            || modelSource.Owner.Creature != Owner
             || modelSource.Type != CardType.Attack
             || !command.DamageProps.IsPoweredAttack()
         )
@@ -48,7 +48,7 @@ public class DoubleDamagePower : CustomPowerModel
     {
         if (
             cardSource == null
-            || cardSource.Owner.Creature != this.Owner
+            || cardSource.Owner.Creature != Owner
             || !props.IsPoweredAttack()
         )
             return 1M;
