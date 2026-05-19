@@ -37,7 +37,7 @@ public class WePeacePower : CustomPowerModel
         if (side != Owner.Side)
             return;
         Flash();
-        await PowerCmd.Remove((PowerModel)this);
+        await PowerCmd.Remove(this);
     }
 
     // public override Task AfterRemoved(Creature oldOwner)
@@ -49,6 +49,6 @@ public class WePeacePower : CustomPowerModel
 
     public override bool ShouldPlay(CardModel card, AutoPlayType _)
     {
-        return card.Owner != this.Owner.Player || card.Type != CardType.Attack;
+        return card.Owner != Owner.Player || card.Type != CardType.Attack;
     }
 }
