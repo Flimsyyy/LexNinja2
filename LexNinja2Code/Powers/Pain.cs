@@ -21,18 +21,18 @@ public class Pain : CustomPowerModel
     public override string CustomPackedIconPath => "PainPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "PainPower.png".BigPowerImagePath();
 
-    private int flag = 0;
+    private int flag = 0; // 干啥用的
 
     public override async Task BeforeApplied(
         Creature target,
-        Decimal amount,
+        decimal amount,
         Creature? applier,
         CardModel? cardSource
     )
     {
-        if (this._shouldIgnoreNextInstance)
+        if (_shouldIgnoreNextInstance)
         {
-            this._shouldIgnoreNextInstance = false;
+            _shouldIgnoreNextInstance = false;
         }
         else
         {
@@ -43,15 +43,13 @@ public class Pain : CustomPowerModel
     public override async Task AfterPowerAmountChanged(
         PlayerChoiceContext choiceContext,
         PowerModel power,
-        Decimal amount,
+        decimal amount,
         Creature? applier,
         CardModel? cardSource
     )
     {
-        Lexkela lexkela = power as Lexkela;
         if (
-            Owner.GetPower<Lexkela>() != null
-            && power == lexkela
+            power is Lexkela
             && amount < 0
             && power.Owner == Owner
         )
@@ -72,7 +70,7 @@ public class Pain : CustomPowerModel
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (side != this.Owner.Side)
+        if (side != Owner.Side)
             return;
         if (flag == 1)
             return;
@@ -88,11 +86,8 @@ public class Pain : CustomPowerModel
         CardModel? cardSource
     )
     {
-        if (target == base.Owner && result.UnblockedDamage > 0)
-        {
-            Flash();
-            NinjaAudio.Play("res://LexNinja2/audio/Pain.mp3");
-        }
-        return;
+        if (target != Owner || result.UnblockedDamage <= 0) return;
+        Flash();
+        NinjaAudio.Play("res://LexNinja2/audio/Pain.mp3");
     }
 }
