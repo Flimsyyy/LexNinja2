@@ -27,7 +27,7 @@ public class Lexkela : CustomPowerModel
         out decimal modifiedCost
     )
     {
-        if (card.Owner.Creature != this.Owner || !card.Keywords.Contains(NinjaKeyword.Science))
+        if (card.Owner.Creature != Owner || !card.Keywords.Contains(NinjaKeyword.Science))
         {
             modifiedCost = originalCost;
             return false;
@@ -72,7 +72,7 @@ public class Lexkela : CustomPowerModel
         }
     }
 
-    private int flag = 0;
+    private int flag = 0; // 这是干啥的
 
     public override async Task AfterPowerAmountChanged(
         PlayerChoiceContext choiceContext,
@@ -106,7 +106,7 @@ public class Lexkela : CustomPowerModel
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (side != this.Owner.Side)
+        if (side != Owner.Side)
             return;
         if (flag == 1)
             return;
