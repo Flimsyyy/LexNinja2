@@ -26,46 +26,44 @@ public class WildSnakeGodPower : CustomPowerModel
         NinjaAudio.Play("res://LexNinja2/audio/WildSnakeGod.mp3");
         Flash();
         foreach (
-            CardModel card in PileType
-                .Hand.GetPile(Owner.Player)
-                .Cards.Where<CardModel>((Func<CardModel, bool>)(c => !c.EnergyCost.CostsX))
+            var card in PileType
+                .Hand.GetPile(Owner.Player!)
+                .Cards.Where(c => !c.EnergyCost.CostsX)
         )
         {
-            if (card.EnergyCost.GetWithModifiers(CostModifiers.None) >= 0)
-            {
-                card.EnergyCost.SetThisCombat(NextEnergyCost());
-                NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
-            }
+            if (card.EnergyCost.GetWithModifiers(CostModifiers.None) < 0) continue;
+            card.EnergyCost.SetThisCombat(NextEnergyCost());
+            NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
+            // IReadOnlyList<CardModel> cards = PileType.Hand.GetPile(Owner.Player).Cards;
+            // if (cards.Count == 0)
+            //     return;
+            // int amount = (int) ((Decimal) cards.Count * Amount);
+            // await CreatureCmd.GainBlock(Owner, amount, ValueProp.Unpowered, null);
         }
-        // IReadOnlyList<CardModel> cards = PileType.Hand.GetPile(Owner.Player).Cards;
-        // if (cards.Count == 0)
-        //     return;
-        // int amount = (int) ((Decimal) cards.Count * Amount);
-        // await CreatureCmd.GainBlock(Owner, amount, ValueProp.Unpowered, null);
     }
 
-    public override Decimal ModifyHandDraw(Player player, Decimal count)
+    public override decimal ModifyHandDraw(Player player, decimal count)
     {
-        return player != this.Owner.Player ? count : count + Amount;
+        return player != Owner.Player ? count : count + Amount;
     }
 
     private int _testEnergyCostOverride = -1;
 
     public int TestEnergyCostOverride
     {
-        get => this._testEnergyCostOverride;
+        get => _testEnergyCostOverride;
         set
         {
             TestMode.AssertOn();
-            this.AssertMutable();
-            this._testEnergyCostOverride = value;
+            AssertMutable();
+            _testEnergyCostOverride = value;
         }
     }
 
     private int NextEnergyCost()
     {
-        return this.TestEnergyCostOverride >= 0
-            ? this.TestEnergyCostOverride
-            : this.Owner.Player.RunState.Rng.CombatEnergyCosts.NextInt(4);
+        return TestEnergyCostOverride >= 0
+            ? TestEnergyCostOverride
+            : Owner.Player!.RunState.Rng.CombatEnergyCosts.NextInt(4);
     }
 }
