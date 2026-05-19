@@ -1,8 +1,6 @@
 ﻿using BaseLib.Abstracts;
 using LexNinja2.LexNinja2Code.Api;
-using LexNinja2.LexNinja2Code.Cards;
 using LexNinja2.LexNinja2Code.Cards.Curses;
-using LexNinja2.LexNinja2Code.Cards.Tokens;
 using MegaCrit.Sts2.Core.Audio.Debug;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
@@ -50,7 +48,7 @@ public class TheGreatSeal : CustomEventModel
         // NinjaAudio.Stop("res://LexNinja2/audio/TheGreatSeal.mp3",10f);
         NinjaAudio.Stop("res://LexNinja2/audio/TheGreatSeal2.mp3", 10f);
         NinjaAudio.Play("res://LexNinja2/audio/TheGreatSeal0.mp3");
-        MegaCrit.Sts2.Core.Commands.Cmd.Wait(2f, true);
+        Cmd.Wait(2f, true);
         NinjaAudio.Play("res://LexNinja2/audio/Hamood.mp3", 0.25f);
         // NinjaAudio.PlayLooped("res://LexNinja2/audio/TheGreatSeal.mp3",0.25f);
         NinjaAudio.PlayLooped("res://LexNinja2/audio/TheGreatSeal2.mp3", 0.25f);
