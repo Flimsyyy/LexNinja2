@@ -62,13 +62,7 @@ public class Lexkela : CustomPowerModel
             && cardPlay.Card.Owner == Owner.Player
         )
         {
-            await PowerCmd.Apply<Lexkela>(
-                context,
-                Owner,
-                -1,
-                Owner,
-                null
-            );
+            await PowerCmd.Apply<Lexkela>(context, Owner, -1, Owner, null);
         }
     }
 

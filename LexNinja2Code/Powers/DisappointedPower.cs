@@ -18,13 +18,7 @@ public class DisappointedPower : CustomPowerModel
     {
         if (cardPlay.Card.Type == CardType.Attack && cardPlay.Card.Owner == Owner.Player)
         {
-            await PowerCmd.Apply<WeakPower>(
-                context,
-                Owner,
-                1,
-                null,
-                null
-            );
+            await PowerCmd.Apply<WeakPower>(context, Owner, 1, null, null);
             await PowerCmd.Remove(this);
         }
     }

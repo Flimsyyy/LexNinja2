@@ -29,12 +29,7 @@ public class ReaperHand() : LexNinja2Relic
         if (cardPlay.Card.Keywords.Contains(NinjaKeyword.Hand))
         {
             NinjaAudio.Play("res://LexNinja2/audio/DeathHand.mp3");
-            await OstyCmd.Summon(
-                context,
-                Owner,
-                DynamicVars.Summon.BaseValue,
-                this
-            );
+            await OstyCmd.Summon(context, Owner, DynamicVars.Summon.BaseValue, this);
         }
     }
 }

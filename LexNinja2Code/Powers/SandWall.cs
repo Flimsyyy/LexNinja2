@@ -30,13 +30,7 @@ public class SandWall : CustomPowerModel
         if (Owner.GetPower<BuildSandWallPower>() != null)
         {
             NinjaAudio.Play("res://LexNinja2/audio/BigSandWall.mp3");
-            await PowerCmd.Apply<SandWall>(
-                choiceContext,
-                Owner,
-                -(Amount / 2),
-                null,
-                null
-            );
+            await PowerCmd.Apply<SandWall>(choiceContext, Owner, -(Amount / 2), null, null);
         }
     }
 }
