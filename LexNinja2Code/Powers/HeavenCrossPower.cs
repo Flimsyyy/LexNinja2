@@ -24,7 +24,7 @@ public class HeavenCrossPower : CustomPowerModel
         if (cardPlay.Card.Tags.Contains(NinjaTags.Ninjutsu) && cardPlay.Card.Owner == Owner.Player)
         {
             await PowerCmd.Apply<Lexkela>(
-                new ThrowingPlayerChoiceContext(),
+                context,
                 Owner,
                 Amount,
                 null,

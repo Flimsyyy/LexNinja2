@@ -30,7 +30,7 @@ public class ReaperHand() : LexNinja2Relic
         {
             NinjaAudio.Play("res://LexNinja2/audio/DeathHand.mp3");
             await OstyCmd.Summon(
-                new ThrowingPlayerChoiceContext(),
+                context,
                 Owner,
                 DynamicVars.Summon.BaseValue,
                 this

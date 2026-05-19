@@ -43,7 +43,7 @@ public class BladeDefencePower : CustomPowerModel
         )
             return;
         NinjaAudio.Play("res://LexNinja2/audio/BladeDefence.mp3");
-        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner, 1, Owner, null);
+        await PowerCmd.Apply<Lexkela>(choiceContext, Owner, 1, Owner, null);
     }
 
     public override async Task AfterDamageGiven(

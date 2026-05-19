@@ -63,7 +63,7 @@ public class Lexkela : CustomPowerModel
         )
         {
             await PowerCmd.Apply<Lexkela>(
-                new ThrowingPlayerChoiceContext(),
+                context,
                 Owner,
                 -1,
                 Owner,
@@ -113,6 +113,6 @@ public class Lexkela : CustomPowerModel
         if (Owner.HasPower<Pain>())
             return;
         Flash();
-        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner, 1, null, null);
+        await PowerCmd.Apply<Lexkela>(choiceContext, Owner, 1, null, null);
     }
 }

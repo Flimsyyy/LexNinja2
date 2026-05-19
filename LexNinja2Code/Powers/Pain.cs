@@ -70,7 +70,7 @@ public class Pain : CustomPowerModel
             return;
         if (flag == 1)
             return;
-        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner, 1, null, null);
+        await PowerCmd.Apply<Lexkela>(choiceContext, Owner, 1, null, null);
     }
 
     public override async Task AfterDamageReceived(
