@@ -40,31 +40,30 @@ public class AlanWalkerPower : CustomPowerModel
         if (cardPlay.Card.Owner == Owner.Player)
         {
             Flash();
-            NCombatRoom instance = NCombatRoom.Instance;
-            List<Creature> enemies = base
-                .CombatState.HittableEnemies.Where((Creature e) => e.IsAlive)
+            var enemies = CombatState.HittableEnemies.Where(e => e.IsAlive)
                 .ToList();
-            if (enemies.LastOrDefault() == null)
+            var target = enemies.LastOrDefault();
+            if (target == null)
             {
                 return;
             }
-            NHyperbeamVfx nHyperbeamVfx = NHyperbeamVfx.Create(base.Owner, enemies.LastOrDefault());
+            var nHyperbeamVfx = NHyperbeamVfx.Create(base.Owner, target);
             if (nHyperbeamVfx != null)
             {
                 NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(nHyperbeamVfx);
-                await MegaCrit.Sts2.Core.Commands.Cmd.Wait(0.5f);
+                await Cmd.Wait(0.5f);
             }
-            foreach (Creature item in enemies)
+            foreach (var enemy in enemies)
             {
-                NHyperbeamImpactVfx nHyperbeamImpactVfx = NHyperbeamImpactVfx.Create(
-                    base.Owner,
-                    item
+                var nHyperbeamImpactVfx = NHyperbeamImpactVfx.Create(
+                    Owner,
+                    enemy
                 );
                 if (nHyperbeamImpactVfx != null)
                 {
                     NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(nHyperbeamImpactVfx);
                 }
-                await CreatureCmd.Damage(context, item, 6, ValueProp.Unpowered, null, null);
+                await CreatureCmd.Damage(context, enemy, 6, ValueProp.Unpowered, null, null);
             }
             // foreach (Creature enemy in CombatState.HittableEnemies)
             // {

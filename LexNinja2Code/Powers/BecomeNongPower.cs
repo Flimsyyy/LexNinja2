@@ -12,20 +12,14 @@ namespace LexNinja2.LexNinja2Code.Powers;
 
 public class BecomeNongPower : CustomPowerModel
 {
-    private const string _cardKey = "Card";
+    private const string CardKey = "Card";
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
-    protected override object InitInternalData() => (object)new Data();
+    protected override object InitInternalData() => new Data();
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar("Card", "滚木")];
-    private string name = "nong";
-
-    public string getName()
-    {
-        return name;
-    }
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar(CardKey, "滚木")];
 
     public override string CustomPackedIconPath => "BecomeNongPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "BecomeNongPower.png".BigPowerImagePath();
@@ -53,17 +47,22 @@ public class BecomeNongPower : CustomPowerModel
         // GD.Print("HELLO WORLD");
         // CardPileCmd.Add(this.GetInternalData<BecomeNongPower.Data>().selectedCard, PileType.Deck, source: (AbstractModel)this);
         // return Task.CompletedTask;
-        if (GetInternalData<Data>().selectedCard == null)
+        if (GetInternalData<Data>().SelectedCard == null)
             return;
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/BecomeNong.mp3", 1);
-        await MegaCrit.Sts2.Core.Commands.Cmd.Wait(1f);
+        await Cmd.Wait(1f);
         NinjaAudio.Play("res://LexNinja2/audio/BingBong.mp3", 0.3f);
-
-        for (int i = 0; i < this.Amount; i++)
+        var card = GetInternalData<Data>().SelectedCard;
+        if (card == null)
         {
-            CardModel cardModel = base.Owner.Player.RunState.CloneCard(
-                GetInternalData<Data>().selectedCard
+            return;
+        }
+
+        for (var i = 0; i < Amount; i++)
+        {
+            var cardModel = Owner.Player!.RunState.CloneCard(
+                card
             );
             CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(cardModel, PileType.Deck));
         }
@@ -71,19 +70,21 @@ public class BecomeNongPower : CustomPowerModel
 
     public void SetSelectedCard(CardModel card)
     {
-        this.GetInternalData<Data>().selectedCard = card.CreateClone();
-        ((StringVar)this.DynamicVars["Card"]).StringValue =
-            this.GetInternalData<Data>().selectedCard.Title;
+        var targetCard = card.CreateClone();
+        GetInternalData<Data>().SelectedCard = targetCard;
+        ((StringVar)DynamicVars[CardKey]).StringValue =
+            targetCard.Title;
     }
 
     private class Data
     {
-        public CardModel? selectedCard;
+        public CardModel? SelectedCard;
     }
 
-    public CardModel GetNongCard()
+    public CardModel? GetNongCard()
     {
-        return Owner.Player.RunState.CloneCard(GetInternalData<Data>().selectedCard);
+        var card = GetInternalData<Data>().SelectedCard;
+        return card == null ? null : Owner.Player?.RunState.CloneCard(card);
     }
 
     // private HashSet<CardModel> CardsToSkip
