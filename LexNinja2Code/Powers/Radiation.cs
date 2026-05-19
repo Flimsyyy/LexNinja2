@@ -22,8 +22,8 @@ public class Radiation : CustomPowerModel
         if (side != this.Owner.Side)
             return;
         Flash();
-        decimal Radiation = (decimal)Owner.MaxHp * Amount / 100;
-        await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), Owner, Radiation, false);
+        var radiation = (decimal)Owner.MaxHp * Amount / 100;
+        await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), Owner, radiation, false);
     }
 
     private decimal CalculateMaxHp()
