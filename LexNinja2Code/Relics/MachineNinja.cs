@@ -33,7 +33,7 @@ public class MachineNinja() : LexNinja2Relic
     private CardModel? _cardBeingPlayed;
     private bool WasUsedThisTurn
     {
-        get { return _wasUsedThisTurn; }
+        get => _wasUsedThisTurn;
         set
         {
             AssertMutable();
@@ -43,7 +43,7 @@ public class MachineNinja() : LexNinja2Relic
 
     private CardModel? CardBeingPlayed
     {
-        get { return _cardBeingPlayed; }
+        get => _cardBeingPlayed;
         set
         {
             AssertMutable();
@@ -53,46 +53,27 @@ public class MachineNinja() : LexNinja2Relic
 
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
-        if (CardBeingPlayed != null)
+        if (CardBeingPlayed != null || cardPlay.Card.Owner != base.Owner || WasUsedThisTurn || !cardPlay.Card.Keywords.Contains(NinjaKeyword.Science))
         {
             return Task.CompletedTask;
         }
-        if (cardPlay.Card.Owner != base.Owner)
-        {
-            return Task.CompletedTask;
-        }
-        if (WasUsedThisTurn)
-        {
-            return Task.CompletedTask;
-        }
-        if (!cardPlay.Card.Keywords.Contains(NinjaKeyword.Science))
-        {
-            return Task.CompletedTask;
-        }
+
         CardBeingPlayed = cardPlay.Card;
         return Task.CompletedTask;
     }
 
     public override int ModifyCardPlayCount(CardModel card, Creature? target, int playCount)
     {
-        if (card.Owner != base.Owner)
-        {
-            return playCount;
-        }
-        if (WasUsedThisTurn)
+        if (card.Owner != Owner || WasUsedThisTurn || !card.Keywords.Contains(NinjaKeyword.Science))
         {
             return playCount;
         }
 
-        if (!card.Keywords.Contains(NinjaKeyword.Science))
-        {
-            return playCount;
-        }
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/machine.mp3", 0.7f);
         WasUsedThisTurn = true;
-        CardBeingPlayed = (CardModel)null;
-        this.Status = RelicStatus.Normal;
+        CardBeingPlayed = null;
+        Status = RelicStatus.Normal;
         return playCount + 1;
     }
 
@@ -111,12 +92,12 @@ public class MachineNinja() : LexNinja2Relic
         ICombatState combatState
     )
     {
-        if (side != base.Owner.Creature.Side)
+        if (side != Owner.Creature.Side)
         {
             return Task.CompletedTask;
         }
         WasUsedThisTurn = false;
-        this.Status = RelicStatus.Active;
+        Status = RelicStatus.Active;
         return Task.CompletedTask;
     }
 
