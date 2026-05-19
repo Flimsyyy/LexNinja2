@@ -18,14 +18,11 @@ public class TwoMonksPower : CustomPowerModel
 
     public override int ModifyCardPlayCount(CardModel card, Creature? target, int playCount)
     {
-        if (card.Owner.Creature != base.Owner)
+        if (card.Owner.Creature != Owner || !card.Tags.Contains(NinjaTags.Ninjutsu))
         {
             return playCount;
         }
-        if (!card.Tags.Contains(NinjaTags.Ninjutsu))
-        {
-            return playCount;
-        }
+
         if (card is LexNinja2Card lexNinjaCard)
         {
             lexNinjaCard.SetLexkelaToFreeUntilPlayed();
@@ -35,6 +32,6 @@ public class TwoMonksPower : CustomPowerModel
 
     public override async Task AfterModifyingCardPlayCount(CardModel card)
     {
-        await PowerCmd.Decrement((PowerModel)this);
+        await PowerCmd.Decrement(this);
     }
 }
