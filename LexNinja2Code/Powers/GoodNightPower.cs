@@ -38,15 +38,11 @@ public class GoodNightPower : CustomPowerModel
             flag++;
             return;
         }
-        PowerCmd.Remove(this);
+        await PowerCmd.Remove(this);
     }
 
     public override bool ShouldPlay(CardModel card, AutoPlayType _)
     {
-        if (card.Owner == this.Owner.Player)
-        {
-            return false;
-        }
-        return true;
+        return card.Owner != Owner.Player;
     }
 }
