@@ -24,7 +24,7 @@ public class PlasmaArrowPower : CustomPowerModel
     )
     {
         modifiedCost = originalCost;
-        if (card.Owner.Creature != base.Owner)
+        if (card.Owner.Creature != Owner)
         {
             return false;
         }
@@ -32,23 +32,11 @@ public class PlasmaArrowPower : CustomPowerModel
         {
             return false;
         }
-        bool flag;
-        switch (card.Pile?.Type)
-        {
-            case PileType.Hand:
-            case PileType.Play:
-                flag = true;
-                break;
-            default:
-                flag = false;
-                break;
-        }
-        if (!flag)
-        {
-            return false;
-        }
-        modifiedCost = default(decimal);
+        var pileType = card.Pile?.Type;
+        if (pileType is not (PileType.Hand or PileType.Play)) return false;
+        modifiedCost = 0;
         return true;
+
     }
 
     public override async Task BeforeCardPlayed(CardPlay cardPlay)
@@ -57,33 +45,21 @@ public class PlasmaArrowPower : CustomPowerModel
         {
             return;
         }
-        if (
-            cardPlay.Card.Owner.Creature == base.Owner
-            && cardPlay.Card.Tags.Contains(NinjaTags.Ninjutsu)
-        )
+        if (cardPlay.Card.Owner.Creature != Owner
+            || !cardPlay.Card.Tags.Contains(NinjaTags.Ninjutsu))
         {
-            bool flag;
-            switch (cardPlay.Card.Pile?.Type)
-            {
-                case PileType.Hand:
-                case PileType.Play:
-                    flag = true;
-                    break;
-                default:
-                    flag = false;
-                    break;
-            }
-            if (flag)
-            {
-                await PowerCmd.Apply<FreeNinjutsuPower>(
-                    new ThrowingPlayerChoiceContext(),
-                    Owner,
-                    1,
-                    Owner,
-                    null
-                );
-                await PowerCmd.Decrement(this);
-            }
+            return;
         }
+        
+        var pileType = cardPlay.Card.Pile?.Type;
+        if (pileType is not (PileType.Hand or PileType.Play)) return;
+            await PowerCmd.Apply<FreeNinjutsuPower>(
+                new ThrowingPlayerChoiceContext(),
+                Owner,
+                1,
+                Owner,
+                null
+            );
+            await PowerCmd.Decrement(this);
     }
 }
