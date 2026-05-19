@@ -26,9 +26,9 @@ public class ScarePower : CustomPowerModel
         if (player != Owner.Player)
             return;
         NinjaAudio.Play("res://LexNinja2/audio/吓我一跳释放忍术.mp3");
-        for (int i = 0; i < Amount; i++)
+        for (var i = 0; i < Amount; i++)
         {
-            CardModel card = CardFactory
+            var card = CardFactory
                 .GetDistinctForCombat(
                     Owner.Player,
                     Owner
@@ -36,19 +36,22 @@ public class ScarePower : CustomPowerModel
                             Owner.Player.UnlockState,
                             Owner.Player.RunState.CardMultiplayerConstraint
                         )
-                        .Where<CardModel>(
-                            (Func<CardModel, bool>)(c => c.Tags.Contains(NinjaTags.Ninjutsu))
+                        .Where(
+                            c => c.Tags.Contains(NinjaTags.Ninjutsu)
                         ),
                     1,
                     Owner.Player.RunState.Rng.CombatCardGeneration
                 )
-                .FirstOrDefault<CardModel>();
-            if (card == null)
-                return;
-            if (card is LexNinja2Card lexNinjaCard)
+                .FirstOrDefault();
+            switch (card)
             {
-                lexNinjaCard.SetLexkelaToFreeUntilPlayed();
+                case null:
+                    return;
+                case LexNinja2Card lexNinjaCard:
+                    lexNinjaCard.SetLexkelaToFreeUntilPlayed();
+                    break;
             }
+
             // if (!(Owner.HasPower<WePeacePower>()&&card.Type==CardType.Attack))
             // {
             await CardCmd.AutoPlay(choiceContext, card.CreateDupe(), null);
