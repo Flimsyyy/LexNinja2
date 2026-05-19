@@ -23,7 +23,7 @@ public class LotusBox() : LexNinja2Relic
 
     public override async Task AfterRoomEntered(AbstractRoom room)
     {
-        if (!(room is CombatRoom))
+        if (room is not CombatRoom)
             return;
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/LotusBox.mp3");
@@ -51,7 +51,7 @@ public class LotusBox() : LexNinja2Relic
 
     public override Task BeforeDeath(Creature creature)
     {
-        if (creature != this.Owner.Creature)
+        if (creature != Owner.Creature)
             return Task.CompletedTask;
         NinjaAudio.Play("res://LexNinja2/audio/Cry.mp3");
         return Task.CompletedTask;

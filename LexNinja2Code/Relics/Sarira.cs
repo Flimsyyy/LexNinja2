@@ -16,7 +16,7 @@ public class Sarira() : LexNinja2Relic
     public override RelicRarity Rarity => RelicRarity.Event;
 
     private bool _wasUsed;
-    public override bool IsUsedUp => this._wasUsed;
+    public override bool IsUsedUp => _wasUsed;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new HealVar(100)];
 
@@ -25,22 +25,22 @@ public class Sarira() : LexNinja2Relic
     protected override string BigIconPath => "Sarira.png".BigRelicImagePath();
 
     [SavedProperty]
-    public bool WasUsed
+    private bool WasUsed
     {
         get => this._wasUsed;
         set
         {
-            this.AssertMutable();
-            this._wasUsed = value;
-            if (!this.IsUsedUp)
+            AssertMutable();
+            _wasUsed = value;
+            if (!IsUsedUp)
                 return;
-            this.Status = RelicStatus.Disabled;
+            Status = RelicStatus.Disabled;
         }
     }
 
     public override bool ShouldDieLate(Creature creature)
     {
-        return creature != this.Owner.Creature || this.WasUsed;
+        return creature != Owner.Creature || WasUsed;
     }
 
     public override async Task AfterPreventingDeath(Creature creature)
@@ -50,7 +50,7 @@ public class Sarira() : LexNinja2Relic
         NinjaAudio.Play("res://LexNinja2/audio/SariraRevive.mp3");
         await CreatureCmd.Heal(
             creature,
-            Math.Max(1M, (Decimal)creature.MaxHp * (DynamicVars.Heal.BaseValue / 100M))
+            Math.Max(1M, creature.MaxHp * (DynamicVars.Heal.BaseValue / 100M))
         );
         await PlayerCmd.GainGold(-22000000, Owner);
     }

@@ -21,7 +21,7 @@ public class ThreeDuuz() : LexNinja2Relic
     private CardModel? _cardBeingPlayed;
     private bool WasUsedThisTurn
     {
-        get { return _wasUsedThisTurn; }
+        get => _wasUsedThisTurn;
         set
         {
             AssertMutable();
@@ -31,7 +31,7 @@ public class ThreeDuuz() : LexNinja2Relic
 
     private CardModel? CardBeingPlayed
     {
-        get { return _cardBeingPlayed; }
+        get => _cardBeingPlayed;
         set
         {
             AssertMutable();
@@ -41,22 +41,11 @@ public class ThreeDuuz() : LexNinja2Relic
 
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
-        if (CardBeingPlayed != null)
+        if (CardBeingPlayed != null || cardPlay.Card.Owner != base.Owner || WasUsedThisTurn || !cardPlay.Card.Tags.Contains(NinjaTags.Ninjutsu))
         {
             return Task.CompletedTask;
         }
-        if (cardPlay.Card.Owner != base.Owner)
-        {
-            return Task.CompletedTask;
-        }
-        if (WasUsedThisTurn)
-        {
-            return Task.CompletedTask;
-        }
-        if (!cardPlay.Card.Tags.Contains(NinjaTags.Ninjutsu))
-        {
-            return Task.CompletedTask;
-        }
+
         CardBeingPlayed = cardPlay.Card;
         return Task.CompletedTask;
     }

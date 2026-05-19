@@ -21,80 +21,71 @@ public class KFC() : LexNinja2Relic
 {
     public override RelicRarity Rarity => RelicRarity.Common;
 
-    public const int turnsThreshold = 3;
-    private const string _turnsKey = "Turns";
+    public const int TurnsThreshold = 3;
+    private const string TurnsKey = "Turns";
     private bool _isActivating;
     private int _turnsSeen;
     public override bool ShowCounter => true;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Turns", 3M)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new(TurnsKey, 3M)];
 
-    public override int DisplayAmount
-    {
-        get
-        {
-            if (!IsActivating)
-            {
-                return TurnsSeen;
-            }
-            return base.DynamicVars["Turns"].IntValue;
-        }
-    }
+    public override int DisplayAmount => !IsActivating ? TurnsSeen : DynamicVars[TurnsKey].IntValue;
+
     private bool IsActivating
     {
-        get => this._isActivating;
+        get => _isActivating;
         set
         {
-            this.AssertMutable();
-            this._isActivating = value;
-            this.InvokeDisplayAmountChanged();
+            AssertMutable();
+            _isActivating = value;
+            InvokeDisplayAmountChanged();
         }
     }
 
     [SavedProperty]
-    public int TurnsSeen
+    private int TurnsSeen
     {
-        get => this._turnsSeen;
+        get => _turnsSeen;
         set
         {
-            this.AssertMutable();
-            this._turnsSeen = value;
-            this.InvokeDisplayAmountChanged();
+            AssertMutable();
+            _turnsSeen = value;
+            InvokeDisplayAmountChanged();
         }
     }
 
     public override async Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
     {
-        if (side == base.Owner.Creature.Side)
+        if (side != Owner.Creature.Side)
         {
-            TurnsSeen = (TurnsSeen + 1) % base.DynamicVars["Turns"].IntValue;
-            base.Status = (
-                (TurnsSeen == base.DynamicVars["Turns"].IntValue - 1)
-                    ? RelicStatus.Active
-                    : RelicStatus.Normal
-            );
-            if (TurnsSeen == 0)
-            {
-                TaskHelper.RunSafely(DoActivateVisuals());
-                NinjaAudio.Play("res://LexNinja2/audio/KFC.mp3");
-                IEnumerable<CardModel> distinctForCombat = CardFactory.GetDistinctForCombat(
-                    base.Owner,
-                    from c in ModelDb
-                        .CardPool<TokenCardPool>()
-                        .GetUnlockedCards(
-                            base.Owner.UnlockState,
-                            base.Owner.RunState.CardMultiplayerConstraint
-                        )
-                    where (c.Tags.Contains(NinjaTags.Food))
-                    select c,
-                    1,
-                    base.Owner.RunState.Rng.CombatCardGeneration
-                );
-                foreach (CardModel item in distinctForCombat.ToList())
-                {
-                    await CardPileCmd.AddGeneratedCardToCombat(item, PileType.Hand, Owner);
-                }
-            }
+            return;
+        }
+        TurnsSeen = (TurnsSeen + 1) % DynamicVars[TurnsKey].IntValue;
+        Status = TurnsSeen == DynamicVars[TurnsKey].IntValue - 1
+            ? RelicStatus.Active
+            : RelicStatus.Normal;
+        if (TurnsSeen != 0)
+        {
+            return;
+        }
+        await TaskHelper.RunSafely(DoActivateVisuals());
+        NinjaAudio.Play("res://LexNinja2/audio/KFC.mp3");
+        var distinctForCombat = CardFactory.GetDistinctForCombat(
+            Owner,
+            from c in ModelDb
+                .CardPool<TokenCardPool>()
+                .GetUnlockedCards(
+                    Owner.UnlockState,
+                    Owner.RunState.CardMultiplayerConstraint
+                )
+            where (c.Tags.Contains(NinjaTags.Food))
+            select c,
+            1,
+            Owner.RunState.Rng.CombatCardGeneration
+        );
+        foreach (var item in distinctForCombat.ToList())
+        {
+            await CardPileCmd.AddGeneratedCardToCombat(item, PileType.Hand, Owner);
         }
     }
 
@@ -102,7 +93,7 @@ public class KFC() : LexNinja2Relic
     {
         IsActivating = true;
         Flash();
-        await MegaCrit.Sts2.Core.Commands.Cmd.Wait(1f);
+        await Cmd.Wait(1f);
         IsActivating = false;
     }
 

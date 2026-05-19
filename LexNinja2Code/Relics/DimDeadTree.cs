@@ -25,7 +25,7 @@ public class DimDeadTree() : LexNinja2Relic
             return;
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/DimDeadTree.mp3");
-        PowerCmd.Apply<FreeNinjutsuPower>(
+        await PowerCmd.Apply<FreeNinjutsuPower>(
             new ThrowingPlayerChoiceContext(),
             Owner.Creature,
             1,
