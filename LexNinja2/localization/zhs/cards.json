@@ -6,17 +6,17 @@
   "LEXNINJA2-DEFEND_NINJA.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
   "LEXNINJA2-DEFEND_NINJA.title": "防御",
 
-  "LEXNINJA2-YI_CUT.description": "给予所有敌人{VulnerablePower}层[gold]易伤[/gold]。\n[gold]忍术[/gold]{Renshu:diff()}：先对所有敌人造成{Damage:diff()}点伤害。",
+  "LEXNINJA2-YI_CUT.description": "给予所有敌人{VulnerablePower}层[gold]易伤[/gold]。\n[gold]忍术[/gold]{Renshu:renShu()}：先对所有敌人造成{Damage:diff()}点伤害。",
   "LEXNINJA2-YI_CUT.title": "一字切",
 
-  "LEXNINJA2-SHADE_CROSS_SLASH.description": "对所有敌人造成{Damage:diff()}点伤害。\n给予所有敌人{VulnerablePower:diff()}层[gold]易伤[/gold]。\n[gold]忍术[/gold]{Renshu:diff()}：额外造成2次伤害。",
+  "LEXNINJA2-SHADE_CROSS_SLASH.description": "对所有敌人造成{Damage:diff()}点伤害。\n给予所有敌人{VulnerablePower:diff()}层[gold]易伤[/gold]。\n[gold]忍术[/gold]{Renshu:renShu()}：额外造成2次伤害。",
   "LEXNINJA2-SHADE_CROSS_SLASH.title": "影分身十字斩",
   
   "LEXNINJA2-SHAKE_SHAKE_HANDS.description": "获得1层[gold]虚弱[/gold]。\n给予所有敌人{WeakPower}层[gold]虚弱[/gold]。\n获得{Kela:diff()}点[gold]蕾克拉[/gold]。",
   "LEXNINJA2-SHAKE_SHAKE_HANDS.title": "握握手，握握双手",
 
 
-  "LEXNINJA2-BURNING_BLADE.description": "造成{Damage:diff()}点伤害。\n[gold]忍术[/gold]{Renshu:diff()}：使你的所有[gold]一刀一刀燃烧刀[/gold]获得[gold]重放[/gold]1。",
+  "LEXNINJA2-BURNING_BLADE.description": "造成{Damage:diff()}点伤害。\n[gold]忍术[/gold]{Renshu:renShu()}：使你的所有[gold]一刀一刀燃烧刀[/gold]获得[gold]重放[/gold]1。",
   "LEXNINJA2-BURNING_BLADE.title": "一刀一刀燃烧刀",
 
   "LEXNINJA2-OI_SHENG_LONG.description": "造成{Damage:diff()}点伤害。\n获得{Kela:diff()}点[gold]蕾克拉[/gold]。",
@@ -25,16 +25,16 @@
   "LEXNINJA2-PLASMA_HAND.description": "抽{Cards:diff()}张牌。\n获得{Kela}点[gold]蕾克拉[/gold]。",
   "LEXNINJA2-PLASMA_HAND.title": "离子手",
 
-  "LEXNINJA2-SAND_DEFEND_HAND.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n[gold]忍术[/gold]{Renshu:diff()}：获得{SandWall:diff()}层[gold]沙壁[/gold]",
+  "LEXNINJA2-SAND_DEFEND_HAND.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n[gold]忍术[/gold]{Renshu:renShu()}：获得{SandWall:diff()}层[gold]沙壁[/gold]",
   "LEXNINJA2-SAND_DEFEND_HAND.title": "沙防掩意手",
 
   "LEXNINJA2-SWALLOW_STEPS.description": "抽{Cards:diff()}张牌。\n如果打出的上一张牌是[gold]忍术[/gold]牌，额外抽{ExtraCards:diff()}张。",
   "LEXNINJA2-SWALLOW_STEPS.title": "寒泥挪燕步",
 
-  "LEXNINJA2-STONE_STRONG.description": "回合结束时，获得{StoneStrongPower:diff()}层[gold]沙壁[/gold]\n[gold]忍术[/gold]{Renshu:diff()}：获得{StoneStrongPower:diff()}层[gold]沙壁[/gold]",
+  "LEXNINJA2-STONE_STRONG.description": "回合结束时，获得{StoneStrongPower:diff()}层[gold]沙壁[/gold]\n[gold]忍术[/gold]{Renshu:renShu()}：获得{StoneStrongPower:diff()}层[gold]沙壁[/gold]",
   "LEXNINJA2-STONE_STRONG.title": "牢石耐击术",
 
-  "LEXNINJA2-BEAST_SHOUT.description": "对所有敌人造成{Damage:diff()}点伤害。\n[gold]忍术[/gold]{Renshu:diff()}：使所有敌人失去{StrengthLoss:diff()}点[gold]力量[/gold]。",
+  "LEXNINJA2-BEAST_SHOUT.description": "对所有敌人造成{Damage:diff()}点伤害。\n[gold]忍术[/gold]{Renshu:renShu()}：使所有敌人失去{StrengthLoss:diff()}点[gold]力量[/gold]。",
   "LEXNINJA2-BEAST_SHOUT.title": "豪兽雷鸣",
   
   "LEXNINJA2-NUCLEAR_DRAGON.description": "回合结束时，清空你的[gold]蕾克拉[/gold]。\n回合开始时，获得{NuclearDragonPower:diff()}点[gold]蕾克拉[/gold]",
@@ -46,13 +46,13 @@
   "LEXNINJA2-COMET_CORRUPTED_STAR.description": "如果你的[gold]蕾克拉[/gold]大于2，将1点[gold]蕾克拉[/gold]转换为{Energy:energyIcons()}。\n反之，获得{Kela:diff()}点[gold]蕾克拉[/gold]。",
   "LEXNINJA2-COMET_CORRUPTED_STAR.title": "啊彗星/暗秽星",
 
-  "LEXNINJA2-WE_PEACE.description": "[gold]忍术[/gold]{Renshu:diff()}：如果你没有[gold]无实体[/gold]，获得1层[gold]无实体[/gold]并[gold]消耗[/gold]这张牌，本回合你无法再打出[gold]攻击牌[/gold]。",
+  "LEXNINJA2-WE_PEACE.description": "[gold]忍术[/gold]{Renshu:renShu()}：如果你没有[gold]无实体[/gold]，获得1层[gold]无实体[/gold]并[gold]消耗[/gold]这张牌，本回合你无法再打出[gold]攻击牌[/gold]。",
   "LEXNINJA2-WE_PEACE.title": "我们谁也别还手",
 
   "LEXNINJA2-DARKNESS_SNAKE_HAND.description": "获得{Kela:diff()}点[gold]蕾克拉[/gold]，抽{Cards:diff()}张牌，随机化你[gold]手牌[/gold]中所有牌的耗能。",
   "LEXNINJA2-DARKNESS_SNAKE_HAND.title": "暗秽蛇手",
   
-  "LEXNINJA2-RACING_AGAINST_MESSI.description": "抽{Cards:diff()}张牌。\n[gold]忍术[/gold]{Renshu:diff()}：打出后再抽{ExtraCards:diff()}张",
+  "LEXNINJA2-RACING_AGAINST_MESSI.description": "抽{Cards:diff()}张牌。\n[gold]忍术[/gold]{Renshu:renShu()}：打出后再抽{ExtraCards:diff()}张",
   "LEXNINJA2-RACING_AGAINST_MESSI.title": "我和梅西赛跑",
 
   "LEXNINJA2-GONNA_EAT_SHIT.description": "使自身失去{Damage:diff()}点生命。（受[gold]易伤[/gold]等效果影响）\n获得{Kela:diff()}点[gold]蕾克拉[/gold]和{Energy:energyIcons()}，下回合再获得一次。",
@@ -61,19 +61,19 @@
   "LEXNINJA2-NAMI_LIGHTNING.description": "抽{Cards:diff()}张牌。",
   "LEXNINJA2-NAMI_LIGHTNING.title": "纳米的雷",
 
-  "LEXNINJA2-FLAME_THROWER.description": "造成{Damage:diff()}点伤害。\n给予{WeakPower:diff()}层[gold]虚弱[/gold]。\n[gold]忍术[/gold]{Renshu:diff()}：给予{PoisonPower:diff()}层[gold]中毒[/gold]。",
+  "LEXNINJA2-FLAME_THROWER.description": "造成{Damage:diff()}点伤害。\n给予{WeakPower:diff()}层[gold]虚弱[/gold]。\n[gold]忍术[/gold]{Renshu:renShu()}：给予{PoisonPower:diff()}层[gold]中毒[/gold]。",
   "LEXNINJA2-FLAME_THROWER.title": "阿农火焰",
 
-  "LEXNINJA2-FROG_FROG_GO.description": "[gold]消耗[/gold]一张牌。\n[gold]忍术[/gold]{Renshu:diff()}：获得{Energy:energyIcons()}。",
+  "LEXNINJA2-FROG_FROG_GO.description": "[gold]消耗[/gold]一张牌。\n[gold]忍术[/gold]{Renshu:renShu()}：获得{Energy:energyIcons()}。",
   "LEXNINJA2-FROG_FROG_GO.title": "蛤蟆蛤蟆go",
 
-  "LEXNINJA2-ANGRY_SNAKE_BITE.description": "将一张此牌的复制品加入弃牌堆。\n[gold]忍术[/gold]{Renshu:diff()}：给予{PoisonPower:diff()}层[gold]中毒[/gold]。",
+  "LEXNINJA2-ANGRY_SNAKE_BITE.description": "将一张此牌的复制品加入弃牌堆。\n[gold]忍术[/gold]{Renshu:renShu()}：给予{PoisonPower:diff()}层[gold]中毒[/gold]。",
   "LEXNINJA2-ANGRY_SNAKE_BITE.title": "豪蛇怒咬",
 
   "LEXNINJA2-GAMMA_BLADE.description": "对所有敌人造成{Damage:diff()}点伤害2次。\n给予所有敌人{VulnerablePower:diff()}层[gold]易伤[/gold]。\n给予所有敌人{WeakPower:diff()}层[gold]虚弱[/gold]。",
   "LEXNINJA2-GAMMA_BLADE.title": "伽马伽马刀",
 
-  "LEXNINJA2-MONK_HAND.description": "造成你当前格挡值的伤害。\n[gold]忍术[/gold]{Renshu:diff()}：先获得{Block:diff()}点[gold]格挡[/gold]。{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}",
+  "LEXNINJA2-MONK_HAND.description": "造成你当前格挡值的伤害。\n[gold]忍术[/gold]{Renshu:renShu()}：先获得{Block:diff()}点[gold]格挡[/gold]。{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}",
   "LEXNINJA2-MONK_HAND.title": "罗汉手",
 
   "LEXNINJA2-HOLY_LITTLE_STORM.description": "对随机敌人造成{Damage:diff()}点伤害。\n[gold]忍术[/gold]X：额外随机对敌人造成{Damage:diff()}点伤害X次。",
@@ -82,10 +82,10 @@
   "LEXNINJA2-AHHHH_KNIFE_YOU.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n获得{Kela:diff()}点[gold]蕾克拉[/gold]。\n获得{Kela:diff()}点[gold]活力[/gold]。",
   "LEXNINJA2-AHHHH_KNIFE_YOU.title": "呀呀呀呀呀刀你",
 
-  "LEXNINJA2-HAMOOD_KICK.description": "对所有敌人造成{Damage:diff()}点伤害。\n每当你抽到这张牌时，这张牌的耗能增加1。\n[gold]忍术[/gold]{Renshu:diff()}：这张牌的耗能减少1。",
+  "LEXNINJA2-HAMOOD_KICK.description": "对所有敌人造成{Damage:diff()}点伤害。\n每当你抽到这张牌时，这张牌的耗能增加1。\n[gold]忍术[/gold]{Renshu:renShu()}：这张牌的耗能减少1。",
   "LEXNINJA2-HAMOOD_KICK.title": "哈姆爷大无影脚",
 
-  "LEXNINJA2-BUDDHA_HAND.description": "造成{Damage:diff()}点伤害。\n给予{VulnerablePower:diff()}层[gold]易伤[/gold]。\n[gold]忍术[/gold]{Renshu:diff()}：获得{Energy:energyIcons()}。",
+  "LEXNINJA2-BUDDHA_HAND.description": "造成{Damage:diff()}点伤害。\n给予{VulnerablePower:diff()}层[gold]易伤[/gold]。\n[gold]忍术[/gold]{Renshu:renShu()}：获得{Energy:energyIcons()}。",
   "LEXNINJA2-BUDDHA_HAND.title": "哈佛扪心手",
 
   "LEXNINJA2-HEAVEN_CROSS.description": "你每打出一张[gold]忍术[/gold]牌，获得1点[gold]蕾克拉[/gold]。",
@@ -104,19 +104,19 @@
   "LEXNINJA2-MUMMY_MUMMY.description": "减少[gold]蕾克拉[/gold]时，获得{MummyPower:diff()}点[gold]格挡[/gold]。",
   "LEXNINJA2-MUMMY_MUMMY.title": "啊木乃伊啊木乃伊",
 
-  "LEXNINJA2-WATER_SAND_STORM.description": "对所有敌人造成等同于你[gold]沙壁[/gold]层数的伤害。\n[gold]忍术[/gold]{Renshu:diff()}：先获得{SandWall:diff()}层[gold]沙壁[/gold]。{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}",
+  "LEXNINJA2-WATER_SAND_STORM.description": "对所有敌人造成等同于你[gold]沙壁[/gold]层数的伤害。\n[gold]忍术[/gold]{Renshu:renShu()}：先获得{SandWall:diff()}层[gold]沙壁[/gold]。{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}",
   "LEXNINJA2-WATER_SAND_STORM.title": "水之砂暴",
 
-  "LEXNINJA2-GO_BACK_HANDS.description": "将你[gold]弃牌堆[/gold]中的所有[gold]手系忍术[/gold]放入你的手牌。\n[gold]忍术[/gold]{Renshu:diff()}：将这些牌的耗能降为0{energyPrefix:energyIcons(1)}，直到你下一次将他们打出。",
+  "LEXNINJA2-GO_BACK_HANDS.description": "将你[gold]弃牌堆[/gold]中的所有[gold]手系忍术[/gold]放入你的手牌。\n[gold]忍术[/gold]{Renshu:renShu()}：将这些牌的耗能降为0{energyPrefix:energyIcons(1)}，直到你下一次将他们打出。",
   "LEXNINJA2-GO_BACK_HANDS.title": "回来吧我心爱的手",
 
   "LEXNINJA2-BLACK_ZI_CANNON.description": "造成{Damage:diff()}点伤害。",
   "LEXNINJA2-BLACK_ZI_CANNON.title": "黑子大炮",
 
-  "LEXNINJA2-DRAGON_PUNCH.description": "造成{Damage:diff()}点伤害。\n[gold]忍术[/gold]{Renshu:diff()}：抽{Cards:diff()}张牌。",
+  "LEXNINJA2-DRAGON_PUNCH.description": "造成{Damage:diff()}点伤害。\n[gold]忍术[/gold]{Renshu:renShu()}：抽{Cards:diff()}张牌。",
   "LEXNINJA2-DRAGON_PUNCH.title": "龙火拳",
 
-  "LEXNINJA2-DARKNESS_SHORYU_KEN.description": "造成{Damage:diff()}点伤害。\n给予{WeakPower:diff()}层[gold]虚弱[/gold]。\n[gold]忍术[/gold]{Renshu:diff()}：随机[gold]消耗[/gold]一张牌。",
+  "LEXNINJA2-DARKNESS_SHORYU_KEN.description": "造成{Damage:diff()}点伤害。\n给予{WeakPower:diff()}层[gold]虚弱[/gold]。\n[gold]忍术[/gold]{Renshu:renShu()}：随机[gold]消耗[/gold]一张牌。",
   "LEXNINJA2-DARKNESS_SHORYU_KEN.title": "黑暗紊乱升龙",
 
   "LEXNINJA2-SHADOW_BLADE.selectionScreenPrompt": "选择一张牌，使其作为[gold]刀系忍术[/gold]打出并消耗。",
@@ -142,7 +142,7 @@
   "LEXNINJA2-DISAPPOINTED_AFTER_BOCCHI.description": "你打出的下一张攻击牌将会造成三倍伤害。\n你打出下一张攻击牌后，获得1层[gold]虚弱[/gold]。",
   "LEXNINJA2-DISAPPOINTED_AFTER_BOCCHI.title": "我很失望，看完孤独摇滚",
 
-  "LEXNINJA2-BLACK_DRAGON_HAND.description": "给予{WeakPower:diff()}层[gold]虚弱[/gold]，去除敌人身上的[gold]无实体[/gold]。\n[gold]忍术[/gold]{Renshu:diff()}：偷取{HpLoss:diff()}点最大生命值",
+  "LEXNINJA2-BLACK_DRAGON_HAND.description": "给予{WeakPower:diff()}层[gold]虚弱[/gold]，去除敌人身上的[gold]无实体[/gold]。\n[gold]忍术[/gold]{Renshu:renShu()}：偷取{HpLoss:diff()}点最大生命值",
   "LEXNINJA2-BLACK_DRAGON_HAND.title": "暗龙夺魂手",
 
   "LEXNINJA2-GOOD_NIGHT.description": "获得{Kela:diff()}点[gold]蕾克拉[/gold]。\n结束你的回合。\n下个回合开始时，恢复最大生命值的30％且无法打出卡牌。",
@@ -169,7 +169,7 @@
   "LEXNINJA2-LAN_BLADE.description": "造成{Damage:diff()}点伤害。（不会触发[gold]岚刀一直切[/gold]。）",
   "LEXNINJA2-LAN_BLADE.title": "岚刀",
 
-  "LEXNINJA2-LAN_BLADE_CUTTING.description": "你每打出一张[gold]刀系忍术[/gold]牌，将一张{IfUpgraded:show:[gold]岚刀+[/gold]|[gold]岚刀[/gold]}加入你的手牌。\n[gold]忍术[/gold]{Renshu:diff()}：将一张{IfUpgraded:show:[gold]岚刀+[/gold]|[gold]岚刀[/gold]}加入你的手牌。",
+  "LEXNINJA2-LAN_BLADE_CUTTING.description": "你每打出一张[gold]刀系忍术[/gold]牌，将一张{IfUpgraded:show:[gold]岚刀+[/gold]|[gold]岚刀[/gold]}加入你的手牌。\n[gold]忍术[/gold]{Renshu:renShu()}：将一张{IfUpgraded:show:[gold]岚刀+[/gold]|[gold]岚刀[/gold]}加入你的手牌。",
   "LEXNINJA2-LAN_BLADE_CUTTING.title": "岚刀一直切",
 
   "LEXNINJA2-TURBINE.description": "你每打出一张[gold]科学忍具[/gold]牌，抽1张牌",
@@ -178,19 +178,19 @@
   "LEXNINJA2-MAN_TOO_WEAK.description": "获得{StrengthPower:diff()}点[gold]力量[/gold]。\n获得{DexterityPower:diff()}点[gold]敏捷[/gold]。\n回合开始时，减少{ManTooWeakPower:diff()}点[gold]蕾克拉[/gold]。",
   "LEXNINJA2-MAN_TOO_WEAK.title": "好男人也没的身手",
 
-  "LEXNINJA2-BUILD_SAND_WALL.description": "你的[gold]沙壁[/gold]每次只会减少1层。\n[gold]忍术[/gold]{Renshu:diff()}：获得等同于你当前[gold]沙壁[/gold]层数的[gold]格挡[/gold]。",
+  "LEXNINJA2-BUILD_SAND_WALL.description": "你的[gold]沙壁[/gold]每次只会减少1层。\n[gold]忍术[/gold]{Renshu:renShu()}：获得等同于你当前[gold]沙壁[/gold]层数的[gold]格挡[/gold]。",
   "LEXNINJA2-BUILD_SAND_WALL.title": "寒砂碧泪凝",
 
-  "LEXNINJA2-SHEN_WEI.description": "回合开始时，减少1点[gold]蕾克拉[/gold]以获得1层[gold]无实体[/gold]。\n打出[gold]攻击牌[/gold]时，减少1层[gold]无实体[/gold]。\n[gold]忍术[/gold]{Renshu:diff()}：获得1层[gold]无实体[/gold]。",
+  "LEXNINJA2-SHEN_WEI.description": "回合开始时，减少1点[gold]蕾克拉[/gold]以获得1层[gold]无实体[/gold]。\n打出[gold]攻击牌[/gold]时，减少1层[gold]无实体[/gold]。\n[gold]忍术[/gold]{Renshu:renShu()}：获得1层[gold]无实体[/gold]。",
   "LEXNINJA2-SHEN_WEI.title": "神威",
 
-  "LEXNINJA2-GET_PEOPLE_TAX.description": "对所有敌人造成{Damage:diff()}点伤害。\n[gold]忍术[/gold]{Renshu:diff()}：每有一个敌人，获得{Gold:diff()}[gold]金币[/gold]。",
+  "LEXNINJA2-GET_PEOPLE_TAX.description": "对所有敌人造成{Damage:diff()}点伤害。\n[gold]忍术[/gold]{Renshu:renShu()}：每有一个敌人，获得{Gold:diff()}[gold]金币[/gold]。",
   "LEXNINJA2-GET_PEOPLE_TAX.title": "人民收米术",
 
-  "LEXNINJA2-U_B_W.description": "[gold]忍术[/gold]{Renshu:diff()}：本场战斗中，你每打出一张[gold]刀系忍术[/gold]，随机对敌人造成{Damage:diff()}点伤害一次。{InCombat:\n（造成{HitCounts:diff()}次伤害。）|}",
+  "LEXNINJA2-U_B_W.description": "[gold]忍术[/gold]{Renshu:renShu()}：本场战斗中，你每打出一张[gold]刀系忍术[/gold]，随机对敌人造成{Damage:diff()}点伤害一次。{InCombat:\n（造成{HitCounts:diff()}次伤害。）|}",
   "LEXNINJA2-U_B_W.title": "十亿响刀落",
 
-  "LEXNINJA2-DARK_SOUL_CUT.description": "[gold]忍术[/gold]{Renshu:diff()}：造成{Damage:diff()}点伤害3次。\n[gold]斩杀[/gold]时，获得等同于目标[gold]当前生命值[/gold]的最大生命值。",
+  "LEXNINJA2-DARK_SOUL_CUT.description": "[gold]忍术[/gold]{Renshu:renShu()}：造成{Damage:diff()}点伤害3次。\n[gold]斩杀[/gold]时，获得等同于目标[gold]当前生命值[/gold]的最大生命值。",
   "LEXNINJA2-DARK_SOUL_CUT.title": "暗魂影术黑字斩",
 
   "LEXNINJA2-REAPER_FLAME_BLADE.description": "获得{IntangiblePower:diff()}层[gold]无实体[/gold]。\n你每出一张牌，所有敌人失去{ReaperFlame:diff()}点生命。\n你每[gold]消耗[/gold]一张牌，此牌的耗能就减少{energyPrefix:energyIcons(1)}。",
@@ -199,28 +199,28 @@
   "LEXNINJA2-PAST_HAS_GONE_HAND.description": "[gold]消耗[/gold]你的[gold]弃牌堆[/gold]。\n每[gold]消耗[/gold]一张牌，获得{CalculationExtra:diff()}点[gold]格挡[/gold]和1点[gold]蕾克拉[/gold]。{InCombat:\n（获得{CalculatedBlock:diff()}点格挡）|}",
   "LEXNINJA2-PAST_HAS_GONE_HAND.title": "往事如烟手",
 
-  "LEXNINJA2-OH_FUCK_FLASH.description": "阻止下1次你受到的生命值损伤。\n[gold]忍术[/gold]{Renshu:diff()}：结束你的回合。\n进行一个额外回合。",
+  "LEXNINJA2-OH_FUCK_FLASH.description": "阻止下1次你受到的生命值损伤。\n[gold]忍术[/gold]{Renshu:renShu()}：结束你的回合。\n进行一个额外回合。",
   "LEXNINJA2-OH_FUCK_FLASH.title": "哎哟我草闪现！",
 
   "LEXNINJA2-I_REPRESENT_SHINOBI.description": "减少[gold]蕾克拉[/gold]时，获得{energyPrefix:energyIcons(1)}。",
   "LEXNINJA2-I_REPRESENT_SHINOBI.title": "我代表着SHINOBI",
 
-  "LEXNINJA2-HAND_ION_DESTRUCTION.description": "对所有敌人造成{Damage:diff()}点伤害X次。\n[gold]忍术[/gold]{Renshu:diff()}：使本次伤害[gold]翻倍[/gold]。",
+  "LEXNINJA2-HAND_ION_DESTRUCTION.description": "对所有敌人造成{Damage:diff()}点伤害X次。\n[gold]忍术[/gold]{Renshu:renShu()}：使本次伤害[gold]翻倍[/gold]。",
   "LEXNINJA2-HAND_ION_DESTRUCTION.title": "拿到手离子大毁灭",
 
   "LEXNINJA2-MOBIUS_LOOP_SNAKE.description": "打出一张你上一张打出的牌。\\n你的回合开始时，如果这张牌在你的[gold]消耗牌堆[/gold]中，则将其打出。",
   "LEXNINJA2-MOBIUS_LOOP_SNAKE.title": "莫比乌回环蛇",
 
-  "LEXNINJA2-DRAGON_SMOG.description": "获得1层[gold]无实体[/gold]。\n[gold]忍术[/gold]{Renshu:diff()}：去除所有敌人身上的[gold]人工制品[/gold]，并给予所有敌人{VulnerablePower}层[gold]易伤[/gold]。",
+  "LEXNINJA2-DRAGON_SMOG.description": "获得1层[gold]无实体[/gold]。\n[gold]忍术[/gold]{Renshu:renShu()}：去除所有敌人身上的[gold]人工制品[/gold]，并给予所有敌人{VulnerablePower}层[gold]易伤[/gold]。",
   "LEXNINJA2-DRAGON_SMOG.title": "令神龙造成烟雾",
 
-  "LEXNINJA2-SCARE_FORM.description": "[gold]忍术[/gold]{Renshu:diff()}：回合开始时，随机释放{ScarePower:diff()}个[gold]忍术[/gold]。",
+  "LEXNINJA2-SCARE_FORM.description": "[gold]忍术[/gold]{Renshu:renShu()}：回合开始时，随机释放{ScarePower:diff()}个[gold]忍术[/gold]。",
   "LEXNINJA2-SCARE_FORM.title": "受惊形态",
 
-  "LEXNINJA2-TAKE_YOUR_HEART.description": "造成{Damage:diff()}点伤害。\n[gold]忍术[/gold]{Renshu:diff()}：[gold]负面效果[/gold]总层数不小于{DebuffAmount:diff()}层的目标敌人死亡。",
+  "LEXNINJA2-TAKE_YOUR_HEART.description": "造成{Damage:diff()}点伤害。\n[gold]忍术[/gold]{Renshu:renShu()}：[gold]负面效果[/gold]总层数不小于{DebuffAmount:diff()}层的目标敌人死亡。",
   "LEXNINJA2-TAKE_YOUR_HEART.title": "我夺取心脏",
 
-  "LEXNINJA2-FOUR_NIGHTS_LIGHTNING.description": "对随机敌人造成{Damage:diff()}点伤害4次。\n抽1张牌。\n获得{energyPrefix:energyIcons(1)}。\n[gold]忍术[/gold]{Renshu:diff()}：重复{Repeat:diff()}次。",
+  "LEXNINJA2-FOUR_NIGHTS_LIGHTNING.description": "对随机敌人造成{Damage:diff()}点伤害4次。\n抽1张牌。\n获得{energyPrefix:energyIcons(1)}。\n[gold]忍术[/gold]{Renshu:renShu()}：重复{Repeat:diff()}次。",
   "LEXNINJA2-FOUR_NIGHTS_LIGHTNING.title": "四夜雷电光",
 
   "LEXNINJA2-IGNIS_HEALING.description": "恢复最大生命值的{bili:diff()}%。\n回合开始时，失去{IgnisHealingPower:diff()}点生命值。",
@@ -252,7 +252,7 @@
   "LEXNINJA2-SALT_STEALTH.description": "[gold]变化[/gold]一张牌。\n获得{Kela:diff()}点[gold]蕾克拉[/gold]。",
   "LEXNINJA2-SALT_STEALTH.title": "拿盐弄模糊不清",
 
-  "LEXNINJA2-SOUTH_CROSS_SEAL.description": "使敌人获得50点[gold]格挡[/gold]并[gold]击晕[/gold]该敌人。\n[gold]忍术[/gold]{Renshu:diff()}：效果持续{SealPower:diff()}个回合，直到受到未被[gold]格挡[/gold]的伤害。",
+  "LEXNINJA2-SOUTH_CROSS_SEAL.description": "使敌人获得50点[gold]格挡[/gold]并[gold]击晕[/gold]该敌人。\n[gold]忍术[/gold]{Renshu:renShu()}：效果持续{SealPower:diff()}个回合，直到受到未被[gold]格挡[/gold]的伤害。",
   "LEXNINJA2-SOUTH_CROSS_SEAL.title": "南十字深深封印",
 
   "LEXNINJA2-BLACK_SNAKE_HEART.description": "打出与上一张牌同名的卡牌时，将其[gold]消耗[/gold]并获得{BlackSnakeHeartPower:diff()}层[gold]无实体[/gold]。",
@@ -320,7 +320,7 @@
   "手系忍术": "[gold]手系忍术[/gold]",
   "刀系忍术": "[gold]刀系忍术[/gold]",
   "科学忍具": "[gold]科学忍具[/gold]",
-  "忍术": "\n[gold]忍术[/gold]{Renshu:diff()}：",
+  "忍术": "\n[gold]忍术[/gold]{Renshu:renShu()}：",
   "蕾克拉": "[gold]蕾克拉[/gold]",
   "获得蕾克拉": "获得{Kela:diff()}点[gold]蕾克拉[/gold]。",
   "能量": "获得{Energy:energyIcons()}",
