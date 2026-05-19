@@ -34,7 +34,7 @@ public class InfiniteSnakeBitesPower : CustomPowerModel
             return;
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/ShootOnThis.mp3");
-        for (int i = 0; i < Amount; i++)
+        for (var i = 0; i < Amount; i++)
         {
             CardModel card = CombatState.CreateCard<AngrySnakeBite>(Owner.Player);
             CardCmd.Upgrade(card);
