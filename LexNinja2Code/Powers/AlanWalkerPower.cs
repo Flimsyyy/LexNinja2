@@ -39,8 +39,7 @@ public class AlanWalkerPower : CustomPowerModel
         if (cardPlay.Card.Owner == Owner.Player)
         {
             Flash();
-            var enemies = CombatState.HittableEnemies.Where(e => e.IsAlive)
-                .ToList();
+            var enemies = CombatState.HittableEnemies.Where(e => e.IsAlive).ToList();
             var target = enemies.LastOrDefault();
             if (target == null)
             {
@@ -54,10 +53,7 @@ public class AlanWalkerPower : CustomPowerModel
             }
             foreach (var enemy in enemies)
             {
-                var nHyperbeamImpactVfx = NHyperbeamImpactVfx.Create(
-                    Owner,
-                    enemy
-                );
+                var nHyperbeamImpactVfx = NHyperbeamImpactVfx.Create(Owner, enemy);
                 if (nHyperbeamImpactVfx != null)
                 {
                     NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(nHyperbeamImpactVfx);

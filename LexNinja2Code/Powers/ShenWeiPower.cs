@@ -31,13 +31,7 @@ public class ShenWeiPower : CustomPowerModel
         }
         if (cardPlay.Card.Type == CardType.Attack)
         {
-            await PowerCmd.Apply<IntangiblePower>(
-                context,
-                Owner,
-                -1,
-                null,
-                null
-            );
+            await PowerCmd.Apply<IntangiblePower>(context, Owner, -1, null, null);
         }
     }
 

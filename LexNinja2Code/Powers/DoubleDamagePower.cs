@@ -46,11 +46,7 @@ public class DoubleDamagePower : CustomPowerModel
         CardModel? cardSource
     )
     {
-        if (
-            cardSource == null
-            || cardSource.Owner.Creature != Owner
-            || !props.IsPoweredAttack()
-        )
+        if (cardSource == null || cardSource.Owner.Creature != Owner || !props.IsPoweredAttack())
             return 1M;
         var internalData = GetInternalData<Data>();
         return

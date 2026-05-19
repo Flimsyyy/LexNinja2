@@ -28,12 +28,6 @@ public class StoneStrongPower : CustomPowerModel
             return;
         }
         NinjaAudio.Play("res://LexNinja2/audio/StoneStrong.mp3");
-        await PowerCmd.Apply<SandWall>(
-            choiceContext,
-            Owner,
-            Amount,
-            null,
-            null
-        );
+        await PowerCmd.Apply<SandWall>(choiceContext, Owner, Amount, null, null);
     }
 }

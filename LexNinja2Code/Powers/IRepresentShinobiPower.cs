@@ -31,7 +31,8 @@ public class IRepresentShinobiPower : CustomPowerModel
         if (power is Lexkela && amount < 0 && power.Owner == Owner)
         {
             NinjaAudio.Play("res://LexNinja2/audio/IRepresentShinobi.mp3");
-            if (Owner.Player != null) await PlayerCmd.GainEnergy(Amount, Owner.Player);
+            if (Owner.Player != null)
+                await PlayerCmd.GainEnergy(Amount, Owner.Player);
         }
     }
 }

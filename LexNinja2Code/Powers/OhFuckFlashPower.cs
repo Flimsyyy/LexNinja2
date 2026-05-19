@@ -38,9 +38,7 @@ public class OhFuckFlashPower : CustomPowerModel
         if (side != Owner.Side)
             return Task.CompletedTask;
         if (Owner.Player != null)
-            WasOwnerPartOfLastPlayerTurn = CombatManager.Instance.IsPartOfPlayerTurn(
-                Owner.Player
-            );
+            WasOwnerPartOfLastPlayerTurn = CombatManager.Instance.IsPartOfPlayerTurn(Owner.Player);
         return Task.CompletedTask;
     }
 

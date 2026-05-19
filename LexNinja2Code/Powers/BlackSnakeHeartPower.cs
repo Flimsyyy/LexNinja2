@@ -20,7 +20,7 @@ public class BlackSnakeHeartPower : CustomPowerModel
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<IntangiblePower>()];
     protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar(CardKey, "滚木")];
-    
+
     protected override object InitInternalData() => new Data();
 
     public override string CustomPackedIconPath => "BlackSnakeHeartPower.png".PowerImagePath();
@@ -38,13 +38,7 @@ public class BlackSnakeHeartPower : CustomPowerModel
         {
             NinjaAudio.Play("res://LexNinja2/audio/BlackSnakeHeart.mp3");
             await CardCmd.Exhaust(context, cardPlay.Card);
-            await PowerCmd.Apply<IntangiblePower>(
-                context,
-                Owner,
-                Amount,
-                Owner,
-                null
-            );
+            await PowerCmd.Apply<IntangiblePower>(context, Owner, Amount, Owner, null);
         }
         CardToStore(currentCard);
     }

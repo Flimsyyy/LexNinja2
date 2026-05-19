@@ -48,11 +48,7 @@ public class Pain : CustomPowerModel
         CardModel? cardSource
     )
     {
-        if (
-            power is Lexkela
-            && amount < 0
-            && power.Owner == Owner
-        )
+        if (power is Lexkela && amount < 0 && power.Owner == Owner)
         {
             flag = 1;
         }
@@ -86,7 +82,8 @@ public class Pain : CustomPowerModel
         CardModel? cardSource
     )
     {
-        if (target != Owner || result.UnblockedDamage <= 0) return;
+        if (target != Owner || result.UnblockedDamage <= 0)
+            return;
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/Pain.mp3");
     }

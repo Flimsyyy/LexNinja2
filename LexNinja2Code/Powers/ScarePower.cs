@@ -35,9 +35,7 @@ public class ScarePower : CustomPowerModel
                             Owner.Player.UnlockState,
                             Owner.Player.RunState.CardMultiplayerConstraint
                         )
-                        .Where(
-                            c => c.Tags.Contains(NinjaTags.Ninjutsu)
-                        ),
+                        .Where(c => c.Tags.Contains(NinjaTags.Ninjutsu)),
                     1,
                     Owner.Player.RunState.Rng.CombatCardGeneration
                 )

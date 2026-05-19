@@ -53,7 +53,12 @@ public class MachineNinja() : LexNinja2Relic
 
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
-        if (CardBeingPlayed != null || cardPlay.Card.Owner != base.Owner || WasUsedThisTurn || !cardPlay.Card.Keywords.Contains(NinjaKeyword.Science))
+        if (
+            CardBeingPlayed != null
+            || cardPlay.Card.Owner != base.Owner
+            || WasUsedThisTurn
+            || !cardPlay.Card.Keywords.Contains(NinjaKeyword.Science)
+        )
         {
             return Task.CompletedTask;
         }

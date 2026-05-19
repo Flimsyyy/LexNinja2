@@ -35,9 +35,7 @@ public class DamageNextTurnPower : CustomPowerModel
         foreach (var hittableEnemy in CombatState.HittableEnemies)
         {
             var instance = NCombatRoom.Instance;
-            instance?.CombatVfxContainer.AddChildSafely(
-                NBigSlashVfx.Create(hittableEnemy)!
-            );
+            instance?.CombatVfxContainer.AddChildSafely(NBigSlashVfx.Create(hittableEnemy)!);
         }
         await Cmd.CustomScaledWait(0.2f, 0.4f);
         await CreatureCmd.Damage(

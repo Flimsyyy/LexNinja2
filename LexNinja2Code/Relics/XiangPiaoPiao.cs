@@ -48,7 +48,13 @@ public class XiangPiaoPiao() : LexNinja2Relic
             return;
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/XiangPiaoPiao.mp3");
-        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner.Creature, 1, null, null);
+        await PowerCmd.Apply<Lexkela>(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            1,
+            null,
+            null
+        );
     }
 
     public override string PackedIconPath => "XiangPiaoPiao.png".RelicImagePath();

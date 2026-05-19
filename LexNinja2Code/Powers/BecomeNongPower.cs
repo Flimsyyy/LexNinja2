@@ -61,9 +61,7 @@ public class BecomeNongPower : CustomPowerModel
 
         for (var i = 0; i < Amount; i++)
         {
-            var cardModel = Owner.Player!.RunState.CloneCard(
-                card
-            );
+            var cardModel = Owner.Player!.RunState.CloneCard(card);
             CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(cardModel, PileType.Deck));
         }
     }
@@ -72,8 +70,7 @@ public class BecomeNongPower : CustomPowerModel
     {
         var targetCard = card.CreateClone();
         GetInternalData<Data>().SelectedCard = targetCard;
-        ((StringVar)DynamicVars[CardKey]).StringValue =
-            targetCard.Title;
+        ((StringVar)DynamicVars[CardKey]).StringValue = targetCard.Title;
     }
 
     private class Data

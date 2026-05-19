@@ -47,7 +47,7 @@ public static class NinjaHelper
             ?.CardPlay.Card;
         return cardLast;
     }
-    
+
     public static CardModel? LastCard(CardModel card)
     {
         return LastCard(card.Owner);

@@ -33,10 +33,10 @@ public class PlasmaArrowPower : CustomPowerModel
             return false;
         }
         var pileType = card.Pile?.Type;
-        if (pileType is not (PileType.Hand or PileType.Play)) return false;
+        if (pileType is not (PileType.Hand or PileType.Play))
+            return false;
         modifiedCost = 0;
         return true;
-
     }
 
     public override async Task BeforeCardPlayed(CardPlay cardPlay)
@@ -45,21 +45,24 @@ public class PlasmaArrowPower : CustomPowerModel
         {
             return;
         }
-        if (cardPlay.Card.Owner.Creature != Owner
-            || !cardPlay.Card.Tags.Contains(NinjaTags.Ninjutsu))
+        if (
+            cardPlay.Card.Owner.Creature != Owner
+            || !cardPlay.Card.Tags.Contains(NinjaTags.Ninjutsu)
+        )
         {
             return;
         }
-        
+
         var pileType = cardPlay.Card.Pile?.Type;
-        if (pileType is not (PileType.Hand or PileType.Play)) return;
-            await PowerCmd.Apply<FreeNinjutsuPower>(
-                new ThrowingPlayerChoiceContext(),
-                Owner,
-                1,
-                Owner,
-                null
-            );
-            await PowerCmd.Decrement(this);
+        if (pileType is not (PileType.Hand or PileType.Play))
+            return;
+        await PowerCmd.Apply<FreeNinjutsuPower>(
+            new ThrowingPlayerChoiceContext(),
+            Owner,
+            1,
+            Owner,
+            null
+        );
+        await PowerCmd.Decrement(this);
     }
 }

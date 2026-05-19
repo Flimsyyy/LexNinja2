@@ -41,7 +41,12 @@ public class ThreeDuuz() : LexNinja2Relic
 
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
-        if (CardBeingPlayed != null || cardPlay.Card.Owner != base.Owner || WasUsedThisTurn || !cardPlay.Card.Tags.Contains(NinjaTags.Ninjutsu))
+        if (
+            CardBeingPlayed != null
+            || cardPlay.Card.Owner != base.Owner
+            || WasUsedThisTurn
+            || !cardPlay.Card.Tags.Contains(NinjaTags.Ninjutsu)
+        )
         {
             return Task.CompletedTask;
         }

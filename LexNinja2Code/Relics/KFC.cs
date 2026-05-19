@@ -61,9 +61,10 @@ public class KFC() : LexNinja2Relic
             return;
         }
         TurnsSeen = (TurnsSeen + 1) % DynamicVars[TurnsKey].IntValue;
-        Status = TurnsSeen == DynamicVars[TurnsKey].IntValue - 1
-            ? RelicStatus.Active
-            : RelicStatus.Normal;
+        Status =
+            TurnsSeen == DynamicVars[TurnsKey].IntValue - 1
+                ? RelicStatus.Active
+                : RelicStatus.Normal;
         if (TurnsSeen != 0)
         {
             return;
@@ -74,10 +75,7 @@ public class KFC() : LexNinja2Relic
             Owner,
             from c in ModelDb
                 .CardPool<TokenCardPool>()
-                .GetUnlockedCards(
-                    Owner.UnlockState,
-                    Owner.RunState.CardMultiplayerConstraint
-                )
+                .GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint)
             where (c.Tags.Contains(NinjaTags.Food))
             select c,
             1,

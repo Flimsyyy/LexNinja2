@@ -62,7 +62,7 @@ public class NuclearDragonPower : CustomPowerModel
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/NuclearDragon.mp3");
         await PowerCmd.Apply<Lexkela>(choiceContext, Owner, Amount, Owner, null);
-        
+
         var child = NGroundFireVfx.Create(Owner);
         if (child == null)
             return;

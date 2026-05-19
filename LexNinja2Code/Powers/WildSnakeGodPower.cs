@@ -25,12 +25,11 @@ public class WildSnakeGodPower : CustomPowerModel
         NinjaAudio.Play("res://LexNinja2/audio/WildSnakeGod.mp3");
         Flash();
         foreach (
-            var card in PileType
-                .Hand.GetPile(Owner.Player!)
-                .Cards.Where(c => !c.EnergyCost.CostsX)
+            var card in PileType.Hand.GetPile(Owner.Player!).Cards.Where(c => !c.EnergyCost.CostsX)
         )
         {
-            if (card.EnergyCost.GetWithModifiers(CostModifiers.None) < 0) continue;
+            if (card.EnergyCost.GetWithModifiers(CostModifiers.None) < 0)
+                continue;
             card.EnergyCost.SetThisCombat(NextEnergyCost());
             NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
             // IReadOnlyList<CardModel> cards = PileType.Hand.GetPile(Owner.Player).Cards;
