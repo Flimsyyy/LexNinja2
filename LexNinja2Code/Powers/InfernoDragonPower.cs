@@ -22,9 +22,10 @@ public class InfernoDragonPower : CustomPowerModel
 
     private decimal CalculateExtraDamage()
     {
-        if (Owner.GetPower<Lexkela>() != null)
+        var lexKela = Owner.GetPower<Lexkela>();
+        if (lexKela != null)
         {
-            decimal kela = Owner.GetPower<Lexkela>().Amount;
+            decimal kela = lexKela.Amount;
             DynamicVars["dian"].BaseValue = Amount * kela;
         }
         else
@@ -34,17 +35,17 @@ public class InfernoDragonPower : CustomPowerModel
         return DynamicVars["dian"].BaseValue;
     }
 
-    public override Decimal ModifyDamageMultiplicative(
+    public override decimal ModifyDamageMultiplicative(
         Creature? target,
-        Decimal amount,
+        decimal amount,
         ValueProp props,
         Creature? dealer,
         CardModel? cardSource
     )
     {
-        decimal extraDamage = CalculateExtraDamage() / 100;
+        var extraDamage = CalculateExtraDamage() / 100;
         return
-            dealer != this.Owner && !this.Owner.Pets.Contains<Creature>(dealer)
+            dealer != Owner && !Owner.Pets.Contains(dealer)
             || !props.IsPoweredAttack()
             || cardSource == null
             ? 1
