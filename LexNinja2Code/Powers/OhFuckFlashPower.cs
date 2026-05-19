@@ -20,26 +20,27 @@ public class OhFuckFlashPower : CustomPowerModel
 
     private bool WasOwnerPartOfLastPlayerTurn
     {
-        get => this._wasOwnerPartOfLastPlayerTurn;
+        get => _wasOwnerPartOfLastPlayerTurn;
         set
         {
-            this.AssertMutable();
-            this._wasOwnerPartOfLastPlayerTurn = value;
+            AssertMutable();
+            _wasOwnerPartOfLastPlayerTurn = value;
         }
     }
 
     public override bool ShouldTakeExtraTurn(Player player)
     {
-        return this.WasOwnerPartOfLastPlayerTurn && player == this.Owner.Player && _isEffective;
+        return WasOwnerPartOfLastPlayerTurn && player == Owner.Player && _isEffective;
     }
 
     public override Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
     {
-        if (side != this.Owner.Side)
+        if (side != Owner.Side)
             return Task.CompletedTask;
-        this.WasOwnerPartOfLastPlayerTurn = CombatManager.Instance.IsPartOfPlayerTurn(
-            this.Owner.Player
-        );
+        if (Owner.Player != null)
+            WasOwnerPartOfLastPlayerTurn = CombatManager.Instance.IsPartOfPlayerTurn(
+                Owner.Player
+            );
         return Task.CompletedTask;
     }
 
