@@ -54,12 +54,7 @@ public class BecomeNongPower : CustomPowerModel
         await Cmd.Wait(1f);
         NinjaAudio.Play("res://LexNinja2/audio/BingBong.mp3", 0.3f);
         var card = GetInternalData<Data>().SelectedCard;
-        // 姑且先这么写？
-        if (card?.ClonePreservingMutability() is not CardModel clone)
-        {
-            return;
-        }
-        card = clone;
+        if (card == null) return;
 
         for (var i = 0; i < Amount; i++)
         {
