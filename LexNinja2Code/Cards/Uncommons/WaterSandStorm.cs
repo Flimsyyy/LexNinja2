@@ -9,7 +9,6 @@ using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -50,17 +49,20 @@ public class WaterSandStorm()
         {
             return;
         }
-        nRollingBoulderVfx.Connect(
-            NRollingBoulderVfx.SignalName.HitCreature,
-            Callable.From(
-                async delegate(NCreature _)
-                {
-                    await CommonActions
-                        .CardAttack(this, play, tmpSfx: "blunt_attack.mp3")
-                        .Execute(choiceContext);
-                }
-            )
-        );
+        // nRollingBoulderVfx.Connect(
+        //     NRollingBoulderVfx.SignalName.HitCreature,
+        //     Callable.From(
+        //         async delegate(NCreature _)
+        //         {
+        //             await CommonActions
+        //                 .CardAttack(this, play, tmpSfx: "blunt_attack.mp3")
+        //                 .Execute(choiceContext);
+        //         }
+        //     )
+        // );
+        await CommonActions
+            .CardAttack(this, play, tmpSfx: "blunt_attack.mp3")
+            .Execute(choiceContext);
         var signalAwaiter = nRollingBoulderVfx.ToSignal(
             nRollingBoulderVfx,
             NRollingBoulderVfx.SignalName.Finished
