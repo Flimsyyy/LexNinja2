@@ -149,7 +149,7 @@ public abstract class LexNinja2Card(int cost, CardType type, CardRarity rarity, 
         return GetCurrentLexKelaCost();
     }
 
-    private async Task SpendLexKela(int amount, PlayerChoiceContext choiceContext)
+    public async Task SpendLexKela(int amount, PlayerChoiceContext choiceContext)
     {
         if (amount <= 0)
         {

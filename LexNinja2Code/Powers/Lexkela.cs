@@ -1,5 +1,6 @@
 ﻿using BaseLib.Abstracts;
 using LexNinja2.LexNinja2Code.Api;
+using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -57,13 +58,17 @@ public class Lexkela : CustomPowerModel
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if (
-            cardPlay.Card.Keywords.Contains(NinjaKeyword.Science)
-            && cardPlay.Card.Owner == Owner.Player
-        )
+        if (cardPlay.Card.Owner != Owner.Player)
         {
-            await PowerCmd.Apply<Lexkela>(context, Owner, -1, Owner, null);
+            return;
         }
+
+        var card = cardPlay.Card;
+        if (card is not LexNinja2Card ninjaCard || !card.Keywords.Contains(NinjaKeyword.Science))
+        {
+            return;
+        }
+        await ninjaCard.SpendLexKela(1, context);
     }
 
     private int flag = 0; // 这是干啥的
