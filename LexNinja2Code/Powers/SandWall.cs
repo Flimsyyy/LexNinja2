@@ -27,10 +27,13 @@ public class SandWall : CustomPowerModel
             return;
         Flash();
         await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Unpowered, null);
-        if (Owner.GetPower<BuildSandWallPower>() != null)
+        if (Owner.HasPower<BuildSandWallPower>())
         {
             NinjaAudio.Play("res://LexNinja2/audio/BigSandWall.mp3");
-            await PowerCmd.Apply<SandWall>(choiceContext, Owner, -(Amount / 2), null, null);
+            await PowerCmd.Apply<SandWall>(choiceContext, Owner, -1, Owner, null);
+            return;
         }
+        NinjaAudio.Play("res://LexNinja2/audio/SandWall.mp3");
+        await PowerCmd.Apply<SandWall>(choiceContext, Owner, -(Amount / 2), Owner, null);
     }
 }
