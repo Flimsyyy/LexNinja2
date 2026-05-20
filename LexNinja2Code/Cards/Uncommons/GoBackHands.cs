@@ -22,7 +22,7 @@ public class GoBackHands() : LexNinja2Card(2, CardType.Skill, CardRarity.Uncommo
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/GoBackHands.mp3");
-        var isNinjutsu = await Ninjutsu(choiceContext);
+        var isNinjutsu = await Ninjutsu(choiceContext, play);
         foreach (var card in PileType.Discard.GetPile(Owner).Cards.Where(Filter).ToList())
         {
             if (isNinjutsu)

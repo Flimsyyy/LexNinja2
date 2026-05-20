@@ -35,7 +35,7 @@ public class BurningBlade()
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
         // if (!shouldTriggerFatal || !attackCommand.Results.Any<DamageResult>((Func<DamageResult, bool>) (r => r.WasTargetKilled)))
 
-        if (!await Ninjutsu(choiceContext))
+        if (!await Ninjutsu(choiceContext, play))
         {
             return;
         }

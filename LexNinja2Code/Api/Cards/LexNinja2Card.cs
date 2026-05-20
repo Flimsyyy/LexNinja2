@@ -40,8 +40,12 @@ public abstract class LexNinja2Card(int cost, CardType type, CardRarity rarity, 
 
     public TemporaryCardCost? TemporaryLexKelaCost => _temporaryLexKelaCosts.LastOrDefault();
 
-    protected async Task<bool> Ninjutsu(PlayerChoiceContext choiceContext)
+    protected async Task<bool> Ninjutsu(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        if (cardPlay.IsAutoPlay)
+        {
+            return true;
+        }
         var lexKeLa = GetLexKelaAmount();
         var renShuAmount = GetLexKelaCostWithModifiers();
         if (lexKeLa < renShuAmount)

@@ -38,7 +38,7 @@ public class BeastShout()
                 tmpSfx: "lightning_orb_evoke.mp3"
             )
             .Execute(choiceContext);
-        if (!await Ninjutsu(choiceContext))
+        if (!await Ninjutsu(choiceContext, play))
         {
             return;
         }

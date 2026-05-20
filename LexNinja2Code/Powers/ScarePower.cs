@@ -1,6 +1,5 @@
 ﻿using BaseLib.Abstracts;
 using LexNinja2.LexNinja2Code.Api;
-using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -41,15 +40,10 @@ public class ScarePower : CustomPowerModel
                     Owner.Player.RunState.Rng.CombatCardGeneration
                 )
                 .FirstOrDefault();
-            switch (card)
+            if (card == null)
             {
-                case null:
-                    return;
-                case LexNinja2Card lexNinjaCard:
-                    lexNinjaCard.SetLexKelaToFreeUntilPlayed();
-                    break;
+                return;
             }
-
             // if (!(Owner.HasPower<WePeacePower>()&&card.Type==CardType.Attack))
             // {
             await CardCmd.AutoPlay(choiceContext, card.CreateDupe(), null);

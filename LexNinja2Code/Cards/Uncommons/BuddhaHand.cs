@@ -44,7 +44,7 @@ public class BuddhaHand()
             .CardAttack(this, play, vfx: "vfx/vfx_attack_blunt")
             .Execute(choiceContext);
         await CommonActions.Apply<VulnerablePower>(choiceContext, this, play);
-        if (!await Ninjutsu(choiceContext))
+        if (!await Ninjutsu(choiceContext, play))
         {
             return;
         }

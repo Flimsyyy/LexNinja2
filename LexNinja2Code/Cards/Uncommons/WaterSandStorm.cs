@@ -33,7 +33,7 @@ public class WaterSandStorm()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/WaterSandStorm.mp3");
-        if (await Ninjutsu(choiceContext))
+        if (await Ninjutsu(choiceContext, play))
         {
             await CommonActions.ApplySelf<SandWall>(choiceContext, this);
         }

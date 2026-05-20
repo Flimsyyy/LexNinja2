@@ -23,7 +23,7 @@ public class OhFuckFlash() : LexNinja2Card(2, CardType.Skill, CardRarity.Rare, T
     {
         NinjaAudio.Play("res://LexNinja2/audio/OhFuckFlash.mp3");
         await CommonActions.ApplySelf<BufferPower>(choiceContext, this);
-        if (!await Ninjutsu(choiceContext))
+        if (!await Ninjutsu(choiceContext, play))
         {
             return;
         }

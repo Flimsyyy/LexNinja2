@@ -25,7 +25,7 @@ public class GetPeopleTax()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        if (await Ninjutsu(choiceContext))
+        if (await Ninjutsu(choiceContext, play))
         {
             NinjaAudio.Play("res://LexNinja2/audio/GetPeopleTax.mp3");
             var monsterPos = new Vector2?();

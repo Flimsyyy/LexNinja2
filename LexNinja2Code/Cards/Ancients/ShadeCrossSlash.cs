@@ -33,7 +33,7 @@ public class ShadeCrossSlash()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        if (await Ninjutsu(choiceContext))
+        if (await Ninjutsu(choiceContext, play))
         {
             NinjaAudio.Play("res://LexNinja2/audio/ShadeCrossSlash.mp3");
             var nGrandFinaleVfx = NGrandFinaleVfx.Create(Owner.Creature);

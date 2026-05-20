@@ -28,7 +28,7 @@ public class RacingAgainstMessi()
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card != this || !await Ninjutsu(choiceContext))
+        if (cardPlay.Card != this || !await Ninjutsu(choiceContext, cardPlay))
         {
             return;
         }

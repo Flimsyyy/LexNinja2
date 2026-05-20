@@ -42,7 +42,7 @@ public class FlameThrower()
         instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(play.Target!)!);
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
         await CommonActions.Apply<WeakPower>(choiceContext, this, play);
-        if (!await Ninjutsu(choiceContext))
+        if (!await Ninjutsu(choiceContext, play))
         {
             return;
         }

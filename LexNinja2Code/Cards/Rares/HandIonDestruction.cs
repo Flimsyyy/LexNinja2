@@ -34,7 +34,7 @@ public class HandIonDestruction()
             return;
         }
         NinjaAudio.Play("res://LexNinja2/audio/HandIonDestruction.mp3");
-        if (await Ninjutsu(choiceContext))
+        if (await Ninjutsu(choiceContext, play))
         {
             await Cmd.Wait(1.2f);
             await PowerCmd.Apply<DoubleDamagePower>(

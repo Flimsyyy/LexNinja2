@@ -24,7 +24,7 @@ public class BuildSandWall()
         NinjaAudio.Play("res://LexNinja2/audio/BuildSandWall.mp3");
         await CommonActions.ApplySelf<BuildSandWallPower>(choiceContext, this);
         var sandWallPower = Owner.Creature.GetPower<SandWall>();
-        if (sandWallPower == null || !await Ninjutsu(choiceContext))
+        if (sandWallPower == null || !await Ninjutsu(choiceContext, play))
         {
             return;
         }

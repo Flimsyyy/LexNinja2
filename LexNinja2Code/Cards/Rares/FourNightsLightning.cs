@@ -24,7 +24,7 @@ public class FourNightsLightning()
         await NinjaAnim.TriggerCastAnim(this);
         await Cmd.Wait(0.5f);
         decimal repeatCount = 1;
-        if (await Ninjutsu(choiceContext))
+        if (await Ninjutsu(choiceContext, play))
         {
             repeatCount += DynamicVars.Repeat.BaseValue;
         }

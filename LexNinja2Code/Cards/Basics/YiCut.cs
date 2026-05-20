@@ -30,7 +30,7 @@ public class YiCut()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/YiCut.mp3");
-        if (await Ninjutsu(choiceContext))
+        if (await Ninjutsu(choiceContext, play))
         {
             await CommonActions
                 .CardAttack(

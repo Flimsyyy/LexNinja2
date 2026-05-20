@@ -28,7 +28,7 @@ public class HamoodKick()
             .CardAttack(this, play, tmpSfx: "blunt_attack.mp3")
             .WithHitVfxNode((Func<Creature, Node2D>)(t => NBigSlashImpactVfx.Create(t)!))
             .Execute(choiceContext);
-        if (!await Ninjutsu(choiceContext))
+        if (!await Ninjutsu(choiceContext, play))
         {
             return;
         }

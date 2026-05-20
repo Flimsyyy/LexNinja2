@@ -32,7 +32,7 @@ public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, T
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/MonkHand.mp3");
-        if (await Ninjutsu(choiceContext))
+        if (await Ninjutsu(choiceContext, play))
         {
             await CommonActions.CardBlock(this, play);
         }

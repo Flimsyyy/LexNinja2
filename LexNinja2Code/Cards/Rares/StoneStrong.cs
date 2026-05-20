@@ -29,7 +29,7 @@ public class StoneStrong() : LexNinja2Card(1, CardType.Power, CardRarity.Rare, T
     {
         NinjaAudio.Play("res://LexNinja2/audio/StoneStrong.mp3");
         await CommonActions.ApplySelf<StoneStrongPower>(choiceContext, this);
-        if (!await Ninjutsu(choiceContext))
+        if (!await Ninjutsu(choiceContext, play))
         {
             return;
         }

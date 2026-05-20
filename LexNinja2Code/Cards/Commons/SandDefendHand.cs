@@ -26,7 +26,7 @@ public class SandDefendHand() : LexNinja2Card(1, CardType.Skill, CardRarity.Comm
     {
         NinjaAudio.Play("res://LexNinja2/audio/SandDefendHand.mp3");
         await CommonActions.CardBlock(this, play);
-        if (!await Ninjutsu(choiceContext))
+        if (!await Ninjutsu(choiceContext, play))
         {
             return;
         }

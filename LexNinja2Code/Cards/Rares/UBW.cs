@@ -41,7 +41,7 @@ public class UBW() : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetTy
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        if (!await Ninjutsu(choiceContext))
+        if (!await Ninjutsu(choiceContext, play))
         {
             return;
         }

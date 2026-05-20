@@ -28,7 +28,7 @@ public class AngrySnakeBite()
             await CardPileCmd.AddGeneratedCardToCombat(CreateClone(), PileType.Discard, Owner),
             1f
         );
-        if (!await Ninjutsu(choiceContext))
+        if (!await Ninjutsu(choiceContext, play))
         {
             return;
         }

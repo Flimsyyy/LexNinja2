@@ -20,7 +20,7 @@ public class GetAllHands() : LexNinja2Card(2, CardType.Skill, CardRarity.Rare, T
     {
         NinjaAudio.Play("res://LexNinja2/audio/GetAllHands.mp3");
         await CommonActions.ApplySelf<GetAllHandsPower>(choiceContext, this);
-        // if (await Ninjutsu(choiceContext))
+        // if (await Ninjutsu(choiceContext, play))
         // {
         //     for (int i = 0; i < DynamicVars.Cards.BaseValue; i++)
         //     {

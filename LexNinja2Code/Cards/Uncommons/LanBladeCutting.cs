@@ -43,7 +43,7 @@ public class LanBladeCutting()
             await CommonActions.ApplySelf<LanBladePower>(choiceContext, this);
         }
 
-        if (!await Ninjutsu(choiceContext))
+        if (!await Ninjutsu(choiceContext, play))
         {
             return;
         }

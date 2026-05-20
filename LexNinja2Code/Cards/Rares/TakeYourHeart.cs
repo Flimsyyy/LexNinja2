@@ -36,7 +36,7 @@ public class TakeYourHeart()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        if (!IsEnoughDebuff(play.Target!) || !await Ninjutsu(choiceContext))
+        if (!IsEnoughDebuff(play.Target!) || !await Ninjutsu(choiceContext, play))
         {
             await CommonActions
                 .CardAttack(this, play, vfx: "vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3")

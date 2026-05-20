@@ -34,7 +34,7 @@ public class BlackDragonHand()
             await PowerCmd.Remove<IntangiblePower>(play.Target);
         }
 
-        if (!await Ninjutsu(choiceContext))
+        if (!await Ninjutsu(choiceContext, play))
         {
             return;
         }

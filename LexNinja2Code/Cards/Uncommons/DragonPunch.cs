@@ -25,7 +25,7 @@ public class DragonPunch()
         await CommonActions
             .CardAttack(this, play, vfx: "vfx/vfx_thrash", tmpSfx: "blunt_attack.mp3")
             .Execute(choiceContext);
-        if (!await Ninjutsu(choiceContext))
+        if (!await Ninjutsu(choiceContext, play))
         {
             return;
         }

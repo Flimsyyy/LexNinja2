@@ -29,7 +29,7 @@ public class DragonSmog() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
     {
         NinjaAudio.Play("res://LexNinja2/audio/DragonSmog.mp3");
         await CommonActions.ApplySelf<IntangiblePower>(choiceContext, this);
-        if (!await Ninjutsu(choiceContext))
+        if (!await Ninjutsu(choiceContext, play))
         {
             return;
         }

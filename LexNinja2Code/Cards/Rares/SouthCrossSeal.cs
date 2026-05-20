@@ -26,7 +26,7 @@ public class SouthCrossSeal()
         NinjaAudio.Play("res://LexNinja2/audio/SouthCrossSeal.wav");
         await CreatureCmd.Stun(play.Target!);
         await CreatureCmd.GainBlock(play.Target!, 50, ValueProp.Unpowered, play);
-        if (!await Ninjutsu(choiceContext))
+        if (!await Ninjutsu(choiceContext, play))
         {
             return;
         }
