@@ -1,4 +1,5 @@
 ﻿using BaseLib.Utils;
+using Godot;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -24,6 +25,8 @@ public class AngrySnakeBite()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
+        
+        
         CardCmd.PreviewCardPileAdd(
             await CardPileCmd.AddGeneratedCardToCombat(CreateClone(), PileType.Discard, Owner),
             1f
