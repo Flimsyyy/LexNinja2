@@ -7,9 +7,6 @@
 
   "LEXNINJA2-BLADE.description": "[gold]刀系忍术[/gold]的流派。",
   "LEXNINJA2-BLADE.title": "刀系忍术",
-  
-  "LEXNINJA2-FREENINJUTSU.description": "这张牌下次打出时不消耗蕾克拉",
-  "LEXNINJA2-FREENINJUTSU.title": "免费忍术",
 
   "LEXNINJA2-SCIENCE.description": "每点[gold]蕾克拉[/gold]会降低[gold]费用[/gold]，打出时消耗[blue]1[/blue]点[gold]蕾克拉[/gold]。",
   "LEXNINJA2-SCIENCE.title": "科学忍具",
