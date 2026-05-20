@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration
+    default="false"
+    name="Publish LexNinja2 Debug"
+    type="DotNetFolderPublish"
+    factoryName="Publish to folder"
+  >
+    <riderPublish
+      configuration="Debug"
+      platform="Any CPU"
+      target_folder="$PROJECT_DIR$/bin/Debug/net9.0/publish"
+      target_framework="net9.0"
+      uuid_high="497054430722279194"
+      uuid_low="-5752986746567430182"
+    />
+    <method v="2" />
+  </configuration>
+</component>
