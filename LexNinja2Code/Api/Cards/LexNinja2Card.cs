@@ -56,7 +56,7 @@ public abstract class LexNinja2Card(int cost, CardType type, CardRarity rarity, 
         return true;
     }
 
-    protected bool CanCastNinjutsu()
+    public bool CanCastNinjutsu()
     {
         return GetLexKelaAmount() >= GetLexKelaCostWithModifiers();
     }
