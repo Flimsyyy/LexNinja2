@@ -16,7 +16,7 @@ namespace LexNinja2.LexNinja2Code.Cards.Rares;
 public class SariraRevive() : LexNinja2Card(0, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new CardsVar(3), new LexKelaVar(2), new EnergyVar(1)];
+        [new CardsVar(1), new LexKelaVar(2)];
 
     // protected override bool ShouldGlowGoldInternal => isHitPointLow();
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];

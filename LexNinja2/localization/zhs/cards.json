@@ -293,7 +293,7 @@
   "LEXNINJA2-HE_BULLY_ME.description": "所有盟友获得{Energy:energyIcons()}。\n所有盟友获得{StrengthPower:diff()}点临时[gold]力量[/gold]。\n结束你的回合。",
   "LEXNINJA2-HE_BULLY_ME.title": "好师傅哥哥他欺负我",
 
-  "LEXNINJA2-SARIRA_REVIVE.description": "获得{Kela:diff()}点[gold]蕾克拉[/gold]。\n抽1张牌.\n被删除时，获得[gold]舍利子[/gold]。(最多获得一个）",
+  "LEXNINJA2-SARIRA_REVIVE.description": "获得{Kela:diff()}点[gold]蕾克拉[/gold]。\n抽{Cards:diff()}张牌.\n被删除时，获得[gold]舍利子[/gold]。(最多获得一个）",
   "LEXNINJA2-SARIRA_REVIVE.title": "舍利子回魂",
 
   "LEXNINJA2-ITALY_SILVER_SLASH.description": "随机对敌人造成{Damage:diff()}点伤害{Repeat:diff()}次。\n抽{Cards:diff()}张牌。\n将{Cards:diff()}张[gold]岚刀[/gold]添加到你的[gold]抽牌堆[/gold]中。",
