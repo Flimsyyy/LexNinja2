@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -16,9 +17,6 @@ namespace LexNinja2.LexNinja2Code.Cards.Commons;
 
 public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    private const decimal BlockAmount = 6;
-    private const decimal BlockUpgrade = 3;
-
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new NinjutsuVar(1),
@@ -30,11 +28,16 @@ public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, T
                     var block = card.Owner.Creature.Block;
                     if (card is not LexNinja2Card ninjaCard || !ninjaCard.CanCastNinjutsu())
                         return block;
-                    block += (int)BlockAmount;
-                    if (card.IsUpgraded)
-                    {
-                        block += (int)BlockUpgrade;
-                    }
+                    block += (int)
+                        Hook.ModifyBlock(
+                            card.Owner.Creature.CombatState!,
+                            card.Owner.Creature,
+                            card.DynamicVars.Block.BaseValue,
+                            ValueProp.Move,
+                            null,
+                            null,
+                            out var _
+                        );
                     return block;
                 }
             ),
@@ -65,7 +68,7 @@ public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, T
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(BlockUpgrade);
+        DynamicVars.Block.UpgradeValueBy(3);
     }
 
     public override string CustomPortraitPath => $"MonkHand_p.png".BigCardImagePath();
