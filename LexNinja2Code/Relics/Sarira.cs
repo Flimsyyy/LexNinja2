@@ -25,8 +25,10 @@ public class Sarira() : LexNinja2Relic
     protected override string PackedIconOutlinePath => "/outline/Sarira.png".RelicImagePath();
     protected override string BigIconPath => "Sarira.png".BigRelicImagePath();
 
+    // ReSharper disable once MemberCanBePrivate.Global
+    // BaseLib requires it to be public so that it can be scanned
     [SavedProperty]
-    private bool WasUsed
+    public bool WasUsed
     {
         get => this._wasUsed;
         set

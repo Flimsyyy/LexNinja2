@@ -54,8 +54,10 @@ public class ISeeYou() : LexNinja2Card(-1, CardType.Quest, CardRarity.Quest, Tar
     //     return Task.CompletedTask;
     // }
 
+    // ReSharper disable once MemberCanBePrivate.Global
+    // BaseLib requires it to be public so that it can be scanned
     [SavedProperty]
-    private int CombatsSeen
+    public int CombatsSeen
     {
         get => _combatsSeen;
         set
