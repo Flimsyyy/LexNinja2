@@ -20,6 +20,7 @@ public class WaterSandStorm()
     : LexNinja2Card(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
     private const decimal SandWallAmount = 10;
+    private const decimal SandWallUpgrade = 3;
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new NinjutsuVar(2),
@@ -30,9 +31,12 @@ public class WaterSandStorm()
                 (card, _) =>
                 {
                     var sandWall = card.Owner.Creature.GetPowerAmount<SandWall>();
-                    if (card is LexNinja2Card ninjaCard && ninjaCard.CanCastNinjutsu())
+                    if (card is not LexNinja2Card ninjaCard || !ninjaCard.CanCastNinjutsu())
+                        return sandWall;
+                    sandWall += (int)SandWallAmount;
+                    if (card.IsUpgraded)
                     {
-                        sandWall += (int)SandWallAmount;
+                        sandWall += (int)SandWallUpgrade;
                     }
                     return sandWall;
                 }
@@ -91,7 +95,7 @@ public class WaterSandStorm()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Power<SandWall>().UpgradeValueBy(3);
+        DynamicVars.Power<SandWall>().UpgradeValueBy(SandWallUpgrade);
     }
 
     public override string CustomPortraitPath => $"WaterSandStorm_p.png".BigCardImagePath();
