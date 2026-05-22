@@ -34,7 +34,8 @@ public class KFC() : LexNinja2Relic
 
     public override int DisplayAmount => !IsActivating ? TurnsSeen : DynamicVars[TurnsKey].IntValue;
 
-    private bool IsActivating
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    public bool IsActivating
     {
         get => _isActivating;
         set
