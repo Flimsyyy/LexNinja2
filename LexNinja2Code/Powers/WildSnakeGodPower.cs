@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.TestSupport;
 
@@ -16,6 +17,8 @@ public class WildSnakeGodPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
+
+    protected override object InitInternalData() => new Data();
 
     public override string CustomPackedIconPath => "WildSnakeGodPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "WildSnakeGodPower.png".BigPowerImagePath();
@@ -30,36 +33,55 @@ public class WildSnakeGodPower : CustomPowerModel
             return;
         NinjaAudio.Play("res://LexNinja2/audio/WildSnakeGod.mp3");
         Flash();
-        foreach (
-            var card in PileType.Hand.GetPile(Owner.Player!).Cards.Where(c => !c.EnergyCost.CostsX)
-        )
+        // foreach (
+        //     var card in PileType.Hand.GetPile(Owner.Player!).Cards.Where(c => !c.EnergyCost.CostsX)
+        // )
+        // {
+        //     if (card.EnergyCost.GetWithModifiers(CostModifiers.None) < 0)
+        //         continue;
+        //     card.EnergyCost.SetThisCombat(NextEnergyCost());
+        //     NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
+        //     // IReadOnlyList<CardModel> cards = PileType.Hand.GetPile(Owner.Player).Cards;
+        //     // if (cards.Count == 0)
+        //     //     return;
+        //     // int amount = (int) ((Decimal) cards.Count * Amount);
+        //     // await CreatureCmd.GainBlock(Owner, amount, ValueProp.Unpowered, null);
+        // }
+    }
+
+    public override Task BeforeCardPlayed(CardPlay cardPlay)
+    {
+        if (base.Applier?.Player == null)
         {
-            if (card.EnergyCost.GetWithModifiers(CostModifiers.None) < 0)
-                continue;
-            card.EnergyCost.SetThisCombat(NextEnergyCost());
-            NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
-            // IReadOnlyList<CardModel> cards = PileType.Hand.GetPile(Owner.Player).Cards;
-            // if (cards.Count == 0)
-            //     return;
-            // int amount = (int) ((Decimal) cards.Count * Amount);
-            // await CreatureCmd.GainBlock(Owner, amount, ValueProp.Unpowered, null);
+            return Task.CompletedTask;
         }
+        if (cardPlay.Card.Owner != base.Applier.Player)
+        {
+            return Task.CompletedTask;
+        }
+        GetInternalData<Data>().AmountsForPlayedCards.Add(cardPlay.Card, Amount);
+        return Task.CompletedTask;
     }
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Owner != Owner.Player)
-            return;
-        NinjaAudio.Play("res://LexNinja2/audio/WildSnakeGod.mp3");
-        Flash();
-        foreach (
-            var card in PileType.Hand.GetPile(Owner.Player!).Cards.Where(c => !c.EnergyCost.CostsX)
+        if (
+            GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card, out var value)
+            && cardPlay.Card.Owner == Owner.Player
         )
         {
-            if (card.EnergyCost.GetWithModifiers(CostModifiers.None) < 0)
-                continue;
-            card.EnergyCost.SetThisCombat(NextEnergyCost());
-            NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
+            Flash();
+            foreach (
+                var card in PileType
+                    .Hand.GetPile(Owner.Player!)
+                    .Cards.Where(c => !c.EnergyCost.CostsX)
+            )
+            {
+                if (card.EnergyCost.GetWithModifiers(CostModifiers.None) < 0)
+                    continue;
+                card.EnergyCost.SetThisCombat(NextEnergyCost());
+                NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
+            }
         }
     }
 
@@ -86,5 +108,10 @@ public class WildSnakeGodPower : CustomPowerModel
         return TestEnergyCostOverride >= 0
             ? TestEnergyCostOverride
             : Owner.Player!.RunState.Rng.CombatEnergyCosts.NextInt(4);
+    }
+
+    private class Data
+    {
+        public readonly Dictionary<CardModel, int> AmountsForPlayedCards = new();
     }
 }
