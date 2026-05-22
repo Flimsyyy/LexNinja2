@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -27,7 +28,16 @@ public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, T
                     var block = card.Owner.Creature.Block;
                     if (card is not LexNinja2Card ninjaCard || !ninjaCard.CanCastNinjutsu())
                         return block;
-                    block += card.DynamicVars.Block.IntValue;
+                    block += (int)
+                        Hook.ModifyBlock(
+                            card.Owner.Creature.CombatState!,
+                            card.Owner.Creature,
+                            card.DynamicVars.Block.BaseValue,
+                            ValueProp.Move,
+                            null,
+                            null,
+                            out var _
+                        );
                     return block;
                 }
             ),
