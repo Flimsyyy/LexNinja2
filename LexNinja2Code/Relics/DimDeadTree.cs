@@ -6,6 +6,7 @@ using LexNinja2.LexNinja2Code.Character;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
@@ -20,7 +21,11 @@ public class DimDeadTree() : LexNinja2Relic
     protected override string PackedIconOutlinePath => "/outline/DimDeadTree.png".RelicImagePath();
     protected override string BigIconPath => "DimDeadTree.png".BigRelicImagePath();
 
-    public override async Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
+    public override async Task AfterSideTurnStart(
+        CombatSide side,
+        IReadOnlyList<Creature> creatures,
+        ICombatState combatState
+    )
     {
         if (side != Owner.Creature.Side)
             return;

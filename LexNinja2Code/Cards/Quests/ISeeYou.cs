@@ -1,4 +1,5 @@
-﻿using BaseLib.Utils;
+﻿using System.Diagnostics.CodeAnalysis;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -54,8 +55,8 @@ public class ISeeYou() : LexNinja2Card(-1, CardType.Quest, CardRarity.Quest, Tar
     //     return Task.CompletedTask;
     // }
 
-    // ReSharper disable once MemberCanBePrivate.Global
     // BaseLib requires it to be public so that it can be scanned
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     [SavedProperty]
     public int CombatsSeen
     {

@@ -19,7 +19,11 @@ public class BladeDefencePower : CustomPowerModel
     public override string CustomPackedIconPath => "ParryPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "ParryPower84.png".BigPowerImagePath();
 
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(
+        PlayerChoiceContext choiceContext,
+        CombatSide side,
+        IEnumerable<Creature> participants
+    )
     {
         if (side == Owner.Side)
             return;

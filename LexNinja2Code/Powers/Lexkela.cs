@@ -103,7 +103,11 @@ public class Lexkela : CustomPowerModel
         flag = 0;
     }
 
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(
+        PlayerChoiceContext choiceContext,
+        CombatSide side,
+        IEnumerable<Creature> creatures
+    )
     {
         if (side != Owner.Side)
             return;

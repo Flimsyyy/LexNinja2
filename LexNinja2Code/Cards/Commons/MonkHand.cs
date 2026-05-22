@@ -17,6 +17,7 @@ namespace LexNinja2.LexNinja2Code.Cards.Commons;
 public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     private const decimal BlockAmount = 6;
+    private const decimal BlockUpgrade = 3;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
@@ -27,9 +28,12 @@ public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, T
                 (card, _) =>
                 {
                     var block = card.Owner.Creature.Block;
-                    if (card is LexNinja2Card ninjaCard && ninjaCard.CanCastNinjutsu())
+                    if (card is not LexNinja2Card ninjaCard || !ninjaCard.CanCastNinjutsu())
+                        return block;
+                    block += (int)BlockAmount;
+                    if (card.IsUpgraded)
                     {
-                        block += (int)BlockAmount;
+                        block += (int)BlockUpgrade;
                     }
                     return block;
                 }
@@ -61,7 +65,7 @@ public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, T
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(3);
+        DynamicVars.Block.UpgradeValueBy(BlockUpgrade);
     }
 
     public override string CustomPortraitPath => $"MonkHand_p.png".BigCardImagePath();

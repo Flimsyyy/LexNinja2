@@ -1,4 +1,5 @@
-﻿using BaseLib.Utils;
+﻿using System.Diagnostics.CodeAnalysis;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Relics;
@@ -6,6 +7,7 @@ using LexNinja2.LexNinja2Code.Character;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.Helpers;
@@ -43,8 +45,8 @@ public class KFC() : LexNinja2Relic
         }
     }
 
-    // ReSharper disable once MemberCanBePrivate.Global
     // BaseLib requires it to be public so that it can be scanned
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     [SavedProperty]
     public int TurnsSeen
     {
@@ -57,7 +59,11 @@ public class KFC() : LexNinja2Relic
         }
     }
 
-    public override async Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
+    public override async Task AfterSideTurnStart(
+        CombatSide side,
+        IReadOnlyList<Creature> creatures,
+        ICombatState combatState
+    )
     {
         if (side != Owner.Creature.Side)
         {

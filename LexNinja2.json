@@ -4,9 +4,9 @@
   "author": "Flimsy",
   "description": "蕾忍Mod杀戮尖塔2的版本",
   "version": "VERSION_PLACEHOLDER",
-  "min_game_version": "0.105.0",
+  "min_game_version": "0.106.0",
   "has_pck": true,
   "has_dll": true,
-  "dependencies": [{ "id": "BaseLib", "min_version": "3.1.2" }],
+  "dependencies": [{ "id": "BaseLib", "min_version": "3.1.4" }],
   "affects_gameplay": true
 }

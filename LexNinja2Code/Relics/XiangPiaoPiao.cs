@@ -43,7 +43,11 @@ public class XiangPiaoPiao() : LexNinja2Relic
         );
     }
 
-    public override async Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
+    public override async Task AfterSideTurnStart(
+        CombatSide side,
+        IReadOnlyList<Creature> creatures,
+        ICombatState combatState
+    )
     {
         if (side != Owner.Creature.Side)
             return;

@@ -91,10 +91,10 @@ public class MachineNinja() : LexNinja2Relic
     //
     //
     // }
-
     public override Task BeforeSideTurnStart(
         PlayerChoiceContext choiceContext,
         CombatSide side,
+        IReadOnlyList<Creature> creatures,
         ICombatState combatState
     )
     {

@@ -98,6 +98,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="SmartFormat" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -134,7 +135,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="!Exists('$(Sts2DataDir)/sts2.dll')">
-    <PackageReference Include="FuYnAloft.Sts2.References" Version="0.105.1-beta" />
+    <PackageReference Include="Book.StS2.RefLib" Version="0.106.0-beta" />
   </ItemGroup>
 
   <Target Name="GetGitVersion" BeforeTargets="GenerateVersionedManifest">

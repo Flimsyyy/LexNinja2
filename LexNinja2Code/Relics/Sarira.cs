@@ -1,4 +1,5 @@
-﻿using BaseLib.Utils;
+﻿using System.Diagnostics.CodeAnalysis;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Relics;
@@ -25,8 +26,8 @@ public class Sarira() : LexNinja2Relic
     protected override string PackedIconOutlinePath => "/outline/Sarira.png".RelicImagePath();
     protected override string BigIconPath => "Sarira.png".BigRelicImagePath();
 
-    // ReSharper disable once MemberCanBePrivate.Global
     // BaseLib requires it to be public so that it can be scanned
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     [SavedProperty]
     public bool WasUsed
     {
