@@ -68,8 +68,8 @@
   "LEXNINJA2-GOOD_NIGHT_POWER.smartDescription": "回合开始时，恢复[blue]{Amount}[/blue]点生命值，你无法出牌。",
   "LEXNINJA2-GOOD_NIGHT_POWER.title": "好好睡",
   
-  "LEXNINJA2-WILD_SNAKE_GOD_POWER.description": "回合开始时，抽两张牌，随机化你[gold]手牌[/gold]中所有牌的耗能。",
-  "LEXNINJA2-WILD_SNAKE_GOD_POWER.smartDescription": "回合开始时，抽两张牌，随机化你[gold]手牌[/gold]中所有牌的耗能。",
+  "LEXNINJA2-WILD_SNAKE_GOD_POWER.description": "回合开始时，抽2张牌，随机化你[gold]手牌[/gold]中所有牌的耗能。",
+  "LEXNINJA2-WILD_SNAKE_GOD_POWER.smartDescription": "回合开始时，抽[blue]{Amount}[/blue]张牌。\n出牌时，随机化你的[gold]手牌[/gold]中所有牌的耗能。",
   "LEXNINJA2-WILD_SNAKE_GOD_POWER.title": "草野蛇神",
 
   "LEXNINJA2-LAN_BLADE_POWER.description": "打出[gold]刀系忍术[/gold]牌时，获得一张[gold]岚刀[/gold]。",

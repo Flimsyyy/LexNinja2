@@ -7,10 +7,13 @@ using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Cards;
+using MegaCrit.Sts2.Core.TestSupport;
 
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
-public class WildSnakeGod() : LexNinja2Card(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+public class WildSnakeGod() : LexNinja2Card(0, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new NinjutsuVar(1), new PowerVar<WildSnakeGodPower>(2)];
@@ -35,9 +38,44 @@ public class WildSnakeGod() : LexNinja2Card(2, CardType.Power, CardRarity.Uncomm
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        AddKeyword(CardKeyword.Retain);
     }
 
     public override string CustomPortraitPath => $"WildSnakeGod.png".BigCardImagePath();
     public override string PortraitPath => $"WildSnakeGod.png".CardImagePath();
+
+    public override Task AfterCardDrawn(
+        PlayerChoiceContext choiceContext,
+        CardModel card,
+        bool fromHandDraw
+    )
+    {
+        if (!fromHandDraw)
+        {
+            return Task.CompletedTask;
+        }
+        EnergyCost.SetThisCombat(NextEnergyCost());
+        NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
+        return Task.CompletedTask;
+    }
+
+    private int _testEnergyCostOverride = -1;
+
+    public int TestEnergyCostOverride
+    {
+        get => _testEnergyCostOverride;
+        set
+        {
+            TestMode.AssertOn();
+            AssertMutable();
+            _testEnergyCostOverride = value;
+        }
+    }
+
+    private int NextEnergyCost()
+    {
+        return TestEnergyCostOverride >= 0
+            ? TestEnergyCostOverride
+            : Owner!.RunState.Rng.CombatEnergyCosts.NextInt(4);
+    }
 }

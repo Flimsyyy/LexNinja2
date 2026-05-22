@@ -163,7 +163,7 @@
   "LEXNINJA2-PLAY_HEARTH_STONE.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
   "LEXNINJA2-PLAY_HEARTH_STONE.title": "让我幸福玩炉石",
 
-  "LEXNINJA2-WILD_SNAKE_GOD.description": "在你的回合开始时，额外抽{WildSnakeGodPower:diff()}张牌并随机化你[gold]手牌[/gold]中所有牌的耗能。",
+  "LEXNINJA2-WILD_SNAKE_GOD.description": "每当你抽到这张牌时，随机化这张牌的耗能。\n在你的回合开始时，额外抽{WildSnakeGodPower:diff()}张牌。\n出牌时，随机化你的[gold]手牌[/gold]的耗能。",
   "LEXNINJA2-WILD_SNAKE_GOD.title": "草野蛇神",
 
   "LEXNINJA2-LAN_BLADE.description": "造成{Damage:diff()}点伤害。（不会触发[gold]岚刀一直切[/gold]。）",
