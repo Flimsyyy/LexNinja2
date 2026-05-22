@@ -3,6 +3,7 @@ using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Nodes.Cards;
@@ -18,7 +19,11 @@ public class WildSnakeGodPower : CustomPowerModel
     public override string CustomPackedIconPath => "WildSnakeGodPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "WildSnakeGodPower.png".BigPowerImagePath();
 
-    public override async Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
+    public override async Task AfterSideTurnStart(
+        CombatSide side,
+        IReadOnlyList<Creature> creatures,
+        ICombatState combatState
+    )
     {
         if (side != Owner.Side)
             return;

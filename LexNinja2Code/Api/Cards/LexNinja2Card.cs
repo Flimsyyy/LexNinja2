@@ -56,7 +56,7 @@ public abstract class LexNinja2Card(int cost, CardType type, CardRarity rarity, 
         return true;
     }
 
-    protected bool CanCastNinjutsu()
+    public bool CanCastNinjutsu()
     {
         return GetLexKelaAmount() >= GetLexKelaCostWithModifiers();
     }
@@ -161,6 +161,10 @@ public abstract class LexNinja2Card(int cost, CardType type, CardRarity rarity, 
             return;
         }
         await CommonActions.ApplySelf<Lexkela>(choiceContext, this, -amount);
+        if (TemporaryLexKelaCost != null)
+        {
+            ClearsLexKelaWhenCardIsPlayed();
+        }
         await NinjaHooks.AfterLexKelaSpent(Owner.RunState, CombatState!, amount, Owner);
     }
 

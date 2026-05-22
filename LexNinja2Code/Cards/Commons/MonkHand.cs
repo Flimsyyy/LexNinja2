@@ -4,6 +4,8 @@ using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -14,13 +16,27 @@ namespace LexNinja2.LexNinja2Code.Cards.Commons;
 
 public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
+    private const decimal BlockAmount = 6;
+    private const decimal BlockUpgrade = 3;
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new NinjutsuVar(1),
             new CalculationBaseVar(0),
             new BlockVar(6, ValueProp.Move),
             new CalculatedDamageVar(ValueProp.Move).WithMultiplier(
-                (card, _) => card.Owner.Creature.Block
+                (card, _) =>
+                {
+                    var block = card.Owner.Creature.Block;
+                    if (card is not LexNinja2Card ninjaCard || !ninjaCard.CanCastNinjutsu())
+                        return block;
+                    block += (int)BlockAmount;
+                    if (card.IsUpgraded)
+                    {
+                        block += (int)BlockUpgrade;
+                    }
+                    return block;
+                }
             ),
             new ExtraDamageVar(1M),
         ];
@@ -37,13 +53,19 @@ public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, T
             await CommonActions.CardBlock(this, play);
         }
         await CommonActions
-            .CardAttack(this, play, vfx: "vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3")
+            .CardAttack(
+                this,
+                play.Target,
+                damage: Owner.Creature.Block,
+                vfx: "vfx/vfx_attack_blunt",
+                tmpSfx: "blunt_attack.mp3"
+            )
             .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(3);
+        DynamicVars.Block.UpgradeValueBy(BlockUpgrade);
     }
 
     public override string CustomPortraitPath => $"MonkHand_p.png".BigCardImagePath();

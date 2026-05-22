@@ -19,7 +19,11 @@ public class SealPower : CustomPowerModel
     public override string CustomPackedIconPath => "SealPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "SealPower84.png".BigPowerImagePath();
 
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(
+        PlayerChoiceContext choiceContext,
+        CombatSide side,
+        IEnumerable<Creature> creatures
+    )
     {
         if (side != Owner.Side)
         {

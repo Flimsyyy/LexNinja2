@@ -1,3 +1,4 @@
+using System.Reflection.Emit;
 using HarmonyLib;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using MegaCrit.Sts2.Core.Models;
@@ -31,19 +32,12 @@ public static class CardModelPatch
     [HarmonyPatch(nameof(CardModel.EndOfTurnCleanup))]
     public static void EndOfTurnCleanupPostfix(CardModel __instance)
     {
-        if (__instance is LexNinja2Card ninjaCard)
+        if (__instance is not LexNinja2Card ninjaCard)
+            return;
+        if (ninjaCard.TemporaryLexKelaCost == null)
         {
-            ninjaCard.ClearsLexKelaWhenTurnEnds();
+            return;
         }
-    }
-
-    [HarmonyPostfix]
-    [HarmonyPatch(nameof(CardModel.OnPlayWrapper))]
-    public static void OnPlayWrapperPostfix(CardModel __instance)
-    {
-        if (__instance is LexNinja2Card ninjaCard)
-        {
-            ninjaCard.ClearsLexKelaWhenCardIsPlayed();
-        }
+        ninjaCard.ClearsLexKelaWhenTurnEnds();
     }
 }

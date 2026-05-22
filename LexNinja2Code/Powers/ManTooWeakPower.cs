@@ -3,6 +3,7 @@ using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -19,7 +20,11 @@ public class ManTooWeakPower : CustomPowerModel
     public override string CustomPackedIconPath => "ManTooWeakPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "ManTooWeakPower.png".BigPowerImagePath();
 
-    public override async Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
+    public override async Task AfterSideTurnStart(
+        CombatSide side,
+        IReadOnlyList<Creature> participants,
+        ICombatState combatState
+    )
     {
         if (side != Owner.Side)
             return;

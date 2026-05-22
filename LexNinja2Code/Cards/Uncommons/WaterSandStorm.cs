@@ -6,6 +6,7 @@ using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -18,14 +19,27 @@ namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 public class WaterSandStorm()
     : LexNinja2Card(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
+    private const decimal SandWallAmount = 10;
+    private const decimal SandWallUpgrade = 3;
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new NinjutsuVar(2),
-            new PowerVar<SandWall>(10),
+            new PowerVar<SandWall>(SandWallAmount),
             new CalculationBaseVar(0),
             new ExtraDamageVar(1),
             new CalculatedDamageVar(ValueProp.Move).WithMultiplier(
-                (card, _) => card.Owner.Creature.GetPowerAmount<SandWall>()
+                (card, _) =>
+                {
+                    var sandWall = card.Owner.Creature.GetPowerAmount<SandWall>();
+                    if (card is not LexNinja2Card ninjaCard || !ninjaCard.CanCastNinjutsu())
+                        return sandWall;
+                    sandWall += (int)SandWallAmount;
+                    if (card.IsUpgraded)
+                    {
+                        sandWall += (int)SandWallUpgrade;
+                    }
+                    return sandWall;
+                }
             ),
         ];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
@@ -61,7 +75,12 @@ public class WaterSandStorm()
         //     )
         // );
         await CommonActions
-            .CardAttack(this, play, tmpSfx: "blunt_attack.mp3")
+            .CardAttack(
+                this,
+                play.Target,
+                damage: Owner.Creature.GetPowerAmount<SandWall>(),
+                tmpSfx: "blunt_attack.mp3"
+            )
             .Execute(choiceContext);
         var signalAwaiter = nRollingBoulderVfx.ToSignal(
             nRollingBoulderVfx,
@@ -76,7 +95,7 @@ public class WaterSandStorm()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Power<SandWall>().UpgradeValueBy(3);
+        DynamicVars.Power<SandWall>().UpgradeValueBy(SandWallUpgrade);
     }
 
     public override string CustomPortraitPath => $"WaterSandStorm_p.png".BigCardImagePath();
