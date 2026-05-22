@@ -12,9 +12,7 @@ body:
     id: mod-version
     attributes:
       label: Mod版本
-      description: |
-      你正在使用的蕾忍Mod版本（例如2.0.5）
-      请在游戏中点击**设置**-下拉找到**模组设置**-找到**LexNinja2**-在右边看模组版本号
+      description: 你正在使用的蕾忍Mod版本（例如2.0.5），请在游戏中点击**设置**-下拉找到**模组设置**-找到**LexNinja2**-在右边看模组版本号
       placeholder: "例如: 2.0.5"
     validations:
       required: true
@@ -32,9 +30,7 @@ body:
     id: baselib-version
     attributes:
       label: BaseLib 版本
-      description: |
-      你正在使用的BaseLib版本（例如3.1.4）
-      请在游戏中点击**设置**-下拉找到**模组设置**-找到**BaseLib**-在右边看模组版本号
+      description: 你正在使用的BaseLib版本（例如3.1.4），请在游戏中点击**设置**-下拉找到**模组设置**-找到**BaseLib**-在右边看模组版本号
       placeholder: "例如: 3.1.4"
     validations:
       required: true
