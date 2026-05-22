@@ -75,9 +75,10 @@ public class TakeYourHeart()
     {
         var debuffAmount = target
             .Powers.Where(p => p.TypeForCurrentAmount == PowerType.Debuff)
-            .Sum(p => p.Amount);
+            .Sum(p => Math.Abs(p.Amount));
         return debuffAmount >= DynamicVars[DebuffAmount].IntValue;
     }
 
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
+    protected override bool ShouldGlowGoldInternal =>
+        CanCastNinjutsu() && CombatState != null && CombatState.HittableEnemies.Any(IsEnoughDebuff);
 }
