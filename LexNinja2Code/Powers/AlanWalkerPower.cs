@@ -17,7 +17,7 @@ namespace LexNinja2.LexNinja2Code.Powers;
 public class AlanWalkerPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
     // protected override object InitInternalData() => (object) new Data();
