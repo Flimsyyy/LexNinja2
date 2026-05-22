@@ -1,4 +1,5 @@
-﻿using BaseLib.Utils;
+﻿using System.Diagnostics.CodeAnalysis;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Relics;
@@ -21,7 +22,9 @@ public class ThreeDuuz() : LexNinja2Relic
 
     private bool _wasUsedThisTurn;
     private CardModel? _cardBeingPlayed;
-    private bool WasUsedThisTurn
+
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    public bool WasUsedThisTurn
     {
         get => _wasUsedThisTurn;
         set
@@ -31,7 +34,8 @@ public class ThreeDuuz() : LexNinja2Relic
         }
     }
 
-    private CardModel? CardBeingPlayed
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    public CardModel? CardBeingPlayed
     {
         get => _cardBeingPlayed;
         set
