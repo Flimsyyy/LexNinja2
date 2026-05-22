@@ -25,7 +25,7 @@ public class AlanWalker() : LexNinja2Card(3, CardType.Power, CardRarity.Event, T
         NinjaAudio.Play("res://LexNinja2/audio/AlanWalker.mp3");
         await CommonActions.ApplySelf<AlanWalkerPower>(choiceContext, this);
         await Cmd.Wait(0.5f);
-        NinjaAudio.PlayLooped("res://LexNinja2/audio/Faded.mp3");
+        NinjaAudio.PlayLooped("res://LexNinja2/audio/Faded.mp3", 0.6f);
     }
 
     protected override void OnUpgrade()
