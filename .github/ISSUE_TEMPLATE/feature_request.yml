@@ -1,0 +1,21 @@
+name: "✨功能请求"
+description: “请求为蕾忍Mod添加全新的功能，比如卡牌、遗物等。”
+title: "[Feature]: "
+labels: ["feature request"]
+
+body:
+  - type: textarea
+    id: problem-statement
+    attributes:
+      label: 你想要的功能解决了什么问题？
+      description: 描述此功能将填补的空白或解决的问题。
+    validations:
+      required: true
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: 功能详细描述
+      description: 清晰、具体地描述你希望添加的新功能（可以是新机制、新卡牌、新遗物等）。
+    validations:
+      required: true

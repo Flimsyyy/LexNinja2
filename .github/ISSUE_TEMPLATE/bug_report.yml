@@ -1,0 +1,93 @@
+name: 🐛Bug反馈（游戏问题/崩溃）
+description: 提交Mod运行中的崩溃、卡牌/遗物效果异常、机制错误等。
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你帮忙改进这个 Mod！请尽可能详细地填写以下信息。
+
+  - type: input
+    id: mod-version
+    attributes:
+      label: Mod版本
+      description: |
+      你正在使用的蕾忍Mod版本（例如2.0.5）
+      请在游戏中点击**设置**-下拉找到**模组设置**-找到**LexNinja2**-在右边看模组版本号
+      placeholder: "例如: 2.0.5"
+    validations:
+      required: true
+
+  - type: input
+    id: game-version
+    attributes:
+      label: 游戏版本
+      description: 游戏的版本号（请在游戏主界面右上角查看）
+      placeholder: "例如: 0.106"
+    validations:
+      required: true
+
+  - type: input
+    id: baselib-version
+    attributes:
+      label: BaseLib 版本
+      description: |
+      你正在使用的BaseLib版本（例如3.1.4）
+      请在游戏中点击**设置**-下拉找到**模组设置**-找到**BaseLib**-在右边看模组版本号
+      placeholder: "例如: 3.1.4"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: version-check
+    attributes:
+      label: 版本条件确认
+      description: 请确认以下环境要求
+      options:
+        - label: "我使用了最新版的蕾忍Mod，并更新到了对应的游戏版本和BaseLib版本"
+          required: true
+        - label: "我已尝试仅安装蕾忍Mod和BaseLib两个Mod，并复现了问题。"
+          required: true
+
+  - type: textarea
+    id: what-did
+    attributes:
+      label: 你干了什么？
+      description: 清晰描述触发问题的操作步骤
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 发生了什么？
+      description: 描述实际出现的异常现象（崩溃、卡死、数值错误、效果缺失等）
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-expected
+    attributes:
+      label: 应该是什么？
+      description: 描述你期望的正确行为
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志内容
+      description: |
+        请找到对应的日志文件并上传附件。日志对排查问题至关重要！
+
+        **日志位置：**
+        - Windows: `%appdata%/SlayTheSpire2/logs`
+        - macOS: `~/Library/Application Support/SlayTheSpire2/logs`
+        - Linux: `~/.local/share/SlayTheSpire2/logs`
+
+        如果日志过长，建议使用 [Ubuntu Paste](https://paste.ubuntu.com/) 或 [GitHub Gist](https://gist.github.com/)，然后将链接粘贴在这里。
+      placeholder: |
+        在此粘贴日志内容或外部链接...
+    validations:
+      required: true
