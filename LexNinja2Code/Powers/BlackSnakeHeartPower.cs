@@ -30,11 +30,7 @@ public class BlackSnakeHeartPower : CustomPowerModel
     {
         var currentCard = cardPlay.Card;
         var lastCard = GetInternalData<Data>().LastCard;
-        if (lastCard == null)
-        {
-            return;
-        }
-        if (currentCard.GetType() == lastCard.GetType())
+        if (lastCard != null && currentCard.GetType() == lastCard.GetType())
         {
             NinjaAudio.Play("res://LexNinja2/audio/BlackSnakeHeart.mp3");
             await CardCmd.Exhaust(context, cardPlay.Card);
