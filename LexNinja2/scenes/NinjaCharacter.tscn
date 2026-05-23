@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bv635nuxskxwi"]
+[gd_scene load_steps=12 format=3 uid="uid://bv635nuxskxwi"]
 
 [ext_resource type="Texture2D" uid="uid://dsj6gtcuja53b" path="res://LexNinja2/images/charui/Ninja.png" id="1_cwhfs"]
 [ext_resource type="Texture2D" uid="uid://cyxpj3aqq52ku" path="res://LexNinja2/images/charui/cast3.png" id="2_b3gem"]
@@ -117,20 +117,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="GDScript" id="GDScript_uetf1"]
-script/source = "extends AnimatedSprite2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
-
 [node name="NinjaCharacter" type="Node2D"]
 position = Vector2(1, -100)
 
@@ -138,10 +124,8 @@ position = Vector2(1, -100)
 position = Vector2(-1, -111.00001)
 scale = Vector2(1.1421055, 1.1421053)
 sprite_frames = SubResource("SpriteFrames_po7nr")
-animation = &"idle_loop"
+animation = &"die"
 autoplay = "idle_loop"
-frame_progress = 0.50937307
-script = SubResource("GDScript_uetf1")
 
 [node name="Bounds" type="Control" parent="."]
 layout_mode = 3

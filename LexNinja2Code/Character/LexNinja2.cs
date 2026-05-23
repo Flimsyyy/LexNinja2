@@ -1,4 +1,5 @@
 ﻿using BaseLib.Abstracts;
+using BaseLib.Patches.UI;
 using Godot;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Cards.Basics;
@@ -64,6 +65,13 @@ public class LexNinja2 : PlaceholderCharacterModel
     //音效
     // public override string CustomAttackSfx => "blunt_attack.mp3";
     public override string CharacterTransitionSfx => "event:/sfx/ui/wipe_ironclad";
+
+    public override RelicIconData? CustomYummyCookie =>
+        new(
+            BigIconPath: "YummyCookie.png".BigRelicImagePath(),
+            PackedIconPath: "YummyCookie.png".RelicImagePath(),
+            PackedIconOutlinePath: "YummyCookie.png".RelicImagePath()
+        );
 
     // public override string CustomDeathSfx => "res://LexNinja2/audio/Cry.mp3";
     public override string CharacterSelectSfx => "res://LexNinja2/audio/pick.mp3";
