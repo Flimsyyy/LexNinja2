@@ -6,7 +6,6 @@ using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -68,6 +67,16 @@ public class WaterSandStorm()
         //         }
         //     )
         // );
+
+        // var signalAwaiter = nRollingBoulderVfx.ToSignal(
+        //     nRollingBoulderVfx,
+        //     NRollingBoulderVfx.SignalName.Finished
+        // );
+        NCombatRoom.Instance?.CombatVfxContainer.CallDeferred(
+            Node.MethodName.AddChild,
+            nRollingBoulderVfx
+        );
+        // await signalAwaiter;
         await CommonActions
             .CardAttack(
                 this,
@@ -76,15 +85,6 @@ public class WaterSandStorm()
                 tmpSfx: "blunt_attack.mp3"
             )
             .Execute(choiceContext);
-        var signalAwaiter = nRollingBoulderVfx.ToSignal(
-            nRollingBoulderVfx,
-            NRollingBoulderVfx.SignalName.Finished
-        );
-        NCombatRoom.Instance?.CombatVfxContainer.CallDeferred(
-            Node.MethodName.AddChild,
-            nRollingBoulderVfx
-        );
-        await signalAwaiter;
     }
 
     protected override void OnUpgrade()

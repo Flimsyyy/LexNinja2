@@ -3,6 +3,7 @@ using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
@@ -66,6 +67,14 @@ public class AlanWalkerPower : CustomPowerModel
             // }
             await CreatureCmd.GainBlock(Owner, DynamicVars.Block, null);
         }
+    }
+
+    public override Task BeforeDeath(Creature creature)
+    {
+        if (creature != Owner)
+            return Task.CompletedTask;
+        NinjaAudio.Stop("res://LexNinja2/audio/Faded.mp3", 5f);
+        return Task.CompletedTask;
     }
 
     public override async Task AfterCombatEnd(CombatRoom room)
