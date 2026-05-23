@@ -15,6 +15,7 @@ public class LexNinja2 : PlaceholderCharacterModel
     public override string CustomVisualPath => "res://LexNinja2/scenes/NinjaCharacter.tscn";
     public static readonly Color Color = new("252525");
     public override float CastAnimDelay => 1f;
+    public override float DeathAnimTime => 0;
 
     public override Color NameColor => Color;
     public override CharacterGender Gender => CharacterGender.Masculine;
