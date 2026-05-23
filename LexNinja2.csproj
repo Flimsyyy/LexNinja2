@@ -135,7 +135,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="!Exists('$(Sts2DataDir)/sts2.dll')">
-    <PackageReference Include="Book.StS2.RefLib" Version="0.106.0-beta" />
+    <PackageReference Include="Book.StS2.RefLib" Version="0.106.1-beta" />
   </ItemGroup>
 
   <Target Name="GetGitVersion" BeforeTargets="GenerateVersionedManifest">
