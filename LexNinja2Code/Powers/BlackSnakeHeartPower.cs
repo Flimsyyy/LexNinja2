@@ -29,6 +29,10 @@ public class BlackSnakeHeartPower : CustomPowerModel
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
         var currentCard = cardPlay.Card;
+        if (currentCard.Owner.Creature != Owner)
+        {
+            return;
+        }
         var lastCard = GetInternalData<Data>().LastCard;
         if (lastCard != null && currentCard.GetType() == lastCard.GetType())
         {
