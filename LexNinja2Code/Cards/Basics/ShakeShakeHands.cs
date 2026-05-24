@@ -1,8 +1,9 @@
-﻿using BaseLib.Utils;
+﻿using BaseLib.Extensions;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -24,8 +25,15 @@ public class ShakeShakeHands()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/ShakeShakeHand.mp3");
-        await CommonActions.ApplySelf<WeakPower>(choiceContext, this);
-        await CommonActions.Apply<WeakPower>(choiceContext, this, play);
+        await PowerCmd.Apply<WeakPower>(
+            choiceContext,
+            Owner.Creature.CombatState.Creatures.Where(c => !c.IsPet),
+            DynamicVars.Power<WeakPower>().BaseValue,
+            Owner.Creature,
+            this
+        );
+        // await CommonActions.ApplySelf<WeakPower>(choiceContext, this);
+        // await CommonActions.Apply<WeakPower>(choiceContext, this, play);
         await NinjaHelper.AddLexKela(choiceContext, this);
     }
 
