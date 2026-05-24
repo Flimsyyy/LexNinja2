@@ -16,7 +16,7 @@ public class TrueLeechFriend()
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Leech", 3)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<WeakPower>(),HoverTipFactory.FromPower<StrengthPower>()];
+        [HoverTipFactory.FromPower<WeakPower>(), HoverTipFactory.FromPower<StrengthPower>()];
     protected override bool ShouldGlowGoldInternal => IfWeakened();
     public override CardMultiplayerConstraint MultiplayerConstraint =>
         CardMultiplayerConstraint.MultiplayerOnly;
