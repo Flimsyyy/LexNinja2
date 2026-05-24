@@ -1,4 +1,4 @@
-﻿using BaseLib.Extensions;
+﻿using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -24,16 +24,23 @@ public class ShakeShakeHands()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
+        var players = CombatState!.Players;
+        foreach (var player in players)
+        {
+            if (player.Character is Character.LexNinja2)
+            {
+                await PowerCmd.Apply<WeakPower>(
+                    choiceContext,
+                    player.Creature,
+                    DynamicVars.Weak.BaseValue,
+                    Owner.Creature,
+                    this
+                );
+            }
+        }
         NinjaAudio.Play("res://LexNinja2/audio/ShakeShakeHand.mp3");
-        await PowerCmd.Apply<WeakPower>(
-            choiceContext,
-            Owner.Creature.CombatState.Creatures.Where(c => !c.IsPet),
-            DynamicVars.Power<WeakPower>().BaseValue,
-            Owner.Creature,
-            this
-        );
         // await CommonActions.ApplySelf<WeakPower>(choiceContext, this);
-        // await CommonActions.Apply<WeakPower>(choiceContext, this, play);
+        await CommonActions.Apply<WeakPower>(choiceContext, this, play);
         await NinjaHelper.AddLexKela(choiceContext, this);
     }
 

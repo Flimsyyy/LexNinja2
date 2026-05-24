@@ -12,7 +12,7 @@
   "LEXNINJA2-SHADE_CROSS_SLASH.description": "对所有敌人造成{Damage:diff()}点伤害。\n给予所有敌人{VulnerablePower:diff()}层[gold]易伤[/gold]。\n[gold]忍术[/gold]{Renshu:renShu()}：额外造成2次伤害。",
   "LEXNINJA2-SHADE_CROSS_SLASH.title": "影分身十字斩",
   
-  "LEXNINJA2-SHAKE_SHAKE_HANDS.description": "给予所有玩家和敌人{WeakPower}层[gold]虚弱[/gold]。\n获得{Kela:diff()}点[gold]蕾克拉[/gold]。",
+  "LEXNINJA2-SHAKE_SHAKE_HANDS.description": "给予所有[gold]蕾忍[/gold]和敌人{WeakPower}层[gold]虚弱[/gold]。\n获得{Kela:diff()}点[gold]蕾克拉[/gold]。",
   "LEXNINJA2-SHAKE_SHAKE_HANDS.title": "握握手，握握双手",
 
 
