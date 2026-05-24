@@ -20,6 +20,8 @@ public class LeechFriend()
         [HoverTipFactory.FromPower<WeakPower>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate];
     protected override bool ShouldGlowGoldInternal => IfWeakened();
+    public override CardMultiplayerConstraint MultiplayerConstraint =>
+        CardMultiplayerConstraint.SingleplayerOnly;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
