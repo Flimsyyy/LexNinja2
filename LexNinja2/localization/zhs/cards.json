@@ -70,7 +70,7 @@
   "LEXNINJA2-ANGRY_SNAKE_BITE.description": "将一张此牌的复制品加入弃牌堆。\n[gold]忍术[/gold]{Renshu:renShu()}：给予{PoisonPower:diff()}层[gold]中毒[/gold]。",
   "LEXNINJA2-ANGRY_SNAKE_BITE.title": "豪蛇怒咬",
 
-  "LEXNINJA2-GAMMA_BLADE.description": "对所有敌人造成{Damage:diff()}点伤害2次。\n给予所有敌人{VulnerablePower:diff()}层[gold]易伤[/gold]。\n给予所有敌人{WeakPower:diff()}层[gold]虚弱[/gold]。",
+  "LEXNINJA2-GAMMA_BLADE.description": "对所有敌人造成{Damage:diff()}点伤害。\n给予所有敌人{VulnerablePower:diff()}层[gold]易伤[/gold]。\n给予所有敌人{WeakPower:diff()}层[gold]虚弱[/gold]。",
   "LEXNINJA2-GAMMA_BLADE.title": "伽马伽马刀",
 
   "LEXNINJA2-MONK_HAND.description": "造成你当前格挡值的伤害。\n[gold]忍术[/gold]{Renshu:renShu()}：先获得{Block:diff()}点[gold]格挡[/gold]。{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}",
@@ -249,7 +249,7 @@
   "LEXNINJA2-COUNTLESS_VAMPIRE_DOG.title": "十万条吸血狗",
 
   "LEXNINJA2-SALT_STEALTH.selectionScreenPrompt": "选择一张牌，将其[gold]变化[/gold]。",
-  "LEXNINJA2-SALT_STEALTH.description": "[gold]变化[/gold]一张牌。\n获得{Kela:diff()}点[gold]蕾克拉[/gold]。",
+  "LEXNINJA2-SALT_STEALTH.description": "[gold]变化[/gold]一张牌。\n获得{Block:diff()}点[gold]格挡[/gold]。",
   "LEXNINJA2-SALT_STEALTH.title": "拿盐弄模糊不清",
 
   "LEXNINJA2-SOUTH_CROSS_SEAL.description": "使敌人获得50点[gold]格挡[/gold]并[gold]击晕[/gold]该敌人。\n[gold]忍术[/gold]{Renshu:renShu()}：效果持续{SealPower:diff()}个回合，直到受到未被[gold]格挡[/gold]的伤害。",

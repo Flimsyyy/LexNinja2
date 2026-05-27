@@ -14,11 +14,11 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Commons;
 
 public class GammaBlade()
-    : LexNinja2Card(5, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
+    : LexNinja2Card(6, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
-            new DamageVar(7, ValueProp.Move),
+            new DamageVar(13, ValueProp.Move),
             new PowerVar<VulnerablePower>(2),
             new PowerVar<WeakPower>(2),
         ];
@@ -45,7 +45,7 @@ public class GammaBlade()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2);
+        DynamicVars.Damage.UpgradeValueBy(5);
     }
 
     public override string CustomPortraitPath => "GammaBlade.png".BigCardImagePath();
