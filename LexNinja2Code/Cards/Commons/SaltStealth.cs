@@ -29,7 +29,7 @@ public class SaltStealth() : LexNinja2Card(1, CardType.Skill, CardRarity.Common,
         );
         if (selectedCard != null)
         {
-            await CardCmd.TransformToRandom(selectedCard, RunState!.Rng.CombatCardSelection);
+            await CardCmd.TransformToRandom(selectedCard, Owner.RunState.Rng.CombatCardSelection);
         }
         // await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block,play);
     }
