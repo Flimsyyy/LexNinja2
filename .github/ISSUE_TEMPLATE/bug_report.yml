@@ -75,15 +75,15 @@ body:
     attributes:
       label: 日志内容
       description: |
-        请找到对应的日志文件并上传附件。日志对排查问题至关重要！
-
+        请找到对应的日志文件并上传至任意日志分享网站，并把链接粘贴在这里。日志对排查问题至关重要！
+        
+        日志分享网站：比如 [Private Bin](https://logs.notifiarr.com/)、[GitHub Gist](https://gist.github.com/)、[Pastebin](https://pastebin.com/) 或 [Ubuntu Paste](https://paste.ubuntu.com/)。
+        
         **日志位置：**
         - Windows: `%appdata%/SlayTheSpire2/logs`
         - macOS: `~/Library/Application Support/SlayTheSpire2/logs`
         - Linux: `~/.local/share/SlayTheSpire2/logs`
-
-        如果日志过长，建议使用 [Ubuntu Paste](https://paste.ubuntu.com/) 或 [GitHub Gist](https://gist.github.com/)，然后将链接粘贴在这里。
       placeholder: |
-        在此粘贴日志内容或外部链接...
+        在此粘贴有日志内容的外部链接...
     validations:
       required: true
