@@ -37,7 +37,7 @@ public class GammaBlade()
         VfxCmd.PlayOnCreature(Owner.Creature, "vfx/vfx_sweeping_beam");
         await Cmd.Wait(0.1f);
         await CommonActions
-            .CardAttack(this, play, hitCount: 2, vfx: "vfx/vfx_attack_slash")
+            .CardAttack(this, play, vfx: "vfx/vfx_attack_slash")
             .Execute(choiceContext);
         await CommonActions.Apply<WeakPower>(choiceContext, this, play);
         await CommonActions.Apply<VulnerablePower>(choiceContext, this, play);
