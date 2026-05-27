@@ -22,7 +22,6 @@ public class WildSnakeGod() : LexNinja2Card(0, CardType.Power, CardRarity.Uncomm
     {
         NinjaAudio.Play("res://LexNinja2/audio/WildSnakeGod.mp3");
         await CommonActions.ApplySelf<WildSnakeGodPower>(choiceContext, this);
-
     }
 
     protected override void OnUpgrade()
@@ -45,5 +44,4 @@ public class WildSnakeGod() : LexNinja2Card(0, CardType.Power, CardRarity.Uncomm
         NCard.FindOnTable(this)?.PlayRandomizeCostAnim();
         return;
     }
-
 }

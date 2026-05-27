@@ -57,7 +57,6 @@ public class WildSnakeGodPower : CustomPowerModel
             }
         }
     }
-    
 
     private class Data
     {
