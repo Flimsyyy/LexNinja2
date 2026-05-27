@@ -29,7 +29,7 @@ public class PastHasGoneHand() : LexNinja2Card(1, CardType.Skill, CardRarity.Rar
         {
             await NinjaHelper.AddLexKela(choiceContext, this);
             await CommonActions.CardBlock(this, play);
-            await CardCmd.Exhaust(choiceContext, discard[0]);
+            await CardCmd.Exhaust(choiceContext, discard[0], skipVisuals: true);
         }
     }
 
