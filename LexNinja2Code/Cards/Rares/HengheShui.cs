@@ -49,6 +49,7 @@ public class HengheShui() : LexNinja2Card(1, CardType.Skill, CardRarity.Rare, Ta
     protected override void OnUpgrade()
     {
         DynamicVars.Heal.UpgradeValueBy(5);
+        DynamicVars.Poison.UpgradeValueBy(2);
     }
 
     public override string CustomPortraitPath => $"HengheShui_p.png".BigCardImagePath();
