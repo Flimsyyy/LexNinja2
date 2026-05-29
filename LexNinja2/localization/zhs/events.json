@@ -23,5 +23,24 @@
 
   "LEXNINJA2-THE_GREAT_SEAL.pages.OPTION_1.description":"“哈——！姆——！你会没事的哟！！！”\n你如此呐喊着脑海里的话语，眼前出现了一个黑色半拉身子的东西拼死保护一坨[green]绿不拉几的东西[/green]。\n却又在一阵闪光之后，黑色的人亲手手刃了那个绿不拉几的东西。\n那之后，黑色的身影，绿色的小人，一闪一烁。\n\n回过神来，先前那发着光的巨大人形已不见身影，徒留着两件[gold]珍贵器物[/gold]落在地上。\n\n也许你[red]不该这么做[/red]。",
   "LEXNINJA2-THE_GREAT_SEAL.pages.OPTION_2.description":"“哈姆你赶紧走吧要不然抹杀你姥姥爷！”\n“哈姆爷大无影脚！”\n“啊岚刀一直切连姆哈一样能杀！！！”\n\n你眼前是一片血泊，其中还躺着一个粉色头发的人，那个小东西从她怀中暴起一击[red]大飞脚[/red]踹了过来。\n\n你被这一击伤的很重，但那小东西也是[gold]强弩之末[/gold]。\n你拔出背后的刀，即便你不知道你背后哪来的刀，毫不留情地斩杀了它。\n\n耳旁的低语彻底停止了，那个巨大的发光人形似乎变得更加耀眼了，你感觉到思绪轻松了不少。",
-  "LEXNINJA2-THE_GREAT_SEAL.pages.OPTION_3.description":"[sine][purple]“哈姆的哈贝贝……”[/purple][/sine]\n[sine][green]“哈姆的哈贝贝……”[/green][/sine]\n[sine][blue]“哈姆的哈贝贝……”[/blue][/sine]\n[sine][pink]“哈姆的哈贝贝……”[/pink][/sine]\n[sine][red]“哈姆的哈贝贝……”[/red][/sine]\n\n[jitter][red]哈[/red] [green]姆[/green] [blue]杀[/blue] [purple]所[/purple] [pink]有[/pink] !!![/jitter] \n\n挥之···不去···"
+  "LEXNINJA2-THE_GREAT_SEAL.pages.OPTION_3.description":"[sine][purple]“哈姆的哈贝贝……”[/purple][/sine]\n[sine][green]“哈姆的哈贝贝……”[/green][/sine]\n[sine][blue]“哈姆的哈贝贝……”[/blue][/sine]\n[sine][pink]“哈姆的哈贝贝……”[/pink][/sine]\n[sine][red]“哈姆的哈贝贝……”[/red][/sine]\n\n[jitter][red]哈[/red] [green]姆[/green] [blue]杀[/blue] [purple]所[/purple] [pink]有[/pink] !!![/jitter] \n\n挥之···不去···",
+
+  "LEXNINJA2-DRINK.title": "渴了",
+  
+  "LEXNINJA2-DRINK.pages.INITIAL.description": "找到了一处泉水，你[jitter][red]突发恶疾[/red][/jitter]，感到特别口渴，必须立刻喝一口",
+  "LEXNINJA2-DRINK.pages.INITIAL.options.DRINK0.title": "喝水",
+  "LEXNINJA2-DRINK.pages.INITIAL.options.DRINK0.description": "回复[green]{Heal}[/green]点生命值",
+
+  "LEXNINJA2-DRINK.pages.DRINK_OR_LEAVE.description": "舒服了。\n\n不过泉水还有剩的，不如···？",
+  "LEXNINJA2-DRINK.pages.DRINK_OR_LEAVE.options.MORE_DRINK.title": "继续喝",
+  "LEXNINJA2-DRINK.pages.DRINK_OR_LEAVE.options.MORE_DRINK.description": "回复[green]{Heal}[/green]点生命值，移除[gold]{RandomCard}[/gold]",
+  "LEXNINJA2-DRINK.pages.DRINK_OR_LEAVE.options.LEAVE.title": "离开",
+  "LEXNINJA2-DRINK.pages.DRINK_OR_LEAVE.options.LEAVE.description": "",
+
+  "LEXNINJA2-DRINK.pages.MORE_DRINK.description": "又喝了口水，感觉更舒服了。\n\n[jitter][red]还没喝完！！！[/red][/jitter]",
+  "LEXNINJA2-DRINK.pages.MORE_DRINK.options.MORE_DRINK.title": "继续喝",
+  "LEXNINJA2-DRINK.pages.MORE_DRINK.options.MORE_DRINK.description": "回复[green]{Heal}[/green]点生命值，移除[gold]{RandomCard}[/gold],有{Possibility}%的概率喝完。",
+
+  "LEXNINJA2-DRINK.pages.LEAVE1.description": "你决定不喝，转身离开了。",
+  "LEXNINJA2-DRINK.pages.LEAVE2.description": "泉水终于喝完了，这儿没什么剩下的了。"
 }
