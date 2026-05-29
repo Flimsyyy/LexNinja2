@@ -60,8 +60,7 @@ public class PowerJesus() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
             .ToList();
         foreach (var buff in buffs)
         {
-            var data = buff.GetInternalData();
-            if (buff.InstanceType == PowerInstanceType.None || data == null)
+            if (buff.InstanceType == PowerInstanceType.None)
             {
                 await PowerCmd.Apply(
                     choiceContext,
@@ -77,12 +76,16 @@ public class PowerJesus() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
             {
                 continue;
             }
-            var dataClone = NinjaHelper.CloneData(data);
-            if (dataClone == null)
+            var data = buff.GetInternalData();
+            if (data != null)
             {
-                continue;
+                var dataClone = NinjaHelper.CloneData(data);
+                if (dataClone == null)
+                {
+                    continue;
+                }
+                buffClone.SetInternalData(dataClone);
             }
-            buffClone.SetInternalData(dataClone);
             await PowerCmd.Apply(
                 choiceContext,
                 buffClone,
