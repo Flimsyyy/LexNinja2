@@ -19,7 +19,7 @@ public class AlanWalkerPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
+    public override PowerInstanceType InstanceType => PowerInstanceType.None;
 
     // protected override object InitInternalData() => (object) new Data();
 
@@ -39,33 +39,34 @@ public class AlanWalkerPower : CustomPowerModel
         // if (GetInternalData<Data>().amountsForPlayedCards.Remove(cardPlay.Card, out var value)&&cardPlay.Card.Owner==Owner.Player)
         if (cardPlay.Card.Owner == Owner.Player)
         {
-            Flash();
-            var enemies = CombatState.HittableEnemies.Where(e => e.IsAlive).ToList();
-            var target = enemies.LastOrDefault();
-            if (target == null)
+            for (int i = 0; i < Amount; i++)
             {
-                return;
-            }
-            var nHyperbeamVfx = NHyperbeamVfx.Create(base.Owner, target);
-            if (nHyperbeamVfx != null)
-            {
-                NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(nHyperbeamVfx);
-                await Cmd.Wait(0.5f);
-            }
-            foreach (var enemy in enemies)
-            {
-                var nHyperbeamImpactVfx = NHyperbeamImpactVfx.Create(Owner, enemy);
-                if (nHyperbeamImpactVfx != null)
+                Flash();
+                var enemies = CombatState.HittableEnemies.Where(e => e.IsAlive).ToList();
+                var target = enemies.LastOrDefault();
+                if (target == null)
                 {
-                    NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(nHyperbeamImpactVfx);
+                    return;
                 }
-                await CreatureCmd.Damage(context, enemy, 6, ValueProp.Unpowered, null, null);
+                var nHyperbeamVfx = NHyperbeamVfx.Create(base.Owner, target);
+                if (nHyperbeamVfx != null)
+                {
+                    NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(nHyperbeamVfx);
+                    await Cmd.Wait(0.5f);
+                }
+                foreach (var enemy in enemies)
+                {
+                    var nHyperbeamImpactVfx = NHyperbeamImpactVfx.Create(Owner, enemy);
+                    if (nHyperbeamImpactVfx != null)
+                    {
+                        NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(
+                            nHyperbeamImpactVfx
+                        );
+                    }
+                    await CreatureCmd.Damage(context, enemy, 6, ValueProp.Unpowered, null, null);
+                }
+                await CreatureCmd.GainBlock(Owner, DynamicVars.Block, null);
             }
-            // foreach (Creature enemy in CombatState.HittableEnemies)
-            // {
-            //
-            // }
-            await CreatureCmd.GainBlock(Owner, DynamicVars.Block, null);
         }
     }
 
