@@ -23,7 +23,7 @@ public class TheGreatSeal : CustomEventModel
     public override string? CustomInitialPortraitPath =>
         "res://LexNinja2/images/events/TheGreatSeal.png";
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(10, ValueProp.Unblockable | ValueProp.Unpowered)];
+        [new DamageVar(15, ValueProp.Unblockable | ValueProp.Unpowered)];
 
     public override ActModel[] Acts => [ModelDb.Act<Glory>()];
 
