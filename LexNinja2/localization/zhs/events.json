@@ -1,18 +1,14 @@
 ﻿{
-  
   "LEXNINJA2-THE_SPECTRE.title": "尾立，微辣，未来",
-  
   "LEXNINJA2-THE_SPECTRE.pages.INITIAL.description": "你的意识飞升于宇宙之中，朦胧之间，你看到脚底是你原来所在的星球，与此同时，有一个[gold]非常违和[/gold]的红色箭头指着一个[gold]非常违和[/gold]的红色圆圈。\n\n这似乎是对你的某种指引，你会在此处找到些什么[red]奇特的东西[/red]。",
   "LEXNINJA2-THE_SPECTRE.pages.INITIAL.options.TAKE_THE_KITTEN.title": "I SEE YOU",
   "LEXNINJA2-THE_SPECTRE.pages.INITIAL.options.TAKE_THE_KITTEN.description": "获得一张[gold]{Card1}[/gold]",
   "LEXNINJA2-THE_SPECTRE.pages.INITIAL.options.STOP_POSTING_THIS.title": "啊搞得我想都想不到",
   "LEXNINJA2-THE_SPECTRE.pages.INITIAL.options.STOP_POSTING_THIS.description": "获得一张[gold]{Card2}[/gold]",
-  
   "LEXNINJA2-THE_SPECTRE.pages.KITTEN_CHOSEN.description": "I SEE YOU \n\n这么说了，意识模糊着，你不知道是因为你看到了这只小猫有感而发，还是这只小猫在看着你。 \n\n带上它吧，你这么想着。\n\n即便这样的行为，似乎令人[gold]羞耻[/gold]。\n但若是你始终如一，证明自己，活着，爱着，说着谎言···",
   "LEXNINJA2-THE_SPECTRE.pages.STOP_CHOSEN.description": "[jitter][red]不要再给我看这个了！！！[/red][/jitter]\n[jitter][red]我已经看累了！！[/red][/jitter]\n\n[jitter][red]啊搞得我想都想不到！！！[/red][/jitter]",
 
   "LEXNINJA2-THE_GREAT_SEAL.title":"伟大封印",
-  
   "LEXNINJA2-THE_GREAT_SEAL.pages.INITIAL.description": "你的眼前，一个裹着一身黑的蓝色头发像是幻影的东西和[gold]神秘的巨大人形[/gold]守着不知道什么闪着光的东西拦住了你。\n\n你的脑海里响起了[jitter][red]莫名其妙的低语[/red][/jitter]\n[sine]“哈姆……哈姆……哈姆的哈贝贝……”[/sine]\n\n[sine]“哈姆的哈贝贝……”[/sine]\n[jitter][red]“哈姆的哈贝比……”[/red][/jitter]\n\n无数信息涌入你的脑海，那个发着光的神秘人形和蓝头发的幻影还在你面前。\n耳旁的低语挥之不去，思绪逐渐模糊，你在混乱之中听清楚的是……",
   "LEXNINJA2-THE_GREAT_SEAL.pages.INITIAL.options.SAVE_HAMOOD.title": "哈——姆——你会没事的哟",
   "LEXNINJA2-THE_GREAT_SEAL.pages.INITIAL.options.SAVE_HAMOOD.description": "获得一张[red]凡庸[/red]，获得两个稀有遗物",
@@ -20,27 +16,36 @@
   "LEXNINJA2-THE_GREAT_SEAL.pages.INITIAL.options.KILL_HAMOOD.description": "受到[red]{Damage}[/red]点伤害，[gold]删除[/gold]两张牌。",
   "LEXNINJA2-THE_GREAT_SEAL.pages.INITIAL.options.HAMOOD_KILL_ALL.title": "[red]哈[/red] [green]姆[/green] [blue]杀[/blue] [purple]所[/purple] [pink]有[/pink]",
   "LEXNINJA2-THE_GREAT_SEAL.pages.INITIAL.options.HAMOOD_KILL_ALL.description": "获得 [red]哈[/red] [green]姆[/green] [blue]杀[/blue] [purple]所[/purple] [pink]有[/pink]",
-
   "LEXNINJA2-THE_GREAT_SEAL.pages.OPTION_1.description":"“哈——！姆——！你会没事的哟！！！”\n你如此呐喊着脑海里的话语，眼前出现了一个黑色半拉身子的东西拼死保护一坨[green]绿不拉几的东西[/green]。\n却又在一阵闪光之后，黑色的人亲手手刃了那个绿不拉几的东西。\n那之后，黑色的身影，绿色的小人，一闪一烁。\n\n回过神来，先前那发着光的巨大人形已不见身影，徒留着两件[gold]珍贵器物[/gold]落在地上。\n\n也许你[red]不该这么做[/red]。",
   "LEXNINJA2-THE_GREAT_SEAL.pages.OPTION_2.description":"“哈姆你赶紧走吧要不然抹杀你姥姥爷！”\n“哈姆爷大无影脚！”\n“啊岚刀一直切连姆哈一样能杀！！！”\n\n你眼前是一片血泊，其中还躺着一个粉色头发的人，那个小东西从她怀中暴起一击[red]大飞脚[/red]踹了过来。\n\n你被这一击伤的很重，但那小东西也是[gold]强弩之末[/gold]。\n你拔出背后的刀，即便你不知道你背后哪来的刀，毫不留情地斩杀了它。\n\n耳旁的低语彻底停止了，那个巨大的发光人形似乎变得更加耀眼了，你感觉到思绪轻松了不少。",
   "LEXNINJA2-THE_GREAT_SEAL.pages.OPTION_3.description":"[sine][purple]“哈姆的哈贝贝……”[/purple][/sine]\n[sine][green]“哈姆的哈贝贝……”[/green][/sine]\n[sine][blue]“哈姆的哈贝贝……”[/blue][/sine]\n[sine][pink]“哈姆的哈贝贝……”[/pink][/sine]\n[sine][red]“哈姆的哈贝贝……”[/red][/sine]\n\n[jitter][red]哈[/red] [green]姆[/green] [blue]杀[/blue] [purple]所[/purple] [pink]有[/pink] !!![/jitter] \n\n挥之···不去···",
 
   "LEXNINJA2-DRINK.title": "渴了",
-  
   "LEXNINJA2-DRINK.pages.INITIAL.description": "找到了一处泉水，你[jitter][red]突发恶疾[/red][/jitter]，感到特别口渴，必须立刻喝一口",
   "LEXNINJA2-DRINK.pages.INITIAL.options.DRINK0.title": "喝水",
   "LEXNINJA2-DRINK.pages.INITIAL.options.DRINK0.description": "回复[green]{Heal}[/green]点生命值",
-
   "LEXNINJA2-DRINK.pages.DRINK_OR_LEAVE.description": "舒服了。\n\n不过泉水还有剩的，不如···？",
   "LEXNINJA2-DRINK.pages.DRINK_OR_LEAVE.options.MORE_DRINK.title": "继续喝",
   "LEXNINJA2-DRINK.pages.DRINK_OR_LEAVE.options.MORE_DRINK.description": "回复[green]{Heal}[/green]点生命值，移除[gold]{RandomCard}[/gold]",
   "LEXNINJA2-DRINK.pages.DRINK_OR_LEAVE.options.LEAVE.title": "离开",
   "LEXNINJA2-DRINK.pages.DRINK_OR_LEAVE.options.LEAVE.description": "",
-
   "LEXNINJA2-DRINK.pages.MORE_DRINK.description": "又喝了口水，感觉更舒服了。\n\n[jitter][red]还没喝完！！！[/red][/jitter]",
   "LEXNINJA2-DRINK.pages.MORE_DRINK.options.MORE_DRINK.title": "继续喝",
   "LEXNINJA2-DRINK.pages.MORE_DRINK.options.MORE_DRINK.description": "回复[green]{Heal}[/green]点生命值，移除[gold]{RandomCard}[/gold],有{Possibility}%的概率喝完。",
-
   "LEXNINJA2-DRINK.pages.LEAVE1.description": "你决定不喝，转身离开了。",
-  "LEXNINJA2-DRINK.pages.LEAVE2.description": "泉水终于喝完了，这儿没什么剩下的了。"
+  "LEXNINJA2-DRINK.pages.LEAVE2.description": "泉水终于喝完了，这儿没什么剩下的了。",
+
+  "LEXNINJA2-MAN_YU_DIAN.title": "鳗鱼店",
+  "LEXNINJA2-MAN_YU_DIAN.pages.INITIAL.description": "你在地上找到了一幅卷轴，上面写着字。\n你感觉到[gold]特别有开腔的欲望。[/gold]\n\n回过神来，你来到了一家饭店，坐在一张桌子前。\n虽说老板和老板娘看上去不太对劲，你意识到了“鳗鱼店”是[red]鳗鱼开的店[/red]的意思，但它们现在正在问你要不要吃点什么。",
+  "LEXNINJA2-MAN_YU_DIAN.pages.INITIAL.options.YUAN_SHEN.title": "吃饭",
+  "LEXNINJA2-MAN_YU_DIAN.pages.INITIAL.options.YUAN_SHEN.description": "支付[gold]220[/gold]金币，获得一张[gold]原始力量[/gold]，回复[green]{Heal}[/green]点生命值",
+  "LEXNINJA2-MAN_YU_DIAN.pages.INITIAL.options.MAN_YU.title":"杀人拿500",
+  "LEXNINJA2-MAN_YU_DIAN.pages.INITIAL.options.MAN_YU.description":"[red]攻击[/red]老板娘。获得[gold]花露水[/gold]。",
+  "LEXNINJA2-MAN_YU_DIAN.pages.INITIAL.options.LEAVE.title":"离开",
+  "LEXNINJA2-MAN_YU_DIAN.pages.INITIAL.options.LEAVE.description":"获得一张[red]蚊子手[/red]。",
+  "LEXNINJA2-MAN_YU_DIAN.pages.FIGHT.description": "你不打算和这些鳗鱼做生意，攻击了老板娘。\n[jitter][red]鳗鱼店老板立刻冲上前来[/red][/jitter]把老板娘护在身后与你拼命。\n\n混乱之中，你拿起了一瓶花露水。",
+  "LEXNINJA2-MAN_YU_DIAN.pages.FIGHT.options.FIGHT.title": "战斗！！",
+  "LEXNINJA2-MAN_YU_DIAN.pages.FIGHT.options.FIGHT.description": "",
+  "LEXNINJA2-MAN_YU_DIAN.pages.YUAN_SHEN.description": "贵是贵了点，不过挺好吃的，你吃的饱饱的。\n\n你还觉得自己浑身[gold]充满了力量[/gold]，特别想砸石头。",
+  "LEXNINJA2-MAN_YU_DIAN.pages.LEAVE.description": "你决定不吃了，转身离开了。\n\n气急败坏的老板娘对你做了些什么，你总感觉有个拍不死的东西老是在你耳朵旁边烦你。"
 }
