@@ -43,7 +43,13 @@ public class NuclearDragonPower : CustomPowerModel
             return;
         }
         Flash();
-        await PowerCmd.Remove<Lexkela>(Owner);
+        await PowerCmd.Apply<Lexkela>(
+            choiceContext,
+            Owner,
+            -Owner.GetPowerAmount<Lexkela>(),
+            Owner,
+            null
+        );
 
         var child = NGroundFireVfx.Create(Owner);
         if (child == null)
