@@ -1,4 +1,5 @@
-﻿using BaseLib.Utils;
+﻿using BaseLib.Extensions;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -10,16 +11,19 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
-public class TwoMonks() : LexNinja2Card(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
+public class TwoMonks() : LexNinja2Card(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<TwoMonksPower>(1)];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(NinjaKeyword.Renshu)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/TwoMonks.mp3");
+        if (!Owner.HasPower<TwoMonksPower>())
+        {
+            await CommonActions.ApplySelf<TwoMonksPower>(choiceContext, this);
+        }
         await CommonActions.ApplySelf<TwoMonksPower>(choiceContext, this);
     }
 

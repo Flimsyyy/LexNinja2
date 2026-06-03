@@ -229,7 +229,7 @@
   "LEXNINJA2-NAMI_YOYO.description": "给予{PoisonPower:diff()}层[gold]中毒[/gold]。\n给予一个随机敌人该名敌人身上的[gold]中毒[/gold]。",
   "LEXNINJA2-NAMI_YOYO.title": "纳米悠悠球",
 
-  "LEXNINJA2-TWO_MONKS.description": "你的下一张[gold]忍术[/gold]牌会额外打出一次。",
+  "LEXNINJA2-TWO_MONKS.description": "进行一个额外回合。\n额外回合由分身接管。",
   "LEXNINJA2-TWO_MONKS.title": "罗汉分身",
 
   "LEXNINJA2-GET_ALL_HANDS.description": "打出此牌后，你在这个回合内每打出一张[gold]手系忍术[/gold]牌，抽1张牌，获得{energyPrefix:energyIcons(1)}，直到你打出非[gold]手系忍术[/gold]牌为止。",

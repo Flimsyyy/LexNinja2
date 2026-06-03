@@ -1,4 +1,5 @@
 ﻿using BaseLib.Abstracts;
+using BaseLib.Extensions;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -54,6 +55,10 @@ public class OhFuckFlashPower : CustomPowerModel
     {
         if (player != Owner.Player)
             return;
+        if (player.HasPower<TwoMonksPower>())
+        {
+            return;
+        }
         _isEffective = false;
         await PowerCmd.Remove(this);
     }
