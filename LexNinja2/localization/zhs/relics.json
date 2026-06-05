@@ -31,7 +31,7 @@
   "LEXNINJA2-THREE_DUUZ.flavor": "哦哦，FUMO，还是可爱，实际人民收米术。",
   "LEXNINJA2-THREE_DUUZ.title": "3D幽幽子",
   
-  "LEXNINJA2-TOILET_WATER.description": "当你抽到[red]诅咒[/red]牌时，将其[gold]消耗[/gold]并抽[blue]{Cards}[/blue]张牌。",
+  "LEXNINJA2-TOILET_WATER.description": "每场战斗中，抽到前[blue]{Count}[/blue]张[red]诅咒[/red]牌时，将其[gold]消耗[/gold]并抽[blue]{Cards}[/blue]张牌。",
   "LEXNINJA2-TOILET_WATER.flavor": "原本是用来缓解飞虫引起的瘙痒的液体，意外的对于清洁有很好的效果。",
   "LEXNINJA2-TOILET_WATER.title": "花露水",
 
