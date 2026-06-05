@@ -14,7 +14,7 @@ namespace LexNinja2.LexNinja2Code.Powers;
 public class GetAllHandsPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
 
     protected override object InitInternalData() => new Data();
 
@@ -33,8 +33,11 @@ public class GetAllHandsPower : CustomPowerModel
                 await PowerCmd.Remove(this);
                 return;
             }
-            await CardPileCmd.Draw(context, 1, Owner.Player);
-            await PlayerCmd.GainEnergy(1, Owner.Player);
+            for (int i = 0; i < Amount; i++)
+            {
+                await CardPileCmd.Draw(context, 1, Owner.Player);
+                await PlayerCmd.GainEnergy(1, Owner.Player);
+            }
         }
     }
 
