@@ -1,5 +1,4 @@
 ﻿using BaseLib.Abstracts;
-using Godot;
 using LexNinja2.LexNinja2Code.Api;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -19,20 +18,16 @@ public class Drink : CustomEventModel
 
     public override bool IsAllowed(IRunState runState)
     {
-        if (
-            runState.Players.All(p => PileType.Deck.GetPile(p).Cards.Count(c => c.IsRemovable) > 10)
-        )
-        {
-            return true;
-        }
-        return false;
+        return runState.Players.All(p =>
+            PileType.Deck.GetPile(p).Cards.Count(c => c.IsRemovable) > 10
+        );
     }
 
     private decimal _stop;
     private CardModel? _randomCardToLose;
     private CardModel? RandomCardToLose
     {
-        get { return _randomCardToLose; }
+        get => _randomCardToLose;
         set
         {
             AssertMutable();
@@ -45,21 +40,19 @@ public class Drink : CustomEventModel
         List<CardModel> list;
         if (RandomCardToLose == null)
         {
-            list = Owner.Deck.Cards.Where((CardModel c) => c.Rarity != CardRarity.Basic).ToList();
+            list = Owner.Deck.Cards.Where((c) => c.Rarity != CardRarity.Basic).ToList();
         }
         else
         {
-            list = Owner
-                .Deck.Cards.Where((CardModel c) => c.GetType() != RandomCardToLose.GetType())
-                .ToList();
+            list = Owner.Deck.Cards.Where(c => c.GetType() != RandomCardToLose.GetType()).ToList();
         }
-        list.RemoveAll((CardModel c) => !c.IsRemovable);
+        list.RemoveAll(c => !c.IsRemovable);
         if (list.Count == 0)
         {
-            list = base.Owner.Deck.Cards.Where((CardModel c) => c.IsRemovable).ToList();
+            list = Owner.Deck.Cards.Where(c => c.IsRemovable).ToList();
         }
         RandomCardToLose = base.Rng.NextItem(list);
-        StringVar stringVar = (StringVar)base.DynamicVars["RandomCard"];
+        StringVar stringVar = (StringVar)DynamicVars["RandomCard"];
         if (RandomCardToLose != null)
             stringVar.StringValue = RandomCardToLose.Title;
     }
@@ -109,8 +102,7 @@ public class Drink : CustomEventModel
         if (RandomCardToLose != null)
             await CardPileCmd.RemoveFromDeck(RandomCardToLose);
         GetNewRandomCard();
-        _stop = Owner.RunState.Rng.CombatEnergyCosts.NextInt(101);
-        GD.Print(_stop);
+        _stop = Rng.NextInt(101);
         if (
             _stop >= DynamicVars["Possibility"].BaseValue
             || DynamicVars["Possibility"].BaseValue == 15
@@ -136,10 +128,5 @@ public class Drink : CustomEventModel
     private async Task Leave()
     {
         SetEventFinished(PageDescription("LEAVE1"));
-    }
-
-    private async Task Leave2()
-    {
-        SetEventFinished(PageDescription("LEAVE2"));
     }
 }

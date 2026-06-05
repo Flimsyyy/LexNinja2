@@ -5,7 +5,6 @@ using LexNinja2.LexNinja2Code.Encounter;
 using LexNinja2.LexNinja2Code.Relics;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -70,11 +69,10 @@ public class ManYuDian : CustomEventModel
 
     private async Task Fight()
     {
-        List<Reward> list = new List<Reward>();
-        foreach (Player player in base.Owner.RunState.Players)
-        {
-            list.Add(new GoldReward(22, player));
-        }
+        var list = base
+            .Owner.RunState.Players.Select(player => new GoldReward(22, player))
+            .Cast<Reward>()
+            .ToList();
         EnterCombatWithoutExitingEvent<ManYuDianEncounter>(list, shouldResumeAfterCombat: false);
     }
 
