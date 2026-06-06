@@ -15,8 +15,8 @@ public class PlasmaArrowPower : CustomPowerModel, ITryModifyLexKelaCost, IAfterL
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override string CustomPackedIconPath => "power.png".PowerImagePath();
-    public override string? CustomBigIconPath => "power.png".BigPowerImagePath();
+    public override string CustomPackedIconPath => "PlasmaArrowPower.png".PowerImagePath();
+    public override string? CustomBigIconPath => "PlasmaArrowPower.png".BigPowerImagePath();
 
     public override bool TryModifyEnergyCostInCombat(
         CardModel card,
