@@ -17,7 +17,7 @@ public class PlasmaArrow()
     : LexNinja2Card(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(12, ValueProp.Move), new PowerVar<PlasmaArrowPower>(1)];
+        [new DamageVar(14, ValueProp.Move), new PowerVar<PlasmaArrowPower>(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(NinjaKeyword.Renshu)];
 
