@@ -317,7 +317,7 @@
   "LEXNINJA2-MOSQUITO_HAND.description": "出牌时会有蚊子叫。",
   "LEXNINJA2-MOSQUITO_HAND.title": "蚊子手",
 
-  "LEXNINJA2-TRUE_LEECH_FRIEND.description": "吸取一个在这回合打出的牌数小于{PlayMax:diff()}张的盟友{Leech:diff()}点[gold]力量[/gold]。",
+  "LEXNINJA2-TRUE_LEECH_FRIEND.description": "回合结束前，吸取一个本回合内打出的牌数小于你的盟友{Leech:diff()}点[gold]力量[/gold]。",
   "LEXNINJA2-TRUE_LEECH_FRIEND.title": "好友眼蛤十字吸",
   
   "手系忍术": "[gold]手系忍术[/gold]",

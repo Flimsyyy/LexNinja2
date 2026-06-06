@@ -16,8 +16,7 @@ namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 public class TrueLeechFriend()
     : LexNinja2Card(0, CardType.Skill, CardRarity.Uncommon, TargetType.AnyAlly)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DynamicVar("Leech", 3), new IntVar("PlayMax", 3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Leech", 3)];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [CardKeyword.Innate, CardKeyword.Retain];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -34,7 +33,7 @@ public class TrueLeechFriend()
             return;
         }
         NinjaAudio.Play("res://LexNinja2/audio/LeechFriend.mp3");
-        await PowerCmd.Apply<StrengthPower>(
+        await PowerCmd.Apply<DarkShacklesPower>(
             choiceContext,
             Owner.Creature,
             DynamicVars["Leech"].BaseValue,
@@ -42,7 +41,7 @@ public class TrueLeechFriend()
             this
         );
         if (play.Target != null)
-            await PowerCmd.Apply<StrengthPower>(
+            await PowerCmd.Apply<FlexPotionPower>(
                 choiceContext,
                 play.Target,
                 -DynamicVars["Leech"].BaseValue,
@@ -63,7 +62,11 @@ public class TrueLeechFriend()
             CombatManager.Instance.History.CardPlaysFinished.Count(
                 (CardPlayFinishedEntry e) =>
                     e.HappenedThisTurn(base.CombatState) && e.CardPlay.Card.Owner == target.Player
-            ) < base.DynamicVars["PlayMax"].IntValue
+            )
+            < CombatManager.Instance.History.CardPlaysFinished.Count(
+                (CardPlayFinishedEntry e) =>
+                    e.HappenedThisTurn(base.CombatState) && e.CardPlay.Card.Owner == Owner
+            )
         )
         {
             return true;
