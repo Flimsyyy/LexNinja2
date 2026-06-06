@@ -15,8 +15,8 @@ public class WePeacePower : CustomPowerModel
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Single;
 
-    public override string CustomPackedIconPath => "power.png".PowerImagePath();
-    public override string? CustomBigIconPath => "power.png".BigPowerImagePath();
+    public override string CustomPackedIconPath => "WePeacePower.png".PowerImagePath();
+    public override string? CustomBigIconPath => "WePeacePower.png".BigPowerImagePath();
 
     // public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     // {
