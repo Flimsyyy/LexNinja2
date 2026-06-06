@@ -45,12 +45,10 @@ public class ManYuDian : CustomEventModel
 
     private async Task YuanShen()
     {
+        NinjaAudio.Play("res://LexNinja2/audio/YuanShen.mp3");
         await PlayerCmd.LoseGold(DynamicVars.Gold.BaseValue, Owner!);
         CardCmd.PreviewCardPileAdd(
-            await CardPileCmd.Add(
-                Owner!.RunState.CreateCard<PrimalForce>(base.Owner),
-                PileType.Deck
-            )
+            await CardPileCmd.Add(Owner!.RunState.CreateCard<PrimalForce>(Owner), PileType.Deck)
         );
         await CreatureCmd.Heal(Owner!.Creature, DynamicVars.Heal.BaseValue);
         SetEventFinished(PageDescription("YUAN_SHEN"));
@@ -58,6 +56,7 @@ public class ManYuDian : CustomEventModel
 
     private async Task ManYu()
     {
+        NinjaAudio.Play("res://LexNinja2/audio/KillFor500.mp3");
         await RelicCmd.Obtain<ToiletWater>(Owner!);
         FightPage();
     }
@@ -69,11 +68,15 @@ public class ManYuDian : CustomEventModel
 
     private async Task Fight()
     {
-        var list = base
-            .Owner.RunState.Players.Select(player => new GoldReward(22, player))
+        var list = Owner
+            ?.RunState.Players.Select(player => new GoldReward(22, player))
             .Cast<Reward>()
             .ToList();
-        EnterCombatWithoutExitingEvent<ManYuDianEncounter>(list, shouldResumeAfterCombat: false);
+        if (list != null)
+            EnterCombatWithoutExitingEvent<ManYuDianEncounter>(
+                list,
+                shouldResumeAfterCombat: false
+            );
     }
 
     private async Task Leave()
@@ -82,10 +85,7 @@ public class ManYuDian : CustomEventModel
         await Cmd.Wait(0.5f);
         NinjaAudio.Play("res://LexNinja2/audio/Mosquito2.mp3", 0.4f);
         CardCmd.PreviewCardPileAdd(
-            await CardPileCmd.Add(
-                Owner!.RunState.CreateCard<MosquitoHand>(base.Owner),
-                PileType.Deck
-            )
+            await CardPileCmd.Add(Owner!.RunState.CreateCard<MosquitoHand>(Owner), PileType.Deck)
         );
         SetEventFinished(PageDescription("LEAVE"));
     }
