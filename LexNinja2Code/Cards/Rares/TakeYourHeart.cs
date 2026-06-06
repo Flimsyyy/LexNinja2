@@ -25,7 +25,7 @@ public class TakeYourHeart()
     private const string DebuffAmount = "DebuffAmount";
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new NinjutsuVar(10), new DamageVar(0, ValueProp.Move), new(DebuffAmount, 2)];
+        [new NinjutsuVar(10), new DamageVar(10, ValueProp.Move), new(DebuffAmount, 2)];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<ArtifactPower>()];

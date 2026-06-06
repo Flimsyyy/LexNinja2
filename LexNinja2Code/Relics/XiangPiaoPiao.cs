@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Rooms;
 
 namespace LexNinja2.LexNinja2Code.Relics;
 
@@ -21,26 +22,18 @@ public class XiangPiaoPiao() : LexNinja2Relic
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<Lexkela>()];
 
-    // public override async Task AfterRoomEntered(AbstractRoom room)
-    // {
-    //     if (room is not CombatRoom)
-    //         return;
-    //     Flash();
-    //     await PowerCmd.Apply<Pain>(
-    //         new ThrowingPlayerChoiceContext(),
-    //         Owner.Creature,
-    //         1,
-    //         null,
-    //         null
-    //     );
-    //     await PowerCmd.Apply<Lexkela>(
-    //         new ThrowingPlayerChoiceContext(),
-    //         Owner.Creature,
-    //         2,
-    //         null,
-    //         null
-    //     );
-    // }
+    public override async Task AfterRoomEntered(AbstractRoom room)
+    {
+        if (room is not CombatRoom)
+            return;
+        await PowerCmd.Apply<Pain>(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            1,
+            null,
+            null
+        );
+    }
 
     public override async Task AfterSideTurnStart(
         CombatSide side,

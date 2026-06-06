@@ -1,5 +1,4 @@
 ﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -32,7 +31,6 @@ public class StoneStrongPower : CustomPowerModel
         {
             return;
         }
-        NinjaAudio.Play("res://LexNinja2/audio/StoneStrong.mp3");
         await PowerCmd.Apply<SandWall>(choiceContext, Owner, Amount, null, null);
     }
 }

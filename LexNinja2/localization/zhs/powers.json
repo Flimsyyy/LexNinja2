@@ -116,8 +116,8 @@
   "LEXNINJA2-IGNIS_HEALING_POWER.smartDescription": "回合开始时受到[blue]{HpLoss}[/blue]点伤害。",
   "LEXNINJA2-IGNIS_HEALING_POWER.title": "火神",
 
-  "LEXNINJA2-TWO_MONKS_POWER.description": "下一张[gold]忍术[/gold]牌会额外打出一次。",
-  "LEXNINJA2-TWO_MONKS_POWER.smartDescription": "下[blue]{Amount}[/blue]张[gold]忍术[/gold]牌会额外打出一次。",
+  "LEXNINJA2-TWO_MONKS_POWER.description": "获得被分身接管的[gold]额外回合[/gold]。",
+  "LEXNINJA2-TWO_MONKS_POWER.smartDescription": "获得被分身接管的[gold]额外回合[/gold]。",
   "LEXNINJA2-TWO_MONKS_POWER.title": "罗汉分身",
 
   "LEXNINJA2-GET_ALL_HANDS_POWER.description": "你在这个回合内每打出一张[gold]手系忍术[/gold]牌，抽1张牌，获得1点[gold]能量[/gold]。",

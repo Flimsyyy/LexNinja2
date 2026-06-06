@@ -3,7 +3,6 @@ using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -24,22 +23,8 @@ public class ShakeShakeHands()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        var players = CombatState!.Players;
-        foreach (var player in players)
-        {
-            if (player.Character is Character.LexNinja2)
-            {
-                await PowerCmd.Apply<WeakPower>(
-                    choiceContext,
-                    player.Creature,
-                    DynamicVars.Weak.BaseValue,
-                    Owner.Creature,
-                    this
-                );
-            }
-        }
         NinjaAudio.Play("res://LexNinja2/audio/ShakeShakeHand.mp3");
-        // await CommonActions.ApplySelf<WeakPower>(choiceContext, this);
+        await CommonActions.ApplySelf<WeakPower>(choiceContext, this);
         await CommonActions.Apply<WeakPower>(choiceContext, this, play);
         await NinjaHelper.AddLexKela(choiceContext, this);
     }

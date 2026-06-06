@@ -9,7 +9,7 @@ public static class NinjaAudio
     private static readonly Dictionary<string, List<AudioStreamPlayer>> ActivePlayers = new();
 
     // 基础播放（音量）
-    public static void Play(string path, float volume = 0.5f)
+    public static void Play(string path, float volume = 1f)
     {
         PlayInternal(path, volume, 1f, false);
     }

@@ -5,8 +5,12 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Entities.RestSite;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Rewards;
+using MegaCrit.Sts2.Core.Rooms;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
@@ -26,10 +30,21 @@ public class GoodNightPower : CustomPowerModel
         ICombatState combatState
     )
     {
-        if (side != Owner.Side)
+        if (side != Owner.Side || Owner.Player == null)
             return;
-        await CreatureCmd.Heal(Owner, Amount);
+        var player = Owner.Player;
+        await CreatureCmd.Heal(Owner, HealRestSiteOption.GetHealAmount(player));
         Flash();
+        await Hook.AfterRestSiteHeal(player.RunState, player, false);
+        var rewards = new List<Reward>();
+        Hook.ModifyRestSiteHealRewards(player.RunState, player, rewards, false);
+        if (rewards.Count != 0 && CombatState.RunState.CurrentRoom is CombatRoom room)
+        {
+            foreach (var reward in rewards)
+            {
+                room.AddExtraReward(player, reward);
+            }
+        }
     }
 
     public override async Task AfterSideTurnEnd(
