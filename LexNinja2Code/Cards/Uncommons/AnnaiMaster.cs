@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
@@ -26,8 +27,9 @@ public class AnnaiMaster() : LexNinja2Card(1, CardType.Skill, CardRarity.Uncommo
         var card = CardFactory
             .GetDistinctForCombat(
                 Owner,
-                Owner
-                    .Character.CardPool.GetUnlockedCards(
+                ModelDb
+                    .Character<Character.LexNinja2>()
+                    .CardPool.GetUnlockedCards(
                         Owner.UnlockState,
                         Owner.RunState.CardMultiplayerConstraint
                     )

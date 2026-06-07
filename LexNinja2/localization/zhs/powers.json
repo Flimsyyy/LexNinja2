@@ -149,7 +149,7 @@
   "LEXNINJA2-SCIENCE_POWER.title": "INDUSTRY！！！",
 
   "LEXNINJA2-OH_FUCK_FLASH_POWER.description": "获得一个额外回合。",
-  "LEXNINJA2-OH_FUCK_FLASH_POWER.smartDescription": "获得一个额外回合。",
+  "LEXNINJA2-OH_FUCK_FLASH_POWER.smartDescription": "获得[blue]{Amount}[/blue]个额外回合。",
   "LEXNINJA2-OH_FUCK_FLASH_POWER.title": "闪现",
 
   "LEXNINJA2-ALAN_WALKER_POWER.description": "你每出一张牌，对所有敌人造成[blue]6[/blue]点伤害，获得[blue]7[/blue]点[gold]格挡[/gold]。",
