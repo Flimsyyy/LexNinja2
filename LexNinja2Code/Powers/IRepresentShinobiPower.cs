@@ -3,11 +3,10 @@ using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Hooks;
 using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 
 namespace LexNinja2.LexNinja2Code.Powers;
@@ -18,6 +17,14 @@ public class IRepresentShinobiPower : CustomPowerModel, IAfterLexKelaSpent
     public override PowerStackType StackType => PowerStackType.Counter;
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(StaticHoverTip.Energy), HoverTipFactory.FromPower<Lexkela>()];
+
+    private bool _isUsed;
+
+    public bool IsUsed
+    {
+        get => _isUsed;
+        set => _isUsed = value;
+    }
 
     public override string CustomPackedIconPath => "IRepresentShinobiPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "IRepresentShinobiPower84.png".BigPowerImagePath();
@@ -44,15 +51,27 @@ public class IRepresentShinobiPower : CustomPowerModel, IAfterLexKelaSpent
         {
             return;
         }
-        int num = CombatManager.Instance.History.CardPlaysStarted.Count(e =>
-            e.Actor == Owner && e.HappenedThisTurn(CombatState)
-        );
-        if (num > 1)
+
+        if (IsUsed)
         {
             return;
         }
-
+        IsUsed = true;
         NinjaAudio.Play("res://LexNinja2/audio/IRepresentShinobi.mp3");
+        Flash();
         await PlayerCmd.GainEnergy(Amount, Owner.Player);
+    }
+
+    public override async Task BeforeHandDraw(
+        Player player,
+        PlayerChoiceContext choiceContext,
+        ICombatState combatState
+    )
+    {
+        if (player != Owner.Player)
+        {
+            return;
+        }
+        IsUsed = false;
     }
 }

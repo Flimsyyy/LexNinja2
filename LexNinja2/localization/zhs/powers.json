@@ -100,8 +100,8 @@
   "LEXNINJA2-REAPER_FLAME.smartDescription": "每次打出牌时，所有敌人失去[blue]{Amount}[/blue]点生命。",
   "LEXNINJA2-REAPER_FLAME.title": "死神火焰",
 
-  "LEXNINJA2-I_REPRESENT_SHINOBI_POWER.description": "消耗[gold]蕾克拉[/gold]时，获得[gold]能量[/gold]。",
-  "LEXNINJA2-I_REPRESENT_SHINOBI_POWER.smartDescription": "消耗[gold]蕾克拉[/gold]时，获得[blue]{Amount}[/blue]点[gold]能量[/gold]。",
+  "LEXNINJA2-I_REPRESENT_SHINOBI_POWER.description": "每回合第一次减少[gold]蕾克拉[/gold]时，获得[gold]能量[/gold]。",
+  "LEXNINJA2-I_REPRESENT_SHINOBI_POWER.smartDescription": "每回合第一次减少[gold]蕾克拉[/gold]时，获得[blue]{Amount}[/blue]点[gold]能量[/gold]。",
   "LEXNINJA2-I_REPRESENT_SHINOBI_POWER.title": "我代表着SHINOBI",
 
   "LEXNINJA2-DOUBLE_DAMAGE_POWER.description": "下次攻击造成双倍伤害。",

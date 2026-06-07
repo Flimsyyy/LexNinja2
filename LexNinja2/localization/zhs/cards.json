@@ -202,7 +202,7 @@
   "LEXNINJA2-OH_FUCK_FLASH.description": "阻止下1次你受到的生命值损伤。\n[gold]忍术[/gold]{Renshu:renShu()}：结束你的回合。\n进行一个额外回合。",
   "LEXNINJA2-OH_FUCK_FLASH.title": "哎哟我草闪现！",
 
-  "LEXNINJA2-I_REPRESENT_SHINOBI.description": "你每回合第一次打出[gold]忍术[/gold]牌时，获得{IRepresentShinobiPower:diff()}{energyPrefix:energyIcons(1)}。",
+  "LEXNINJA2-I_REPRESENT_SHINOBI.description": "你每回合第一次减少[gold]蕾克拉[/gold]时，获得{IRepresentShinobiPower:diff()}{energyPrefix:energyIcons(1)}。",
   "LEXNINJA2-I_REPRESENT_SHINOBI.title": "我代表着SHINOBI",
 
   "LEXNINJA2-HAND_ION_DESTRUCTION.description": "对所有敌人造成{Damage:diff()}点伤害X次。\n[gold]忍术[/gold]{Renshu:renShu()}：使本次伤害[gold]翻倍[/gold]。",
