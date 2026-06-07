@@ -53,7 +53,6 @@ public class TrueLeechFriend()
     protected override void OnUpgrade()
     {
         DynamicVars["Leech"].UpgradeValueBy(2);
-        DynamicVars["PlayMax"].UpgradeValueBy(1);
     }
 
     private bool CanLeechFriend(Creature target)
