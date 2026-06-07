@@ -15,7 +15,7 @@ public class OhFuckFlashPower : CustomPowerModel
     private bool _wasOwnerPartOfLastPlayerTurn = true;
     private bool _isEffective = true;
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
 
     public override string CustomPackedIconPath => "OhFuckFlash.png".PowerImagePath();
     public override string? CustomBigIconPath => "OhFuckFlash.png".BigPowerImagePath();
@@ -59,7 +59,10 @@ public class OhFuckFlashPower : CustomPowerModel
         {
             return;
         }
-        _isEffective = false;
-        await PowerCmd.Remove(this);
+        if (Amount == 1)
+        {
+            _isEffective = false;
+        }
+        await PowerCmd.Decrement(this);
     }
 }
