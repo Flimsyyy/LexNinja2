@@ -38,7 +38,6 @@ public class FourNightsLightning()
                 tmpSfx: "lightning_orb_evoke.mp3"
             )
             .Execute(choiceContext);
-        await CardPileCmd.Draw(choiceContext, repeatCount, Owner);
         await PlayerCmd.GainEnergy(repeatCount, Owner);
     }
 

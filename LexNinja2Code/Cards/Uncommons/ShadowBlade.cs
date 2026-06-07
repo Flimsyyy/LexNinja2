@@ -14,10 +14,10 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class ShadowBlade()
-    : LexNinja2Card(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+    : LexNinja2Card(3, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(12, ValueProp.Move), new PowerVar<VulnerablePower>(1)];
+        [new DamageVar(16, ValueProp.Move), new PowerVar<VulnerablePower>(2)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
@@ -46,7 +46,7 @@ public class ShadowBlade()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2);
+        DynamicVars.Damage.UpgradeValueBy(7);
         DynamicVars.Power<VulnerablePower>().UpgradeValueBy(1);
     }
 

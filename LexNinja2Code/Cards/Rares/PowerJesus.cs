@@ -51,6 +51,12 @@ public class PowerJesus() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
+        List<CardModel> list = PileType.Hand.GetPile(base.Owner).Cards.ToList();
+        foreach (CardModel item in list)
+        {
+            await CardCmd.Exhaust(choiceContext, item);
+        }
+
         NinjaAudio.Play("res://LexNinja2/audio/PowerJesus.mp3");
         await NinjaAnim.TriggerCastAnim(this);
 

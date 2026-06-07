@@ -50,7 +50,7 @@ public class GoBackHands() : LexNinja2Card(2, CardType.Skill, CardRarity.Uncommo
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        DynamicVars.Ninjutsu().UpgradeValueBy(-1);
     }
 
     public override string CustomPortraitPath => $"GoBackHands_p.png".BigCardImagePath();

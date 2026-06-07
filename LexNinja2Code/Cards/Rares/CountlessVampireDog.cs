@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
 public class CountlessVampireDog()
-    : LexNinja2Card(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
+    : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>

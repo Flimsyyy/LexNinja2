@@ -2,7 +2,10 @@
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Hooks;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -41,6 +44,14 @@ public class IRepresentShinobiPower : CustomPowerModel, IAfterLexKelaSpent
         {
             return;
         }
+        int num = CombatManager.Instance.History.CardPlaysStarted.Count(e =>
+            e.Actor == Owner && e.HappenedThisTurn(CombatState)
+        );
+        if (num > 1)
+        {
+            return;
+        }
+
         NinjaAudio.Play("res://LexNinja2/audio/IRepresentShinobi.mp3");
         await PlayerCmd.GainEnergy(Amount, Owner.Player);
     }

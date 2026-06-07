@@ -17,7 +17,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class BlackZiCannon()
-    : LexNinja2Card(4, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+    : LexNinja2Card(5, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(26, ValueProp.Move)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>

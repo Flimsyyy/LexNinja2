@@ -14,12 +14,12 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class BeastShout()
-    : LexNinja2Card(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
+    : LexNinja2Card(2, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
     private const string StrengthLoss = "StrengthLoss";
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(11, ValueProp.Move), new(StrengthLoss, 1), new NinjutsuVar(1)];
+        [new DamageVar(14, ValueProp.Move), new(StrengthLoss, 2), new NinjutsuVar(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<StrengthPower>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];

@@ -14,7 +14,7 @@ namespace LexNinja2.LexNinja2Code.Cards.Rares;
 public class HengheShui() : LexNinja2Card(1, CardType.Skill, CardRarity.Rare, TargetType.AnyAlly)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new HealVar(15), new PowerVar<PoisonPower>(3)];
+        [new HealVar(8), new PowerVar<PoisonPower>(3)];
 
     // protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Infection>()];
     public override CardMultiplayerConstraint MultiplayerConstraint =>
@@ -48,7 +48,7 @@ public class HengheShui() : LexNinja2Card(1, CardType.Skill, CardRarity.Rare, Ta
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Heal.UpgradeValueBy(5);
+        DynamicVars.Heal.UpgradeValueBy(4);
         DynamicVars.Poison.UpgradeValueBy(2);
     }
 

@@ -17,7 +17,7 @@ namespace LexNinja2.LexNinja2Code.Cards.Commons;
 public class HolyLittleStorm()
     : LexNinja2Card(1, CardType.Attack, CardRarity.Common, TargetType.RandomEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Move)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<Lexkela>()];
@@ -34,7 +34,6 @@ public class HolyLittleStorm()
         NinjaAudio.Play("res://LexNinja2/audio/HolyLittleStorm.mp3");
         await Cmd.Wait(1f);
         var hitCount = ResolveLexkelaXValue() + 1;
-        await Ninjutsu(choiceContext, play);
         await CommonActions
             .CardAttack(
                 this,
@@ -44,6 +43,7 @@ public class HolyLittleStorm()
                 tmpSfx: "blunt_attack.mp3"
             )
             .Execute(choiceContext);
+        await Ninjutsu(choiceContext, play);
     }
 
     protected override void OnUpgrade()

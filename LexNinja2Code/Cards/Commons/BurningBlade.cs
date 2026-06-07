@@ -20,7 +20,7 @@ public class BurningBlade()
     : LexNinja2Card(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(6, ValueProp.Move), new NinjutsuVar(1)];
+        [new DamageVar(9, ValueProp.Move), new NinjutsuVar(2)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(StaticHoverTip.ReplayStatic)];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
@@ -47,7 +47,7 @@ public class BurningBlade()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2);
+        DynamicVars.Damage.UpgradeValueBy(3);
     }
 
     public override string CustomPortraitPath => "OverBurningBlade_p.png".BigCardImagePath();

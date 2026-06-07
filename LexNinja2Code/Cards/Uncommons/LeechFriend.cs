@@ -18,7 +18,6 @@ public class LeechFriend()
         [new PowerVar<StrengthPower>(2), new PowerVar<DexterityPower>(2)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<WeakPower>()];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate];
     protected override bool ShouldGlowGoldInternal => IfWeakened();
     public override CardMultiplayerConstraint MultiplayerConstraint =>
         CardMultiplayerConstraint.SingleplayerOnly;
@@ -49,8 +48,7 @@ public class LeechFriend()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Strength.UpgradeValueBy(1);
-        DynamicVars.Dexterity.UpgradeValueBy(1);
+        AddKeyword(CardKeyword.Innate);
     }
 
     private bool IfWeakened()

@@ -16,9 +16,9 @@ public class ManTooWeak() : LexNinja2Card(2, CardType.Power, CardRarity.Uncommon
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
-            new PowerVar<StrengthPower>(5),
-            new PowerVar<DexterityPower>(5),
-            new PowerVar<ManTooWeakPower>(2),
+            new PowerVar<StrengthPower>(3),
+            new PowerVar<DexterityPower>(3),
+            new PowerVar<ManTooWeakPower>(1),
         ];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<Lexkela>()];
@@ -34,7 +34,8 @@ public class ManTooWeak() : LexNinja2Card(2, CardType.Power, CardRarity.Uncommon
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Power<ManTooWeakPower>().UpgradeValueBy(-1);
+        DynamicVars.Power<StrengthPower>().UpgradeValueBy(1);
+        DynamicVars.Power<DexterityPower>().UpgradeValueBy(1);
     }
 
     public override string CustomPortraitPath => $"ManTooWeak_p.png".BigCardImagePath();

@@ -16,7 +16,7 @@ namespace LexNinja2.LexNinja2Code.Cards.Commons;
 public class SandDefendHand() : LexNinja2Card(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(8, ValueProp.Move), new NinjutsuVar(1), new PowerVar<SandWall>(6)];
+        [new BlockVar(8, ValueProp.Move), new NinjutsuVar(1), new PowerVar<SandWall>(5)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<SandWall>(), HoverTipFactory.FromPower<Lexkela>()];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
@@ -36,7 +36,7 @@ public class SandDefendHand() : LexNinja2Card(1, CardType.Skill, CardRarity.Comm
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(3);
-        DynamicVars.Power<SandWall>().UpgradeValueBy(3);
+        DynamicVars.Power<SandWall>().UpgradeValueBy(2);
     }
 
     public override string CustomPortraitPath => $"SandDefendHand_p.png".BigCardImagePath();

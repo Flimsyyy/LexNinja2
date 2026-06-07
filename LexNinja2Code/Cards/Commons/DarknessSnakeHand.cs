@@ -11,11 +11,11 @@ using MegaCrit.Sts2.Core.Nodes.Cards;
 namespace LexNinja2.LexNinja2Code.Cards.Commons;
 
 public class DarknessSnakeHand()
-    : LexNinja2Card(0, CardType.Skill, CardRarity.Common, TargetType.Self)
+    : LexNinja2Card(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     // private int _testEnergyCostOverride = -1;
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new CardsVar(5), new LexKelaVar(1)];
+        [new CardsVar(5), new LexKelaVar(2)];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [CardKeyword.Exhaust, NinjaKeyword.Hand];
 
@@ -35,7 +35,7 @@ public class DarknessSnakeHand()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.LexKela().UpgradeValueBy(1);
+        EnergyCost.UpgradeBy(-1);
     }
 
     // public int TestEnergyCostOverride

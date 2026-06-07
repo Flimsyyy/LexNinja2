@@ -3,9 +3,11 @@ using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
@@ -18,24 +20,31 @@ public class BecomeNong() : LexNinja2Card(1, CardType.Power, CardRarity.Rare, Ta
     {
         await NinjaAnim.TriggerCastAnim(this);
         NinjaAudio.Play("res://LexNinja2/audio/BecomeNong.mp3");
-        var card = await CommonActions.SelectSingleCard(
-            this,
-            SelectionScreenPrompt,
-            choiceContext,
-            PileType.Hand
-        );
-        if (card == null)
+        if (base.IsUpgraded)
         {
+            var card = await CommonActions.SelectSingleCard(
+                this,
+                SelectionScreenPrompt,
+                choiceContext,
+                PileType.Hand
+            );
+            if (card != null)
+            {
+                var power = await CommonActions.ApplySelf<BecomeNongPower>(choiceContext, this);
+                power?.SetSelectedCard(card);
+            }
             return;
         }
-        var power = await CommonActions.ApplySelf<BecomeNongPower>(choiceContext, this);
-        power?.SetSelectedCard(card);
+        CardPile pile = PileType.Hand.GetPile(base.Owner);
+        CardModel? card2 = Owner.RunState.Rng.CombatCardSelection.NextItem(pile.Cards);
+        if (card2 != null)
+        {
+            var power = await CommonActions.ApplySelf<BecomeNongPower>(choiceContext, this);
+            power?.SetSelectedCard(card2);
+        }
     }
 
-    protected override void OnUpgrade()
-    {
-        AddKeyword(CardKeyword.Retain);
-    }
+    protected override void OnUpgrade() { }
 
     public override string CustomPortraitPath => $"BecomeNong_p.png".BigCardImagePath();
     public override string PortraitPath => $"BecomeNong.png".CardImagePath();

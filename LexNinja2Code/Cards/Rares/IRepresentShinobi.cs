@@ -1,4 +1,5 @@
-﻿using BaseLib.Utils;
+﻿using BaseLib.Extensions;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -14,8 +15,7 @@ public class IRepresentShinobi()
     : LexNinja2Card(3, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new PowerVar<IRepresentShinobiPower>(1)];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
+        [new PowerVar<IRepresentShinobiPower>(2)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<Lexkela>(), HoverTipFactory.Static(StaticHoverTip.Energy)];
 
@@ -27,7 +27,7 @@ public class IRepresentShinobi()
 
     protected override void OnUpgrade()
     {
-        RemoveKeyword(CardKeyword.Ethereal);
+        DynamicVars.Power<IRepresentShinobiPower>().UpgradeValueBy(1);
     }
 
     public override string CustomPortraitPath => $"IRepresentShinobi_p.png".BigCardImagePath();

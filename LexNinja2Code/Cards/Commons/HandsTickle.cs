@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Commons;
 
 public class HandsTickle()
-    : LexNinja2Card(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    : LexNinja2Card(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     private const string CalculatedHits = "CalculatedHits";
 

@@ -22,14 +22,17 @@ public class DarknessCrawl()
         NinjaAudio.Play("res://LexNinja2/audio/DarknessCrawl.mp3");
         await NinjaAnim.TriggerCastAnim(this);
         var evokeCount = ResolveEnergyXValue();
-        if (IsUpgraded)
-            evokeCount += 1;
         for (var i = 0; i < evokeCount; ++i)
         {
             NinjaAudio.Play("res://LexNinja2/audio/Crawl.mp3");
             await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
             await NinjaHelper.AddLexKela(choiceContext, this);
         }
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Block.UpgradeValueBy(2);
     }
 
     public override string CustomPortraitPath => $"DarknessCrawl_p.png".BigCardImagePath();

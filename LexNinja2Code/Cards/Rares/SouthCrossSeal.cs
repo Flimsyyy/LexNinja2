@@ -31,6 +31,10 @@ public class SouthCrossSeal()
             return;
         }
         await CommonActions.Apply<SealPower>(choiceContext, this, play);
+        if (Owner.Creature.HasPower<Lexkela>())
+        {
+            await SpendLexKela(Owner.Creature.GetPowerAmount<Lexkela>(), choiceContext);
+        }
     }
 
     protected override void OnUpgrade()

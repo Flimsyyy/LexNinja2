@@ -16,7 +16,7 @@ public class BlackDragonHand()
     : LexNinja2Card(0, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new HpLossVar(2), new NinjutsuVar(2), new PowerVar<WeakPower>(2)];
+        [new HpLossVar(3), new NinjutsuVar(4), new PowerVar<WeakPower>(2)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<IntangiblePower>(), HoverTipFactory.FromPower<WeakPower>()];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
@@ -46,7 +46,7 @@ public class BlackDragonHand()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.HpLoss.UpgradeValueBy(1);
+        DynamicVars.Ninjutsu().UpgradeValueBy(-1);
     }
 
     public override string CustomPortraitPath => $"BlackDragonHand_p.png".BigCardImagePath();

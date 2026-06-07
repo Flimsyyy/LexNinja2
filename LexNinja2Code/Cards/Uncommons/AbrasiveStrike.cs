@@ -12,10 +12,10 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class AbrasiveStrike()
-    : LexNinja2Card(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+    : LexNinja2Card(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new PowerVar<ThornsPower>(2), new DamageVar(8, ValueProp.Move)];
+        [new PowerVar<ThornsPower>(2), new DamageVar(7, ValueProp.Move)];
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

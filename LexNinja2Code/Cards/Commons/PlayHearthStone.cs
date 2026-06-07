@@ -14,7 +14,7 @@ namespace LexNinja2.LexNinja2Code.Cards.Commons;
 public class PlayHearthStone()
     : LexNinja2Card(4, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(14, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(12, ValueProp.Move)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<Lexkela>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Science];

@@ -28,6 +28,8 @@ public class DarkSoulCut() : LexNinja2Card(0, CardType.Attack, CardRarity.Rare, 
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
+        await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars.Damage, Owner.Creature);
+        await Cmd.Wait(0.2f);
         if (!await Ninjutsu(choiceContext, play))
         {
             return;

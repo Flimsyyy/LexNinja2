@@ -15,7 +15,7 @@ public class BackFourthHand()
     : LexNinja2Card(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(8, ValueProp.Move), new CardsVar(2)];
+        [new BlockVar(7, ValueProp.Move), new CardsVar(2)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

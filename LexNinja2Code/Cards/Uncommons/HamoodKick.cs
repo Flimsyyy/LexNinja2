@@ -18,7 +18,7 @@ public class HamoodKick()
     : LexNinja2Card(0, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(13, ValueProp.Move), new NinjutsuVar(1)];
+        [new DamageVar(11, ValueProp.Move), new NinjutsuVar(1)];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -49,7 +49,7 @@ public class HamoodKick()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(5);
+        DynamicVars.Damage.UpgradeValueBy(4);
     }
 
     public override string CustomPortraitPath => "HamoodKick2.png".BigCardImagePath();
