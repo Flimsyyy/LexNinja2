@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
@@ -30,8 +31,9 @@ public class ScarePower : CustomPowerModel
             var card = CardFactory
                 .GetDistinctForCombat(
                     Owner.Player,
-                    Owner
-                        .Player.Character.CardPool.GetUnlockedCards(
+                    ModelDb
+                        .Character<Character.LexNinja2>()
+                        .CardPool.GetUnlockedCards(
                             Owner.Player.UnlockState,
                             Owner.Player.RunState.CardMultiplayerConstraint
                         )
