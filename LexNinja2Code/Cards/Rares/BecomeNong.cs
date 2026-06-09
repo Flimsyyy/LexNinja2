@@ -13,8 +13,6 @@ public class BecomeNong() : LexNinja2Card(1, CardType.Power, CardRarity.Rare, Ta
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<BecomeNongPower>(1)];
     public override bool CanBeGeneratedInCombat => false;
-    public override CardMultiplayerConstraint MultiplayerConstraint =>
-        CardMultiplayerConstraint.SingleplayerOnly;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
