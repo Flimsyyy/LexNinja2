@@ -1,5 +1,4 @@
 ﻿using BaseLib.Utils;
-using Godot;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -55,8 +54,13 @@ public class UBW() : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetTy
         await Cmd.Wait(1);
         var hitCount = (int)((CalculatedVar)this.DynamicVars[Hitcounts]).Calculate(play.Target);
         await CommonActions
-            .CardAttack(this, play, hitCount: hitCount, tmpSfx: "heavy_attack.mp3")
-            .WithHitVfxNode((Func<Creature, Node2D>)(t => NBigSlashImpactVfx.Create(t)!))
+            .CardAttack(
+                this,
+                play,
+                hitCount: hitCount,
+                tmpSfx: "heavy_attack.mp3"
+            )
+            .WithHitVfxNode((Creature t) => NBigSlashImpactVfx.Create(t))
             .Execute(choiceContext);
         ;
     }
