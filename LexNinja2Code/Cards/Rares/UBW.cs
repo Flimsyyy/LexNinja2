@@ -1,4 +1,5 @@
 ﻿using BaseLib.Utils;
+using Godot;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -6,10 +7,12 @@ using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.Nodes.Vfx.Cards;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -52,15 +55,8 @@ public class UBW() : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetTy
         await Cmd.Wait(1);
         var hitCount = (int)((CalculatedVar)this.DynamicVars[Hitcounts]).Calculate(play.Target);
         await CommonActions
-            .CardAttack(
-                this,
-                play,
-                hitCount: hitCount,
-                vfx: "vfx/hellraiser_attack_vfx",
-                tmpSfx: "heavy_attack.mp3"
-            )
-            .SpawningHitVfxOnEachCreature()
-            .WithHitVfxSpawnedAtBase()
+            .CardAttack(this, play, hitCount: hitCount, tmpSfx: "heavy_attack.mp3")
+            .WithHitVfxNode((Func<Creature, Node2D>)(t => NBigSlashImpactVfx.Create(t)!))
             .Execute(choiceContext);
         ;
     }
