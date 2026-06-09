@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
 public class GenshinStorm()
-    : LexNinja2Card(2, CardType.Skill, CardRarity.Rare, TargetType.AllAllies)
+    : LexNinja2Card(2, CardType.Skill, CardRarity.Uncommon, TargetType.AllAllies)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromCard<HolyLittleStorm>(true), HoverTipFactory.FromPower<Lexkela>()];

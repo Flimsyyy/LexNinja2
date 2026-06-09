@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class HeBullyMe()
-    : LexNinja2Card(3, CardType.Skill, CardRarity.Uncommon, TargetType.AllAllies)
+    : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, TargetType.AllAllies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new EnergyVar(3), new PowerVar<StrengthPower>(5)];
