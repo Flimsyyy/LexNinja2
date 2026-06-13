@@ -1,23 +1,27 @@
 ﻿using BaseLib.Abstracts;
 using LexNinja2.LexNinja2Code.Api;
+using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class BladeDefencePower : CustomPowerModel
+public class BladeDefencePower : CustomPowerModel, IHasSecondAmount
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
     public override string CustomPackedIconPath => "ParryPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "ParryPower84.png".BigPowerImagePath();
+
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new LexKelaVar(0)];
 
     public override async Task AfterSideTurnEnd(
         PlayerChoiceContext choiceContext,
@@ -47,7 +51,13 @@ public class BladeDefencePower : CustomPowerModel
         )
             return;
         NinjaAudio.Play("res://LexNinja2/audio/BladeDefence.mp3");
-        await PowerCmd.Apply<Lexkela>(choiceContext, Owner, 1, Owner, null);
+        await PowerCmd.Apply<Lexkela>(
+            choiceContext,
+            Owner,
+            DynamicVars.LexKela().BaseValue,
+            Owner,
+            null
+        );
     }
 
     public override async Task AfterDamageGiven(
@@ -68,4 +78,6 @@ public class BladeDefencePower : CustomPowerModel
             return;
         await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Unpowered, null);
     }
+
+    public string GetSecondAmount() => $"{DynamicVars.LexKela().IntValue}";
 }

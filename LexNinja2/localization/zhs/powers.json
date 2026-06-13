@@ -125,7 +125,7 @@
   "LEXNINJA2-GET_ALL_HANDS_POWER.title": "得到所有手",
 
   "LEXNINJA2-BLADE_DEFENCE_POWER.description": "每次攻击后获得[gold]格挡[/gold]，[gold]格挡[/gold]攻击时获得[blue]1[/blue]点[gold]蕾克拉[/gold]。",
-  "LEXNINJA2-BLADE_DEFENCE_POWER.smartDescription": "每次攻击后获得[blue]{Amount}[/blue]点[gold]格挡[/gold]，[gold]格挡[/gold]攻击时获得[blue]1[/blue]点[gold]蕾克拉[/gold]。",
+  "LEXNINJA2-BLADE_DEFENCE_POWER.smartDescription": "每次攻击后获得[blue]{Amount}[/blue]点[gold]格挡[/gold]，[gold]格挡[/gold]攻击时获得[blue]{Kela}[/blue]点[gold]蕾克拉[/gold]。",
   "LEXNINJA2-BLADE_DEFENCE_POWER.title": "拿刀防卫",
   
   "LEXNINJA2-PLASMA_ARROW_POWER.description": "你的下[blue]{Amount}[/blue]张[gold]忍术[/gold]牌免费。",
