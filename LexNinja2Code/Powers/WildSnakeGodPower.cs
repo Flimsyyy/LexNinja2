@@ -12,7 +12,7 @@ namespace LexNinja2.LexNinja2Code.Powers;
 public class WildSnakeGodPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
 
     protected override object InitInternalData() => new Data();
 
@@ -42,18 +42,21 @@ public class WildSnakeGodPower : CustomPowerModel
         {
             Flash();
             NinjaAudio.Play("res://LexNinja2/audio/WildSnakeGod.mp3");
-            foreach (
-                var card in PileType
-                    .Hand.GetPile(Owner.Player!)
-                    .Cards.Where(c => !c.EnergyCost.CostsX)
-            )
+            for (int i = 0; i < Amount; i++)
             {
-                if (card.EnergyCost.GetWithModifiers(CostModifiers.None) < 0)
-                    continue;
-                card.EnergyCost.SetThisCombat(
-                    Owner.Player!.RunState.Rng.CombatEnergyCosts.NextInt(4)
-                );
-                NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
+                foreach (
+                    var card in PileType
+                        .Hand.GetPile(Owner.Player!)
+                        .Cards.Where(c => !c.EnergyCost.CostsX)
+                )
+                {
+                    if (card.EnergyCost.GetWithModifiers(CostModifiers.None) < 0)
+                        continue;
+                    card.EnergyCost.SetThisCombat(
+                        Owner.Player!.RunState.Rng.CombatEnergyCosts.NextInt(4)
+                    );
+                    NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
+                }
             }
         }
     }
