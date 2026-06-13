@@ -35,7 +35,7 @@ public class DarknessSnakeHand()
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        DynamicVars.LexKela().UpgradeValueBy(1);
     }
 
     // public int TestEnergyCostOverride
