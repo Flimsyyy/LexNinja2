@@ -14,7 +14,7 @@ public class CometCorruptedStar()
     : LexNinja2Card(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new LexKelaVar(2), new EnergyVar(1)];
+        [new LexKelaVar(1), new EnergyVar(1)];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.Static(StaticHoverTip.Energy)];
 

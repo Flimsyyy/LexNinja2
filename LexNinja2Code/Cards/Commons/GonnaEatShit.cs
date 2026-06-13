@@ -16,7 +16,7 @@ public class GonnaEatShit() : LexNinja2Card(0, CardType.Attack, CardRarity.Commo
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new DamageVar(3, ValueProp.Move | ValueProp.Unblockable),
-            new LexKelaVar(2),
+            new LexKelaVar(3),
             new EnergyVar(1),
         ];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -32,8 +32,6 @@ public class GonnaEatShit() : LexNinja2Card(0, CardType.Attack, CardRarity.Commo
             ValueProp.Move | ValueProp.Unblockable,
             this
         );
-        await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
-        await NinjaHelper.AddLexKela(choiceContext, this);
         await PowerCmd.Apply<ShitPower>(
             choiceContext,
             Owner.Creature,
@@ -45,7 +43,7 @@ public class GonnaEatShit() : LexNinja2Card(0, CardType.Attack, CardRarity.Commo
 
     protected override void OnUpgrade()
     {
-        DynamicVars.LexKela().UpgradeValueBy(1);
+        DynamicVars.LexKela().UpgradeValueBy(2);
     }
 
     public override string CustomPortraitPath => $"GonnaEatShit_p.png".BigCardImagePath();

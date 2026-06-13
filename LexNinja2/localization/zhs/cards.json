@@ -55,7 +55,7 @@
   "LEXNINJA2-RACING_AGAINST_MESSI.description": "抽{Cards:diff()}张牌。\n[gold]忍术[/gold]{Renshu:renShu()}：打出后再抽{ExtraCards:diff()}张",
   "LEXNINJA2-RACING_AGAINST_MESSI.title": "我和梅西赛跑",
 
-  "LEXNINJA2-GONNA_EAT_SHIT.description": "对自身造成{Damage:diff()}点无法格挡的伤害。\n获得{Kela:diff()}点[gold]蕾克拉[/gold]和{Energy:energyIcons()}，下回合再获得一次。",
+  "LEXNINJA2-GONNA_EAT_SHIT.description": "对自身造成{Damage:diff()}点无法格挡的伤害。\n下回合获得{Kela:diff()}点[gold]蕾克拉[/gold]和{Energy:energyIcons()}。",
   "LEXNINJA2-GONNA_EAT_SHIT.title": "爷要食大粪",
 
   "LEXNINJA2-NAMI_LIGHTNING.description": "抽{Cards:diff()}张牌。",
