@@ -85,7 +85,13 @@ public class BladeDefencePower : CustomPowerModel, IHasSecondAmount
 
     public void UpgradeLexKelaValue(decimal addend)
     {
-        DynamicVars.LexKela().UpgradeValueBy(addend);
+        var lexKelaVar = DynamicVars.LexKela();
+        lexKelaVar.UpgradeValueBy(addend);
+        if (lexKelaVar.BaseValue < 0)
+        {
+            lexKelaVar.BaseValue = 0;
+            lexKelaVar.FinalizeUpgrade();
+        }
         this.InvokeSecondAmountChanged();
     }
 
