@@ -107,8 +107,8 @@ public class BladeDefencePower : CustomPowerModel, IHasSecondAmount
             return Task.CompletedTask;
         }
 
-        var percent = amount / (Amount - amount);
-        UpgradeLexKelaValue(percent * DynamicVars.LexKela().BaseValue);
+        var ratio = amount / (Amount - amount);
+        UpgradeLexKelaValue(ratio * DynamicVars.LexKela().BaseValue);
         return Task.CompletedTask;
     }
 }
