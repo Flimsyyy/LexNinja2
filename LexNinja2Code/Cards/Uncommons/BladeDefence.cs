@@ -19,12 +19,7 @@ public class BladeDefence() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncomm
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/BladeDefence.mp3");
-        var power = await CommonActions.ApplySelf<BladeDefencePower>(choiceContext, this);
-        if (power != null)
-        {
-            power.DynamicVars.LexKela().UpgradeValueBy(1);
-            power.InvokeSecondAmountChanged();
-        }
+        await CommonActions.ApplySelf<BladeDefencePower>(choiceContext, this);
     }
 
     protected override void OnUpgrade()
