@@ -103,7 +103,7 @@ public class BladeDefencePower : CustomPowerModel, IHasSecondAmount
         CardModel? cardSource
     )
     {
-        if (power is not BladeDefencePower)
+        if (power != this)
         {
             return Task.CompletedTask;
         }
