@@ -21,11 +21,7 @@ public class MosquitoHand() : LexNinja2Card(-1, CardType.Curse, CardRarity.Curse
 
     public override Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if (this.Pile.Type == PileType.Exhaust)
-        {
-            return Task.CompletedTask;
-        }
-        if (cardPlay.Card.Owner != Owner)
+        if (Pile!.Type == PileType.Exhaust || cardPlay.Card.Owner != Owner)
         {
             return Task.CompletedTask;
         }

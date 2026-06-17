@@ -9,7 +9,6 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
-using MegaCrit.Sts2.Core.Random;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
@@ -62,7 +61,7 @@ public class TwoMonksPower : CustomPowerModel
             return;
         }
         await PowerCmd.Decrement(this);
-        if (this.Amount >= 1)
+        if (Amount >= 1)
         {
             return;
         }
@@ -74,11 +73,11 @@ public class TwoMonksPower : CustomPowerModel
         Player player
     )
     {
-        if (player != base.Owner.Player)
+        if (player != Owner.Player)
         {
             return;
         }
-        ICombatState combatState = player.Creature.CombatState;
+        var combatState = player.Creature.CombatState;
         Flash();
         using (CardSelectCmd.PushSelector(new VakuuCardSelector()))
         {
@@ -93,21 +92,15 @@ public class TwoMonksPower : CustomPowerModel
                 {
                     break;
                 }
-                CardPile pile = PileType.Hand.GetPile(base.Owner.Player);
-                CardModel card = pile.Cards.FirstOrDefault((CardModel c) => c.CanPlay());
+                var pile = PileType.Hand.GetPile(Owner.Player);
+                var card = pile.Cards.FirstOrDefault(c => c.CanPlay());
                 if (card == null)
                 {
                     break;
                 }
-                Creature target = GetTarget(card, combatState);
+                var target = GetTarget(card, combatState!);
                 await card.SpendResources();
-                await CardCmd.AutoPlay(
-                    choiceContext,
-                    card,
-                    target,
-                    AutoPlayType.Default,
-                    skipXCapture: true
-                );
+                await CardCmd.AutoPlay(choiceContext, card, target, skipXCapture: true);
             }
             if (cardsPlayed == 0)
             {
@@ -119,16 +112,14 @@ public class TwoMonksPower : CustomPowerModel
 
     private Creature? GetTarget(CardModel card, ICombatState combatState)
     {
-        Rng combatTargets = base.Owner.Player.RunState.Rng.CombatTargets;
+        var combatTargets = Owner.Player!.RunState.Rng.CombatTargets;
         return card.TargetType switch
         {
-            TargetType.AnyEnemy => combatState.HittableEnemies.FirstOrDefault(),
+            TargetType.AnyEnemy => combatState.HittableEnemies.ToList().FirstOrDefault(),
             TargetType.AnyAlly => combatTargets.NextItem(
-                combatState.Allies.Where(
-                    (Creature c) => c != null && c.IsAlive && c.IsPlayer && c != base.Owner
-                )
+                combatState.Allies.Where(c => c is { IsAlive: true, IsPlayer: true } && c != Owner)
             ),
-            TargetType.AnyPlayer => base.Owner,
+            TargetType.AnyPlayer => Owner,
             _ => null,
         };
     }
