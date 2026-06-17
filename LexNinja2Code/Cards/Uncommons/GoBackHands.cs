@@ -8,7 +8,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Cards;
 
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
@@ -35,10 +34,7 @@ public class GoBackHands() : LexNinja2Card(2, CardType.Skill, CardRarity.Uncommo
 
     private static bool Filter(CardModel card)
     {
-        var condition =
-            card.Keywords.Contains(NinjaKeyword.Hand)
-            || card.Tags.Contains(CardTag.OstyAttack)
-            || card is HandOfGreed;
+        var condition = NinjaHelper.IsHandRenShu(card);
         if (!condition)
             return false;
         return card.Type switch

@@ -20,10 +20,7 @@ public class HandsTickle()
             new CalculationBaseVar(0M),
             new CalculationExtraVar(1M),
             new CalculatedVar(CalculatedHits).WithMultiplier(
-                (card, _) =>
-                    card.Owner.PlayerCombatState!.AllCards.Count(c =>
-                        c.Keywords.Contains(NinjaKeyword.Hand)
-                    )
+                (card, _) => card.Owner.PlayerCombatState!.AllCards.Count(NinjaHelper.IsHandRenShu)
             ),
         ];
 

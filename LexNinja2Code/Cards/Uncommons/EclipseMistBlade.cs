@@ -44,10 +44,6 @@ public class EclipseMistBlade()
 
     private IEnumerable<CardModel> GetCards()
     {
-        return PileType
-            .Hand.GetPile(Owner)
-            .Cards.Where(c =>
-                !c.Keywords.Contains(NinjaKeyword.Blade) && !c.Tags.Contains(CardTag.Shiv)
-            );
+        return PileType.Hand.GetPile(Owner).Cards.Where(c => !NinjaHelper.IsBladeRenShu(c));
     }
 }

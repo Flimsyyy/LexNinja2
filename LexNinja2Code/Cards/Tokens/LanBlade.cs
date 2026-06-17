@@ -16,7 +16,6 @@ public class LanBlade() : LexNinja2Card(0, CardType.Attack, CardRarity.Token, Ta
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(4, ValueProp.Move)];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [CardKeyword.Ethereal, NinjaKeyword.Blade, CardKeyword.Exhaust];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.LanBlade];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
