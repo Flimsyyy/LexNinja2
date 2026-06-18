@@ -47,5 +47,8 @@
   "LEXNINJA2-MAN_YU_DIAN.pages.FIGHT.options.FIGHT.title": "战斗！！",
   "LEXNINJA2-MAN_YU_DIAN.pages.FIGHT.options.FIGHT.description": "",
   "LEXNINJA2-MAN_YU_DIAN.pages.YUAN_SHEN.description": "贵是贵了点，不过挺好吃的，你吃的饱饱的。\n\n你还觉得自己浑身[gold]充满了力量[/gold]，特别想砸石头。",
-  "LEXNINJA2-MAN_YU_DIAN.pages.LEAVE.description": "你决定不吃了，转身离开了。\n\n气急败坏的老板娘对你做了些什么，你总感觉有个拍不死的东西老是在你耳朵旁边烦你。"
+  "LEXNINJA2-MAN_YU_DIAN.pages.LEAVE.description": "你决定不吃了，转身离开了。\n\n气急败坏的老板娘对你做了些什么，你总感觉有个拍不死的东西老是在你耳朵旁边烦你。",
+
+  "COLORFUL_PHILOSOPHERS.pages.INITIAL.options.CARD_POOL∴LEXNINJA2-LEX_NINJA2_CARD_POOL.title": "x色",
+  "COLORFUL_PHILOSOPHERS.pages.INITIAL.options.CARD_POOL∴LEXNINJA2-LEX_NINJA2_CARD_POOL.description": "获得[blue]{Cards}[/blue]张蕾忍的{Cards:plural:卡牌|卡牌}。"
 }

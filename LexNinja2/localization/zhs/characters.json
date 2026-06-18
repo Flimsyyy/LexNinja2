@@ -1,16 +1,16 @@
 {
-  "LEXNINJA2-LEX_NINJA2.aromaPrinciple": "Lore",
+  "LEXNINJA2-LEX_NINJA2.aromaPrinciple": "这个会出现在混沌芳香的事件里",
   "LEXNINJA2-LEX_NINJA2.banter.alive.endTurnPing": "啊为难为难···",
   "LEXNINJA2-LEX_NINJA2.banter.dead.endTurnPing": "太痛苦了。",
-  "LEXNINJA2-LEX_NINJA2.cardsModifierDescription": "（cardsModifierDescription）这是什么",
-  "LEXNINJA2-LEX_NINJA2.cardsModifierTitle": "（cardsModifierTitle）这是什么",
+  "LEXNINJA2-LEX_NINJA2.cardsModifierDescription": "蕾忍的卡牌现在会出现在奖励与商店中。",
+  "LEXNINJA2-LEX_NINJA2.cardsModifierTitle": "蕾忍卡牌",
   "LEXNINJA2-LEX_NINJA2.description": "蕾忍宗刻意路过的忍者。通过蕾克拉驱动忍术和科学忍具。\n听说尖塔再次开放了，于是决定再来打打看。",
   "LEXNINJA2-LEX_NINJA2.eventDeathPrevention": "啊老子不要死",
   "LEXNINJA2-LEX_NINJA2.goldMonologue": "十亿箱刀乐一万刀一百万刀···",
-  "LEXNINJA2-LEX_NINJA2.possessiveAdjective": "his/her/its",
-  "LEXNINJA2-LEX_NINJA2.pronounObject": "him/her/it",
-  "LEXNINJA2-LEX_NINJA2.pronounPossessive": "his/hers/its",
-  "LEXNINJA2-LEX_NINJA2.pronounSubject": "he/she/it",
+  "LEXNINJA2-LEX_NINJA2.possessiveAdjective": "他的",
+  "LEXNINJA2-LEX_NINJA2.pronounObject": "他",
+  "LEXNINJA2-LEX_NINJA2.pronounPossessive": "他的",
+  "LEXNINJA2-LEX_NINJA2.pronounSubject": "他",
   "LEXNINJA2-LEX_NINJA2.title": "蕾忍",
-  "LEXNINJA2-LEX_NINJA2.titleObject": "蕾忍（哪个）"
+  "LEXNINJA2-LEX_NINJA2.titleObject": "蕾忍"
 }
