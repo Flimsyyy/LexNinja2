@@ -1,7 +1,9 @@
 ﻿using BaseLib.Abstracts;
+using BaseLib.Extensions;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Cards.Uncommons;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -80,4 +82,39 @@ public class BladeDefencePower : CustomPowerModel, IHasSecondAmount
     }
 
     public string GetSecondAmount() => $"{DynamicVars.LexKela().IntValue}";
+
+    public void UpgradeLexKelaValue(decimal addend)
+    {
+        var lexKelaVar = DynamicVars.LexKela();
+        lexKelaVar.UpgradeValueBy(addend);
+        if (lexKelaVar.BaseValue < 0)
+        {
+            lexKelaVar.BaseValue = 0;
+            lexKelaVar.FinalizeUpgrade();
+        }
+        this.InvokeSecondAmountChanged();
+    }
+
+    public override Task AfterPowerAmountChanged(
+        PlayerChoiceContext choiceContext,
+        PowerModel power,
+        decimal amount,
+        Creature? applier,
+        CardModel? cardSource
+    )
+    {
+        if (power != this)
+        {
+            return Task.CompletedTask;
+        }
+        if (cardSource is BladeDefence)
+        {
+            UpgradeLexKelaValue(1);
+            return Task.CompletedTask;
+        }
+
+        var ratio = amount / (Amount - amount);
+        UpgradeLexKelaValue(ratio * DynamicVars.LexKela().BaseValue);
+        return Task.CompletedTask;
+    }
 }
