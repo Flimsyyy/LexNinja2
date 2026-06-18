@@ -205,7 +205,7 @@
   "LEXNINJA2-I_REPRESENT_SHINOBI.description": "减少[gold]蕾克拉[/gold]时，获得{energyPrefix:energyIcons(1)}。",
   "LEXNINJA2-I_REPRESENT_SHINOBI.title": "我代表着SHINOBI",
 
-  "LEXNINJA2-HAND_ION_DESTRUCTION.description": "对所有敌人造成{Damage:diff()}点伤害X次。\n[gold]忍术[/gold]{Renshu:renShu()}：使本次伤害[gold]翻倍[/gold]。",
+  "LEXNINJA2-HAND_ION_DESTRUCTION.description": "对所有敌人造成{Damage:diff()}点伤害。\n失去所有[gold]蕾克拉[/gold]。\n无法获得[gold]蕾克拉[/gold]一回合。",
   "LEXNINJA2-HAND_ION_DESTRUCTION.title": "拿到手离子大毁灭",
 
   "LEXNINJA2-MOBIUS_LOOP_SNAKE.description": "打出一张你上一张打出的牌。\\n你的回合开始时，如果这张牌在你的[gold]消耗牌堆[/gold]中，则将其打出。",
