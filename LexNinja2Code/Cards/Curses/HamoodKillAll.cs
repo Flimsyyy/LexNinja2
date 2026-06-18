@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Cards.Curses;
 
-[Pool(typeof(TokenCardPool))]
+[Pool(typeof(CurseCardPool))]
 public class HamoodKillAll() : LexNinja2Card(1, CardType.Curse, CardRarity.Curse, TargetType.None)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
