@@ -24,20 +24,21 @@ public class GetAllHandsPower : CustomPowerModel
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
         if (
-            GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card, out _)
-            && cardPlay.Card.Owner == Owner.Player
+            !GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card, out _)
+            || cardPlay.Card.Owner != Owner.Player
         )
         {
-            if (!cardPlay.Card.Keywords.Contains(NinjaKeyword.Hand))
-            {
-                await PowerCmd.Remove(this);
-                return;
-            }
-            for (int i = 0; i < Amount; i++)
-            {
-                await CardPileCmd.Draw(context, 1, Owner.Player);
-                await PlayerCmd.GainEnergy(1, Owner.Player);
-            }
+            return;
+        }
+        if (!NinjaHelper.IsHandRenShu(cardPlay.Card))
+        {
+            await PowerCmd.Remove(this);
+            return;
+        }
+        for (var i = 0; i < Amount; i++)
+        {
+            await CardPileCmd.Draw(context, 1, Owner.Player);
+            await PlayerCmd.GainEnergy(1, Owner.Player);
         }
     }
 

@@ -13,7 +13,7 @@ namespace LexNinja2.LexNinja2Code.Powers;
 
 public class LanBladePowerUpgraded : CustomPowerModel
 {
-    protected override object InitInternalData() => (object)new Data();
+    protected override object InitInternalData() => new Data();
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -25,35 +25,35 @@ public class LanBladePowerUpgraded : CustomPowerModel
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if (
-            GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card, out var value)
-            && (
-                (
-                    cardPlay.Card.Keywords.Contains(NinjaKeyword.Blade)
-                    && !cardPlay.Card.Tags.Contains(NinjaTags.LanBlade)
-                ) || cardPlay.Card.Tags.Contains(CardTag.Shiv)
-            )
-            && cardPlay.Card.Owner == Owner.Player
-        )
+        var cardPlayed = cardPlay.Card;
+        if (cardPlayed.Owner != Owner.Player)
         {
-            NinjaAudio.Play("res://LexNinja2/audio/LanBlade.mp3");
-            for (var i = 0; i < Amount; i++)
-            {
-                CardModel card = CombatState.CreateCard<LanBlade>(Owner.Player);
-                CardCmd.Upgrade(card);
-                await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner.Player);
-            }
+            return;
         }
-    }
-
-    public override Task BeforeCardPlayed(CardPlay cardPlay)
-    {
-        GetInternalData<Data>().AmountsForPlayedCards.Add(cardPlay.Card, base.Amount);
-        return Task.CompletedTask;
+        if (!NinjaHelper.IsBladeRenShu(cardPlayed))
+        {
+            return;
+        }
+        if (cardPlayed is LanBlade)
+        {
+            return;
+        }
+        if (!GetInternalData<Data>().IsActive)
+        {
+            GetInternalData<Data>().IsActive = true;
+            return;
+        }
+        NinjaAudio.Play("res://LexNinja2/audio/LanBlade.mp3");
+        for (var i = 0; i < Amount; i++)
+        {
+            CardModel card = CombatState.CreateCard<LanBlade>(Owner.Player);
+            CardCmd.Upgrade(card);
+            await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner.Player);
+        }
     }
 
     private class Data
     {
-        public readonly Dictionary<CardModel, int> AmountsForPlayedCards = new();
+        public bool IsActive;
     }
 }

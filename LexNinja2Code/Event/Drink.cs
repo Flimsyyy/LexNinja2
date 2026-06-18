@@ -37,22 +37,18 @@ public class Drink : CustomEventModel
 
     private void GetNewRandomCard()
     {
-        List<CardModel> list;
-        if (RandomCardToLose == null)
-        {
-            list = Owner.Deck.Cards.Where((c) => c.Rarity != CardRarity.Basic).ToList();
-        }
-        else
-        {
-            list = Owner.Deck.Cards.Where(c => c.GetType() != RandomCardToLose.GetType()).ToList();
-        }
+        var cards = Owner!.Deck.Cards;
+        var list =
+            RandomCardToLose == null
+                ? cards.Where(c => c.Rarity != CardRarity.Basic).ToList()
+                : cards.Where(c => c.GetType() != RandomCardToLose.GetType()).ToList();
         list.RemoveAll(c => !c.IsRemovable);
         if (list.Count == 0)
         {
-            list = Owner.Deck.Cards.Where(c => c.IsRemovable).ToList();
+            list = cards.Where(c => c.IsRemovable).ToList();
         }
-        RandomCardToLose = base.Rng.NextItem(list);
-        StringVar stringVar = (StringVar)DynamicVars["RandomCard"];
+        RandomCardToLose = Rng.NextItem(list);
+        var stringVar = (StringVar)DynamicVars["RandomCard"];
         if (RandomCardToLose != null)
             stringVar.StringValue = RandomCardToLose.Title;
     }
@@ -80,7 +76,7 @@ public class Drink : CustomEventModel
         SetEventState(
             PageDescription("DRINK_OR_LEAVE"),
             [
-                Option(MoreDrink, "DRINK_OR_LEAVE", HoverTipFactory.FromCard(RandomCardToLose)), // 第二个参数代表该选项所在页面
+                Option(MoreDrink, "DRINK_OR_LEAVE", HoverTipFactory.FromCard(RandomCardToLose!)), // 第二个参数代表该选项所在页面
                 Option(Leave, "DRINK_OR_LEAVE"),
             ]
         );
@@ -88,14 +84,11 @@ public class Drink : CustomEventModel
 
     private async Task MoreDrink()
     {
-        if (DynamicVars["Possibility"].BaseValue == 15)
-        {
-            NinjaAudio.Play("res://LexNinja2/audio/MoreDrink.mp3");
-        }
-        else
-        {
-            NinjaAudio.Play("res://LexNinja2/audio/MORE!!!.mp3");
-        }
+        NinjaAudio.Play(
+            DynamicVars["Possibility"].BaseValue == 15
+                ? "res://LexNinja2/audio/MoreDrink.mp3"
+                : "res://LexNinja2/audio/MORE!!!.mp3"
+        );
         var player = Owner;
         if (player != null)
             await CreatureCmd.Heal(player.Creature, DynamicVars.Heal.BaseValue);
@@ -121,12 +114,13 @@ public class Drink : CustomEventModel
     {
         SetEventState(
             PageDescription("MORE_DRINK"),
-            [Option(MoreDrink, "MORE_DRINK", HoverTipFactory.FromCard(RandomCardToLose))]
+            [Option(MoreDrink, "MORE_DRINK", HoverTipFactory.FromCard(RandomCardToLose!))]
         );
     }
 
-    private async Task Leave()
+    private Task Leave()
     {
         SetEventFinished(PageDescription("LEAVE1"));
+        return Task.CompletedTask;
     }
 }

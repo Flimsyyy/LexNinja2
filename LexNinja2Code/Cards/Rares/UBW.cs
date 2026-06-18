@@ -29,10 +29,7 @@ public class UBW() : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetTy
                 (card, _) =>
                     CombatManager.Instance.History.CardPlaysFinished.Count(e =>
                         e.CardPlay.Card.Owner == card.Owner
-                        && (
-                            e.CardPlay.Card.Keywords.Contains(NinjaKeyword.Blade)
-                            || e.CardPlay.Card.Tags.Contains(CardTag.Shiv)
-                        )
+                        && NinjaHelper.IsBladeRenShu(e.CardPlay.Card)
                     )
             ),
         ];

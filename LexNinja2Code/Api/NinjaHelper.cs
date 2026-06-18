@@ -4,9 +4,11 @@ using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Cards;
 
 namespace LexNinja2.LexNinja2Code.Api;
 
@@ -67,5 +69,17 @@ public static class NinjaHelper
             field.SetValue(clone, value);
         }
         return clone;
+    }
+
+    public static bool IsHandRenShu(CardModel card)
+    {
+        return card.Keywords.Contains(NinjaKeyword.Hand)
+            || card.Tags.Contains(CardTag.OstyAttack)
+            || card is HandOfGreed;
+    }
+
+    public static bool IsBladeRenShu(CardModel card)
+    {
+        return card.Keywords.Contains(NinjaKeyword.Blade) || card.Tags.Contains(CardTag.Shiv);
     }
 }

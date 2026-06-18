@@ -12,9 +12,6 @@ public class NinjaTags
     public static CardTag Snake;
 
     [CustomEnum]
-    public static CardTag LanBlade;
-
-    [CustomEnum]
     public static CardTag Food;
 
     [CustomEnum]

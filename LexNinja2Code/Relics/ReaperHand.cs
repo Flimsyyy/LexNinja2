@@ -27,7 +27,7 @@ public class ReaperHand() : LexNinja2Relic
         {
             return;
         }
-        if (cardPlay.Card.Keywords.Contains(NinjaKeyword.Hand))
+        if (NinjaHelper.IsHandRenShu(cardPlay.Card))
         {
             NinjaAudio.Play("res://LexNinja2/audio/DeathHand.mp3");
             await OstyCmd.Summon(context, Owner, DynamicVars.Summon.BaseValue, this);

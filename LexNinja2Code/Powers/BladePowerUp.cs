@@ -1,7 +1,6 @@
 ﻿using BaseLib.Abstracts;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -34,10 +33,7 @@ public class BladePowerUp : CustomPowerModel
             Owner != dealer
             || !props.IsPoweredAttack()
             || cardSource == null
-            || (
-                !cardSource.Keywords.Contains(NinjaKeyword.Blade)
-                && !cardSource.Tags.Contains(CardTag.Shiv)
-            )
+            || !NinjaHelper.IsBladeRenShu(cardSource)
             ? 0M
             : Amount;
     }
