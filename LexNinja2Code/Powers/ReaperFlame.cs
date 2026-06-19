@@ -28,6 +28,10 @@ public class ReaperFlame : CustomPowerModel
 
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
+        if (cardPlay.Card.Owner != Owner.Player)
+        {
+            return Task.CompletedTask;
+        }
         GetInternalData<Data>().AmountsForPlayedCards.Add(cardPlay.Card, Amount);
         return Task.CompletedTask;
     }

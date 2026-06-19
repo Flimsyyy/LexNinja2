@@ -22,7 +22,6 @@ public class HandIonDestruction()
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(38, ValueProp.Move), new PowerVar<NoLexkelaPower>(1)];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<Lexkela>()];

@@ -25,21 +25,32 @@ public class TurbinePower : CustomPowerModel
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if (
-            GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card, out var amount)
-            && cardPlay.Card.Owner == Owner.Player
-            && cardPlay.Card.Keywords.Contains(NinjaKeyword.Science)
-        )
+        if (!IsTargetCard(cardPlay.Card))
         {
-            Flash();
-            await CardPileCmd.Draw(context, amount, Owner.Player);
+            return;
         }
+        if (!GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card, out var amount))
+        {
+            return;
+        }
+
+        Flash();
+        await CardPileCmd.Draw(context, amount, Owner.Player!);
     }
 
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
+        if (!IsTargetCard(cardPlay.Card))
+        {
+            return Task.CompletedTask;
+        }
         GetInternalData<Data>().AmountsForPlayedCards.Add(cardPlay.Card, Amount);
         return Task.CompletedTask;
+    }
+
+    private bool IsTargetCard(CardModel card)
+    {
+        return card.Owner == Owner.Player && card.Keywords.Contains(NinjaKeyword.Science);
     }
 
     private class Data
