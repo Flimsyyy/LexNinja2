@@ -20,7 +20,8 @@ namespace LexNinja2.LexNinja2Code.Cards.Rares;
 public class HandIonDestruction()
     : LexNinja2Card(3, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(38, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new DamageVar(38, ValueProp.Move), new PowerVar<NoLexkelaPower>(1)];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -50,19 +51,12 @@ public class HandIonDestruction()
         }
 
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
-        await PowerCmd.Apply<NoLexkelaPower>(
-            choiceContext,
-            Owner.Creature,
-            1,
-            Owner.Creature,
-            this
-        );
-
+        await CommonActions.ApplySelf<NoLexkelaPower>(choiceContext, this);
         if (!Owner.Creature.HasPower<Lexkela>())
         {
             return;
         }
-        await SpendLexKela(Owner.Creature.GetPowerAmount<Lexkela>(), choiceContext);
+        await SpendAllLexKela(choiceContext);
     }
 
     protected override void OnUpgrade()

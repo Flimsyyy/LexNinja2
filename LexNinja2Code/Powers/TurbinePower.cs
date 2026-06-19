@@ -1,5 +1,4 @@
 ﻿using BaseLib.Abstracts;
-using Godot;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Commands;
@@ -27,26 +26,24 @@ public class TurbinePower : CustomPowerModel
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
         if (
-            GetInternalData<Data>().amountsForPlayedCards.Remove(cardPlay.Card, out _)
+            GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card, out var amount)
             && cardPlay.Card.Owner == Owner.Player
             && cardPlay.Card.Keywords.Contains(NinjaKeyword.Science)
         )
         {
             Flash();
-            await CardPileCmd.Draw(context, Amount, Owner.Player);
+            await CardPileCmd.Draw(context, amount, Owner.Player);
         }
     }
 
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
-        GD.Print("进入函数");
-        GetInternalData<Data>().amountsForPlayedCards.Add(cardPlay.Card, Amount);
-        GD.Print("GetInternalData<Data>() amountsForPlayedCards:" + Amount);
+        GetInternalData<Data>().AmountsForPlayedCards.Add(cardPlay.Card, Amount);
         return Task.CompletedTask;
     }
 
     private class Data
     {
-        public readonly Dictionary<CardModel, int> amountsForPlayedCards = new();
+        public readonly Dictionary<CardModel, int> AmountsForPlayedCards = new();
     }
 }

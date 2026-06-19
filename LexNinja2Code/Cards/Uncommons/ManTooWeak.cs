@@ -40,40 +40,4 @@ public class ManTooWeak() : LexNinja2Card(2, CardType.Power, CardRarity.Uncommon
     public override string CustomPortraitPath => $"ManTooWeak_p.png".BigCardImagePath();
     public override string PortraitPath => $"ManTooWeak.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/ManTooWeak.png".CardImagePath();
-    //
-    // private Boolean Ninjutsu()
-    // {
-    //     if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-    //     {
-    //         return true;
-    //     }
-    //     if (Owner.Creature.GetPower<Lexkela>() != null)
-    //     {
-    //         if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-    //         {
-    //             PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner.Creature,-DynamicVars["Renshu"].BaseValue, Owner.Creature, this);
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-    //
-    // private Boolean CanCastNinjutsu()
-    // {
-    //     if (Owner.Creature.GetPower<FreeNinjutsuPower>() != null)
-    //     {
-    //         return true;
-    //     }
-    //
-    //     if (Owner.Creature.GetPower<Lexkela>() != null)
-    //     {
-    //         if (Owner.Creature.GetPower<Lexkela>().Amount >= DynamicVars["Renshu"].BaseValue)
-    //         {
-    //             return true;
-    //         }
-    //     }
-    //
-    //     return false;
-    // }
-    // protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

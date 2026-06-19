@@ -1,12 +1,15 @@
 using System.Reflection;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Hooks;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 
@@ -21,7 +24,32 @@ public static class NinjaHelper
 
     public static async Task AddLexKela(PlayerChoiceContext ctx, CardModel card, decimal amount)
     {
-        await PowerCmd.Apply<Lexkela>(ctx, card.Owner.Creature, amount, card.Owner.Creature, card);
+        await AddLexKela(ctx, card.Owner, amount, card);
+    }
+
+    public static async Task AddLexKela(
+        PlayerChoiceContext ctx,
+        Player player,
+        decimal amount,
+        CardModel? cardSource
+    )
+    {
+        await AddLexKela(ctx, player.Creature, amount, cardSource);
+    }
+
+    public static async Task AddLexKela(
+        PlayerChoiceContext ctx,
+        Creature creature,
+        decimal amount,
+        CardModel? cardSource
+    )
+    {
+        await PowerCmd.Apply<Lexkela>(ctx, creature, amount, creature, cardSource);
+    }
+
+    public static int GetLexKelaAmount(Player player)
+    {
+        return player.Creature.GetPowerAmount<Lexkela>();
     }
 
     public static async Task DrawExtra(CardModel card, PlayerChoiceContext ctx)
@@ -81,5 +109,65 @@ public static class NinjaHelper
     public static bool IsBladeRenShu(CardModel card)
     {
         return card.Keywords.Contains(NinjaKeyword.Blade) || card.Tags.Contains(CardTag.Shiv);
+    }
+
+    public static async Task SpendLexKela(
+        Player player,
+        ICombatState combatState,
+        int amount,
+        PlayerChoiceContext choiceContext,
+        CardModel? cardSource
+    )
+    {
+        if (amount <= 0)
+        {
+            await NinjaHooks.AfterLexKelaSpent(
+                choiceContext,
+                player.RunState,
+                combatState,
+                amount,
+                player
+            );
+            return;
+        }
+        await PowerCmd.Apply<Lexkela>(
+            choiceContext,
+            player.Creature,
+            -amount,
+            player.Creature,
+            cardSource
+        );
+        await NinjaHooks.AfterLexKelaSpent(
+            choiceContext,
+            player.RunState,
+            combatState,
+            amount,
+            player
+        );
+    }
+
+    public static async Task SpendAllLexKela(
+        Player player,
+        ICombatState combatState,
+        PlayerChoiceContext choiceContext,
+        CardModel? cardSource
+    )
+    {
+        await SpendLexKela(
+            player,
+            combatState,
+            GetLexKelaAmount(player),
+            choiceContext,
+            cardSource
+        );
+    }
+
+    public static void UpgradeDynamicVarValue(DynamicVar dynamicVar, decimal addend)
+    {
+        dynamicVar.UpgradeValueBy(addend);
+        if (dynamicVar.BaseValue >= 0)
+            return;
+        dynamicVar.BaseValue = 0;
+        dynamicVar.FinalizeUpgrade();
     }
 }

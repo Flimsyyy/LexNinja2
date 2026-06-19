@@ -72,13 +72,9 @@
   "LEXNINJA2-WILD_SNAKE_GOD_POWER.smartDescription": "出牌时，随机化你的[gold]手牌[/gold]中所有牌的耗能[blue]{Amount}[/blue]次。",
   "LEXNINJA2-WILD_SNAKE_GOD_POWER.title": "草野蛇神",
 
-  "LEXNINJA2-LAN_BLADE_POWER.description": "打出[gold]刀系忍术[/gold]牌时，获得一张[gold]岚刀[/gold]。",
-  "LEXNINJA2-LAN_BLADE_POWER.smartDescription": "打出[gold]刀系忍术[/gold]牌时，获得一张[gold]岚刀[/gold]。",
+  "LEXNINJA2-LAN_BLADE_POWER.description": "打出[gold]刀系忍术[/gold]牌时，获得1张[gold]岚刀[/gold]。",
+  "LEXNINJA2-LAN_BLADE_POWER.smartDescription": "打出[gold]刀系忍术[/gold]牌时，获得{LanBlade}张[gold]岚刀[/gold]，获得{LanBladeUpgraded}张[gold]岚刀+[/gold]。",
   "LEXNINJA2-LAN_BLADE_POWER.title": "岚刀一直切",
-
-  "LEXNINJA2-LAN_BLADE_POWER_UPGRADED.description": "打出[gold]刀系忍术[/gold]牌时，获得一张[gold]岚刀+[/gold]。",
-  "LEXNINJA2-LAN_BLADE_POWER_UPGRADED.smartDescription": "打出[gold]刀系忍术[/gold]牌时，获得一张[gold]岚刀+[/gold]。",
-  "LEXNINJA2-LAN_BLADE_POWER_UPGRADED.title": "岚刀一直切",
 
   "LEXNINJA2-TURBINE_POWER.description": "打出[gold]科学忍具[/gold]牌时抽牌。",
   "LEXNINJA2-TURBINE_POWER.smartDescription": "打出[gold]科学忍具[/gold]牌时，抽[blue]{Amount}[/blue]张牌。",

@@ -1,5 +1,4 @@
-﻿using BaseLib.Extensions;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -28,20 +27,7 @@ public class LanBladeCutting()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/LanBladeCutting.mp3");
-        if (IsUpgraded)
-        {
-            await PowerCmd.Apply<LanBladePowerUpgraded>(
-                choiceContext,
-                Owner.Creature,
-                DynamicVars.Power<LanBladePower>().IntValue,
-                Owner.Creature,
-                this
-            );
-        }
-        else
-        {
-            await CommonActions.ApplySelf<LanBladePower>(choiceContext, this);
-        }
+        await CommonActions.ApplySelf<LanBladePower>(choiceContext, this);
 
         if (!await Ninjutsu(choiceContext, play))
         {
