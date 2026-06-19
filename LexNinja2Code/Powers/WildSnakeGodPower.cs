@@ -29,7 +29,7 @@ public class WildSnakeGodPower : CustomPowerModel
         {
             return Task.CompletedTask;
         }
-        GetInternalData<Data>().AmountsForPlayedCards.Add(cardPlay.Card,Amount);
+        GetInternalData<Data>().AmountsForPlayedCards.Add(cardPlay.Card, Amount);
         return Task.CompletedTask;
     }
 
