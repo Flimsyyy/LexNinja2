@@ -45,13 +45,7 @@ public class XiangPiaoPiao() : LexNinja2Relic
             return;
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/XiangPiaoPiao.mp3");
-        await PowerCmd.Apply<Lexkela>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            2,
-            null,
-            null
-        );
+        await NinjaHelper.AddLexKela(new ThrowingPlayerChoiceContext(), Owner, 2, null);
     }
 
     public override string PackedIconPath => "XiangPiaoPiao.png".RelicImagePath();
@@ -60,7 +54,7 @@ public class XiangPiaoPiao() : LexNinja2Relic
 
     public override Task BeforeDeath(Creature creature)
     {
-        if (creature != this.Owner.Creature)
+        if (creature != Owner.Creature)
             return Task.CompletedTask;
         NinjaAudio.Play("res://LexNinja2/audio/Cry.mp3");
         return Task.CompletedTask;

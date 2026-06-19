@@ -35,13 +35,7 @@ public class LotusBox() : LexNinja2Relic
             null,
             null
         );
-        await PowerCmd.Apply<Lexkela>(
-            new ThrowingPlayerChoiceContext(),
-            Owner.Creature,
-            2,
-            null,
-            null
-        );
+        await NinjaHelper.AddLexKela(new ThrowingPlayerChoiceContext(), Owner, 2, null);
     }
 
     public override string PackedIconPath => "LotusBox.png".RelicImagePath();

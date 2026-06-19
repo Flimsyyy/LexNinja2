@@ -1,6 +1,7 @@
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Runs;
 
@@ -31,6 +32,7 @@ public class NinjaHooks
     }
 
     public static async Task AfterLexKelaSpent(
+        PlayerChoiceContext choiceContext,
         IRunState runState,
         ICombatState combatState,
         int amount,
@@ -45,7 +47,7 @@ public class NinjaHooks
         {
             if (item is IAfterLexKelaSpent mod)
             {
-                await mod.AfterLexKelaSpent(amount, spender);
+                await mod.AfterLexKelaSpent(choiceContext, amount, spender);
             }
             item.InvokeExecutionFinished();
         }

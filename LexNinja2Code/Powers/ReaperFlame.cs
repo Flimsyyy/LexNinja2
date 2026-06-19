@@ -35,27 +35,28 @@ public class ReaperFlame : CustomPowerModel
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
         if (
-            GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card, out _)
-            && cardPlay.Card.Owner == Owner.Player
+            cardPlay.Card.Owner != Owner.Player
+            || !GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card, out var amount)
         )
         {
-            Flash();
-            var instance = NCombatRoom.Instance;
-            foreach (var enemy in CombatState.HittableEnemies)
-            {
-                instance?.CombatVfxContainer.AddChildSafely(
-                    NGroundFireVfx.Create(enemy, VfxColor.Purple)!
-                );
-                SfxCmd.Play("event:/sfx/characters/attack_fire");
-                await CreatureCmd.Damage(
-                    context,
-                    enemy,
-                    Amount,
-                    ValueProp.Unblockable | ValueProp.Unpowered,
-                    null,
-                    null
-                );
-            }
+            return;
+        }
+        Flash();
+        var instance = NCombatRoom.Instance;
+        foreach (var enemy in CombatState.HittableEnemies)
+        {
+            instance?.CombatVfxContainer.AddChildSafely(
+                NGroundFireVfx.Create(enemy, VfxColor.Purple)!
+            );
+            SfxCmd.Play("event:/sfx/characters/attack_fire");
+            await CreatureCmd.Damage(
+                context,
+                enemy,
+                amount,
+                ValueProp.Unblockable | ValueProp.Unpowered,
+                null,
+                null
+            );
         }
     }
 

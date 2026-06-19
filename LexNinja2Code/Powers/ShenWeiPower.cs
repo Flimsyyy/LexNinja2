@@ -32,7 +32,7 @@ public class ShenWeiPower : CustomPowerModel
         }
         if (cardPlay.Card.Type == CardType.Attack)
         {
-            await PowerCmd.Apply<IntangiblePower>(context, Owner, -1, null, null);
+            await PowerCmd.Apply<IntangiblePower>(context, Owner, -1, Owner, null);
         }
     }
 
@@ -42,7 +42,7 @@ public class ShenWeiPower : CustomPowerModel
         ICombatState combatState
     )
     {
-        if (side != Owner.Side)
+        if (side != Owner.Side || Owner.Player == null)
             return;
         if (Owner.GetPower<Lexkela>() == null)
         {
@@ -57,6 +57,12 @@ public class ShenWeiPower : CustomPowerModel
             null,
             null
         );
-        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner, -1, null, null);
+        await NinjaHelper.SpendLexKela(
+            Owner.Player,
+            CombatState,
+            1,
+            new ThrowingPlayerChoiceContext(),
+            null
+        );
     }
 }

@@ -53,13 +53,7 @@ public class BladeDefencePower : CustomPowerModel, IHasSecondAmount
         )
             return;
         NinjaAudio.Play("res://LexNinja2/audio/BladeDefence.mp3");
-        await PowerCmd.Apply<Lexkela>(
-            choiceContext,
-            Owner,
-            DynamicVars.LexKela().BaseValue,
-            Owner,
-            null
-        );
+        await NinjaHelper.AddLexKela(choiceContext, Owner, DynamicVars.LexKela().BaseValue, null);
     }
 
     public override async Task AfterDamageGiven(
@@ -85,13 +79,7 @@ public class BladeDefencePower : CustomPowerModel, IHasSecondAmount
 
     public void UpgradeLexKelaValue(decimal addend)
     {
-        var lexKelaVar = DynamicVars.LexKela();
-        lexKelaVar.UpgradeValueBy(addend);
-        if (lexKelaVar.BaseValue < 0)
-        {
-            lexKelaVar.BaseValue = 0;
-            lexKelaVar.FinalizeUpgrade();
-        }
+        NinjaHelper.UpgradeDynamicVarValue(DynamicVars.LexKela(), addend);
         this.InvokeSecondAmountChanged();
     }
 

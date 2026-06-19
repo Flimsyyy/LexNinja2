@@ -21,44 +21,42 @@ public class WildSnakeGodPower : CustomPowerModel
 
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
-        if (base.Applier?.Player == null)
+        if (Applier?.Player == null || cardPlay.Card.Owner != Applier.Player)
         {
             return Task.CompletedTask;
         }
-        if (cardPlay.Card.Owner != base.Applier.Player)
-        {
-            return Task.CompletedTask;
-        }
+
         GetInternalData<Data>().AmountsForPlayedCards.Add(cardPlay.Card, Amount);
         return Task.CompletedTask;
     }
 
-    public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
+    public override Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
         if (
-            GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card)
-            && cardPlay.Card.Owner == Owner.Player
+            cardPlay.Card.Owner != Owner.Player
+            || !GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card, out var amount)
         )
         {
-            Flash();
-            NinjaAudio.Play("res://LexNinja2/audio/WildSnakeGod.mp3");
-            var cards = PileType
-                .Hand.GetPile(Owner.Player!)
-                .Cards.Where(c => !c.EnergyCost.CostsX)
-                .ToList();
-            for (int i = 0; i < Amount; i++)
+            return Task.CompletedTask;
+        }
+        Flash();
+        NinjaAudio.Play("res://LexNinja2/audio/WildSnakeGod.mp3");
+        var cards = PileType
+            .Hand.GetPile(Owner.Player!)
+            .Cards.Where(c => !c.EnergyCost.CostsX)
+            .Where(card => card.EnergyCost.GetWithModifiers(CostModifiers.None) >= 0)
+            .ToList();
+        for (var i = 0; i < amount; i++)
+        {
+            foreach (var card in cards)
             {
-                foreach (var card in cards)
-                {
-                    if (card.EnergyCost.GetWithModifiers(CostModifiers.None) < 0)
-                        continue;
-                    card.EnergyCost.SetThisCombat(
-                        Owner.Player!.RunState.Rng.CombatEnergyCosts.NextInt(4)
-                    );
-                    NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
-                }
+                card.EnergyCost.SetThisCombat(
+                    Owner.Player!.RunState.Rng.CombatEnergyCosts.NextInt(4)
+                );
+                NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
             }
         }
+        return Task.CompletedTask;
     }
 
     private class Data

@@ -2,7 +2,6 @@
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -74,10 +73,10 @@ public class Pain : CustomPowerModel
             return;
         if (flag == 1)
             return;
-        await PowerCmd.Apply<Lexkela>(choiceContext, Owner, 1, null, null);
+        await NinjaHelper.AddLexKela(choiceContext, Owner, 1, null);
     }
 
-    public override async Task AfterDamageReceived(
+    public override Task AfterDamageReceived(
         PlayerChoiceContext choiceContext,
         Creature target,
         DamageResult result,
@@ -87,8 +86,9 @@ public class Pain : CustomPowerModel
     )
     {
         if (target != Owner || result.UnblockedDamage <= 0)
-            return;
+            return Task.CompletedTask;
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/Pain.mp3");
+        return Task.CompletedTask;
     }
 }

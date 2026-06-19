@@ -33,7 +33,7 @@ public class NuclearDragonPower : CustomPowerModel
         IEnumerable<Creature> creatures
     )
     {
-        if (side != Owner.Side)
+        if (side != Owner.Side || Owner.Player == null)
         {
             return;
         }
@@ -43,14 +43,7 @@ public class NuclearDragonPower : CustomPowerModel
             return;
         }
         Flash();
-        await PowerCmd.Apply<Lexkela>(
-            choiceContext,
-            Owner,
-            -Owner.GetPowerAmount<Lexkela>(),
-            Owner,
-            null
-        );
-
+        await NinjaHelper.SpendAllLexKela(Owner.Player, CombatState, choiceContext, null);
         var child = NGroundFireVfx.Create(Owner);
         if (child == null)
             return;
@@ -72,7 +65,7 @@ public class NuclearDragonPower : CustomPowerModel
         }
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/NuclearDragon.mp3");
-        await PowerCmd.Apply<Lexkela>(choiceContext, Owner, Amount, Owner, null);
+        await NinjaHelper.AddLexKela(choiceContext, Owner, Amount, null);
 
         var child = NGroundFireVfx.Create(Owner);
         if (child == null)
@@ -82,12 +75,4 @@ public class NuclearDragonPower : CustomPowerModel
         var instance = NCombatRoom.Instance;
         instance?.CombatVfxContainer.AddChildSafely(child);
     }
-
-    /*public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
-    {
-        if (side != Owner.Side)
-            return;
-        Flash();
-        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner, Amount, null, null);
-    }*/
 }
