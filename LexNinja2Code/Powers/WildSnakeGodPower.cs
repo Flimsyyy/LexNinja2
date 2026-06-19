@@ -42,13 +42,13 @@ public class WildSnakeGodPower : CustomPowerModel
         {
             Flash();
             NinjaAudio.Play("res://LexNinja2/audio/WildSnakeGod.mp3");
+            var cards = PileType
+                .Hand.GetPile(Owner.Player!)
+                .Cards.Where(c => !c.EnergyCost.CostsX)
+                .ToList();
             for (int i = 0; i < Amount; i++)
             {
-                foreach (
-                    var card in PileType
-                        .Hand.GetPile(Owner.Player!)
-                        .Cards.Where(c => !c.EnergyCost.CostsX)
-                )
+                foreach (var card in cards)
                 {
                     if (card.EnergyCost.GetWithModifiers(CostModifiers.None) < 0)
                         continue;

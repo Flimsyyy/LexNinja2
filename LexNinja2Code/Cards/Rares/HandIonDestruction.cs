@@ -50,18 +50,6 @@ public class HandIonDestruction()
         }
 
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
-
-        if (!Owner.Creature.HasPower<Lexkela>())
-        {
-            return;
-        }
-        await PowerCmd.Apply<Lexkela>(
-            choiceContext,
-            Owner.Creature,
-            -Owner.Creature.GetPowerAmount<Lexkela>(),
-            Owner.Creature,
-            null
-        );
         await PowerCmd.Apply<NoLexkelaPower>(
             choiceContext,
             Owner.Creature,
@@ -69,6 +57,12 @@ public class HandIonDestruction()
             Owner.Creature,
             this
         );
+
+        if (!Owner.Creature.HasPower<Lexkela>())
+        {
+            return;
+        }
+        await SpendLexKela(Owner.Creature.GetPowerAmount<Lexkela>(), choiceContext);
     }
 
     protected override void OnUpgrade()
