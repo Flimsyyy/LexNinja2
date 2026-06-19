@@ -61,7 +61,10 @@ public class BecomeNongPower : CustomPowerModel
         {
             for (var i = 0; i < Amount; i++)
             {
-                var cardModel = Owner.Player!.RunState.CreateCard(card, Owner.Player);
+                //清除卡牌上多余的信息
+                var cardToClone = CardModel.FromSerializable(card.ToSerializable());
+                var cardModel = Owner.Player!.RunState.CloneCard(cardToClone);
+                cardModel.Owner = Owner.Player!;
                 CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(cardModel, PileType.Deck));
             }
             return;

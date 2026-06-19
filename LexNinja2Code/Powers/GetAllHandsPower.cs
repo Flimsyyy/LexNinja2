@@ -24,8 +24,8 @@ public class GetAllHandsPower : CustomPowerModel
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
         if (
-            !GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card, out var amount)
-            || cardPlay.Card.Owner != Owner.Player
+            cardPlay.Card.Owner != Owner.Player
+            || !GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card, out var amount)
         )
         {
             return;
@@ -44,6 +44,10 @@ public class GetAllHandsPower : CustomPowerModel
 
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
+        if (cardPlay.Card.Owner != Owner.Player)
+        {
+            return Task.CompletedTask;
+        }
         GetInternalData<Data>().AmountsForPlayedCards.Add(cardPlay.Card, Amount);
         return Task.CompletedTask;
     }

@@ -34,10 +34,9 @@ public class LanBladePower : CustomPowerModel, IHasSecondAmount
 
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
-        if (Applier?.Player == null || cardPlay.Card.Owner != Applier.Player)
-        {
+        var cardPlayed = cardPlay.Card;
+        if (!IsTargetCard(cardPlayed))
             return Task.CompletedTask;
-        }
 
         GetInternalData<Data>()
             .AmountsForPlayedCards.Add(
@@ -50,18 +49,8 @@ public class LanBladePower : CustomPowerModel, IHasSecondAmount
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
         var cardPlayed = cardPlay.Card;
-        if (cardPlayed.Owner != Owner.Player)
-        {
+        if (!IsTargetCard(cardPlayed))
             return;
-        }
-        if (!NinjaHelper.IsBladeRenShu(cardPlayed))
-        {
-            return;
-        }
-        if (cardPlayed is LanBlade)
-        {
-            return;
-        }
         if (!GetInternalData<Data>().AmountsForPlayedCards.Remove(cardPlay.Card, out var amounts))
         {
             return;
@@ -125,6 +114,14 @@ public class LanBladePower : CustomPowerModel, IHasSecondAmount
         UpgradeBaseLanBladeValue(ratio * DynamicVars[Base].IntValue);
         UpgradeUpgradedLanBladeValue(ratio * DynamicVars[Upgraded].IntValue);
         return Task.CompletedTask;
+    }
+
+    private bool IsTargetCard(CardModel card)
+    {
+        return card.Owner == Owner.Player
+            && card.Owner == Owner.Player
+            && NinjaHelper.IsBladeRenShu(card)
+            && card is not LanBlade;
     }
 
     private class Data
