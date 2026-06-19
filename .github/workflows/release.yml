@@ -9,49 +9,11 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+      - name: Release STS2 Mod
+        uses: iouter/iouter_actions/sts2/release@master
         with:
-          dotnet-version: "9.0.x"
-      - name: Extract version from tag
-        id: version
-        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
-      - name: Restore Tools
-        run: dotnet tool restore
-      - name: Check formatting with CSharpier
-        run: dotnet csharpier check .
-      - name: Restore dependencies
-        run: dotnet restore
-      - name: Setup Godot Action
-        uses: chickensoft-games/setup-godot@v2.4.1
-        with:
-          version: 4.5.1
-          use-dotnet: true
-          include-templates: true
-      - name: Get Godot executable path
-        id: godot-path
-        run: |
-          echo "GODOT_EXE=$(which godot)" >> $GITHUB_OUTPUT
-      - name: Download and install Spine GDExtension
-        run: |
-          cd ${{ github.workspace }}
-          wget -O spine.zip "https://spine-godot.s3.eu-central-1.amazonaws.com/4.2/4.5.1-stable/spine-godot-extension-4.2-4.5.1-stable.zip"
-          unzip -o spine.zip
-      - name: Import Godot project
-        run: godot --headless --editor --quit --path . --import
-      - name: Publish
-        run: dotnet publish -c ExportRelease
+          project-name: ${{ github.event.repository.name }}
+          workshop-item-id: 3747530622
         env:
-          GodotPath: ${{ steps.godot-path.outputs.GODOT_EXE }}
-          ModsPath: ${{ github.workspace }}/mods_output/
-      - name: Package Release Artifacts
-        run: |
-          cd mods_output/LexNinja2
-          zip -r ../../LexNinja2-v${{ steps.version.outputs.version }}.zip .
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: LexNinja2-v${{ steps.version.outputs.version }}.zip
-          generate_release_notes: true
-          draft: false
-          prerelease: false
+          STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
+          STEAM_CONFIG_VDF: ${{ secrets.STEAM_CONFIG_VDF }}
