@@ -33,7 +33,7 @@ public class TrueLeechFriend()
             return;
         }
         NinjaAudio.Play("res://LexNinja2/audio/LeechFriend.mp3");
-        await PowerCmd.Apply<DarkShacklesPower>(
+        await PowerCmd.Apply<FlexPotionPower>(
             choiceContext,
             Owner.Creature,
             DynamicVars["Leech"].BaseValue,
@@ -41,10 +41,10 @@ public class TrueLeechFriend()
             this
         );
         if (play.Target != null)
-            await PowerCmd.Apply<FlexPotionPower>(
+            await PowerCmd.Apply<DarkShacklesPower>(
                 choiceContext,
                 play.Target,
-                -DynamicVars["Leech"].BaseValue,
+                DynamicVars["Leech"].BaseValue,
                 Owner.Creature,
                 this
             );

@@ -68,8 +68,8 @@
   "LEXNINJA2-GOOD_NIGHT_POWER.smartDescription": "回合开始时，恢复[blue]{Amount}[/blue]点生命值，你无法出牌。",
   "LEXNINJA2-GOOD_NIGHT_POWER.title": "好好睡",
   
-  "LEXNINJA2-WILD_SNAKE_GOD_POWER.description": "出牌时，随机化你[gold]手牌[/gold]中所有牌的耗能。",
-  "LEXNINJA2-WILD_SNAKE_GOD_POWER.smartDescription": "出牌时，随机化你的[gold]手牌[/gold]中所有牌的耗能。",
+  "LEXNINJA2-WILD_SNAKE_GOD_POWER.description": "出牌时，随机化你[gold]手牌[/gold]中所有牌的耗能[blue]1[/blue]次。",
+  "LEXNINJA2-WILD_SNAKE_GOD_POWER.smartDescription": "出牌时，随机化你的[gold]手牌[/gold]中所有牌的耗能[blue]{Amount}[/blue]次。",
   "LEXNINJA2-WILD_SNAKE_GOD_POWER.title": "草野蛇神",
 
   "LEXNINJA2-LAN_BLADE_POWER.description": "打出[gold]刀系忍术[/gold]牌时，获得一张[gold]岚刀[/gold]。",
@@ -154,5 +154,9 @@
 
   "LEXNINJA2-ALAN_WALKER_POWER.description": "你每出一张牌，对所有敌人造成[blue]6[/blue]点伤害，获得[blue]7[/blue]点[gold]格挡[/gold]。",
   "LEXNINJA2-ALAN_WALKER_POWER.smartDescription": "你每出一张牌，对所有敌人造成[blue]6[/blue]点伤害，获得[blue]7[/blue]点[gold]格挡[/gold]。",
-  "LEXNINJA2-ALAN_WALKER_POWER.title": "艾伦·沃克"
+  "LEXNINJA2-ALAN_WALKER_POWER.title": "艾伦·沃克",
+
+  "LEXNINJA2-NO_LEXKELA_POWER.description": "无法获得蕾克拉[blue]1[/blue]回合。",
+  "LEXNINJA2-NO_LEXKELA_POWER.smartDescription": "无法获得蕾克拉[blue]{Amount}[/blue]回合。",
+  "LEXNINJA2-NO_LEXKELA_POWER.title": "无法获取蕾克拉"
 }

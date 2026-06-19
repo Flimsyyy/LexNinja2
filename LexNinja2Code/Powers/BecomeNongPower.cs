@@ -57,6 +57,16 @@ public class BecomeNongPower : CustomPowerModel
         if (card == null)
             return;
 
+        if (Owner.CombatState!.RunState.Players.Count > 1)
+        {
+            for (var i = 0; i < Amount; i++)
+            {
+                var cardModel = Owner.Player!.RunState.CreateCard(card, Owner.Player);
+                CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(cardModel, PileType.Deck));
+            }
+            return;
+        }
+
         for (var i = 0; i < Amount; i++)
         {
             var cardModel = Owner.Player!.RunState.CloneCard(card);
