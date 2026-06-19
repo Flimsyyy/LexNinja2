@@ -2,7 +2,6 @@
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -26,22 +25,20 @@ public class ManTooWeakPower : CustomPowerModel
         ICombatState combatState
     )
     {
-        if (side != Owner.Side)
+        if (side != Owner.Side || Owner.Player == null)
             return;
-        if (Owner.GetPower<Lexkela>() == null)
+        if (Owner.HasPower<Lexkela>())
         {
             return;
         }
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/ManTooWeak.mp3");
-        await PowerCmd.Apply<Lexkela>(
-            new ThrowingPlayerChoiceContext(),
-            Owner,
+        await NinjaHelper.SpendLexKela(
+            Owner.Player,
+            CombatState,
             -Amount,
-            Owner,
+            new ThrowingPlayerChoiceContext(),
             null
         );
-        // await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Owner, Amount, Owner, null);
-        // await PowerCmd.Apply<DexterityPower>(new ThrowingPlayerChoiceContext(), Owner, Amount, Owner, null);
     }
 }

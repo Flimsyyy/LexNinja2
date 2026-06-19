@@ -1,4 +1,5 @@
 ﻿using BaseLib.Abstracts;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -25,7 +26,7 @@ public class ShitPower : CustomPowerModel
         if (player != Owner.Player)
             return;
         await PlayerCmd.GainEnergy(1, player);
-        await PowerCmd.Apply<Lexkela>(new ThrowingPlayerChoiceContext(), Owner, Amount, null, null);
+        await NinjaHelper.AddLexKela(new ThrowingPlayerChoiceContext(), player, Amount, null);
         await PowerCmd.Remove(this);
     }
 }

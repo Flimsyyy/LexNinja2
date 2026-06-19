@@ -3,7 +3,6 @@ using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -71,7 +70,7 @@ public class Lexkela : CustomPowerModel
         await ninjaCard.SpendLexKela(1, context);
     }
 
-    private int flag = 0; // 这是干啥的
+    private int flag = 0; //你应该用bool...
 
     public override async Task AfterPowerAmountChanged(
         PlayerChoiceContext choiceContext,
@@ -116,6 +115,6 @@ public class Lexkela : CustomPowerModel
         if (Owner.HasPower<Pain>())
             return;
         Flash();
-        await PowerCmd.Apply<Lexkela>(choiceContext, Owner, 1, null, null);
+        await NinjaHelper.AddLexKela(choiceContext, Owner, 1, null);
     }
 }

@@ -127,7 +127,7 @@ public abstract class LexNinja2Card(int cost, CardType type, CardRarity rarity, 
 
     public int GetLexKelaAmount()
     {
-        return Owner.Creature.GetPowerAmount<Lexkela>();
+        return NinjaHelper.GetLexKelaAmount(Owner);
     }
 
     public int GetLexKelaCostWithModifiers()
@@ -155,17 +155,16 @@ public abstract class LexNinja2Card(int cost, CardType type, CardRarity rarity, 
 
     public async Task SpendLexKela(int amount, PlayerChoiceContext choiceContext)
     {
-        if (amount <= 0)
-        {
-            await NinjaHooks.AfterLexKelaSpent(Owner.RunState, CombatState!, amount, Owner);
-            return;
-        }
-        await CommonActions.ApplySelf<Lexkela>(choiceContext, this, -amount);
+        await NinjaHelper.SpendLexKela(Owner, CombatState!, amount, choiceContext, this);
         if (TemporaryLexKelaCost != null)
         {
             ClearsLexKelaWhenCardIsPlayed();
         }
-        await NinjaHooks.AfterLexKelaSpent(Owner.RunState, CombatState!, amount, Owner);
+    }
+
+    public async Task SpendAllLexKela(PlayerChoiceContext choiceContext)
+    {
+        await SpendLexKela(GetLexKelaAmount(), choiceContext);
     }
 
     public void ClearsLexKelaWhenCardIsPlayed()

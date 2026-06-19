@@ -4,6 +4,7 @@ using LexNinja2.LexNinja2Code.Api.Hooks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Powers;
@@ -27,7 +28,11 @@ public class FreeNinjutsuPower : CustomPowerModel, ITryModifyLexKelaCost, IAfter
         return true;
     }
 
-    public async Task AfterLexKelaSpent(int amount, Player spender)
+    public async Task AfterLexKelaSpent(
+        PlayerChoiceContext choiceContext,
+        int amount,
+        Player spender
+    )
     {
         if (spender.Creature != Owner)
         {

@@ -91,7 +91,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.2.0" PrivateAssets="All" />
+    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.2.1" PrivateAssets="All" />
     <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.9" />
     <AdditionalFiles Include="LexNinja2/localization/**/*.json" />
     <PackageReference Include="CSharpier.MsBuild" Version="1.2.6">

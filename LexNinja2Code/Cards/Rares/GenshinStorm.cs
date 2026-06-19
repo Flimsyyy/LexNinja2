@@ -48,13 +48,7 @@ public class GenshinStorm()
             }
             if (player != Owner.Creature)
             {
-                await PowerCmd.Apply<Lexkela>(
-                    choiceContext,
-                    player.Player!.Creature,
-                    amount,
-                    Owner.Creature,
-                    this
-                );
+                await NinjaHelper.AddLexKela(choiceContext, player, amount, this);
             }
         }
     }
