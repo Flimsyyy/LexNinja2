@@ -6,7 +6,7 @@ using SmartFormat;
 namespace LexNinja2.LexNinja2Code.Api.Patch;
 
 [HarmonyPatch(typeof(LocManager), "LoadLocFormatters")]
-public static class LocManagerManager
+public static class LocManagerPatch
 {
     public static void Postfix()
     {
@@ -14,5 +14,6 @@ public static class LocManagerManager
             AccessTools.Field(typeof(LocManager), "_smartFormatter").GetValue(null)
             as SmartFormatter;
         formatter?.AddExtensions(new RenShuFormatter());
+        formatter?.AddExtensions(new ShowIfChallengeModeFormatter());
     }
 }
