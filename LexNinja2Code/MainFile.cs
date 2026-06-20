@@ -1,8 +1,10 @@
 using System.Collections;
+using BaseLib.Config;
 using BaseLib.Utils;
 using Godot;
 using Godot.Bridge;
 using HarmonyLib;
+using LexNinja2.LexNinja2Code.Api;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
 using Logger = MegaCrit.Sts2.Core.Logging.Logger;
@@ -20,6 +22,8 @@ public partial class MainFile : Node
 
     public static void Initialize()
     {
+        ModConfigRegistry.Register(ModId, new NinjaConfig());
+
         var harmony = new Harmony(ModId);
 
         harmony.PatchAll();
