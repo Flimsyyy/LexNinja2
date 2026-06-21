@@ -1,15 +1,15 @@
 ﻿using BaseLib.Abstracts;
 using LexNinja2.LexNinja2Code.Api;
+using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using LexNinja2.LexNinja2Code.Api.Hooks;
-using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class HeavenCrossPower : CustomPowerModel, IAfterLexKelaSpent
+public class HeavenCrossPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -19,17 +19,18 @@ public class HeavenCrossPower : CustomPowerModel, IAfterLexKelaSpent
     public override string CustomPackedIconPath => "HeavenCrossPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "HeavenCrossPower84.png".BigPowerImagePath();
 
-    public async Task AfterLexKelaSpent(
-        PlayerChoiceContext choiceContext,
-        int amount,
-        Player spender
-    )
+    public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if (spender != Owner.Player)
+        if (cardPlay.Card.Owner != Owner.Player)
         {
             return;
         }
 
-        await NinjaHelper.AddLexKela(choiceContext, spender, Amount, null);
+        var card = cardPlay.Card;
+        if (card is not LexNinja2Card ninjaCard || !card.Tags.Contains(NinjaTags.Ninjutsu))
+        {
+            return;
+        }
+        await NinjaHelper.AddLexKela(context, Owner, Amount, null);
     }
 }
