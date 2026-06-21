@@ -36,7 +36,7 @@ public class ManTooWeakPower : CustomPowerModel
         await NinjaHelper.SpendLexKela(
             Owner.Player,
             CombatState,
-            -Amount,
+            Amount,
             new ThrowingPlayerChoiceContext(),
             null
         );
