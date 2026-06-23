@@ -1,4 +1,4 @@
-name: Release
+name: Publish
 on:
   push:
     tags: ["v*"]
@@ -9,8 +9,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - name: Release STS2 Mod
-        uses: iouter/iouter_actions/sts2/release@master
+      - name: Publish STS2 Mod
+        uses: iouter/iouter_actions/sts2/publish@master
         with:
           project-name: ${{ github.event.repository.name }}
           workshop-item-id: 3747530622
