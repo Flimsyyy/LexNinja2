@@ -11,11 +11,10 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class DragonPunch()
-    : LexNinja2Card(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+    : LexNinja2NinjutsuCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(18, ValueProp.Move), new CardsVar(2), new NinjutsuVar(1)];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [CardKeyword.Retain, NinjaKeyword.Hand];
 
@@ -25,7 +24,7 @@ public class DragonPunch()
         await CommonActions
             .CardAttack(this, play, vfx: "vfx/vfx_thrash", tmpSfx: "blunt_attack.mp3")
             .Execute(choiceContext);
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
@@ -41,6 +40,4 @@ public class DragonPunch()
     public override string CustomPortraitPath => $"DragonPunch_p.png".BigCardImagePath();
     public override string PortraitPath => $"DragonPunch.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/DragonPunch.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

@@ -12,18 +12,18 @@ using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace LexNinja2.LexNinja2Code.Cards.Ancients;
 
-public class ShenWei() : LexNinja2Card(3, CardType.Power, CardRarity.Ancient, TargetType.Self)
+public class ShenWei()
+    : LexNinja2NinjutsuCard(3, CardType.Power, CardRarity.Ancient, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new NinjutsuVar(3), new PowerVar<IntangiblePower>(1), new PowerVar<ShenWeiPower>(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<IntangiblePower>()];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/ShenWei.mp3");
-        if (await Ninjutsu(choiceContext, play))
+        if (Ninjutsu(play))
         {
             await CommonActions.ApplySelf<IntangiblePower>(choiceContext, this);
         }
@@ -38,6 +38,4 @@ public class ShenWei() : LexNinja2Card(3, CardType.Power, CardRarity.Ancient, Ta
     public override string CustomPortraitPath => $"ShenWei_p.png".BigCardImagePath();
     public override string PortraitPath => $"ShenWei.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/ShenWei.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

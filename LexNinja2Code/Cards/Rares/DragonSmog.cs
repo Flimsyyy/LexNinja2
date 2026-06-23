@@ -12,12 +12,12 @@ using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
-public class DragonSmog() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, TargetType.Self)
+public class DragonSmog()
+    : LexNinja2NinjutsuCard(3, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<VulnerablePower>(99), new NinjutsuVar(2), new PowerVar<IntangiblePower>(1)];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [
             HoverTipFactory.FromPower<VulnerablePower>(),
             HoverTipFactory.FromPower<ArtifactPower>(),
@@ -29,7 +29,7 @@ public class DragonSmog() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
     {
         NinjaAudio.Play("res://LexNinja2/audio/DragonSmog.mp3");
         await CommonActions.ApplySelf<IntangiblePower>(choiceContext, this);
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
@@ -50,12 +50,10 @@ public class DragonSmog() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Ninjutsu().UpgradeValueBy(-1);
+        UpgradeNinjutsuValueBy(-1);
     }
 
     public override string CustomPortraitPath => $"DragonSmog_p.png".BigCardImagePath();
     public override string PortraitPath => $"DragonSmog.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/DragonSmog.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

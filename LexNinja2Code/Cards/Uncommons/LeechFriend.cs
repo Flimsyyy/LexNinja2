@@ -16,7 +16,7 @@ public class LeechFriend()
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<StrengthPower>(2), new PowerVar<DexterityPower>(2)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<WeakPower>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate];
     protected override bool ShouldGlowGoldInternal => IfWeakened();

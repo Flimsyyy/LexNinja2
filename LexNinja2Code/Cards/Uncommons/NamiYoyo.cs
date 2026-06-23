@@ -18,7 +18,7 @@ public class NamiYoyo() : LexNinja2Card(4, CardType.Skill, CardRarity.Uncommon, 
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<PoisonPower>(4)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Science];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<PoisonPower>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -46,24 +46,6 @@ public class NamiYoyo() : LexNinja2Card(4, CardType.Skill, CardRarity.Uncommon, 
             this
         );
     }
-
-    /*public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
-    {
-        if (player == base.Owner && CombatManager.Instance.History.CardPlaysFinished.Any((CardPlayFinishedEntry e) => e.RoundNumber == base.CombatState.RoundNumber - 1 && e.CardPlay.Card == this))
-        {
-            CardPile? pile = base.Pile;
-            if (pile == null || pile.Type != PileType.Hand)
-            {
-                await CardPileCmd.Add(this, PileType.Hand);
-            }
-        }
-    }*/
-
-    /*protected override PileType GetResultPileType()
-    {
-        PileType resultPileType = base.GetResultPileType();
-        return resultPileType != PileType.Discard ? resultPileType : PileType.Hand;
-    }*/
 
     protected override void OnUpgrade()
     {

@@ -1,5 +1,4 @@
-﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Api;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Cards.Curses;
 using MegaCrit.Sts2.Core.Audio.Debug;
 using MegaCrit.Sts2.Core.CardSelection;
@@ -11,21 +10,21 @@ using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Acts;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace LexNinja2.LexNinja2Code.Event;
 
-public class TheGreatSeal : CustomEventModel
+[RegisterActEvent(typeof(Glory))]
+public class TheGreatSeal : ModEventTemplate
 {
     public override string? CustomInitialPortraitPath =>
         "res://LexNinja2/images/events/TheGreatSeal.png";
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(15, ValueProp.Unblockable | ValueProp.Unpowered)];
-
-    public override ActModel[] Acts => [ModelDb.Act<Glory>()];
 
     // public override bool IsAllowed(IRunState runState)
     // {
@@ -63,9 +62,19 @@ public class TheGreatSeal : CustomEventModel
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions() =>
         [
-            Option(SaveHamood, HoverTipFactory.FromCardWithCardHoverTips<Normality>()),
-            Option(KillHamood),
-            Option(HamoodKillAll, HoverTipFactory.FromCardWithCardHoverTips<HamoodKillAll>()),
+            new(
+                this,
+                SaveHamood,
+                InitialOptionKey("SAVE_HAMOOD"),
+                HoverTipFactory.FromCardWithCardHoverTips<Normality>()
+            ),
+            new(this, KillHamood, InitialOptionKey("KILL_HAMOOD")),
+            new(
+                this,
+                HamoodKillAll,
+                InitialOptionKey("HAMOOD_KILL_ALL"),
+                HoverTipFactory.FromCardWithCardHoverTips<HamoodKillAll>()
+            ),
         ];
 
     private async Task SaveHamood()

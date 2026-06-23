@@ -1,6 +1,6 @@
-﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Api;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -10,12 +10,12 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class ScarePower : CustomPowerModel
+public class ScarePower : LexNinja2Power
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override string CustomPackedIconPath => "ScarePower32.png".PowerImagePath();
+    public override string CustomIconPath => "ScarePower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "ScarePower84.png".BigPowerImagePath();
 
     public override async Task AfterPlayerTurnStart(

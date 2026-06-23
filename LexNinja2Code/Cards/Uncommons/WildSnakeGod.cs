@@ -32,16 +32,16 @@ public class WildSnakeGod() : LexNinja2Card(0, CardType.Power, CardRarity.Uncomm
     public override string CustomPortraitPath => $"WildSnakeGod.png".BigCardImagePath();
     public override string PortraitPath => $"WildSnakeGod.png".CardImagePath();
 
-    public override async Task AfterSideTurnStart(
+    public override Task AfterSideTurnStart(
         CombatSide side,
         IReadOnlyList<Creature> creatures,
         ICombatState combatState
     )
     {
         if (side != Owner.Creature.Side)
-            return;
+            return Task.CompletedTask;
         EnergyCost.SetThisCombat(Owner!.RunState.Rng.CombatEnergyCosts.NextInt(4));
         NCard.FindOnTable(this)?.PlayRandomizeCostAnim();
-        return;
+        return Task.CompletedTask;
     }
 }

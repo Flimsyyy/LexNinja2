@@ -28,7 +28,7 @@ public class DarknessCrawl()
         {
             NinjaAudio.Play("res://LexNinja2/audio/Crawl.mp3");
             await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
-            await NinjaHelper.AddLexKela(choiceContext, this);
+            await LexKela.Gain(this);
         }
     }
 

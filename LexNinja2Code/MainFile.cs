@@ -1,12 +1,17 @@
 using System.Collections;
-using BaseLib.Config;
+using System.Reflection;
 using BaseLib.Utils;
 using Godot;
 using Godot.Bridge;
 using HarmonyLib;
 using LexNinja2.LexNinja2Code.Api;
+using LexNinja2.LexNinja2Code.Api.Patch;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
+using STS2RitsuLib;
+using STS2RitsuLib.Audio;
+using STS2RitsuLib.Interop;
+using STS2RitsuLib.Patching.Core;
 using Logger = MegaCrit.Sts2.Core.Logging.Logger;
 
 namespace LexNinja2.LexNinja2Code;
@@ -22,7 +27,18 @@ public partial class MainFile : Node
 
     public static void Initialize()
     {
-        ModConfigRegistry.Register(ModId, new NinjaConfig());
+        ModTypeDiscoveryHub.RegisterModAssembly(ModId, Assembly.GetExecutingAssembly());
+
+        LexKela.Register();
+
+        FmodStudioStreamingFiles.TryPreloadAsSound("res://LexNinja2/audio/Faded.mp3");
+        FmodStudioStreamingFiles.TryPreloadAsSound("res://LexNinja2/audio/AlanWalker.mp3");
+
+        var patcher = RitsuLibFramework.CreatePatcher(ModId, "ninja-patches");
+        patcher.RegisterPatch<NinjaSelectPatch>();
+
+        if (!patcher.PatchAll())
+            throw new InvalidOperationException("Critical patches failed.");
 
         var harmony = new Harmony(ModId);
 

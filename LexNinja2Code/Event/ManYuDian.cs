@@ -1,5 +1,4 @@
-﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Api;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Cards.Curses;
 using LexNinja2.LexNinja2Code.Encounter;
 using LexNinja2.LexNinja2Code.Relics;
@@ -8,15 +7,17 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Acts;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Runs;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace LexNinja2.LexNinja2Code.Event;
 
-public class ManYuDian : CustomEventModel
+[RegisterActEvent(typeof(Hive))]
+public class ManYuDian : ModEventTemplate
 {
     public override string? CustomInitialPortraitPath =>
         "res://LexNinja2/images/events/ManYuDian.png";
@@ -28,8 +29,6 @@ public class ManYuDian : CustomEventModel
 
     public override bool IsShared => true;
 
-    public override ActModel[] Acts => [ModelDb.Act<Hive>()];
-
     protected override Task BeforeEventStarted(bool isPreFinished)
     {
         NinjaAudio.Play("res://LexNinja2/audio/ManyuDian.mp3");
@@ -38,9 +37,19 @@ public class ManYuDian : CustomEventModel
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions() =>
         [
-            Option(YuanShen, HoverTipFactory.FromCardWithCardHoverTips<PrimalForce>()),
-            Option(ManYu, HoverTipFactory.FromRelic<ToiletWater>()),
-            Option(Leave, HoverTipFactory.FromCardWithCardHoverTips<MosquitoHand>()),
+            new(
+                this,
+                YuanShen,
+                InitialOptionKey("YUAN_SHEN"),
+                HoverTipFactory.FromCardWithCardHoverTips<PrimalForce>()
+            ),
+            new(this, ManYu, InitialOptionKey("MAN_YU"), HoverTipFactory.FromRelic<ToiletWater>()),
+            new(
+                this,
+                Leave,
+                InitialOptionKey("LEAVE"),
+                HoverTipFactory.FromCardWithCardHoverTips<MosquitoHand>()
+            ),
         ];
 
     private async Task YuanShen()
@@ -63,10 +72,13 @@ public class ManYuDian : CustomEventModel
 
     private void FightPage()
     {
-        SetEventState(PageDescription("FIGHT"), [Option(Fight, "FIGHT")]);
+        SetEventState(
+            PageDescription("FIGHT"),
+            [new EventOption(this, Fight, ModOptionKey("FIGHT", "FIGHT"))]
+        );
     }
 
-    private async Task Fight()
+    private Task Fight()
     {
         var list = Owner
             ?.RunState.Players.Select(player => new GoldReward(22, player))
@@ -77,6 +89,7 @@ public class ManYuDian : CustomEventModel
                 list,
                 shouldResumeAfterCombat: false
             );
+        return Task.CompletedTask;
     }
 
     private async Task Leave()

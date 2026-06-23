@@ -14,16 +14,15 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class BeastShout()
-    : LexNinja2Card(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
+    : LexNinja2NinjutsuCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
     private const string StrengthLoss = "StrengthLoss";
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(11, ValueProp.Move), new(StrengthLoss, 1), new NinjutsuVar(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<StrengthPower>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -38,7 +37,7 @@ public class BeastShout()
                 tmpSfx: "lightning_orb_evoke.mp3"
             )
             .Execute(choiceContext);
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
@@ -61,6 +60,4 @@ public class BeastShout()
     public override string CustomPortraitPath => "BeastShout_p.png".BigCardImagePath();
     public override string PortraitPath => "BeastShout.png".CardImagePath();
     public override string BetaPortraitPath => "beta/BeastShout.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

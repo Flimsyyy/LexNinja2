@@ -3,7 +3,6 @@ using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -13,22 +12,22 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace LexNinja2.LexNinja2Code.Cards.Commons;
 
-public class FrogFrogGo() : LexNinja2Card(0, CardType.Skill, CardRarity.Common, TargetType.Self)
+public class FrogFrogGo()
+    : LexNinja2NinjutsuCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new NinjutsuVar(1), new EnergyVar(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [
             HoverTipFactory.FromKeyword(CardKeyword.Exhaust),
-            HoverTipFactory.FromPower<Lexkela>(),
+            LexKela.HoverTip(),
             HoverTipFactory.Static(StaticHoverTip.Energy),
         ];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/FrogFrogGo.mp3");
-        if (await Ninjutsu(choiceContext, play))
+        if (Ninjutsu(play))
         {
             await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
         }
@@ -52,6 +51,4 @@ public class FrogFrogGo() : LexNinja2Card(0, CardType.Skill, CardRarity.Common, 
     public override string CustomPortraitPath => "FrogFrogGo_p.png".BigCardImagePath();
     public override string PortraitPath => "FrogFrogGo.png".CardImagePath();
     public override string BetaPortraitPath => "beta/FrogFrogGo.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

@@ -16,8 +16,8 @@ public class IRepresentShinobi()
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<IRepresentShinobiPower>(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<Lexkela>(), HoverTipFactory.Static(StaticHoverTip.Energy)];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
+        [LexKela.HoverTip(), HoverTipFactory.Static(StaticHoverTip.Energy)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

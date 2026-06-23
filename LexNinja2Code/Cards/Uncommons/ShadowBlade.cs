@@ -18,7 +18,7 @@ public class ShadowBlade()
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(12, ValueProp.Move), new PowerVar<VulnerablePower>(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 

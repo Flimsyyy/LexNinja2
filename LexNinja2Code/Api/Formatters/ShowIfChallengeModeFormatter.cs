@@ -1,10 +1,11 @@
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Localization;
 using SmartFormat.Core.Extensions;
+using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace LexNinja2.LexNinja2Code.Api.Formatters;
 
-public class ShowIfChallengeModeFormatter : IAutoRegisterFormatSpecifier
+[RegisterSmartFormatter]
+public class ShowIfChallengeModeFormatter : IFormatter
 {
     public string Name
     {

@@ -11,11 +11,11 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
-public class ScareForm() : LexNinja2Card(3, CardType.Power, CardRarity.Rare, TargetType.Self)
+public class ScareForm()
+    : LexNinja2NinjutsuCard(3, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<ScarePower>(1), new NinjutsuVar(0)];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

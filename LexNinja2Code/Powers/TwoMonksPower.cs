@@ -1,5 +1,5 @@
-﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Api.Extensions;
+﻿using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -12,41 +12,27 @@ using MegaCrit.Sts2.Core.Models.Relics;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class TwoMonksPower : CustomPowerModel
+public class TwoMonksPower : LexNinja2Power
 {
-    private bool _wasOwnerPartOfLastPlayerTurn = true;
-    private bool _isEffective = true;
+    private bool _isEffective;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override string CustomPackedIconPath => "TwoMonksPower.png".PowerImagePath();
+    public override string CustomIconPath => "TwoMonksPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "TwoMonksPower.png".BigPowerImagePath();
-
-    private bool WasOwnerPartOfLastPlayerTurn
-    {
-        get => _wasOwnerPartOfLastPlayerTurn;
-        set
-        {
-            AssertMutable();
-            _wasOwnerPartOfLastPlayerTurn = value;
-        }
-    }
 
     public override bool ShouldTakeExtraTurn(Player player)
     {
-        return WasOwnerPartOfLastPlayerTurn && player == Owner.Player && _isEffective;
+        return player == Owner.Player;
     }
 
-    public override Task AfterSideTurnStart(
-        CombatSide side,
-        IReadOnlyList<Creature> creatures,
-        ICombatState combatState
-    )
+    public override Task AfterTakingExtraTurn(Player player)
     {
-        if (side != Owner.Side)
+        if (player != Owner.Player)
+        {
             return Task.CompletedTask;
-        if (Owner.Player != null)
-            WasOwnerPartOfLastPlayerTurn = CombatManager.Instance.IsPartOfPlayerTurn(Owner.Player);
+        }
+        _isEffective = true;
         return Task.CompletedTask;
     }
 
@@ -60,12 +46,10 @@ public class TwoMonksPower : CustomPowerModel
         {
             return;
         }
-        await PowerCmd.Decrement(this);
-        if (Amount >= 1)
+        if (_isEffective)
         {
-            return;
+            await PowerCmd.Decrement(this);
         }
-        _isEffective = false;
     }
 
     public override async Task AfterAutoPrePlayPhaseEnteredLate(

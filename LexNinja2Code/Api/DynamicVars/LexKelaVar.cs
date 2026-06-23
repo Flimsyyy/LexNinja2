@@ -1,14 +1,14 @@
 using BaseLib.Extensions;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace LexNinja2.LexNinja2Code.Api.DynamicVars;
 
-public class LexKelaVar : DynamicVar
+public class LexKelaVar : SecondaryResourceVar
 {
     public const string Key = "Kela";
 
     public LexKelaVar(decimal baseValue)
-        : base(Key, baseValue)
+        : base(Key, LexKela.Id, baseValue)
     {
         this.WithTooltip(Key.ToUpperInvariant());
     }

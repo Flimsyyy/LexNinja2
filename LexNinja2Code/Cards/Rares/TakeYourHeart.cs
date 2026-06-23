@@ -20,14 +20,13 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
 public class TakeYourHeart()
-    : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+    : LexNinja2NinjutsuCard(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
     private const string DebuffAmount = "DebuffAmount";
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new NinjutsuVar(10), new DamageVar(10, ValueProp.Move), new(DebuffAmount, 2)];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<ArtifactPower>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [CardKeyword.Exhaust, NinjaKeyword.Hand];
@@ -36,7 +35,7 @@ public class TakeYourHeart()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        if (!IsEnoughDebuff(play.Target!) || !await Ninjutsu(choiceContext, play))
+        if (!IsEnoughDebuff(play.Target!) || !Ninjutsu(play))
         {
             await CommonActions
                 .CardAttack(this, play, vfx: "vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3")
@@ -80,5 +79,7 @@ public class TakeYourHeart()
     }
 
     protected override bool ShouldGlowGoldInternal =>
-        CanCastNinjutsu() && CombatState != null && CombatState.HittableEnemies.Any(IsEnoughDebuff);
+        base.ShouldGlowGoldInternal
+        && CombatState != null
+        && CombatState.HittableEnemies.Any(IsEnoughDebuff);
 }

@@ -15,17 +15,16 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
 public class GetPeopleTax()
-    : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
+    : LexNinja2NinjutsuCard(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(15, ValueProp.Move), new GoldVar(12), new NinjutsuVar(2)];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     public override bool CanBeGeneratedInCombat => false;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        if (await Ninjutsu(choiceContext, play))
+        if (Ninjutsu(play))
         {
             NinjaAudio.Play("res://LexNinja2/audio/GetPeopleTax.mp3");
             var monsterPos = new Vector2?();
@@ -57,6 +56,4 @@ public class GetPeopleTax()
     public override string CustomPortraitPath => $"GetPeopleTax_p.png".BigCardImagePath();
     public override string PortraitPath => $"GetPeopleTax.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/GetPeopleTax.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

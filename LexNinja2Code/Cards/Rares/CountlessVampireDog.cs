@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using STS2RitsuLib;
 
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
@@ -30,7 +31,9 @@ public class CountlessVampireDog()
             return;
         }
         NinjaAudio.Play("res://LexNinja2/audio/CountlessVampireDog.mp3");
-        var num = 10 - CardPile.GetCards(Owner, PileType.Hand).Count();
+        var num =
+            RitsuLibFramework.GetMaxHandSize(Owner)
+            - CardPile.GetCards(Owner, PileType.Hand).Count();
         for (var index = 0; index < num; ++index)
             await CardPileCmd.AddGeneratedCardToCombat(
                 original.CreateClone(),

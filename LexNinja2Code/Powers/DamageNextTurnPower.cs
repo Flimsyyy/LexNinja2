@@ -1,6 +1,6 @@
-﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Api;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -13,14 +13,14 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class DamageNextTurnPower : CustomPowerModel
+public class DamageNextTurnPower : LexNinja2Power
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(Amount, ValueProp.Unpowered)];
 
-    public override string CustomPackedIconPath => "power.png".PowerImagePath();
+    public override string CustomIconPath => "power.png".PowerImagePath();
     public override string? CustomBigIconPath => "power.png".BigPowerImagePath();
 
     public override async Task AfterPlayerTurnStart(

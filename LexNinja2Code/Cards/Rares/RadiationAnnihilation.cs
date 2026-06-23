@@ -14,8 +14,7 @@ public class RadiationAnnihilation()
     : LexNinja2Card(6, CardType.Skill, CardRarity.Rare, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<Radiation>(25)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Science];
     public override CardMultiplayerConstraint MultiplayerConstraint =>
         CardMultiplayerConstraint.SingleplayerOnly;

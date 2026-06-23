@@ -1,5 +1,5 @@
-﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Api.Extensions;
+﻿using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -11,13 +11,13 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class DoubleDamagePower : CustomPowerModel
+public class DoubleDamagePower : LexNinja2Power
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
-    public override string CustomPackedIconPath => "DoubleDamagePower.png".PowerImagePath();
+    public override string CustomIconPath => "DoubleDamagePower.png".PowerImagePath();
     public override string? CustomBigIconPath => "DoubleDamagePower.png".BigPowerImagePath();
 
     protected override object InitInternalData() => new Data();

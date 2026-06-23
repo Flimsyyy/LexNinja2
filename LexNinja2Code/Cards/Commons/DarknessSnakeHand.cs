@@ -22,7 +22,7 @@ public class DarknessSnakeHand()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/DarknessSnakeHand.mp3");
-        await NinjaHelper.AddLexKela(choiceContext, this);
+        await LexKela.Gain(this);
         await CommonActions.Draw(this, choiceContext);
         foreach (var card in PileType.Hand.GetPile(Owner).Cards.Where(c => !c.EnergyCost.CostsX))
         {
@@ -38,22 +38,8 @@ public class DarknessSnakeHand()
         DynamicVars.LexKela().UpgradeValueBy(1);
     }
 
-    // public int TestEnergyCostOverride
-    // {
-    //     get => _testEnergyCostOverride;
-    //     set
-    //     {
-    //         TestMode.AssertOn();
-    //         AssertMutable();
-    //         _testEnergyCostOverride = value;
-    //     }
-    // }
-
     private int NextEnergyCost()
     {
-        // return TestEnergyCostOverride >= 0
-        // ? TestEnergyCostOverride
-        // : Owner.RunState.Rng.CombatEnergyCosts.NextInt(4);
         return Owner.RunState.Rng.CombatEnergyCosts.NextInt(4);
     }
 

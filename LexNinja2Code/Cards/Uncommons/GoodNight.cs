@@ -27,7 +27,7 @@ public class GoodNight() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncommon,
             Owner.Creature,
             this
         );
-        await NinjaHelper.AddLexKela(choiceContext, this);
+        await LexKela.Gain(this);
         PlayerCmd.EndTurn(Owner, false);
     }
 

@@ -27,10 +27,6 @@ public class MobiusLoopSnake()
         NinjaAudio.Play("res://LexNinja2/audio/MobiusLoopSnake.mp3");
         NinjaAudio.Play("res://LexNinja2/audio/Mobius.mp3", 0.15f);
         await Cmd.Wait(1f);
-        // if (LastCard().Tags.Contains(NinjaTags.Ninjutsu))
-        // {
-        //     await PowerCmd.Apply<FreeNinjutsuPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, 1, Owner.Creature, this);
-        // }
         await CardCmd.AutoPlay(choiceContext, card.CreateDupe(), null);
     }
 
@@ -53,15 +49,4 @@ public class MobiusLoopSnake()
             return;
         await CardCmd.AutoPlay(choiceContext, this, Owner.Creature);
     }
-
-    // public override async Task AfterCardDrawn(
-    //     PlayerChoiceContext choiceContext,
-    //     CardModel card,
-    //     bool fromHandDraw)
-    // {
-    //     if (Ninjutsu())
-    //     {
-    //         await CardPileCmd.AutoPlayFromDrawPile(choiceContext, Owner, 1, CardPilePosition.Top, false);
-    //     }
-    // }
 }

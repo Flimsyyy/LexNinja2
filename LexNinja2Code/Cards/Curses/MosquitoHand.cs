@@ -1,6 +1,4 @@
-﻿using BaseLib.Utils;
-using LexNinja2.LexNinja2Code.Api;
-using LexNinja2.LexNinja2Code.Api.Cards;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -8,11 +6,13 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Rooms;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace LexNinja2.LexNinja2Code.Cards.Curses;
 
-[Pool(typeof(CurseCardPool))]
-public class MosquitoHand() : LexNinja2Card(-1, CardType.Curse, CardRarity.Curse, TargetType.Self)
+[RegisterCard(typeof(CurseCardPool))]
+public class MosquitoHand() : ModCardTemplate(-1, CardType.Curse, CardRarity.Curse, TargetType.Self)
 {
     public override int MaxUpgradeLevel => 0;
     protected override IEnumerable<DynamicVar> CanonicalVars => [];

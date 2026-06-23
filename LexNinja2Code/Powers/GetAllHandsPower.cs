@@ -1,6 +1,6 @@
-﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Api;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -11,14 +11,14 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class GetAllHandsPower : CustomPowerModel
+public class GetAllHandsPower : LexNinja2Power
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
     protected override object InitInternalData() => new Data();
 
-    public override string CustomPackedIconPath => "GetAllHandsPower32.png".PowerImagePath();
+    public override string CustomIconPath => "GetAllHandsPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "GetAllHandsPower84.png".BigPowerImagePath();
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)

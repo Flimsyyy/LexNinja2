@@ -2,7 +2,6 @@
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -21,8 +20,7 @@ public class MambaMissile()
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(3, ValueProp.Move), new RepeatVar(5)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Science];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Mamba];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

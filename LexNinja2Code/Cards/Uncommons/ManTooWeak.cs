@@ -20,8 +20,7 @@ public class ManTooWeak() : LexNinja2Card(2, CardType.Power, CardRarity.Uncommon
             new PowerVar<DexterityPower>(5),
             new PowerVar<ManTooWeakPower>(2),
         ];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

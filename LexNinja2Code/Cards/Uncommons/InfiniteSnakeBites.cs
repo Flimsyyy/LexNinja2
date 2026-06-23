@@ -16,7 +16,7 @@ public class InfiniteSnakeBites()
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<InfiniteSnakeBitesPower>(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromCard<AngrySnakeBite>(true)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
 

@@ -14,8 +14,7 @@ public class NuclearDragon() : LexNinja2Card(1, CardType.Power, CardRarity.Rare,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<NuclearDragonPower>(6)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

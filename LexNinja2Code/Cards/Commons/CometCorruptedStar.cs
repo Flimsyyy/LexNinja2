@@ -14,22 +14,22 @@ public class CometCorruptedStar()
     : LexNinja2Card(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new LexKelaVar(2), new EnergyVar(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [new LexKelaVar(2), new EnergyVar(1), new NinjutsuVar(1)];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.Static(StaticHoverTip.Energy)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/CometCorruptedStar.mp3");
-        var kela = GetLexKelaAmount();
+        var kela = LexKela.Get(Owner);
         if (kela > 2)
         {
-            await SpendLexKela(1, choiceContext);
+            await LexKela.Spend(this);
             await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
         }
         else
         {
-            await NinjaHelper.AddLexKela(choiceContext, this);
+            await LexKela.Gain(this);
         }
     }
 

@@ -11,17 +11,17 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
-public class GoBackHands() : LexNinja2Card(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public class GoBackHands()
+    : LexNinja2NinjutsuCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new NinjutsuVar(2)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromKeyword(NinjaKeyword.Hand)];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/GoBackHands.mp3");
-        var isNinjutsu = await Ninjutsu(choiceContext, play);
+        var isNinjutsu = Ninjutsu(play);
         foreach (var card in PileType.Discard.GetPile(Owner).Cards.Where(Filter).ToList())
         {
             if (isNinjutsu)
@@ -52,6 +52,4 @@ public class GoBackHands() : LexNinja2Card(2, CardType.Skill, CardRarity.Uncommo
     public override string CustomPortraitPath => $"GoBackHands_p.png".BigCardImagePath();
     public override string PortraitPath => $"GoBackHands.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/GoBackHands.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

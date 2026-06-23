@@ -3,7 +3,6 @@ using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -17,8 +16,8 @@ public class PastHasGoneHand() : LexNinja2Card(1, CardType.Skill, CardRarity.Rar
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new BlockVar(4, ValueProp.Move), new LexKelaVar(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(CardKeyword.Exhaust), HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
+        [HoverTipFactory.FromKeyword(CardKeyword.Exhaust), LexKela.HoverTip()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -27,7 +26,7 @@ public class PastHasGoneHand() : LexNinja2Card(1, CardType.Skill, CardRarity.Rar
         var discard = PileType.Discard.GetPile(Owner).Cards;
         while (discard.Count != 0)
         {
-            await NinjaHelper.AddLexKela(choiceContext, this);
+            await LexKela.Gain(this);
             await CommonActions.CardBlock(this, play);
             await CardCmd.Exhaust(choiceContext, discard[0], skipVisuals: true);
         }

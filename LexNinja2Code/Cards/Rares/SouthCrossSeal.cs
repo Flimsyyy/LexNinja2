@@ -14,19 +14,18 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
 public class SouthCrossSeal()
-    : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, TargetType.AnyEnemy)
+    : LexNinja2NinjutsuCard(3, CardType.Skill, CardRarity.Rare, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<SealPower>(2), new NinjutsuVar(3)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/SouthCrossSeal.wav");
         await CreatureCmd.Stun(play.Target!);
         await CreatureCmd.GainBlock(play.Target!, 50, ValueProp.Unpowered, play);
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
@@ -41,6 +40,4 @@ public class SouthCrossSeal()
     public override string CustomPortraitPath => $"SouthCrossSeal_p.png".BigCardImagePath();
     public override string PortraitPath => $"SouthCrossSeal.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/SouthCrossSeal.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

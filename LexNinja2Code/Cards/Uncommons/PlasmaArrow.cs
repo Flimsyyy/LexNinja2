@@ -18,7 +18,7 @@ public class PlasmaArrow()
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(14, ValueProp.Move), new PowerVar<PlasmaArrowPower>(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromKeyword(NinjaKeyword.Renshu)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

@@ -2,7 +2,6 @@
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Cards.Commons;
-using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -12,18 +11,14 @@ using MegaCrit.Sts2.Core.HoverTips;
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
 public class GenshinStorm()
-    : LexNinja2Card(2, CardType.Skill, CardRarity.Uncommon, TargetType.AllAllies)
+    : LexNinja2NinjutsuCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.AllAllies, true)
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromCard<HolyLittleStorm>(true), HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
+        [HoverTipFactory.FromCard<HolyLittleStorm>(true), LexKela.HoverTip()];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [NinjaKeyword.Hand, NinjaKeyword.Blade, CardKeyword.Exhaust];
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
     public override CardMultiplayerConstraint MultiplayerConstraint =>
         CardMultiplayerConstraint.MultiplayerOnly;
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
-
-    public override bool HasLexKelaCostX => true;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -32,8 +27,8 @@ public class GenshinStorm()
             from c in CombatState?.GetTeammatesOf(Owner.Creature)
             where c is { IsAlive: true, IsPlayer: true }
             select c;
-        var amount = ResolveLexkelaXValue();
-        await Ninjutsu(choiceContext, play);
+        var amount = ResolveLexkelaXValue(play);
+        Ninjutsu(play);
         foreach (var player in players)
         {
             if (player == Owner.Creature)
@@ -48,7 +43,7 @@ public class GenshinStorm()
             }
             if (player != Owner.Creature)
             {
-                await NinjaHelper.AddLexKela(choiceContext, player, amount, this);
+                await LexKela.Gain(player.Player!, amount, this);
             }
         }
     }

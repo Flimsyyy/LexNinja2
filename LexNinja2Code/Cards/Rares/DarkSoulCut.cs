@@ -15,20 +15,20 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
-public class DarkSoulCut() : LexNinja2Card(0, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+public class DarkSoulCut()
+    : LexNinja2NinjutsuCard(0, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(0, ValueProp.Move), new NinjutsuVar(3)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.Static(StaticHoverTip.Fatal)];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [NinjaKeyword.Blade, CardKeyword.Exhaust];
     public override bool CanBeGeneratedInCombat => false;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
@@ -65,5 +65,4 @@ public class DarkSoulCut() : LexNinja2Card(0, CardType.Attack, CardRarity.Rare, 
     public override string CustomPortraitPath => $"DarkSoulCut_p.png".BigCardImagePath();
     public override string PortraitPath => $"DarkSoulCut.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/DarkSoulCut.png".CardImagePath();
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

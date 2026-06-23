@@ -1,5 +1,5 @@
-﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Api.Extensions;
+﻿using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -13,7 +13,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class ReaperFlame : CustomPowerModel
+public class ReaperFlame : LexNinja2Power
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -23,7 +23,7 @@ public class ReaperFlame : CustomPowerModel
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(Amount, ValueProp.Unblockable | ValueProp.Unpowered)];
 
-    public override string CustomPackedIconPath => "DeathGodFlame32.png".PowerImagePath();
+    public override string CustomIconPath => "DeathGodFlame32.png".PowerImagePath();
     public override string? CustomBigIconPath => "DeathGodFlame84.png".BigPowerImagePath();
 
     public override Task BeforeCardPlayed(CardPlay cardPlay)

@@ -1,13 +1,16 @@
 using System.Text;
-using BaseLib.Abstracts;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using SmartFormat.Core.Extensions;
+using STS2RitsuLib.Cards.FreePlay;
+using STS2RitsuLib.Combat.SecondaryResources;
+using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace LexNinja2.LexNinja2Code.Api.Formatters;
 
-public class RenShuFormatter : IAutoRegisterFormatSpecifier
+[RegisterSmartFormatter]
+public class RenShuFormatter : IFormatter
 {
     public bool TryEvaluateFormat(IFormattingInfo formattingInfo)
     {
@@ -15,8 +18,8 @@ public class RenShuFormatter : IAutoRegisterFormatSpecifier
         {
             return false;
         }
-        var owner = renShu.GetOwner();
-        if (owner is not LexNinja2Card card)
+        var owner = renShu._owner;
+        if (owner is not NinjutsuCard card)
         {
             return false;
         }
@@ -25,12 +28,22 @@ public class RenShuFormatter : IAutoRegisterFormatSpecifier
             formattingInfo.Write("X");
             return true;
         }
-        if (owner is { IsMutable: true })
+        if (owner is not { IsMutable: true })
         {
-            formattingInfo.Write(GetLexKelaText(card));
+            formattingInfo.Write(renShu.ToHighlightedString(true));
             return true;
         }
-        formattingInfo.Write(renShu.ToHighlightedString(true));
+        var plan = SecondaryResourcePaymentResolver.Plan(
+            card,
+            FreePlayBindingRegistry.IsCardFreeForUpcomingPlay(card)
+        );
+        var line = plan.Lines.FirstOrDefault(line => line.Definition.Id == LexKela.Id);
+        if (line == null)
+        {
+            return false;
+        }
+
+        formattingInfo.Write(GetLexKelaText(card, line.Cost));
         return true;
     }
 
@@ -42,18 +55,10 @@ public class RenShuFormatter : IAutoRegisterFormatSpecifier
 
     public bool CanAutoDetect { get; set; }
 
-    private static string GetLexKelaText(LexNinja2Card card)
+    private static string GetLexKelaText(NinjutsuCard card, int cost)
     {
         var sb = new StringBuilder();
         var color = NinjaColor.GetLexKelaCostColor(card).GetColorName();
-        if (color == null)
-        {
-            var renShu = card.DynamicVars.Ninjutsu();
-            if (renShu.WasJustUpgraded)
-            {
-                color = "green";
-            }
-        }
         var hasColor = color != null;
         if (hasColor)
         {
@@ -61,7 +66,7 @@ public class RenShuFormatter : IAutoRegisterFormatSpecifier
             sb.Append(color);
             sb.Append(']');
         }
-        sb.Append(card.GetLexKelaCostWithModifiers());
+        sb.Append(cost);
         if (!hasColor)
             return sb.ToString();
         sb.Append("[/");

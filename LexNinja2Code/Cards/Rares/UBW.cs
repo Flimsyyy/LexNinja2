@@ -17,7 +17,8 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
-public class UBW() : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetType.RandomEnemy)
+public class UBW()
+    : LexNinja2NinjutsuCard(2, CardType.Attack, CardRarity.Rare, TargetType.RandomEnemy)
 {
     private const string Hitcounts = "HitCounts";
 
@@ -35,12 +36,11 @@ public class UBW() : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetTy
                     )
             ),
         ];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
@@ -65,6 +65,4 @@ public class UBW() : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetTy
     public override string CustomPortraitPath => $"UBW_p.png".BigCardImagePath();
     public override string PortraitPath => $"UBW.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/UBW.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

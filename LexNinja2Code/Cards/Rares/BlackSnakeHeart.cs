@@ -16,7 +16,7 @@ public class BlackSnakeHeart() : LexNinja2Card(4, CardType.Power, CardRarity.Rar
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<BlackSnakeHeartPower>(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<IntangiblePower>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

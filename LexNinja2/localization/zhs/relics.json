@@ -1,39 +1,39 @@
 {
-  "LEXNINJA2-LOTUS_BOX.description": "进入战斗时，你获得[blue]2[/blue]点[gold]蕾克拉[/gold]。",
-  "LEXNINJA2-LOTUS_BOX.flavor": "依旧实际JRPG特有的战斗结束就会补满的神奇食品。",
-  "LEXNINJA2-LOTUS_BOX.title": "藕盒",
+  "LEX_NINJA2_RELIC_LOTUS_BOX.description": "进入战斗时，你获得[blue]2[/blue]点[gold]蕾克拉[/gold]。",
+  "LEX_NINJA2_RELIC_LOTUS_BOX.flavor": "依旧实际JRPG特有的战斗结束就会补满的神奇食品。",
+  "LEX_NINJA2_RELIC_LOTUS_BOX.title": "藕盒",
 
-  "LEXNINJA2-XIANG_PIAO_PIAO.description": "回合开始时，获得[blue]2[/blue]点[gold]蕾克拉[/gold]。",
-  "LEXNINJA2-XIANG_PIAO_PIAO.flavor": "忍者之间流行的饮品，不知是某种秘方还是约定俗成的习惯",
-  "LEXNINJA2-XIANG_PIAO_PIAO.title": "香飘飘热饮",
+  "LEX_NINJA2_RELIC_XIANG_PIAO_PIAO.description": "回合开始时，获得[blue]2[/blue]点[gold]蕾克拉[/gold]。",
+  "LEX_NINJA2_RELIC_XIANG_PIAO_PIAO.flavor": "忍者之间流行的饮品，不知是某种秘方还是约定俗成的习惯",
+  "LEX_NINJA2_RELIC_XIANG_PIAO_PIAO.title": "香飘飘热饮",
 
-  "LEXNINJA2-K_F_C.description": "每[blue]{Turns}[/blue]个回合，获得一张忍者特有的[gold]食物[/gold]。",
-  "LEXNINJA2-K_F_C.flavor": "流行于Mortal之间的快餐品牌，适应忍者的口味推出了许多新品。",
-  "LEXNINJA2-K_F_C.title": "肯德基",
+  "LEX_NINJA2_RELIC_K_F_C.description": "每[blue]{Turns}[/blue]个回合，获得一张忍者特有的[gold]食物[/gold]。",
+  "LEX_NINJA2_RELIC_K_F_C.flavor": "流行于Mortal之间的快餐品牌，适应忍者的口味推出了许多新品。",
+  "LEX_NINJA2_RELIC_K_F_C.title": "肯德基",
 
-  "LEXNINJA2-DIM_DEAD_TREE.description": "回合开始时，下一次释放[gold]忍术[/gold]不消耗[gold]蕾克拉[/gold]。",
-  "LEXNINJA2-DIM_DEAD_TREE.flavor": "传闻，安奈师傅曾于暗寒死树下悟道。",
-  "LEXNINJA2-DIM_DEAD_TREE.title": "暗寒死树",
+  "LEX_NINJA2_RELIC_DIM_DEAD_TREE.description": "回合开始时，下一次释放[gold]忍术[/gold]不消耗[gold]蕾克拉[/gold]。",
+  "LEX_NINJA2_RELIC_DIM_DEAD_TREE.flavor": "传闻，安奈师傅曾于暗寒死树下悟道。",
+  "LEX_NINJA2_RELIC_DIM_DEAD_TREE.title": "暗寒死树",
 
-  "LEXNINJA2-REAPER_HAND.description": "打出[gold]手系忍术[/gold]牌时，[gold]召唤[/gold][blue]{Summon}[/blue]。",
-  "LEXNINJA2-REAPER_HAND.flavor": "死神vs火影的故事，想必大家都听说过吧？\n这个波斯可是超囊的对我来说。",
-  "LEXNINJA2-REAPER_HAND.title": "死神的手",
+  "LEX_NINJA2_RELIC_REAPER_HAND.description": "打出[gold]手系忍术[/gold]牌时，[gold]召唤[/gold][blue]{Summon}[/blue]。",
+  "LEX_NINJA2_RELIC_REAPER_HAND.flavor": "死神vs火影的故事，想必大家都听说过吧？\n这个波斯可是超囊的对我来说。",
+  "LEX_NINJA2_RELIC_REAPER_HAND.title": "死神的手",
 
-  "LEXNINJA2-MACHINE_NINJA.description": "回合开始时，你的下一张[gold]科学忍具[/gold]牌会打出两次。",
-  "LEXNINJA2-MACHINE_NINJA.flavor": "忍者生非异也，善假于物焉。",
-  "LEXNINJA2-MACHINE_NINJA.title": "忍机兵·烧油Machine",
+  "LEX_NINJA2_RELIC_MACHINE_NINJA.description": "回合开始时，你的下一张[gold]科学忍具[/gold]牌会打出两次。",
+  "LEX_NINJA2_RELIC_MACHINE_NINJA.flavor": "忍者生非异也，善假于物焉。",
+  "LEX_NINJA2_RELIC_MACHINE_NINJA.title": "忍机兵·烧油Machine",
 
-  "LEXNINJA2-SARIRA.description": "当你的生命值将要降低至[blue]0[/blue]或以下时，回复你[green]{Heal}%[/green]的生命值。\n效果触发后，花费[red]22000000[/red][gold]金币[/gold]。",
-  "LEXNINJA2-SARIRA.flavor": "透支钱财，篡改命运的力量，蕴含其中···",
-  "LEXNINJA2-SARIRA.title": "舍利子",
+  "LEX_NINJA2_RELIC_SARIRA.description": "当你的生命值将要降低至[blue]0[/blue]或以下时，回复你[green]{Heal}%[/green]的生命值。\n效果触发后，花费[red]22000000[/red][gold]金币[/gold]。",
+  "LEX_NINJA2_RELIC_SARIRA.flavor": "透支钱财，篡改命运的力量，蕴含其中···",
+  "LEX_NINJA2_RELIC_SARIRA.title": "舍利子",
   
-  "LEXNINJA2-THREE_DUUZ.description": "每个回合，你打出第一张[gold]忍术[/gold]牌时，抽[blue]2[/blue]张牌。",
-  "LEXNINJA2-THREE_DUUZ.flavor": "哦哦，FUMO，还是可爱，实际人民收米术。",
-  "LEXNINJA2-THREE_DUUZ.title": "3D幽幽子",
+  "LEX_NINJA2_RELIC_THREE_DUUZ.description": "每个回合，你打出第一张[gold]忍术[/gold]牌时，抽[blue]2[/blue]张牌。",
+  "LEX_NINJA2_RELIC_THREE_DUUZ.flavor": "哦哦，FUMO，还是可爱，实际人民收米术。",
+  "LEX_NINJA2_RELIC_THREE_DUUZ.title": "3D幽幽子",
   
-  "LEXNINJA2-TOILET_WATER.description": "每场战斗中，抽到前[blue]{Count}[/blue]张[red]诅咒[/red]牌时，将其[gold]消耗[/gold]并抽[blue]{Cards}[/blue]张牌。",
-  "LEXNINJA2-TOILET_WATER.flavor": "原本是用来缓解飞虫引起的瘙痒的液体，意外的对于清洁有很好的效果。",
-  "LEXNINJA2-TOILET_WATER.title": "花露水",
+  "LEX_NINJA2_RELIC_TOILET_WATER.description": "每场战斗中，抽到前[blue]{Count}[/blue]张[red]诅咒[/red]牌时，将其[gold]消耗[/gold]并抽[blue]{Cards}[/blue]张牌。",
+  "LEX_NINJA2_RELIC_TOILET_WATER.flavor": "原本是用来缓解飞虫引起的瘙痒的液体，意外的对于清洁有很好的效果。",
+  "LEX_NINJA2_RELIC_TOILET_WATER.title": "花露水",
 
-  "SEA_GLASS.LEXNINJA2-LEX_NINJA2.title": "忍术"
+  "SEA_GLASS.LEX_NINJA2.title": "忍术"
 }

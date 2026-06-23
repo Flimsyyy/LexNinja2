@@ -15,13 +15,12 @@ using MegaCrit.Sts2.Core.Models;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class LanBladeCutting()
-    : LexNinja2Card(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+    : LexNinja2NinjutsuCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new NinjutsuVar(1), new PowerVar<LanBladePower>(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromCard<LanBlade>(IsUpgraded)];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -29,25 +28,19 @@ public class LanBladeCutting()
         NinjaAudio.Play("res://LexNinja2/audio/LanBladeCutting.mp3");
         await CommonActions.ApplySelf<LanBladePower>(choiceContext, this);
 
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
+        CardModel card = CombatState!.CreateCard<LanBlade>(Owner);
+        if (IsUpgraded)
         {
-            CardModel card = CombatState!.CreateCard<LanBlade>(Owner);
-            if (IsUpgraded)
-            {
-                CardCmd.Upgrade(card);
-            }
-            await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
+            CardCmd.Upgrade(card);
         }
+        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
     }
-
-    protected override void OnUpgrade() { }
 
     public override string CustomPortraitPath => $"LanBladeCutting_p.png".BigCardImagePath();
     public override string PortraitPath => $"LanBladeCutting.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/LanBladeCutting.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

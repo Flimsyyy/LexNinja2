@@ -2,7 +2,6 @@
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -24,9 +23,9 @@ public class GammaBlade()
         ];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [NinjaKeyword.Blade, NinjaKeyword.Science];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [
-            HoverTipFactory.FromPower<Lexkela>(),
+            LexKela.HoverTip(),
             HoverTipFactory.FromPower<WeakPower>(),
             HoverTipFactory.FromPower<VulnerablePower>(),
         ];

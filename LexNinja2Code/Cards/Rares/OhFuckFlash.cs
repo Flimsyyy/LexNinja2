@@ -12,18 +12,18 @@ using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
-public class OhFuckFlash() : LexNinja2Card(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
+public class OhFuckFlash()
+    : LexNinja2NinjutsuCard(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new NinjutsuVar(3), new PowerVar<BufferPower>(1), new PowerVar<OhFuckFlashPower>(1)];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/OhFuckFlash.mp3");
         await CommonActions.ApplySelf<BufferPower>(choiceContext, this);
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
@@ -34,11 +34,10 @@ public class OhFuckFlash() : LexNinja2Card(2, CardType.Skill, CardRarity.Rare, T
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Ninjutsu().UpgradeValueBy(-1);
+        UpgradeNinjutsuValueBy(-1);
     }
 
     public override string CustomPortraitPath => $"OhFuckFlash_p.png".BigCardImagePath();
     public override string PortraitPath => $"OhFuckFlash.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/OhFuckFlash.png".CardImagePath();
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

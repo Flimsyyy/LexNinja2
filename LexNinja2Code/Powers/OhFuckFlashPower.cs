@@ -1,6 +1,6 @@
-﻿using BaseLib.Abstracts;
-using BaseLib.Extensions;
+﻿using BaseLib.Extensions;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -10,14 +10,14 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class OhFuckFlashPower : CustomPowerModel
+public class OhFuckFlashPower : LexNinja2Power
 {
     private bool _wasOwnerPartOfLastPlayerTurn = true;
     private bool _isEffective = true;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override string CustomPackedIconPath => "OhFuckFlash.png".PowerImagePath();
+    public override string CustomIconPath => "OhFuckFlash.png".PowerImagePath();
     public override string? CustomBigIconPath => "OhFuckFlash.png".BigPowerImagePath();
 
     private bool WasOwnerPartOfLastPlayerTurn

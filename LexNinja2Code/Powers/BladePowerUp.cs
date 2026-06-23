@@ -1,6 +1,6 @@
-﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Api;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -9,16 +9,16 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class BladePowerUp : CustomPowerModel
+public class BladePowerUp : LexNinja2Power
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override bool AllowNegative => true;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromKeyword(NinjaKeyword.Blade)];
 
-    public override string CustomPackedIconPath => "BladePowerUp32.png".PowerImagePath();
+    public override string CustomIconPath => "BladePowerUp32.png".PowerImagePath();
     public override string? CustomBigIconPath => "BladePowerUp84.png".BigPowerImagePath();
 
     public override decimal ModifyDamageAdditive(

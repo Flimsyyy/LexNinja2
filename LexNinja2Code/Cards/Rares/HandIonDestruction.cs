@@ -23,8 +23,7 @@ public class HandIonDestruction()
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(38, ValueProp.Move), new PowerVar<NoLexkelaPower>(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -51,11 +50,7 @@ public class HandIonDestruction()
 
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
         await CommonActions.ApplySelf<NoLexkelaPower>(choiceContext, this);
-        if (!Owner.Creature.HasPower<Lexkela>())
-        {
-            return;
-        }
-        await SpendAllLexKela(choiceContext);
+        await LexKela.Reset(this);
     }
 
     protected override void OnUpgrade()

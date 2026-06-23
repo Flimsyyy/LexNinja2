@@ -17,7 +17,7 @@ public class DisappointedAfterBocchi()
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<GigantificationPower>(1), new PowerVar<DisappointedPower>(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<WeakPower>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

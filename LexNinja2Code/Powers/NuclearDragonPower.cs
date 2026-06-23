@@ -1,7 +1,7 @@
-﻿using BaseLib.Abstracts;
-using Godot;
+﻿using Godot;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -15,17 +15,16 @@ using MegaCrit.Sts2.Core.Nodes.Vfx;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class NuclearDragonPower : CustomPowerModel
+public class NuclearDragonPower : LexNinja2Power
 {
     private const float Scale = 0.8f;
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override string CustomPackedIconPath => "NuclearDragonPower.png".PowerImagePath();
+    public override string CustomIconPath => "NuclearDragonPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "NuclearDragonPower.png".BigPowerImagePath();
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
 
     public override async Task AfterSideTurnEnd(
         PlayerChoiceContext choiceContext,
@@ -38,12 +37,12 @@ public class NuclearDragonPower : CustomPowerModel
             return;
         }
 
-        if (!Owner.HasPower<Lexkela>())
+        if (LexKela.Get(Owner.Player) <= 0)
         {
             return;
         }
         Flash();
-        await NinjaHelper.SpendAllLexKela(Owner.Player, CombatState, choiceContext, null);
+        await LexKela.Reset(Owner.Player, this);
         var child = NGroundFireVfx.Create(Owner);
         if (child == null)
             return;
@@ -65,7 +64,7 @@ public class NuclearDragonPower : CustomPowerModel
         }
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/NuclearDragon.mp3");
-        await NinjaHelper.AddLexKela(choiceContext, Owner, Amount, null);
+        await LexKela.Gain(Owner.Player, Amount, this);
 
         var child = NGroundFireVfx.Create(Owner);
         if (child == null)

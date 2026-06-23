@@ -13,13 +13,12 @@ using MegaCrit.Sts2.Core.Models.Powers;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class BlackDragonHand()
-    : LexNinja2Card(0, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
+    : LexNinja2NinjutsuCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new HpLossVar(2), new NinjutsuVar(2), new PowerVar<WeakPower>(2)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<IntangiblePower>(), HoverTipFactory.FromPower<WeakPower>()];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override bool CanBeGeneratedInCombat => false;
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
@@ -34,7 +33,7 @@ public class BlackDragonHand()
             await PowerCmd.Remove<IntangiblePower>(play.Target);
         }
 
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
@@ -52,5 +51,4 @@ public class BlackDragonHand()
     public override string CustomPortraitPath => $"BlackDragonHand_p.png".BigCardImagePath();
     public override string PortraitPath => $"BlackDragonHand.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/BlackDragonHand.png".CardImagePath();
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

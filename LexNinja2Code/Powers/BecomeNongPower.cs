@@ -1,6 +1,6 @@
-﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Api;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.Rooms;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class BecomeNongPower : CustomPowerModel
+public class BecomeNongPower : LexNinja2Power
 {
     private const string CardKey = "Card";
     public override PowerType Type => PowerType.Buff;
@@ -21,7 +21,7 @@ public class BecomeNongPower : CustomPowerModel
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar(CardKey, "滚木")];
 
-    public override string CustomPackedIconPath => "BecomeNongPower.png".PowerImagePath();
+    public override string CustomIconPath => "BecomeNongPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "BecomeNongPower.png".BigPowerImagePath();
 
     // public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)

@@ -33,7 +33,7 @@ public class GonnaEatShit() : LexNinja2Card(0, CardType.Attack, CardRarity.Commo
             this
         );
         await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
-        await NinjaHelper.AddLexKela(choiceContext, this);
+        await LexKela.Gain(this);
         await PowerCmd.Apply<ShitPower>(
             choiceContext,
             Owner.Creature,

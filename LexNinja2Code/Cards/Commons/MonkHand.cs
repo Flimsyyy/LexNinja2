@@ -3,9 +3,6 @@ using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using LexNinja2.LexNinja2Code.Powers;
-using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Hooks;
@@ -15,7 +12,8 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Cards.Commons;
 
-public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public class MonkHand()
+    : LexNinja2NinjutsuCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
@@ -26,7 +24,7 @@ public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, T
                 (card, _) =>
                 {
                     var block = card.Owner.Creature.Block;
-                    if (card is not LexNinja2Card ninjaCard || !ninjaCard.CanCastNinjutsu())
+                    if (card is not NinjutsuCard ninjaCard || !ninjaCard.CanCastNinjutsu())
                         return block;
                     block += (int)
                         Hook.ModifyBlock(
@@ -43,15 +41,13 @@ public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, T
             ),
             new ExtraDamageVar(1M),
         ];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/MonkHand.mp3");
-        if (await Ninjutsu(choiceContext, play))
+        if (Ninjutsu(play))
         {
             await CommonActions.CardBlock(this, play);
         }
@@ -74,6 +70,4 @@ public class MonkHand() : LexNinja2Card(1, CardType.Attack, CardRarity.Common, T
     public override string CustomPortraitPath => $"MonkHand_p.png".BigCardImagePath();
     public override string PortraitPath => $"MonkHand.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/MonkHand.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

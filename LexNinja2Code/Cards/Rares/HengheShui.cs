@@ -15,8 +15,6 @@ public class HengheShui() : LexNinja2Card(1, CardType.Skill, CardRarity.Rare, Ta
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new HealVar(15), new PowerVar<PoisonPower>(3)];
-
-    // protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Infection>()];
     public override CardMultiplayerConstraint MultiplayerConstraint =>
         CardMultiplayerConstraint.MultiplayerOnly;
     public override bool CanBeGeneratedInCombat => false;
@@ -42,8 +40,6 @@ public class HengheShui() : LexNinja2Card(1, CardType.Skill, CardRarity.Rare, Ta
             Owner.Creature,
             this
         );
-        // await CardPileCmd.AddGeneratedCardToCombat(CombatState.CreateCard<Infection>(play.Target.Player), PileType.Discard, Owner);
-        // new Rng(this.Seed, StringHelper.SnakeCase(RunRngType.CombatTargets.ToString()));
     }
 
     protected override void OnUpgrade()

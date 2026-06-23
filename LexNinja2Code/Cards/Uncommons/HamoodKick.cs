@@ -15,11 +15,10 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class HamoodKick()
-    : LexNinja2Card(0, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
+    : LexNinja2NinjutsuCard(0, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(13, ValueProp.Move), new NinjutsuVar(1)];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -28,7 +27,7 @@ public class HamoodKick()
             .CardAttack(this, play, tmpSfx: "blunt_attack.mp3")
             .WithHitVfxNode((Func<Creature, Node2D>)(t => NBigSlashImpactVfx.Create(t)!))
             .Execute(choiceContext);
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
@@ -55,6 +54,4 @@ public class HamoodKick()
     public override string CustomPortraitPath => "HamoodKick2.png".BigCardImagePath();
     public override string PortraitPath => "HamoodKick2.png".CardImagePath();
     public override string BetaPortraitPath => "beta/HamoodKick2.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

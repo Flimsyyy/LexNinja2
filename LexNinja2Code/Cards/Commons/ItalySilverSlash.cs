@@ -17,7 +17,7 @@ public class ItalySilverSlash()
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(4, ValueProp.Move), new RepeatVar(2), new CardsVar(2)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromCard<LanBlade>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 

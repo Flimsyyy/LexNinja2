@@ -1,6 +1,6 @@
-﻿using BaseLib.Abstracts;
-using LexNinja2.LexNinja2Code.Api;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -9,14 +9,14 @@ using MegaCrit.Sts2.Core.Nodes.Cards;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class WildSnakeGodPower : CustomPowerModel
+public class WildSnakeGodPower : LexNinja2Power
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
     protected override object InitInternalData() => new Data();
 
-    public override string CustomPackedIconPath => "WildSnakeGodPower.png".PowerImagePath();
+    public override string CustomIconPath => "WildSnakeGodPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "WildSnakeGodPower.png".BigPowerImagePath();
 
     public override Task BeforeCardPlayed(CardPlay cardPlay)
