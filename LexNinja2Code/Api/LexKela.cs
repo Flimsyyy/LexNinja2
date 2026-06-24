@@ -31,7 +31,7 @@ public class LexKela
 
         Id = Definition.Id;
 
-        var combatUi = resources.RegisterCombatUi(
+        resources.RegisterCombatUi(
             "lexkela_combat_counter",
             parent =>
             {
@@ -39,23 +39,22 @@ public class LexKela
                     Definition,
                     new SecondaryResourceCounterStyle
                     {
-                        FontSize = 48,
-                        OutlineSize = 15,
+                        FontSize = 36,
+                        OutlineSize = 18,
                         PositiveColor = Colors.White,
-                        AmountLabelOffset = new Vector2(2, 0),
+                        AmountLabelOffset = new Vector2(3, 0),
                         FormatAmount = (amount, max) => amount.ToString(),
-                        CounterSize = new Vector2(192, 192),
-                        IconSize = new Vector2(188, 188),
+                        CounterSize = new Vector2(96, 96),
+                        IconSize = new Vector2(90, 90),
                         IconStyle = SecondaryResourceIconStyle.Default with
                         {
-                            Size = new Vector2(192, 192),
+                            Size = new Vector2(96, 96),
                             HoverTip = SecondaryResourceHoverTipStyle.Default,
                         },
                     }
                 );
-
                 var energyCounter = parent.GetNode<Control>("%EnergyCounterContainer");
-                row.Position = energyCounter.Position + new Vector2(60, 30);
+                row.Position = energyCounter.Position + new Vector2(80, 30);
                 return row;
             },
             ctx => ctx.Node.Bind(ctx.Player)
