@@ -75,7 +75,7 @@ public class LexKela
                 );
 
                 var energyIcon = parent.GetNode<TextureRect>("%EnergyIcon");
-                ui.Position = energyIcon.Position + new Vector2(0, 40);
+                ui.Position = energyIcon.Position + new Vector2(0, 55);
                 return ui;
             },
             ctx => ctx.Node.Refresh(ctx)
