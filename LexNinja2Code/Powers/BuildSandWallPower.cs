@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api.Extensions;
+﻿using System.Collections.Generic;
+using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;

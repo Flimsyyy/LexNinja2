@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;

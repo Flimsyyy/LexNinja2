@@ -1,4 +1,6 @@
-﻿namespace LexNinja2.LexNinja2Code.Api.Extensions;
+﻿using System.IO;
+
+namespace LexNinja2.LexNinja2Code.Api.Extensions;
 
 //Mostly utilities to get asset paths.
 public static class StringExtensions

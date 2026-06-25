@@ -1,4 +1,6 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Relics;
 using LexNinja2.LexNinja2Code.Powers;

@@ -1,3 +1,4 @@
+using System;
 using MegaCrit.Sts2.Core.Localization;
 using SmartFormat.Core.Extensions;
 using STS2RitsuLib.Interop.AutoRegistration;

@@ -1,4 +1,5 @@
-﻿using LexNinja2.LexNinja2Code.Api.Extensions;
+﻿using System.Threading.Tasks;
+using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;

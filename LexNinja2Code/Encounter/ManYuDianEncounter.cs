@@ -1,4 +1,5 @@
-﻿using MegaCrit.Sts2.Core.Models;
+﻿using System.Collections.Generic;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;

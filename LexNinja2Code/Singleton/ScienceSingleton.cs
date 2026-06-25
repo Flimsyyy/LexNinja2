@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;

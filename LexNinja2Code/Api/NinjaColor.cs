@@ -1,3 +1,4 @@
+using System.Linq;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;

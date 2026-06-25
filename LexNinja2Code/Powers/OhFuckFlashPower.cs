@@ -1,4 +1,6 @@
-﻿using BaseLib.Extensions;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Extensions;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Combat;

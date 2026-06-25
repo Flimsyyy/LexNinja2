@@ -1,4 +1,7 @@
+using System;
+using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
