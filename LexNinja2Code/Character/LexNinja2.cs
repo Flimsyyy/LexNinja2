@@ -72,6 +72,7 @@ public class LexNinja2
             AssetProfile.Scenes!.VisualsPath!
         );
 
+    // 攻击建筑师的攻击特效列表
     public override List<string> GetArchitectAttackVfx() =>
         [
             "vfx/vfx_attack_blunt",

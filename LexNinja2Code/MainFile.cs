@@ -9,7 +9,6 @@ using LexNinja2.LexNinja2Code.Api.Patch;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
 using STS2RitsuLib;
-using STS2RitsuLib.Audio;
 using STS2RitsuLib.Interop;
 using STS2RitsuLib.Patching.Core;
 using Logger = MegaCrit.Sts2.Core.Logging.Logger;
@@ -30,9 +29,6 @@ public partial class MainFile : Node
         ModTypeDiscoveryHub.RegisterModAssembly(ModId, Assembly.GetExecutingAssembly());
 
         LexKela.Register();
-
-        FmodStudioStreamingFiles.TryPreloadAsSound("res://LexNinja2/audio/Faded.mp3");
-        FmodStudioStreamingFiles.TryPreloadAsSound("res://LexNinja2/audio/AlanWalker.mp3");
 
         var patcher = RitsuLibFramework.CreatePatcher(ModId, "ninja-patches");
         patcher.RegisterPatch<NinjaSelectPatch>();
