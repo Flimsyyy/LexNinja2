@@ -1,6 +1,7 @@
 using Godot;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib;
@@ -41,7 +42,6 @@ public class LexKela
                     {
                         FontSize = 36,
                         OutlineSize = 18,
-                        PositiveColor = Colors.White,
                         AmountLabelOffset = new Vector2(3, 0),
                         FormatAmount = (amount, max) => amount.ToString(),
                         CounterSize = new Vector2(96, 96),
@@ -71,6 +71,7 @@ public class LexKela
                         IconSize = new Vector2(64, 64),
                         FontSize = 32,
                         OutlineSize = 12,
+                        AffordableOutlineColor = StsColors.ninetyPercentBlack,
                     }
                 );
 
