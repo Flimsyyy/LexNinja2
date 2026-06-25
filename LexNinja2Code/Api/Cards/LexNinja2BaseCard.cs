@@ -15,7 +15,7 @@ public abstract class LexNinja2BaseCard(
     protected override void AddExtraArgsToDescription(LocString description)
     {
         description.AddObj("lexKelaIcon", LexKela.Definition);
-        description.Add("LexNinja2", "LexNinja2");
+        description.Add("IfChallengeMode", NinjaConfig.ChallengeMode);
     }
 
     public override CardAssetProfile AssetProfile =>
