@@ -1,32 +1,38 @@
-﻿using BaseLib.Patches.Content;
-using MegaCrit.Sts2.Core.Entities.Cards;
+﻿using MegaCrit.Sts2.Core.Entities.Cards;
+using STS2RitsuLib.Content;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Keywords;
 
 namespace LexNinja2.LexNinja2Code.Api;
 
+[RegisterOwnedCardKeyword(nameof(RenShu))]
+[RegisterOwnedCardKeyword(
+    nameof(Hand),
+    CardDescriptionPlacement = ModKeywordCardDescriptionPlacement.AfterCardDescription
+)]
+[RegisterOwnedCardKeyword(
+    nameof(Blade),
+    CardDescriptionPlacement = ModKeywordCardDescriptionPlacement.AfterCardDescription
+)]
+[RegisterOwnedCardKeyword(
+    nameof(Science),
+    CardDescriptionPlacement = ModKeywordCardDescriptionPlacement.AfterCardDescription
+)]
 public class NinjaKeyword
 {
-    [CustomEnum("Renshu")]
-    // 放在原版卡牌描述的位置，这里是卡牌描述的前面
-    [KeywordProperties(AutoKeywordPosition.Before)]
-    public static CardKeyword Renshu;
+    public static readonly CardKeyword RenShu = ModContentRegistry
+        .GetQualifiedKeywordId(MainFile.ModId, nameof(RenShu))
+        .GetModCardKeyword();
 
-    [CustomEnum("Hand")]
-    // 放在原版卡牌描述的位置，这里是卡牌描述的前面
-    [KeywordProperties(AutoKeywordPosition.After)]
-    public static CardKeyword Hand;
+    public static readonly CardKeyword Hand = ModContentRegistry
+        .GetQualifiedKeywordId(MainFile.ModId, nameof(Hand))
+        .GetModCardKeyword();
 
-    [CustomEnum("Blade")]
-    // 放在原版卡牌描述的位置，这里是卡牌描述的前面
-    [KeywordProperties(AutoKeywordPosition.After)]
-    public static CardKeyword Blade;
+    public static readonly CardKeyword Blade = ModContentRegistry
+        .GetQualifiedKeywordId(MainFile.ModId, nameof(Blade))
+        .GetModCardKeyword();
 
-    [CustomEnum("Science")]
-    // 放在原版卡牌描述的位置，这里是卡牌描述的前面
-    [KeywordProperties(AutoKeywordPosition.After)]
-    public static CardKeyword Science;
-
-    [CustomEnum("Sarira")]
-    // 放在原版卡牌描述的位置，这里是卡牌描述的前面
-    [KeywordProperties(AutoKeywordPosition.Before)]
-    public static CardKeyword Sarira;
+    public static readonly CardKeyword Science = ModContentRegistry
+        .GetQualifiedKeywordId(MainFile.ModId, nameof(Science))
+        .GetModCardKeyword();
 }

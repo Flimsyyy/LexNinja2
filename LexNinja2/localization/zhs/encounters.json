@@ -1,4 +1,5 @@
 ﻿{
   "LEX_NINJA2_ENCOUNTER_MAN_YU_DIAN_ENCOUNTER.title": "鳗鱼店老板和老板娘",
-  "LEX_NINJA2_ENCOUNTER_MAN_YU_DIAN_ENCOUNTER.loss": "{character}抢劫[gold]{encounter}[/gold]被反杀。"
+  "LEX_NINJA2_ENCOUNTER_MAN_YU_DIAN_ENCOUNTER.loss": "{character}抢劫[gold]{encounter}[/gold]被反杀。",
+  "LEX_NINJA2_ENCOUNTER_MAN_YU_DIAN_ENCOUNTER.customRewardDescription": "没有自定义奖励，遇见它请到github报告。"
 }

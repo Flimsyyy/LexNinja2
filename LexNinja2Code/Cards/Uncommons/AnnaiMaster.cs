@@ -13,7 +13,7 @@ namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 public class AnnaiMaster() : LexNinja2Card(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-        [LexKela.HoverTip(), HoverTipFactory.FromKeyword(NinjaKeyword.Renshu)];
+        [LexKela.HoverTip(), HoverTipFactory.FromKeyword(NinjaKeyword.RenShu)];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 

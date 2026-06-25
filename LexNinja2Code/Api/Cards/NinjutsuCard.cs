@@ -61,4 +61,6 @@ public abstract class NinjutsuCard : ModCardTemplate
         }
         return play.SecondaryResources().Value(LexKela.Id);
     }
+
+    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

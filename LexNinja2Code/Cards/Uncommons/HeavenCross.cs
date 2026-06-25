@@ -14,7 +14,7 @@ public class HeavenCross() : LexNinja2Card(2, CardType.Power, CardRarity.Uncommo
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<HeavenCrossPower>(1)];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-        [LexKela.HoverTip(), HoverTipFactory.FromKeyword(NinjaKeyword.Renshu)];
+        [LexKela.HoverTip(), HoverTipFactory.FromKeyword(NinjaKeyword.RenShu)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

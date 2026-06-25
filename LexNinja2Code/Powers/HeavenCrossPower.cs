@@ -13,7 +13,7 @@ public class HeavenCrossPower : LexNinja2Power
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-        [LexKela.HoverTip(), HoverTipFactory.FromKeyword(NinjaKeyword.Renshu)];
+        [LexKela.HoverTip(), HoverTipFactory.FromKeyword(NinjaKeyword.RenShu)];
 
     public override string CustomIconPath => "HeavenCrossPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "HeavenCrossPower84.png".BigPowerImagePath();

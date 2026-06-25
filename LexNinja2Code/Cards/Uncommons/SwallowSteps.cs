@@ -24,7 +24,7 @@ public class SwallowSteps() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncomm
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new CardsVar(1), new ExtraCards(1)];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-        [HoverTipFactory.FromKeyword(NinjaKeyword.Renshu)];
+        [HoverTipFactory.FromKeyword(NinjaKeyword.RenShu)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

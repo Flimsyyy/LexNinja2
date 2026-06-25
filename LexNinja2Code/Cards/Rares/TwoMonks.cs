@@ -14,7 +14,7 @@ public class TwoMonks() : LexNinja2Card(2, CardType.Skill, CardRarity.Rare, Targ
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<TwoMonksPower>(1)];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-        [HoverTipFactory.FromKeyword(NinjaKeyword.Renshu)];
+        [HoverTipFactory.FromKeyword(NinjaKeyword.RenShu)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

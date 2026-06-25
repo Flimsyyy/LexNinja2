@@ -19,7 +19,7 @@ public class SariraRevive() : LexNinja2Card(0, CardType.Skill, CardRarity.Rare, 
         [new CardsVar(1), new LexKelaVar(2)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-        [HoverTipFactory.FromKeyword(NinjaKeyword.Sarira)];
+        [.. HoverTipFactory.FromRelic<Sarira>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
