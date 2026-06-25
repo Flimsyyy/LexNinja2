@@ -10,6 +10,6 @@ public class LexKelaVar : SecondaryResourceVar
     public LexKelaVar(decimal baseValue)
         : base(Key, LexKela.Id, baseValue)
     {
-        this.WithTooltip(Key.ToUpperInvariant());
+        DynamicVarExtensions.DynamicVarTips[this] = _ => LexKela.HoverTip();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BaseLib.Extensions;
+using MegaCrit.Sts2.Core.HoverTips;
 using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -10,6 +11,7 @@ public class NinjutsuVar : SecondaryResourceVar
     public NinjutsuVar(decimal baseValue)
         : base(Key, LexKela.Id, baseValue)
     {
-        this.WithTooltip(Key.ToUpperInvariant());
+        DynamicVarExtensions.DynamicVarTips[this] = _ =>
+            HoverTipFactory.FromKeyword(NinjaKeyword.RenShu);
     }
 }
