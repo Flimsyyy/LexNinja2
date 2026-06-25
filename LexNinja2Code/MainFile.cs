@@ -26,6 +26,8 @@ public partial class MainFile : Node
 
     public static void Initialize()
     {
+        RitsuLibFramework.RegisterModSettingsReflectionProvider<NinjaConfig>();
+
         ModTypeDiscoveryHub.RegisterModAssembly(ModId, Assembly.GetExecutingAssembly());
 
         LexKela.Register();
