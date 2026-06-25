@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LexNinja2.LexNinja2Code.Api;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -16,9 +13,10 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
 public class GenshinStorm()
-    : LexNinja2NinjutsuCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.AllAllies, true)
+    : LexNinja2NinjutsuCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.AllAllies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new NinjutsuVar(0)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new NinjutsuVar(0) { HasLexKelaCostX = true }];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromCard<HolyLittleStorm>(true), LexKela.HoverTip()];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>

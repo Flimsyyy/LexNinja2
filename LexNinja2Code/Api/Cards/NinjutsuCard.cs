@@ -1,40 +1,30 @@
-using System;
-using System.Collections.Generic;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using STS2RitsuLib.Combat.SecondaryResources;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace LexNinja2.LexNinja2Code.Api.Cards;
 
-public abstract class NinjutsuCard : ModCardTemplate
+public abstract class NinjutsuCard : LexNinja2BaseCard
 {
     protected virtual HashSet<CardTag> AdditionalCanonicalTags => [];
     protected sealed override HashSet<CardTag> CanonicalTags =>
         [NinjaTags.Ninjutsu, .. AdditionalCanonicalTags];
 
-    private const string RenShu = "ren_shu";
+    private const string RenShu = "renShu";
 
-    public bool HasLexKelaCostX { get; }
+    public bool HasLexKelaCostX => DynamicVars.Ninjutsu().HasLexKelaCostX;
 
-    protected NinjutsuCard(
-        int cost,
-        CardType type,
-        CardRarity rarity,
-        TargetType target,
-        bool hasLexKelaCostX = false
-    )
+    protected NinjutsuCard(int cost, CardType type, CardRarity rarity, TargetType target)
         : base(cost, type, rarity, target)
     {
-        HasLexKelaCostX = hasLexKelaCostX;
-        if (hasLexKelaCostX)
+        var ninjutsuVar = DynamicVars.Ninjutsu();
+        if (ninjutsuVar.HasLexKelaCostX)
         {
             this.SecondaryResourceUses()
                 .SpendIfAvailable(RenShu, LexKela.Id, SecondaryResourceCost.X());
             return;
         }
-        this.SecondaryResourceUses()
-            .SpendIfAvailable(RenShu, LexKela.Id, DynamicVars.Ninjutsu().IntValue);
+        this.SecondaryResourceUses().SpendIfAvailable(RenShu, LexKela.Id, ninjutsuVar.IntValue);
     }
 
     //在OnPlay中使用

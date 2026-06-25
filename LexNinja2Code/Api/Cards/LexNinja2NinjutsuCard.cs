@@ -9,6 +9,5 @@ public abstract class LexNinja2NinjutsuCard(
     int cost,
     CardType type,
     CardRarity rarity,
-    TargetType target,
-    bool hasLexKelaCostX = false
-) : NinjutsuCard(cost, type, rarity, target, hasLexKelaCostX);
+    TargetType target
+) : NinjutsuCard(cost, type, rarity, target);

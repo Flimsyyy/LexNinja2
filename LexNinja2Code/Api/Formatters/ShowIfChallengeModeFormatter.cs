@@ -1,4 +1,3 @@
-using System;
 using MegaCrit.Sts2.Core.Localization;
 using SmartFormat.Core.Extensions;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -17,6 +16,10 @@ public class ShowIfChallengeModeFormatter : IFormatter
 
     public bool TryEvaluateFormat(IFormattingInfo formattingInfo)
     {
+        if (formattingInfo.CurrentValue is not "LexNinja2")
+        {
+            return false;
+        }
         var formatList = formattingInfo.Format?.Split('|');
         if (formatList == null)
             throw new LocException(

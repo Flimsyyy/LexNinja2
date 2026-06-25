@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 using LexNinja2.LexNinja2Code.Api;
+using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Cards.Events;
 using MegaCrit.Sts2.Core.Commands;
@@ -15,12 +14,11 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace LexNinja2.LexNinja2Code.Cards.Quests;
 
 [RegisterCard(typeof(TokenCardPool))]
-public class ISeeYou() : ModCardTemplate(-1, CardType.Quest, CardRarity.Quest, TargetType.Self)
+public class ISeeYou() : LexNinja2BaseCard(-1, CardType.Quest, CardRarity.Quest, TargetType.Self)
 {
     // private int _cardsInHand;
     private int _combatsSeen;

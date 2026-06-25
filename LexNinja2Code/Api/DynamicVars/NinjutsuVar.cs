@@ -7,6 +7,7 @@ namespace LexNinja2.LexNinja2Code.Api.DynamicVars;
 public class NinjutsuVar : SecondaryResourceVar
 {
     public const string Key = "RenShu";
+    public bool HasLexKelaCostX { get; init; } = false;
 
     public NinjutsuVar(decimal baseValue)
         : base(Key, LexKela.Id, baseValue)
