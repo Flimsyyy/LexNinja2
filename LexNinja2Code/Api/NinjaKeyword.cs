@@ -5,7 +5,10 @@ using STS2RitsuLib.Keywords;
 
 namespace LexNinja2.LexNinja2Code.Api;
 
-[RegisterOwnedCardKeyword(nameof(RenShu))]
+[RegisterOwnedCardKeyword(
+    nameof(RenShu),
+    CardDescriptionPlacement = ModKeywordCardDescriptionPlacement.None
+)]
 [RegisterOwnedCardKeyword(
     nameof(Hand),
     CardDescriptionPlacement = ModKeywordCardDescriptionPlacement.AfterCardDescription
