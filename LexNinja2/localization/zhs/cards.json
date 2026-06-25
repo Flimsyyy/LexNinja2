@@ -213,7 +213,7 @@
   "LEX_NINJA2_CARD_DRAGON_SMOG.description": "获得1层[gold]无实体[/gold]。\n[gold]忍术[/gold]{RenShu:renShu()}：去除所有敌人身上的[gold]人工制品[/gold]，并给予所有敌人{VulnerablePower}层[gold]易伤[/gold]。",
   "LEX_NINJA2_CARD_DRAGON_SMOG.title": "令神龙造成烟雾",
 
-  "LEX_NINJA2_CARD_SCARE_FORM.description": "[gold]忍术[/gold]{RenShu}：回合开始时，随机释放{ScarePower:diff()}个[gold]忍术[/gold]。",
+  "LEX_NINJA2_CARD_SCARE_FORM.description": "[gold]忍术[/gold]{RenShu:renShu()}：回合开始时，随机释放{ScarePower:diff()}个[gold]忍术[/gold]。",
   "LEX_NINJA2_CARD_SCARE_FORM.title": "受惊形态",
 
   "LEX_NINJA2_CARD_TAKE_YOUR_HEART.description": "造成{Damage:diff()}点伤害。\n[gold]忍术[/gold]{RenShu:renShu()}：[gold]负面效果[/gold]总层数不小于{DebuffAmount:diff()}层的目标敌人死亡。",

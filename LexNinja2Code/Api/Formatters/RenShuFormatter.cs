@@ -35,6 +35,13 @@ public class RenShuFormatter : IFormatter
             formattingInfo.Write(renShu.ToHighlightedString(true));
             return true;
         }
+
+        var requestCost = card.DynamicVars.Ninjutsu().BaseValue;
+        if (requestCost == 0)
+        {
+            formattingInfo.Write(0.ToString());
+            return true;
+        }
         var plan = SecondaryResourcePaymentResolver.Plan(
             card,
             FreePlayBindingRegistry.IsCardFreeForUpcomingPlay(card)
