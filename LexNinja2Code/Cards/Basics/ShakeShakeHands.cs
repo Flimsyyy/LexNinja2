@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -29,7 +27,8 @@ public class ShakeShakeHands()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/ShakeShakeHand.mp3");
-        await CommonActions.ApplySelf<WeakPower>(choiceContext, this);
+        var weakSelf = await CommonActions.ApplySelf<WeakPower>(choiceContext, this);
+        weakSelf!.SkipNextDurationTick = false;
         await CommonActions.Apply<WeakPower>(choiceContext, this, play);
         await LexKela.Gain(this);
     }
