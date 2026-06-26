@@ -32,7 +32,6 @@ public class GenshinStorm()
             where c is { IsAlive: true, IsPlayer: true }
             select c;
         var amount = ResolveLexkelaXValue(play);
-        Ninjutsu(play);
         foreach (var player in players)
         {
             if (player == Owner.Creature)
