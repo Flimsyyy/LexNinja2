@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Godot;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -73,6 +72,7 @@ public class LexKela
                         FontSize = 32,
                         OutlineSize = 12,
                         AffordableOutlineColor = StsColors.ninetyPercentBlack,
+                        OptionalUnavailableOutlineColor = StsColors.ninetyPercentBlack,
                     }
                 );
 
