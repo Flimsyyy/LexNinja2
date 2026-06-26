@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using System.Text;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -9,7 +7,7 @@ using STS2RitsuLib.Cards.FreePlay;
 using STS2RitsuLib.Combat.SecondaryResources;
 using STS2RitsuLib.Interop.AutoRegistration;
 
-namespace LexNinja2.LexNinja2Code.Api.Formatters;
+namespace LexNinja2.LexNinja2Code.Api.SmartFormatters;
 
 [RegisterSmartFormatter]
 public class RenShuFormatter : IFormatter
