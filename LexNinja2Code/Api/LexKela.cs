@@ -19,7 +19,7 @@ public class LexKela
         var resources = RitsuLibFramework.GetSecondaryResourceRegistry(MainFile.ModId);
 
         Definition = resources.Register(
-            "lexkela",
+            "lex_kela",
             new SecondaryResourceDefinition(
                 defaultAmount: 0,
                 baseMaxAmount: null,
@@ -33,7 +33,7 @@ public class LexKela
         Id = Definition.Id;
 
         resources.RegisterCombatUi(
-            "lexkela_combat_counter",
+            "lex_kela_combat_counter",
             parent =>
             {
                 var row = NSecondaryResourceCounter.Create(
@@ -61,7 +61,7 @@ public class LexKela
         );
 
         resources.RegisterCardUi(
-            "lexkela_card_ui",
+            "lex_kela_card_ui",
             parent =>
             {
                 var ui = NSecondaryResourceCardCostUi.Create(
