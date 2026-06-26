@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using LexNinja2.LexNinja2Code.Api.Extensions;
+﻿using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -19,7 +18,8 @@ public class DisappointedPower : LexNinja2Power
     {
         if (cardPlay.Card.Type == CardType.Attack && cardPlay.Card.Owner == Owner.Player)
         {
-            await PowerCmd.Apply<WeakPower>(context, Owner, 1, null, null);
+            var weakSelf = await PowerCmd.Apply<WeakPower>(context, Owner, 1, null, null);
+            weakSelf!.SkipNextDurationTick = false;
             await PowerCmd.Remove(this);
         }
     }
