@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -9,7 +7,9 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
@@ -26,8 +26,21 @@ public class PastHasGoneHand() : LexNinja2Card(1, CardType.Skill, CardRarity.Rar
     {
         NinjaAudio.Play("res://LexNinja2/audio/PastHasGoneHand.mp3");
         var discard = PileType.Discard.GetPile(Owner).Cards;
+        var max = discard.Count;
+        var exhaustAmount = 0;
         while (discard.Count != 0)
         {
+            if (exhaustAmount >= max)
+            {
+                TalkCmd.Play(
+                    new LocString("cards", "LEX_NINJA2_CARD_PAST_HAS_GONE_HAND.talk_failed"),
+                    Owner.Creature,
+                    VfxColor.Black,
+                    VfxDuration.Standard
+                );
+                break;
+            }
+            exhaustAmount++;
             await LexKela.Gain(this);
             await CommonActions.CardBlock(this, play);
             await CardCmd.Exhaust(choiceContext, discard[0], skipVisuals: true);
