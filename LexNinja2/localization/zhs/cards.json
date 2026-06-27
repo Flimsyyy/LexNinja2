@@ -197,6 +197,7 @@
 
   "LEX_NINJA2_CARD_PAST_HAS_GONE_HAND.description": "[gold]消耗[/gold]你的[gold]弃牌堆[/gold]。\n每[gold]消耗[/gold]一张牌，获得{Block:diff()}点[gold]格挡[/gold]和{Kela:secondaryResourceIcons()}点[gold]蕾克拉[/gold]。",
   "LEX_NINJA2_CARD_PAST_HAS_GONE_HAND.title": "往事如烟手",
+  "LEX_NINJA2_CARD_PAST_HAS_GONE_HAND.talk_failed": "啊搞得我想都想不到",
 
   "LEX_NINJA2_CARD_OH_FUCK_FLASH.description": "阻止下1次你受到的生命值损伤。\n[gold]忍术[/gold]{RenShu:renShu()}：结束你的回合。\n进行一个额外回合。",
   "LEX_NINJA2_CARD_OH_FUCK_FLASH.title": "哎哟我草闪现！",
