@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BaseLib.Extensions;
+﻿using BaseLib.Extensions;
 using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
@@ -18,9 +16,9 @@ public class ManTooWeak() : LexNinja2Card(2, CardType.Power, CardRarity.Uncommon
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
-            new PowerVar<StrengthPower>(5),
-            new PowerVar<DexterityPower>(5),
-            new PowerVar<ManTooWeakPower>(2),
+            new PowerVar<StrengthPower>(NinjaHelper.GetValueByChallengeMode(3, 5)),
+            new PowerVar<DexterityPower>(NinjaHelper.GetValueByChallengeMode(3, 5)),
+            new PowerVar<ManTooWeakPower>(NinjaHelper.GetValueByChallengeMode(1, 2)),
         ];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
@@ -35,7 +33,15 @@ public class ManTooWeak() : LexNinja2Card(2, CardType.Power, CardRarity.Uncommon
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Power<ManTooWeakPower>().UpgradeValueBy(-1);
+        if (NinjaConfigsPage.IsChallengeMode())
+        {
+            DynamicVars.Power<StrengthPower>().UpgradeValueBy(1);
+            DynamicVars.Power<DexterityPower>().UpgradeValueBy(1);
+        }
+        else
+        {
+            DynamicVars.Power<ManTooWeakPower>().UpgradeValueBy(-1);
+        }
     }
 
     public override string CustomPortraitPath => $"ManTooWeak_p.png".BigCardImagePath();

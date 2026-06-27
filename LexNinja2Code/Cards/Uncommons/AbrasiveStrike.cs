@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BaseLib.Extensions;
+﻿using BaseLib.Extensions;
 using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
@@ -14,10 +12,18 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class AbrasiveStrike()
-    : LexNinja2Card(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+    : LexNinja2Card(
+        1,
+        CardType.Attack,
+        NinjaHelper.GetValueByChallengeMode(CardRarity.Common, CardRarity.Uncommon),
+        TargetType.AnyEnemy
+    )
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new PowerVar<ThornsPower>(2), new DamageVar(8, ValueProp.Move)];
+        [
+            new PowerVar<ThornsPower>(2),
+            new DamageVar(NinjaHelper.GetValueByChallengeMode(7, 8), ValueProp.Move),
+        ];
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

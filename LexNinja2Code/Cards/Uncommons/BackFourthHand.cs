@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -18,7 +15,7 @@ public class BackFourthHand()
     : LexNinja2Card(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(8, ValueProp.Move), new CardsVar(2)];
+        [new BlockVar(NinjaHelper.GetValueByChallengeMode(7, 8), ValueProp.Move), new CardsVar(2)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

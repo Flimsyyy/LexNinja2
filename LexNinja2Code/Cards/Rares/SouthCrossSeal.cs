@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BaseLib.Extensions;
+﻿using BaseLib.Extensions;
 using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
@@ -32,6 +30,10 @@ public class SouthCrossSeal()
             return;
         }
         await CommonActions.Apply<SealPower>(choiceContext, this, play);
+        if (NinjaConfigsPage.IsChallengeMode())
+        {
+            await LexKela.Reset(this);
+        }
     }
 
     protected override void OnUpgrade()

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -16,12 +14,21 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class BeastShout()
-    : LexNinja2NinjutsuCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
+    : LexNinja2NinjutsuCard(
+        NinjaHelper.GetValueByChallengeMode(2, 1),
+        CardType.Attack,
+        CardRarity.Uncommon,
+        TargetType.AllEnemies
+    )
 {
     private const string StrengthLoss = "StrengthLoss";
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(11, ValueProp.Move), new(StrengthLoss, 1), new NinjutsuVar(1)];
+        [
+            new DamageVar(NinjaHelper.GetValueByChallengeMode(14, 11), ValueProp.Move),
+            new(StrengthLoss, NinjaHelper.GetValueByChallengeMode(2, 1)),
+            new NinjutsuVar(1),
+        ];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<StrengthPower>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];

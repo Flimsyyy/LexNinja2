@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using LexNinja2.LexNinja2Code.Api;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -24,13 +22,21 @@ public class DarknessCrawl()
         NinjaAudio.Play("res://LexNinja2/audio/DarknessCrawl.mp3");
         await NinjaAnim.TriggerCastAnim(this);
         var evokeCount = ResolveEnergyXValue();
-        if (IsUpgraded)
-            evokeCount += 1;
+        if (!NinjaConfigsPage.IsChallengeMode() && IsUpgraded)
+            evokeCount++;
         for (var i = 0; i < evokeCount; ++i)
         {
             NinjaAudio.Play("res://LexNinja2/audio/Crawl.mp3");
             await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
             await LexKela.Gain(this);
+        }
+    }
+
+    protected override void OnUpgrade()
+    {
+        if (NinjaConfigsPage.IsChallengeMode())
+        {
+            DynamicVars.Block.UpgradeValueBy(2);
         }
     }
 

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Reflection;
 using BaseLib.Utils;
@@ -27,7 +26,7 @@ public partial class MainFile : Node
 
     public static void Initialize()
     {
-        RitsuLibFramework.RegisterModSettingsReflectionProvider<NinjaConfig>();
+        NinjaConfigsPage.Register();
 
         ModTypeDiscoveryHub.RegisterModAssembly(ModId, Assembly.GetExecutingAssembly());
 

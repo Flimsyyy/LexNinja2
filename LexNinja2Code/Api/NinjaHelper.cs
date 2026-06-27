@@ -1,7 +1,4 @@
-using System;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
@@ -83,5 +80,10 @@ public static class NinjaHelper
             return;
         dynamicVar.BaseValue = 0;
         dynamicVar.FinalizeUpgrade();
+    }
+
+    public static T GetValueByChallengeMode<T>(T challengeValue, T normalValue)
+    {
+        return NinjaConfigsPage.IsChallengeMode() ? challengeValue : normalValue;
     }
 }

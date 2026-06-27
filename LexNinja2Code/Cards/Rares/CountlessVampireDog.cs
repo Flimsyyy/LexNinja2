@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -15,7 +12,12 @@ using STS2RitsuLib;
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
 public class CountlessVampireDog()
-    : LexNinja2Card(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
+    : LexNinja2Card(
+        NinjaHelper.GetValueByChallengeMode(3, 1),
+        CardType.Skill,
+        CardRarity.Rare,
+        TargetType.Self
+    )
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LexNinja2.LexNinja2Code.Api;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Commands;
@@ -14,7 +11,13 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 
 namespace LexNinja2.LexNinja2Code.Cards.Commons;
 
-public class GodAndBuddha() : LexNinja2Card(0, CardType.Skill, CardRarity.Common, TargetType.Self)
+public class GodAndBuddha()
+    : LexNinja2Card(
+        NinjaHelper.GetValueByChallengeMode(1, 0),
+        CardType.Skill,
+        CardRarity.Common,
+        TargetType.Self
+    )
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];

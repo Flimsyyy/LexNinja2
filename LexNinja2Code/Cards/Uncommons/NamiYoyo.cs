@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -31,23 +28,29 @@ public class NamiYoyo() : LexNinja2Card(4, CardType.Skill, CardRarity.Uncommon, 
         instance?.CombatVfxContainer.AddChildSafely(
             NBolasVfx.Create(Owner.Creature, play.Target!)!
         );
-        await CommonActions.Apply<PoisonPower>(choiceContext, this, play);
+        if (!NinjaConfigsPage.IsChallengeMode())
+        {
+            await CommonActions.Apply<PoisonPower>(choiceContext, this, play);
+        }
         await Cmd.Wait(0.25f);
 
         var poisonPower = play.Target!.GetPower<PoisonPower>();
-        if (poisonPower == null)
+        if (poisonPower != null)
         {
-            return;
+            var enemy = CombatState!.HittableEnemies.ToList();
+            var target = Owner.RunState.Rng.CombatTargets.NextItem(enemy);
+            await PowerCmd.Apply<PoisonPower>(
+                choiceContext,
+                target!,
+                poisonPower.Amount,
+                Owner.Creature,
+                this
+            );
         }
-        var enemy = CombatState!.HittableEnemies.ToList();
-        var target = Owner.RunState.Rng.CombatTargets.NextItem(enemy);
-        await PowerCmd.Apply<PoisonPower>(
-            choiceContext,
-            target!,
-            poisonPower.Amount,
-            Owner.Creature,
-            this
-        );
+        if (NinjaConfigsPage.IsChallengeMode())
+        {
+            await CommonActions.Apply<PoisonPower>(choiceContext, this, play);
+        }
     }
 
     protected override void OnUpgrade()

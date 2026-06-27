@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using LexNinja2.LexNinja2Code.Api;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -16,7 +14,11 @@ public class CometCorruptedStar()
     : LexNinja2Card(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new LexKelaVar(2), new EnergyVar(1), new NinjutsuVar(1)];
+        [
+            new LexKelaVar(NinjaHelper.GetValueByChallengeMode(1, 2)),
+            new EnergyVar(1),
+            new NinjutsuVar(1),
+        ];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.Static(StaticHoverTip.Energy)];
 

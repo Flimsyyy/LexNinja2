@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BaseLib.Extensions;
+﻿using BaseLib.Extensions;
 using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
@@ -19,7 +17,11 @@ public class SandDefendHand()
     : LexNinja2NinjutsuCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(8, ValueProp.Move), new NinjutsuVar(1), new PowerVar<SandWall>(6)];
+        [
+            new BlockVar(8, ValueProp.Move),
+            new NinjutsuVar(1),
+            new PowerVar<SandWall>(NinjaHelper.GetValueByChallengeMode(5, 6)),
+        ];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<SandWall>(), LexKela.HoverTip()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
@@ -38,7 +40,7 @@ public class SandDefendHand()
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(3);
-        DynamicVars.Power<SandWall>().UpgradeValueBy(3);
+        DynamicVars.Power<SandWall>().UpgradeValueBy(NinjaHelper.GetValueByChallengeMode(2, 3));
     }
 
     public override string CustomPortraitPath => $"SandDefendHand_p.png".BigCardImagePath();

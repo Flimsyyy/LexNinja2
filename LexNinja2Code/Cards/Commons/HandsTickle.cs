@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -13,7 +10,12 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Commons;
 
 public class HandsTickle()
-    : LexNinja2Card(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    : LexNinja2Card(
+        2,
+        CardType.Attack,
+        NinjaHelper.GetValueByChallengeMode(CardRarity.Uncommon, CardRarity.Common),
+        TargetType.AnyEnemy
+    )
 {
     private const string CalculatedHits = "CalculatedHits";
 
