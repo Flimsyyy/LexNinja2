@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -39,7 +37,10 @@ public class FourNightsLightning()
                 tmpSfx: "lightning_orb_evoke.mp3"
             )
             .Execute(choiceContext);
-        await CardPileCmd.Draw(choiceContext, repeatCount, Owner);
+        if (!NinjaConfigsPage.IsChallengeMode())
+        {
+            await CardPileCmd.Draw(choiceContext, repeatCount, Owner);
+        }
         await PlayerCmd.GainEnergy(repeatCount, Owner);
     }
 

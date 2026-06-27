@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using Godot;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
@@ -21,7 +18,10 @@ public class HamoodKick()
     : LexNinja2NinjutsuCard(0, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(13, ValueProp.Move), new NinjutsuVar(1)];
+        [
+            new DamageVar(NinjaHelper.GetValueByChallengeMode(11, 13), ValueProp.Move),
+            new NinjutsuVar(1),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -51,7 +51,7 @@ public class HamoodKick()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(5);
+        DynamicVars.Damage.UpgradeValueBy(NinjaHelper.GetValueByChallengeMode(4, 5));
     }
 
     public override string CustomPortraitPath => "HamoodKick2.png".BigCardImagePath();

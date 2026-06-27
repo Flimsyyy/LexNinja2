@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
-namespace LexNinja2.LexNinja2Code.Cards.Rares;
+namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class GenshinStorm()
     : LexNinja2NinjutsuCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.AllAllies)

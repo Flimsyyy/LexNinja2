@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -14,11 +11,15 @@ using MegaCrit.Sts2.Core.Nodes.Cards;
 namespace LexNinja2.LexNinja2Code.Cards.Commons;
 
 public class DarknessSnakeHand()
-    : LexNinja2Card(0, CardType.Skill, CardRarity.Common, TargetType.Self)
+    : LexNinja2Card(
+        NinjaHelper.GetValueByChallengeMode(1, 0),
+        CardType.Skill,
+        CardRarity.Common,
+        TargetType.Self
+    )
 {
-    // private int _testEnergyCostOverride = -1;
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new CardsVar(5), new LexKelaVar(1)];
+        [new CardsVar(5), new LexKelaVar(NinjaHelper.GetValueByChallengeMode(2, 1))];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [CardKeyword.Exhaust, NinjaKeyword.Hand];
 

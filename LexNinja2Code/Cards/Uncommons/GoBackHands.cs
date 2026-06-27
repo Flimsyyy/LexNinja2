@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LexNinja2.LexNinja2Code.Api;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -49,7 +46,14 @@ public class GoBackHands()
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        if (NinjaConfigsPage.IsChallengeMode())
+        {
+            UpgradeNinjutsuValueBy(-1);
+        }
+        else
+        {
+            EnergyCost.UpgradeBy(-1);
+        }
     }
 
     public override string CustomPortraitPath => $"GoBackHands_p.png".BigCardImagePath();

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LexNinja2.LexNinja2Code.Api;
+﻿using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Commands;
@@ -20,6 +17,15 @@ public class PowerJesus() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
+        if (NinjaConfigsPage.IsChallengeMode())
+        {
+            var list = PileType.Hand.GetPile(Owner).Cards.ToList();
+            foreach (var item in list)
+            {
+                await CardCmd.Exhaust(choiceContext, item);
+            }
+        }
+
         NinjaAudio.Play("res://LexNinja2/audio/PowerJesus.mp3");
         await NinjaAnim.TriggerCastAnim(this);
 

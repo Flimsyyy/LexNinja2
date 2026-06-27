@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BaseLib.Extensions;
+﻿using BaseLib.Extensions;
 using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
@@ -16,10 +14,18 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class ShadowBlade()
-    : LexNinja2Card(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+    : LexNinja2Card(
+        NinjaHelper.GetValueByChallengeMode(3, 2),
+        CardType.Attack,
+        CardRarity.Uncommon,
+        TargetType.AnyEnemy
+    )
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(12, ValueProp.Move), new PowerVar<VulnerablePower>(1)];
+        [
+            new DamageVar(NinjaHelper.GetValueByChallengeMode(16, 12), ValueProp.Move),
+            new PowerVar<VulnerablePower>(NinjaHelper.GetValueByChallengeMode(2, 1)),
+        ];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
@@ -48,7 +54,7 @@ public class ShadowBlade()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2);
+        DynamicVars.Damage.UpgradeValueBy(NinjaHelper.GetValueByChallengeMode(7, 2));
         DynamicVars.Power<VulnerablePower>().UpgradeValueBy(1);
     }
 

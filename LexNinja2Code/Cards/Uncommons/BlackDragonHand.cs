@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -18,7 +16,11 @@ public class BlackDragonHand()
     : LexNinja2NinjutsuCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new HpLossVar(2), new NinjutsuVar(2), new PowerVar<WeakPower>(2)];
+        [
+            new HpLossVar(NinjaHelper.GetValueByChallengeMode(3, 2)),
+            new NinjutsuVar(NinjaHelper.GetValueByChallengeMode(4, 2)),
+            new PowerVar<WeakPower>(2),
+        ];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<IntangiblePower>(), HoverTipFactory.FromPower<WeakPower>()];
     public override bool CanBeGeneratedInCombat => false;
@@ -47,7 +49,14 @@ public class BlackDragonHand()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.HpLoss.UpgradeValueBy(1);
+        if (NinjaConfigsPage.IsChallengeMode())
+        {
+            UpgradeNinjutsuValueBy(-1);
+        }
+        else
+        {
+            DynamicVars.HpLoss.UpgradeValueBy(1);
+        }
     }
 
     public override string CustomPortraitPath => $"BlackDragonHand_p.png".BigCardImagePath();

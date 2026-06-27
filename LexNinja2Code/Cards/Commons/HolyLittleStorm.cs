@@ -18,7 +18,10 @@ public class HolyLittleStorm()
     : LexNinja2NinjutsuCard(1, CardType.Attack, CardRarity.Common, TargetType.RandomEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(7, ValueProp.Move), new NinjutsuVar(0) { HasLexKelaCostX = true }];
+        [
+            new DamageVar(NinjaHelper.GetValueByChallengeMode(6, 7), ValueProp.Move),
+            new NinjutsuVar(0) { HasLexKelaCostX = true },
+        ];
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
 

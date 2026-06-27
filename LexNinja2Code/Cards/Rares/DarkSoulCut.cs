@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -31,6 +28,16 @@ public class DarkSoulCut()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
+        if (NinjaConfigsPage.IsChallengeMode())
+        {
+            await CreatureCmd.Damage(
+                choiceContext,
+                Owner.Creature,
+                DynamicVars.Damage,
+                Owner.Creature
+            );
+            await Cmd.Wait(0.2f);
+        }
         if (!Ninjutsu(play))
         {
             return;
