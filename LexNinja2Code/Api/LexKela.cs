@@ -73,6 +73,7 @@ public class LexKela
                         OutlineSize = 12,
                         AffordableOutlineColor = StsColors.ninetyPercentBlack,
                         OptionalUnavailableOutlineColor = StsColors.ninetyPercentBlack,
+                        ReserveVanillaStarCostSlot = true,
                     }
                 );
 
