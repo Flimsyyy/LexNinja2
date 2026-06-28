@@ -37,7 +37,8 @@ public abstract class NinjutsuCard : LexNinja2BaseCard
 
     public bool CanCastNinjutsu()
     {
-        return SecondaryResourcePaymentResolver.CanPay(this);
+        var line = SecondaryResourcePaymentResolver.Plan(this).Lines.ToList().FirstOrDefault();
+        return line != null && line.IsAffordable;
     }
 
     protected void UpgradeNinjutsuValueBy(int addend)
