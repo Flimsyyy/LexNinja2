@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using STS2RitsuLib.Combat.SecondaryResources;

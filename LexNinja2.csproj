@@ -1,7 +1,6 @@
 <Project Sdk="Godot.NET.Sdk/4.5.1">
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>true</ImplicitUsings>
     <Nullable>enable</Nullable>
     <!--Makes code analysis regarding null values stricter.-->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
