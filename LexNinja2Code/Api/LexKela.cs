@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Godot;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Entities.Players;

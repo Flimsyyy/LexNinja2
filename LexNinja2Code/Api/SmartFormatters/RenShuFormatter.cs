@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Text;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
