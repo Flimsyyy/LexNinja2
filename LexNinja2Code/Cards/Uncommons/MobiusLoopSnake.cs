@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -43,10 +42,9 @@ public class MobiusLoopSnake()
     public override string PortraitPath => $"MobiusLoopSnake.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/MobiusLoopSnake.png".CardImagePath();
 
-    public override async Task BeforeHandDraw(
-        Player player,
+    public override async Task AfterPlayerTurnStartEarly(
         PlayerChoiceContext choiceContext,
-        ICombatState combatState
+        Player player
     )
     {
         if (player != Owner)

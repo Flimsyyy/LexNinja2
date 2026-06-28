@@ -17,7 +17,7 @@ public class OhFuckFlashPower : LexNinja2Power
     private bool _wasOwnerPartOfLastPlayerTurn = true;
     private bool _isEffective = true;
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Counter;
+    public override PowerStackType StackType => PowerStackType.Single;
 
     public override string CustomIconPath => "OhFuckFlash.png".PowerImagePath();
     public override string? CustomBigIconPath => "OhFuckFlash.png".BigPowerImagePath();
@@ -50,9 +50,10 @@ public class OhFuckFlashPower : LexNinja2Power
         return Task.CompletedTask;
     }
 
-    public override async Task AfterPlayerTurnStart(
+    public override async Task BeforeHandDraw(
+        Player player,
         PlayerChoiceContext choiceContext,
-        Player player
+        ICombatState combatState
     )
     {
         if (player != Owner.Player)
