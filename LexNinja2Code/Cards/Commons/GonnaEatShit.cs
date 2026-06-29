@@ -34,7 +34,7 @@ public class GonnaEatShit() : LexNinja2Card(0, CardType.Attack, CardRarity.Commo
             ValueProp.Move | ValueProp.Unblockable,
             this
         );
-        if (!NinjaConfigsPage.IsChallengeMode())
+        if (!NinjaConfig.IsChallengeMode())
         {
             await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
             await LexKela.Gain(this);

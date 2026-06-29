@@ -22,7 +22,7 @@ public class BecomeNong() : LexNinja2Card(1, CardType.Power, CardRarity.Rare, Ta
         await NinjaAnim.TriggerCastAnim(this);
         NinjaAudio.Play("res://LexNinja2/audio/BecomeNong.mp3");
         CardModel? card;
-        if (!NinjaConfigsPage.IsChallengeMode() || IsUpgraded)
+        if (!NinjaConfig.IsChallengeMode() || IsUpgraded)
         {
             card = await CommonActions.SelectSingleCard(
                 this,
@@ -47,7 +47,7 @@ public class BecomeNong() : LexNinja2Card(1, CardType.Power, CardRarity.Rare, Ta
 
     protected override void OnUpgrade()
     {
-        if (!NinjaConfigsPage.IsChallengeMode())
+        if (!NinjaConfig.IsChallengeMode())
         {
             AddKeyword(CardKeyword.Retain);
         }

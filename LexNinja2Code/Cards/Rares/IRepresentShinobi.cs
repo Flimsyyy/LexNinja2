@@ -34,7 +34,7 @@ public class IRepresentShinobi()
 
     protected override void OnUpgrade()
     {
-        if (NinjaConfigsPage.IsChallengeMode())
+        if (NinjaConfig.IsChallengeMode())
         {
             DynamicVars.Energy.UpgradeValueBy(1);
         }

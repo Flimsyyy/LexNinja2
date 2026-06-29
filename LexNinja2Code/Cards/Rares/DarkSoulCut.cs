@@ -31,7 +31,7 @@ public class DarkSoulCut()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        if (NinjaConfigsPage.IsChallengeMode())
+        if (NinjaConfig.IsChallengeMode())
         {
             await CreatureCmd.Damage(
                 choiceContext,

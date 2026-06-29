@@ -30,6 +30,10 @@ public static class NinjaAudio
 
     private static void PlayInternal(string path, float volume, float pitch, bool loop)
     {
+        if (!NinjaConfig.IsEnableNinjaSfx())
+        {
+            return;
+        }
         volume *= SaveManager.Instance.SettingsSave.VolumeSfx;
         if (!Cache.TryGetValue(path, out var stream))
         {
@@ -99,6 +103,11 @@ public static class NinjaAudio
 
     private static void StopInternal(string path, float fadeDuration)
     {
+        if (!NinjaConfig.IsEnableNinjaSfx())
+        {
+            return;
+        }
+
         if (!ActivePlayers.TryGetValue(path, out var list))
             return;
 
@@ -135,6 +144,10 @@ public static class NinjaAudio
 
     public static void StopAll(float fadeDuration = 0f)
     {
+        if (!NinjaConfig.IsEnableNinjaSfx())
+        {
+            return;
+        }
         // 先取得所有正在播放的路径，避免遍历时修改字典
         var paths = ActivePlayers.Keys.ToList();
         foreach (var path in paths)

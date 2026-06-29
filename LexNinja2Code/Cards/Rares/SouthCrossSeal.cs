@@ -32,7 +32,7 @@ public class SouthCrossSeal()
             return;
         }
         await CommonActions.Apply<SealPower>(choiceContext, this, play);
-        if (NinjaConfigsPage.IsChallengeMode())
+        if (NinjaConfig.IsChallengeMode())
         {
             await LexKela.Reset(this);
         }

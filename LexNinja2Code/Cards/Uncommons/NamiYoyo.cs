@@ -31,7 +31,7 @@ public class NamiYoyo() : LexNinja2Card(4, CardType.Skill, CardRarity.Uncommon, 
         instance?.CombatVfxContainer.AddChildSafely(
             NBolasVfx.Create(Owner.Creature, play.Target!)!
         );
-        if (!NinjaConfigsPage.IsChallengeMode())
+        if (!NinjaConfig.IsChallengeMode())
         {
             await CommonActions.Apply<PoisonPower>(choiceContext, this, play);
         }
@@ -50,7 +50,7 @@ public class NamiYoyo() : LexNinja2Card(4, CardType.Skill, CardRarity.Uncommon, 
                 this
             );
         }
-        if (NinjaConfigsPage.IsChallengeMode())
+        if (NinjaConfig.IsChallengeMode())
         {
             await CommonActions.Apply<PoisonPower>(choiceContext, this, play);
         }

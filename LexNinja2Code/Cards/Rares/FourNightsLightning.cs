@@ -39,7 +39,7 @@ public class FourNightsLightning()
                 tmpSfx: "lightning_orb_evoke.mp3"
             )
             .Execute(choiceContext);
-        if (!NinjaConfigsPage.IsChallengeMode())
+        if (!NinjaConfig.IsChallengeMode())
         {
             await CardPileCmd.Draw(choiceContext, repeatCount, Owner);
         }

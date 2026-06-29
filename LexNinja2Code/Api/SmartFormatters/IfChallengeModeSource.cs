@@ -13,7 +13,7 @@ public class IfChallengeModeSource : ISource
             return false;
         }
 
-        selectorInfo.Result = NinjaConfigsPage.IsChallengeMode();
+        selectorInfo.Result = NinjaConfig.IsChallengeMode();
         return true;
     }
 }
