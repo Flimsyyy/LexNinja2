@@ -53,7 +53,7 @@ public class LeechFriend()
 
     protected override void OnUpgrade()
     {
-        if (NinjaConfigsPage.IsChallengeMode())
+        if (NinjaConfig.IsChallengeMode())
         {
             AddKeyword(CardKeyword.Innate);
         }

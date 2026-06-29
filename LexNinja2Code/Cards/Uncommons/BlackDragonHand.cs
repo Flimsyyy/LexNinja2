@@ -51,7 +51,7 @@ public class BlackDragonHand()
 
     protected override void OnUpgrade()
     {
-        if (NinjaConfigsPage.IsChallengeMode())
+        if (NinjaConfig.IsChallengeMode())
         {
             UpgradeNinjutsuValueBy(-1);
         }

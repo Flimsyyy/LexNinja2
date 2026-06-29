@@ -24,7 +24,7 @@ public class DarknessCrawl()
         NinjaAudio.Play("res://LexNinja2/audio/DarknessCrawl.mp3");
         await NinjaAnim.TriggerCastAnim(this);
         var evokeCount = ResolveEnergyXValue();
-        if (!NinjaConfigsPage.IsChallengeMode() && IsUpgraded)
+        if (!NinjaConfig.IsChallengeMode() && IsUpgraded)
             evokeCount++;
         for (var i = 0; i < evokeCount; ++i)
         {
@@ -36,7 +36,7 @@ public class DarknessCrawl()
 
     protected override void OnUpgrade()
     {
-        if (NinjaConfigsPage.IsChallengeMode())
+        if (NinjaConfig.IsChallengeMode())
         {
             DynamicVars.Block.UpgradeValueBy(2);
         }

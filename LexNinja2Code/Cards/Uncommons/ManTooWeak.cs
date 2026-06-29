@@ -35,7 +35,7 @@ public class ManTooWeak() : LexNinja2Card(2, CardType.Power, CardRarity.Uncommon
 
     protected override void OnUpgrade()
     {
-        if (NinjaConfigsPage.IsChallengeMode())
+        if (NinjaConfig.IsChallengeMode())
         {
             DynamicVars.Power<StrengthPower>().UpgradeValueBy(1);
             DynamicVars.Power<DexterityPower>().UpgradeValueBy(1);

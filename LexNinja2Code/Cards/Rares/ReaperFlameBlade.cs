@@ -27,7 +27,7 @@ public class ReaperFlameBlade()
         get
         {
             yield return new PowerVar<ReaperFlame>(3);
-            if (!NinjaConfigsPage.IsChallengeMode())
+            if (!NinjaConfig.IsChallengeMode())
                 yield return new PowerVar<IntangiblePower>(1);
         }
     }
@@ -36,7 +36,7 @@ public class ReaperFlameBlade()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/DeadBurningBladeSmog.mp3");
-        if (!NinjaConfigsPage.IsChallengeMode())
+        if (!NinjaConfig.IsChallengeMode())
         {
             await CommonActions.ApplySelf<IntangiblePower>(choiceContext, this);
         }
@@ -59,7 +59,7 @@ public class ReaperFlameBlade()
 
     protected override void OnUpgrade()
     {
-        if (NinjaConfigsPage.IsChallengeMode())
+        if (NinjaConfig.IsChallengeMode())
         {
             EnergyCost.UpgradeBy(-1);
         }

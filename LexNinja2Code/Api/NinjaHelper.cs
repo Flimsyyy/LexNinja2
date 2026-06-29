@@ -87,6 +87,6 @@ public static class NinjaHelper
 
     public static T GetValueByChallengeMode<T>(T challengeValue, T normalValue)
     {
-        return NinjaConfigsPage.IsChallengeMode() ? challengeValue : normalValue;
+        return NinjaConfig.IsChallengeMode() ? challengeValue : normalValue;
     }
 }

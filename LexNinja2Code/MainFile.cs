@@ -27,7 +27,7 @@ public partial class MainFile : Node
 
     public static void Initialize()
     {
-        NinjaConfigsPage.Register();
+        NinjaConfig.Register();
 
         ModTypeDiscoveryHub.RegisterModAssembly(ModId, Assembly.GetExecutingAssembly());
 

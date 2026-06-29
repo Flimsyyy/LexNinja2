@@ -44,7 +44,7 @@ public class IRepresentShinobiPower : LexNinja2Power, ISecondaryResourceHookList
             return;
         }
 
-        if (NinjaConfigsPage.IsChallengeMode())
+        if (NinjaConfig.IsChallengeMode())
         {
             if (IsUsedThisTurn)
             {
@@ -63,7 +63,7 @@ public class IRepresentShinobiPower : LexNinja2Power, ISecondaryResourceHookList
         ICombatState combatState
     )
     {
-        if (!NinjaConfigsPage.IsChallengeMode() || player != Owner.Player)
+        if (!NinjaConfig.IsChallengeMode() || player != Owner.Player)
         {
             return Task.CompletedTask;
         }
