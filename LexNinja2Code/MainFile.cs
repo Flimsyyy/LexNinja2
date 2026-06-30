@@ -20,6 +20,11 @@ namespace LexNinja2.LexNinja2Code;
 public partial class MainFile : Node
 {
     public const string ModId = "LexNinja2"; //Used for resource filepath
+    public static string Version =>
+        Assembly
+            .GetExecutingAssembly()
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
+            .InformationalVersion;
 
     // private static bool _audioInitTriggered = false;
 
@@ -28,6 +33,8 @@ public partial class MainFile : Node
     public static void Initialize()
     {
         NinjaConfig.Register();
+
+        NinjaTelemetry.Register();
 
         ModTypeDiscoveryHub.RegisterModAssembly(ModId, Assembly.GetExecutingAssembly());
 

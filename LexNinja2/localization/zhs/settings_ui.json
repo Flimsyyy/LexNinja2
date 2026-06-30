@@ -3,5 +3,6 @@
   "LEX_NINJA2_SETTINGS_UI_SECTION_GENERAL": "通用",
   "LEX_NINJA2_SETTINGS_UI_TOGGLE_CHALLENGE_MODE.title": "挑战模式",
   "LEX_NINJA2_SETTINGS_UI_TOGGLE_CHALLENGE_MODE.description": "更改后请重启游戏。\n多人游戏的所有玩家应使用同一选项。\n蕾忍将变成大区......",
-  "LEX_NINJA2_SETTINGS_UI_TOGGLE_ENABLE_NINJA_SFX.title": "启用蕾忍音效"
+  "LEX_NINJA2_SETTINGS_UI_TOGGLE_ENABLE_NINJA_SFX.title": "启用蕾忍音效",
+  "LEX_NINJA2_SETTINGS_UI_TELEMETRY.run_history": "发送已结束跑局的原版历史运行记录，用来分析平衡性。"
 }

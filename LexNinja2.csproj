@@ -199,6 +199,7 @@
     <PropertyGroup>
       <Version>$(JsonVersion.TrimStart('v'))</Version>
       <FileVersion>$(Version)</FileVersion>
+      <InformationalVersion>$(Version)</InformationalVersion>
     </PropertyGroup>
 
     <Message Text="Final JsonVersion: $(JsonVersion)" Importance="High" />
