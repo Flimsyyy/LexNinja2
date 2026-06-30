@@ -49,6 +49,7 @@ public static partial class NinjaTelemetry
                         sharedContributionSubscriptions: ["lex_ninja2_run_context"],
                         captureFilter: evt =>
                             !evt.IsAbandoned
+                            && !DirtyDataSingleton.IsDirtyData
                             && evt.Run.Players.Any(player =>
                                 player.CharacterId == ModelDb.Character<Character.LexNinja2>().Id
                             )
