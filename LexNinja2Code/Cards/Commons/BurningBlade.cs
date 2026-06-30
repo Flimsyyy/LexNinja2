@@ -40,11 +40,10 @@ public class BurningBlade()
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
         // if (!shouldTriggerFatal || !attackCommand.Results.Any<DamageResult>((Func<DamageResult, bool>) (r => r.WasTargetKilled)))
 
-        if (LexKela.Get(Owner) < DynamicVars.Ninjutsu().BaseValue)
+        if (!await LexKela.Spend(Owner, DynamicVars.Ninjutsu().IntValue, this, this))
         {
             return;
         }
-        await LexKela.Spend(Owner, DynamicVars.Ninjutsu().IntValue, this, this);
         foreach (var card in Owner.PlayerCombatState!.AllCards.OfType<BurningBlade>())
         {
             ++card.BaseReplayCount;
