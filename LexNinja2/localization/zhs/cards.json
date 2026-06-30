@@ -128,7 +128,7 @@
   "LEX_NINJA2_CARD_RADIATION_ANNIHILATION.description": "所有敌人回合结束时失去25％[gold]最大生命值[/gold]。",
   "LEX_NINJA2_CARD_RADIATION_ANNIHILATION.title": "辐射湮灭",
 
-  "LEX_NINJA2_CARD_POWER_JESUS.description": "{IfChallengeMode:cond:[gold]消耗[/gold]所有[gold]手牌[/gold]。\n|}你的每种[gold]正面效果[/gold]翻倍。",
+  "LEX_NINJA2_CARD_POWER_JESUS.description": "{IfChallengeMode:cond:[gold]消耗[/gold]所有[gold]手牌[/gold]。\n|}你的每种[gold]正面效果[/gold]和{lexKelaIcon:secondaryResourceIcons(1)}翻倍。",
   "LEX_NINJA2_CARD_POWER_JESUS.title": "神力大耶稣",
 
   "LEX_NINJA2_CARD_LEECH_FRIEND.description": "对一个身上有[gold]虚弱[/gold]的敌人吸取{StrengthPower:diff()}点力量和{DexterityPower:diff()}点敏捷。",
