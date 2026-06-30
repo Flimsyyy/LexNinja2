@@ -23,7 +23,7 @@ public class HandIonDestruction()
     : LexNinja2Card(3, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(38, ValueProp.Move), new PowerVar<NoLexkelaPower>(1)];
+        [new DamageVar(33, ValueProp.Move), new PowerVar<NoLexkelaPower>(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
 
@@ -52,12 +52,11 @@ public class HandIonDestruction()
 
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
         await CommonActions.ApplySelf<NoLexkelaPower>(choiceContext, this);
-        await LexKela.Reset(this);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(8);
+        DynamicVars.Damage.UpgradeValueBy(11);
     }
 
     public override string CustomPortraitPath => $"HandIonDestruction.png".BigCardImagePath();
