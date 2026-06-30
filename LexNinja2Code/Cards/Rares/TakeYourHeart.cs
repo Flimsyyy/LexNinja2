@@ -41,8 +41,9 @@ public class TakeYourHeart()
     {
         if (!IsEnoughDebuff(play.Target!) || !Ninjutsu(play))
         {
+            NinjaAudio.Play("res://LexNinja2/audio/Hia.mp3");
             await CommonActions
-                .CardAttack(this, play, vfx: "vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3")
+                .CardAttack(this, play, vfx: "vfx/vfx_molten_fist", tmpSfx: "blunt_attack.mp3")
                 .Execute(choiceContext);
             return;
         }

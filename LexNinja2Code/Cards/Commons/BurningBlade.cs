@@ -20,7 +20,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Commons;
 
 public class BurningBlade()
-    : LexNinja2NinjutsuCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    : LexNinja2Card(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
@@ -40,7 +40,7 @@ public class BurningBlade()
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
         // if (!shouldTriggerFatal || !attackCommand.Results.Any<DamageResult>((Func<DamageResult, bool>) (r => r.WasTargetKilled)))
 
-        if (!Ninjutsu(play))
+        if (!await LexKela.Spend(Owner, DynamicVars.Ninjutsu().IntValue, this, this))
         {
             return;
         }

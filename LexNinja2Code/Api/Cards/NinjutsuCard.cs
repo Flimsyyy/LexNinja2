@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using STS2RitsuLib.Combat.SecondaryResources;
@@ -37,7 +38,8 @@ public abstract class NinjutsuCard : LexNinja2BaseCard
 
     public bool CanCastNinjutsu()
     {
-        return SecondaryResourcePaymentResolver.CanPay(this);
+        var line = SecondaryResourcePaymentResolver.Plan(this).Lines.ToList().FirstOrDefault();
+        return line != null && line.IsAffordable;
     }
 
     protected void UpgradeNinjutsuValueBy(int addend)

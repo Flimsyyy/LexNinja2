@@ -32,6 +32,7 @@ public class PowerJesus() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
         NinjaAudio.Play("res://LexNinja2/audio/PowerJesus.mp3");
         await NinjaAnim.TriggerCastAnim(this);
 
+        await LexKela.Gain(Owner, LexKela.Get(Owner));
         var buffs = Owner
             .Creature.Powers.Where(p => p.TypeForCurrentAmount == PowerType.Buff)
             .Where(p => p.StackType == PowerStackType.Counter)
