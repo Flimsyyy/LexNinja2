@@ -24,7 +24,7 @@ public class BurningBlade()
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
-            new DamageVar(NinjaHelper.GetValueByChallengeMode(9, 6), ValueProp.Move),
+            new DamageVar(NinjaHelper.GetValueByChallengeMode(9, 7), ValueProp.Move),
             new NinjutsuVar(NinjaHelper.GetValueByChallengeMode(2, 1)),
         ];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
@@ -52,7 +52,7 @@ public class BurningBlade()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(NinjaHelper.GetValueByChallengeMode(3, 2));
+        DynamicVars.Damage.UpgradeValueBy(3);
     }
 
     public override string CustomPortraitPath => "OverBurningBlade_p.png".BigCardImagePath();
