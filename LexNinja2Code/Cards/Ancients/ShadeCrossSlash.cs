@@ -61,7 +61,7 @@ public class ShadeCrossSlash()
         }
         await CommonActions.Apply<VulnerablePower>(choiceContext, this, play);
     }
-    
+
     protected override void OnUpgrade()
     {
         UpgradeNinjutsuValueBy(-1);
