@@ -1,5 +1,7 @@
-﻿using BaseLib.Abstracts;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -10,12 +12,12 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class WePeacePower : CustomPowerModel
+public class WePeacePower : LexNinja2Power
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Single;
 
-    public override string CustomPackedIconPath => "WePeacePower.png".PowerImagePath();
+    public override string CustomIconPath => "WePeacePower.png".PowerImagePath();
     public override string? CustomBigIconPath => "WePeacePower.png".BigPowerImagePath();
 
     // public override async Task AfterApplied(Creature? applier, CardModel? cardSource)

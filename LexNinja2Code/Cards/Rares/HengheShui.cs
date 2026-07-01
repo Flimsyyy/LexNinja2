@@ -1,4 +1,6 @@
-﻿using BaseLib.Extensions;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Extensions;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -14,9 +16,7 @@ namespace LexNinja2.LexNinja2Code.Cards.Rares;
 public class HengheShui() : LexNinja2Card(1, CardType.Skill, CardRarity.Rare, TargetType.AnyAlly)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new HealVar(15), new PowerVar<PoisonPower>(3)];
-
-    // protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Infection>()];
+        [new HealVar(NinjaHelper.GetValueByChallengeMode(8, 15)), new PowerVar<PoisonPower>(3)];
     public override CardMultiplayerConstraint MultiplayerConstraint =>
         CardMultiplayerConstraint.MultiplayerOnly;
     public override bool CanBeGeneratedInCombat => false;
@@ -42,13 +42,11 @@ public class HengheShui() : LexNinja2Card(1, CardType.Skill, CardRarity.Rare, Ta
             Owner.Creature,
             this
         );
-        // await CardPileCmd.AddGeneratedCardToCombat(CombatState.CreateCard<Infection>(play.Target.Player), PileType.Discard, Owner);
-        // new Rng(this.Seed, StringHelper.SnakeCase(RunRngType.CombatTargets.ToString()));
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Heal.UpgradeValueBy(5);
+        DynamicVars.Heal.UpgradeValueBy(NinjaHelper.GetValueByChallengeMode(4, 5));
         DynamicVars.Poison.UpgradeValueBy(2);
     }
 

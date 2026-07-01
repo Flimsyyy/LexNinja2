@@ -1,5 +1,7 @@
-﻿using BaseLib.Abstracts;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -9,13 +11,13 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class Radiation : CustomPowerModel
+public class Radiation : LexNinja2Power
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new("dian", 0)];
 
-    public override string CustomPackedIconPath => "Radiation32.png".PowerImagePath();
+    public override string CustomIconPath => "Radiation32.png".PowerImagePath();
     public override string? CustomBigIconPath => "Radiation84.png".BigPowerImagePath();
 
     public override async Task AfterSideTurnStart(

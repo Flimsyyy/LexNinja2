@@ -1,8 +1,10 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
+using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -15,26 +17,26 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Commons;
 
 public class HolyLittleStorm()
-    : LexNinja2Card(1, CardType.Attack, CardRarity.Common, TargetType.RandomEnemy)
+    : LexNinja2NinjutsuCard(1, CardType.Attack, CardRarity.Common, TargetType.RandomEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [
+            new DamageVar(NinjaHelper.GetValueByChallengeMode(6, 7), ValueProp.Move),
+            new NinjutsuVar(0) { HasLexKelaCostX = true },
+        ];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [NinjaKeyword.Hand, NinjaKeyword.Blade];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu, NinjaTags.Holy];
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 
-    public override bool HasLexKelaCostX => true;
+    protected override HashSet<CardTag> AdditionalCanonicalTags => [NinjaTags.Holy];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/HolyLittleStorm.mp3");
         await Cmd.Wait(1f);
-        var hitCount = ResolveLexkelaXValue() + 1;
-        await Ninjutsu(choiceContext, play);
+        var hitCount = ResolveLexkelaXValue(play) + 1;
         await CommonActions
             .CardAttack(
                 this,

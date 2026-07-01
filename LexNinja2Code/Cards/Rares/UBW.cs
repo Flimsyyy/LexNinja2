@@ -1,4 +1,7 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -6,7 +9,6 @@ using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -17,9 +19,10 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
-public class UBW() : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetType.RandomEnemy)
+public class UBW()
+    : LexNinja2NinjutsuCard(2, CardType.Attack, CardRarity.Rare, TargetType.RandomEnemy)
 {
-    private const string Hitcounts = "HitCounts";
+    private const string HitCounts = "HitCounts";
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
@@ -27,7 +30,7 @@ public class UBW() : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetTy
             new DamageVar(8, ValueProp.Move),
             new CalculationBaseVar(0),
             new CalculationExtraVar(1),
-            new CalculatedVar(Hitcounts).WithMultiplier(
+            new CalculatedVar(HitCounts).WithMultiplier(
                 (card, _) =>
                     CombatManager.Instance.History.CardPlaysFinished.Count(e =>
                         e.CardPlay.Card.Owner == card.Owner
@@ -35,12 +38,11 @@ public class UBW() : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetTy
                     )
             ),
         ];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
@@ -49,10 +51,10 @@ public class UBW() : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetTy
         var instance = NCombatRoom.Instance;
         instance?.CombatVfxContainer.AddChildSafely(NHellraiserVfx.Create(Owner.Creature)!);
         await Cmd.Wait(1);
-        var hitCount = (int)((CalculatedVar)this.DynamicVars[Hitcounts]).Calculate(play.Target);
+        var hitCount = (int)((CalculatedVar)DynamicVars[HitCounts]).Calculate(play.Target);
         await CommonActions
             .CardAttack(this, play, hitCount: hitCount, tmpSfx: "heavy_attack.mp3")
-            .WithHitVfxNode((Creature t) => NBigSlashImpactVfx.Create(t))
+            .WithHitVfxNode(NBigSlashImpactVfx.Create)
             .Execute(choiceContext);
         ;
     }
@@ -65,6 +67,4 @@ public class UBW() : LexNinja2Card(2, CardType.Attack, CardRarity.Rare, TargetTy
     public override string CustomPortraitPath => $"UBW_p.png".BigCardImagePath();
     public override string PortraitPath => $"UBW.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/UBW.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

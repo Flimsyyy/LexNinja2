@@ -1,4 +1,6 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -13,8 +15,7 @@ namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 public class Turbine() : LexNinja2Card(5, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<TurbinePower>(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Science];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

@@ -1,10 +1,11 @@
-﻿using BaseLib.Extensions;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Extensions;
 using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
@@ -18,7 +19,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Commons;
 
 public class FlameThrower()
-    : LexNinja2Card(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    : LexNinja2NinjutsuCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
@@ -27,12 +28,12 @@ public class FlameThrower()
             new PowerVar<WeakPower>(1),
             new NinjutsuVar(1),
         ];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [
             HoverTipFactory.FromPower<WeakPower>(),
             HoverTipFactory.FromPower<PoisonPower>(),
-            HoverTipFactory.FromPower<Lexkela>(),
+            LexKela.HoverTip(),
         ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -42,7 +43,7 @@ public class FlameThrower()
         instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(play.Target!)!);
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
         await CommonActions.Apply<WeakPower>(choiceContext, this, play);
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
@@ -58,6 +59,4 @@ public class FlameThrower()
     public override string CustomPortraitPath => $"FlameThrower_p.png".BigCardImagePath();
     public override string PortraitPath => $"FlameThrower.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/FlameThrower.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

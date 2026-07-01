@@ -1,8 +1,8 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Relics;
-using LexNinja2.LexNinja2Code.Character;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -12,8 +12,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
 namespace LexNinja2.LexNinja2Code.Relics;
 
-[Pool(typeof(LexNinja2RelicPool))]
-public class DimDeadTree() : LexNinja2Relic
+public class DimDeadTree : LexNinja2Relic
 {
     public override RelicRarity Rarity => RelicRarity.Rare;
 

@@ -1,8 +1,8 @@
-﻿using BaseLib.Abstracts;
-using BaseLib.Utils;
-using LexNinja2.LexNinja2Code.Character;
+﻿using LexNinja2.LexNinja2Code.Character;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace LexNinja2.LexNinja2Code.Api.Potions;
 
-[Pool(typeof(LexNinja2PotionPool))]
-public abstract class LexNinja2Potion : CustomPotionModel;
+[RegisterPotion(typeof(LexNinja2PotionPool), Inherit = true)]
+public abstract class LexNinja2Potion : ModPotionTemplate;

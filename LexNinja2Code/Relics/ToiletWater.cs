@@ -1,4 +1,6 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Relics;
 using MegaCrit.Sts2.Core.Commands;
@@ -11,7 +13,7 @@ using MegaCrit.Sts2.Core.Rooms;
 
 namespace LexNinja2.LexNinja2Code.Relics;
 
-public class ToiletWater() : LexNinja2Relic
+public class ToiletWater : LexNinja2Relic
 {
     public override RelicRarity Rarity => RelicRarity.Event;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1), new("Count", 2)];
@@ -20,7 +22,7 @@ public class ToiletWater() : LexNinja2Relic
     public override int DisplayAmount => Count;
     public int Count
     {
-        get { return _count; }
+        get => _count;
         set
         {
             AssertMutable();

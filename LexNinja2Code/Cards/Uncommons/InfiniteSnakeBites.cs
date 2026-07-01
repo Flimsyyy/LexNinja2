@@ -1,4 +1,6 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -16,7 +18,7 @@ public class InfiniteSnakeBites()
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<InfiniteSnakeBitesPower>(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromCard<AngrySnakeBite>(true)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
 

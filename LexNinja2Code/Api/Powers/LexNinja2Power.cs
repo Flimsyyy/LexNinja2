@@ -1,28 +1,15 @@
-﻿using BaseLib.Abstracts;
-using BaseLib.Extensions;
-using Godot;
-using LexNinja2.LexNinja2Code.Api.Extensions;
+﻿using LexNinja2.LexNinja2Code.Api.Extensions;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace LexNinja2.LexNinja2Code.Api.Powers;
 
-public abstract class LexNinja2Power : CustomPowerModel
+[RegisterPower(Inherit = true)]
+public abstract class LexNinja2Power : ModPowerTemplate
 {
-    //Loads from LexNinja2/images/powers/your_power.png
-    public override string CustomPackedIconPath
-    {
-        get
-        {
-            var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".PowerImagePath();
-            return ResourceLoader.Exists(path) ? path : "power.png".PowerImagePath();
-        }
-    }
-
-    public override string CustomBigIconPath
-    {
-        get
-        {
-            var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigPowerImagePath();
-            return ResourceLoader.Exists(path) ? path : "power.png".BigPowerImagePath();
-        }
-    }
+    public override PowerAssetProfile AssetProfile =>
+        new(
+            IconPath: $"{GetType().Name}.png".PowerImagePath(),
+            BigIconPath: $"{GetType().Name}.png".BigPowerImagePath()
+        );
 }

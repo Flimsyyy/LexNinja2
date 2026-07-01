@@ -1,4 +1,7 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -20,10 +23,12 @@ public class BurningBlade()
     : LexNinja2Card(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(6, ValueProp.Move), new NinjutsuVar(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [
+            new DamageVar(NinjaHelper.GetValueByChallengeMode(9, 6), ValueProp.Move),
+            new NinjutsuVar(NinjaHelper.GetValueByChallengeMode(2, 1)),
+        ];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.Static(StaticHoverTip.ReplayStatic)];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -35,7 +40,7 @@ public class BurningBlade()
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
         // if (!shouldTriggerFatal || !attackCommand.Results.Any<DamageResult>((Func<DamageResult, bool>) (r => r.WasTargetKilled)))
 
-        if (!await Ninjutsu(choiceContext, play))
+        if (!await LexKela.Spend(Owner, DynamicVars.Ninjutsu().IntValue, this, this))
         {
             return;
         }
@@ -47,13 +52,12 @@ public class BurningBlade()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2);
+        DynamicVars.Damage.UpgradeValueBy(NinjaHelper.GetValueByChallengeMode(3, 2));
     }
 
     public override string CustomPortraitPath => "OverBurningBlade_p.png".BigCardImagePath();
     public override string PortraitPath => "OverBurningBlade.png".CardImagePath();
     public override string BetaPortraitPath => "beta/OverBurningBlade.png".CardImagePath();
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 
     public override Task AfterDamageGiven(
         PlayerChoiceContext choiceContext,

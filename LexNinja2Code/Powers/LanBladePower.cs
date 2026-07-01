@@ -1,7 +1,10 @@
-﻿using BaseLib.Abstracts;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using LexNinja2.LexNinja2Code.Cards.Tokens;
 using LexNinja2.LexNinja2Code.Cards.Uncommons;
 using MegaCrit.Sts2.Core.Commands;
@@ -15,7 +18,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class LanBladePower : CustomPowerModel, IHasSecondAmount
+public class LanBladePower : LexNinja2Power, IHasSecondAmount
 {
     private const string Base = "LanBlade";
     private const string Upgraded = "LanBladeUpgraded";
@@ -24,12 +27,12 @@ public class LanBladePower : CustomPowerModel, IHasSecondAmount
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromKeyword(NinjaKeyword.Blade), HoverTipFactory.FromCard<LanBlade>()];
     protected override IEnumerable<DynamicVar> CanonicalVars => [new(Base, 0), new(Upgraded, 0)];
     public override int DisplayAmount => DynamicVars[Base].IntValue;
 
-    public override string CustomPackedIconPath => "LanBladePower32.png".PowerImagePath();
+    public override string CustomIconPath => "LanBladePower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "LanBladePower84.png".BigPowerImagePath();
 
     public override Task BeforeCardPlayed(CardPlay cardPlay)
@@ -61,13 +64,13 @@ public class LanBladePower : CustomPowerModel, IHasSecondAmount
         List<CardModel> cards = [];
         for (var i = 0; i < upgradedAmount; i++)
         {
-            var card = CombatState.CreateCard<LanBlade>(Owner.Player);
+            var card = CombatState.CreateCard<LanBlade>(Owner.Player!);
             CardCmd.Upgrade(card);
             cards.Add(card);
         }
         for (var i = 0; i < baseAmount; i++)
         {
-            var card = CombatState.CreateCard<LanBlade>(Owner.Player);
+            var card = CombatState.CreateCard<LanBlade>(Owner.Player!);
             cards.Add(card);
         }
         await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Hand, Owner.Player);

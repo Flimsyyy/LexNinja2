@@ -1,4 +1,7 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -18,7 +21,7 @@ public class EclipseMistBlade()
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new BlockVar(8, ValueProp.Move), new LexKelaVar(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 
@@ -29,7 +32,7 @@ public class EclipseMistBlade()
         foreach (var card in GetCards().ToList())
         {
             await CardCmd.Exhaust(choiceContext, card);
-            await NinjaHelper.AddLexKela(choiceContext, this);
+            await LexKela.Gain(this);
         }
     }
 

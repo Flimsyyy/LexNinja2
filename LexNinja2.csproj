@@ -1,7 +1,6 @@
 <Project Sdk="Godot.NET.Sdk/4.5.1">
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>true</ImplicitUsings>
     <Nullable>enable</Nullable>
     <!--Makes code analysis regarding null values stricter.-->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -91,14 +90,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.3.0" PrivateAssets="All" />
-    <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.9" />
+    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.3.2" PrivateAssets="All" />
     <AdditionalFiles Include="LexNinja2/localization/**/*.json" />
     <PackageReference Include="CSharpier.MsBuild" Version="1.2.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Nothing.STS2RitsuLib.ModAnalyzers" Version="0.8.2" />
     <PackageReference Include="SmartFormat" Version="3.3.0" />
+    <PackageReference Include="STS2.RitsuLib" Version="0.4.40" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
@@ -199,6 +199,7 @@
     <PropertyGroup>
       <Version>$(JsonVersion.TrimStart('v'))</Version>
       <FileVersion>$(Version)</FileVersion>
+      <InformationalVersion>$(Version)</InformationalVersion>
     </PropertyGroup>
 
     <Message Text="Final JsonVersion: $(JsonVersion)" Importance="High" />

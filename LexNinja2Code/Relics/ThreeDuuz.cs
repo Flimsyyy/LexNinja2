@@ -1,9 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Relics;
-using LexNinja2.LexNinja2Code.Character;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -15,8 +16,7 @@ using MegaCrit.Sts2.Core.Rooms;
 
 namespace LexNinja2.LexNinja2Code.Relics;
 
-[Pool(typeof(LexNinja2RelicPool))]
-public class ThreeDuuz() : LexNinja2Relic
+public class ThreeDuuz : LexNinja2Relic
 {
     public override RelicRarity Rarity => RelicRarity.Shop;
 

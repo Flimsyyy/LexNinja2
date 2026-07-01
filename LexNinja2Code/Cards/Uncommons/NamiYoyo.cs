@@ -1,4 +1,7 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -18,7 +21,7 @@ public class NamiYoyo() : LexNinja2Card(4, CardType.Skill, CardRarity.Uncommon, 
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<PoisonPower>(4)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Science];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<PoisonPower>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -28,42 +31,30 @@ public class NamiYoyo() : LexNinja2Card(4, CardType.Skill, CardRarity.Uncommon, 
         instance?.CombatVfxContainer.AddChildSafely(
             NBolasVfx.Create(Owner.Creature, play.Target!)!
         );
-        await CommonActions.Apply<PoisonPower>(choiceContext, this, play);
+        if (!NinjaConfig.IsChallengeMode())
+        {
+            await CommonActions.Apply<PoisonPower>(choiceContext, this, play);
+        }
         await Cmd.Wait(0.25f);
 
         var poisonPower = play.Target!.GetPower<PoisonPower>();
-        if (poisonPower == null)
+        if (poisonPower != null)
         {
-            return;
+            var enemy = CombatState!.HittableEnemies.ToList();
+            var target = Owner.RunState.Rng.CombatTargets.NextItem(enemy);
+            await PowerCmd.Apply<PoisonPower>(
+                choiceContext,
+                target!,
+                poisonPower.Amount,
+                Owner.Creature,
+                this
+            );
         }
-        var enemy = CombatState!.HittableEnemies.ToList();
-        var target = Owner.RunState.Rng.CombatTargets.NextItem(enemy);
-        await PowerCmd.Apply<PoisonPower>(
-            choiceContext,
-            target!,
-            poisonPower.Amount,
-            Owner.Creature,
-            this
-        );
+        if (NinjaConfig.IsChallengeMode())
+        {
+            await CommonActions.Apply<PoisonPower>(choiceContext, this, play);
+        }
     }
-
-    /*public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
-    {
-        if (player == base.Owner && CombatManager.Instance.History.CardPlaysFinished.Any((CardPlayFinishedEntry e) => e.RoundNumber == base.CombatState.RoundNumber - 1 && e.CardPlay.Card == this))
-        {
-            CardPile? pile = base.Pile;
-            if (pile == null || pile.Type != PileType.Hand)
-            {
-                await CardPileCmd.Add(this, PileType.Hand);
-            }
-        }
-    }*/
-
-    /*protected override PileType GetResultPileType()
-    {
-        PileType resultPileType = base.GetResultPileType();
-        return resultPileType != PileType.Discard ? resultPileType : PileType.Hand;
-    }*/
 
     protected override void OnUpgrade()
     {

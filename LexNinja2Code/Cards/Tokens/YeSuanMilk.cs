@@ -1,4 +1,5 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -7,11 +8,12 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace LexNinja2.LexNinja2Code.Cards.Tokens;
 
-[Pool(typeof(TokenCardPool))]
-public class YeSuanMilk() : LexNinja2Card(0, CardType.Skill, CardRarity.Token, TargetType.Self)
+[RegisterCard(typeof(TokenCardPool))]
+public class YeSuanMilk() : LexNinja2BaseCard(0, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new LexKelaVar(3)];
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Food];
@@ -20,7 +22,7 @@ public class YeSuanMilk() : LexNinja2Card(0, CardType.Skill, CardRarity.Token, T
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/YeSuanMilk.mp3");
-        await NinjaHelper.AddLexKela(choiceContext, this);
+        await LexKela.Gain(this);
     }
 
     protected override void OnUpgrade()

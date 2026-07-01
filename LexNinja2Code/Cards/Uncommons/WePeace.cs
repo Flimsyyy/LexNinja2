@@ -1,4 +1,6 @@
-﻿using BaseLib.Extensions;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Extensions;
 using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
@@ -14,18 +16,18 @@ using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
-public class WePeace() : LexNinja2Card(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public class WePeace()
+    : LexNinja2NinjutsuCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<IntangiblePower>(1), new NinjutsuVar(1), new PowerVar<WePeacePower>(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<IntangiblePower>(), HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
+        [HoverTipFactory.FromPower<IntangiblePower>(), LexKela.HoverTip()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
@@ -46,5 +48,4 @@ public class WePeace() : LexNinja2Card(1, CardType.Skill, CardRarity.Uncommon, T
     public override string CustomPortraitPath => $"WePeace_p.png".BigCardImagePath();
     public override string PortraitPath => $"WePeace.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/WePeace.png".CardImagePath();
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

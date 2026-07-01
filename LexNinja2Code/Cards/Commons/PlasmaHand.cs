@@ -1,4 +1,6 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -19,7 +21,7 @@ public class PlasmaHand() : LexNinja2Card(1, CardType.Skill, CardRarity.Common, 
     {
         NinjaAudio.Play("res://LexNinja2/audio/PlasmaHand.mp3");
         await CommonActions.Draw(this, choiceContext);
-        await NinjaHelper.AddLexKela(choiceContext, this);
+        await LexKela.Gain(this);
     }
 
     protected override void OnUpgrade()

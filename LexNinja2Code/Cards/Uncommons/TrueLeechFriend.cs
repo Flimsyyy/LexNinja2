@@ -1,8 +1,10 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -19,7 +21,7 @@ public class TrueLeechFriend()
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Leech", 3)];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [CardKeyword.Innate, CardKeyword.Retain];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<StrengthPower>()];
     protected override bool ShouldGlowGoldInternal =>
         CombatState != null && CombatState.Allies.Any(CanLeechFriend);
@@ -57,20 +59,12 @@ public class TrueLeechFriend()
 
     private bool CanLeechFriend(Creature target)
     {
-        if (
-            CombatManager.Instance.History.CardPlaysFinished.Count(
-                (CardPlayFinishedEntry e) =>
-                    e.HappenedThisTurn(base.CombatState) && e.CardPlay.Card.Owner == target.Player
+        return CombatManager.Instance.History.CardPlaysFinished.Count(e =>
+                e.HappenedThisTurn(CombatState) && e.CardPlay.Card.Owner == target.Player
             )
-            < CombatManager.Instance.History.CardPlaysFinished.Count(
-                (CardPlayFinishedEntry e) =>
-                    e.HappenedThisTurn(base.CombatState) && e.CardPlay.Card.Owner == Owner
-            )
-        )
-        {
-            return true;
-        }
-        return false;
+            < CombatManager.Instance.History.CardPlaysFinished.Count(e =>
+                e.HappenedThisTurn(base.CombatState) && e.CardPlay.Card.Owner == Owner
+            );
     }
 
     public override string CustomPortraitPath => $"TrueLeechFriend.png".BigCardImagePath();

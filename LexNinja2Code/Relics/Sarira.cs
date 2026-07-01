@@ -1,5 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using BaseLib.Utils;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Relics;
@@ -7,13 +9,11 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Saves.Runs;
 
 namespace LexNinja2.LexNinja2Code.Relics;
 
-[Pool(typeof(EventRelicPool))]
-public class Sarira() : LexNinja2Relic
+public class Sarira : LexNinja2Relic
 {
     public override RelicRarity Rarity => RelicRarity.Event;
 

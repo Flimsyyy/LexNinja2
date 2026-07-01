@@ -1,4 +1,7 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -16,9 +19,10 @@ public class LeechFriend()
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<StrengthPower>(2), new PowerVar<DexterityPower>(2)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<WeakPower>()];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate];
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+        NinjaHelper.GetValueByChallengeMode(base.CanonicalKeywords, [CardKeyword.Innate]);
     protected override bool ShouldGlowGoldInternal => IfWeakened();
     public override CardMultiplayerConstraint MultiplayerConstraint =>
         CardMultiplayerConstraint.SingleplayerOnly;
@@ -49,8 +53,15 @@ public class LeechFriend()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Strength.UpgradeValueBy(1);
-        DynamicVars.Dexterity.UpgradeValueBy(1);
+        if (NinjaConfig.IsChallengeMode())
+        {
+            AddKeyword(CardKeyword.Innate);
+        }
+        else
+        {
+            DynamicVars.Strength.UpgradeValueBy(1);
+            DynamicVars.Dexterity.UpgradeValueBy(1);
+        }
     }
 
     private bool IfWeakened()

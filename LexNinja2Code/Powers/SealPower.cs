@@ -1,6 +1,8 @@
-﻿using BaseLib.Abstracts;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -11,12 +13,12 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class SealPower : CustomPowerModel
+public class SealPower : LexNinja2Power
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override string CustomPackedIconPath => "SealPower32.png".PowerImagePath();
+    public override string CustomIconPath => "SealPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "SealPower84.png".BigPowerImagePath();
 
     public override async Task AfterSideTurnEnd(

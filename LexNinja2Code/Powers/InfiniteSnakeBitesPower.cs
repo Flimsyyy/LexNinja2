@@ -1,6 +1,8 @@
-﻿using BaseLib.Abstracts;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using LexNinja2.LexNinja2Code.Cards.Commons;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -13,14 +15,14 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class InfiniteSnakeBitesPower : CustomPowerModel
+public class InfiniteSnakeBitesPower : LexNinja2Power
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromCard<AngrySnakeBite>(true)];
 
-    public override string CustomPackedIconPath => "InfiniteSnakeBitesPower.png".PowerImagePath();
+    public override string CustomIconPath => "InfiniteSnakeBitesPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "InfiniteSnakeBitesPower.png".BigPowerImagePath();
 
     public override async Task BeforeHandDraw(

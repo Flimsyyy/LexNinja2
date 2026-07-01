@@ -1,4 +1,5 @@
-﻿using BaseLib.Abstracts;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Cards.Quests;
 using MegaCrit.Sts2.Core.Commands;
@@ -9,10 +10,14 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Acts;
 using MegaCrit.Sts2.Core.Models.Cards;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace LexNinja2.LexNinja2Code.Event;
 
-public sealed class TheSpectre : CustomEventModel
+[RegisterActEvent(typeof(Overgrowth))]
+[RegisterActEvent(typeof(Underdocks))]
+public sealed class TheSpectre : ModEventTemplate
 {
     // 背景图位置
     public override string? CustomInitialPortraitPath =>
@@ -24,8 +29,6 @@ public sealed class TheSpectre : CustomEventModel
             new StringVar("Card1", ModelDb.Card<ISeeYou>().Title),
             new StringVar("Card2", ModelDb.Card<Impatience>().Title),
         ];
-
-    public override ActModel[] Acts => [ModelDb.Act<Overgrowth>(), ModelDb.Act<Underdocks>()];
 
     // public override bool IsAllowed(IRunState runState)
     // {
@@ -54,8 +57,18 @@ public sealed class TheSpectre : CustomEventModel
     // 生成事件初始选项。这里是两个选项：失去生命值或者失去金币，然后进入选择奖励阶段
     protected override IReadOnlyList<EventOption> GenerateInitialOptions() =>
         [
-            Option(TakeTheKitten, HoverTipFactory.FromCardWithCardHoverTips<ISeeYou>()),
-            Option(StopPostingThis, HoverTipFactory.FromCardWithCardHoverTips<Impatience>()),
+            new(
+                this,
+                TakeTheKitten,
+                InitialOptionKey("TAKE_THE_KITTEN"),
+                HoverTipFactory.FromCardWithCardHoverTips<ISeeYou>()
+            ),
+            new(
+                this,
+                StopPostingThis,
+                InitialOptionKey("STOP_POSTING_THIS"),
+                HoverTipFactory.FromCardWithCardHoverTips<Impatience>()
+            ),
         ];
 
     private async Task TakeTheKitten()

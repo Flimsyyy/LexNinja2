@@ -1,36 +1,36 @@
-﻿using BaseLib.Abstracts;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Cards.Ancients;
-using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace LexNinja2.LexNinja2Code.Cards.Basics;
 
+[RegisterCharacterStarterCard(typeof(Character.LexNinja2), Order = 2)]
+[RegisterArchaicToothTranscendence(typeof(ShadeCrossSlash))]
 public class YiCut()
-    : LexNinja2Card(0, CardType.Attack, CardRarity.Basic, TargetType.AllEnemies),
-        ITranscendenceCard
+    : LexNinja2NinjutsuCard(0, CardType.Attack, CardRarity.Basic, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new NinjutsuVar(2), new PowerVar<VulnerablePower>(1), new DamageVar(10, ValueProp.Move)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<VulnerablePower>(), HoverTipFactory.FromPower<Lexkela>()];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
+        [HoverTipFactory.FromPower<VulnerablePower>(), LexKela.HoverTip()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/YiCut.mp3");
-        if (await Ninjutsu(choiceContext, play))
+        if (Ninjutsu(play))
         {
             await CommonActions
                 .CardAttack(
@@ -44,16 +44,12 @@ public class YiCut()
         await CommonActions.Apply<VulnerablePower>(choiceContext, this, play);
     }
 
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
-
     protected override void OnUpgrade()
     {
-        DynamicVars.Ninjutsu().UpgradeValueBy(-1);
+        UpgradeNinjutsuValueBy(-1);
     }
 
     public override string CustomPortraitPath => "YiCut_p.png".BigCardImagePath();
     public override string PortraitPath => "YiCut.png".CardImagePath();
     public override string BetaPortraitPath => "beta/YiCut.png".CardImagePath();
-
-    public CardModel GetTranscendenceTransformedCard() => ModelDb.Card<ShadeCrossSlash>();
 }

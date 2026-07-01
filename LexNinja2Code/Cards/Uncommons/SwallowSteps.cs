@@ -1,4 +1,7 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -23,8 +26,8 @@ public class SwallowSteps() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncomm
     }
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new CardsVar(1), new ExtraCards(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(NinjaKeyword.Renshu)];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
+        [HoverTipFactory.FromKeyword(NinjaKeyword.RenShu)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -38,23 +41,6 @@ public class SwallowSteps() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncomm
         await Cmd.Wait(0.5f);
         NinjaAudio.Play("res://LexNinja2/audio/Running.mp3");
         await NinjaHelper.DrawExtra(this, choiceContext);
-        // await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
-        // do
-        // {
-        //     CardModel cardModel = await CardPileCmd.Draw(choiceContext, Owner);
-        //     if (cardModel != null && !cardModel.Tags.Contains(NinjaTags.Ninjutsu) )
-        //     {
-        //         owner = Owner;
-        //         pileTypeArray = new PileType[1]{ PileType.Hand };
-        //     }
-        //     else
-        //         goto label_3;
-        // }
-        // while (CardPile.GetCards(owner, pileTypeArray).Count<CardModel>() < 10);
-        // goto label_6;
-        // label_3:
-        // return;
-        // label_6:;
     }
 
     protected override void OnUpgrade()

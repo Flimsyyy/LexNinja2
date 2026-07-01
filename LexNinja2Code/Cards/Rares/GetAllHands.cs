@@ -1,4 +1,6 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -20,24 +22,12 @@ public class GetAllHands() : LexNinja2Card(2, CardType.Skill, CardRarity.Rare, T
     {
         NinjaAudio.Play("res://LexNinja2/audio/GetAllHands.mp3");
         await CommonActions.ApplySelf<GetAllHandsPower>(choiceContext, this);
-        // if (await Ninjutsu(choiceContext, play))
-        // {
-        //     for (int i = 0; i < DynamicVars.Cards.BaseValue; i++)
-        //     {
-        //         CardModel card = CardFactory.GetDistinctForCombat(Owner, Owner.Character.CardPool.GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint).Where<CardModel>((Func<CardModel, bool>) (c => c.Keywords.Contains(NinjaKeyword.Hand))), 1, Owner.RunState.Rng.CombatCardGeneration).FirstOrDefault<CardModel>();
-        //         if (card == null)
-        //             return;
-        //         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true);
-        //     }
-        // }
     }
 
     protected override void OnUpgrade()
     {
         RemoveKeyword(CardKeyword.Exhaust);
     }
-
-    // protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 
     public override string CustomPortraitPath => $"GetAllHands_p.png".BigCardImagePath();
     public override string PortraitPath => $"GetAllHands.png".CardImagePath();

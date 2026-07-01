@@ -1,5 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -14,18 +15,19 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Saves.Runs;
+using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace LexNinja2.LexNinja2Code.Cards.Quests;
 
-[Pool(typeof(TokenCardPool))]
-public class ISeeYou() : LexNinja2Card(-1, CardType.Quest, CardRarity.Quest, TargetType.Self)
+[RegisterCard(typeof(TokenCardPool))]
+public class ISeeYou() : LexNinja2BaseCard(-1, CardType.Quest, CardRarity.Quest, TargetType.Self)
 {
     // private int _cardsInHand;
     private int _combatsSeen;
     public override int MaxUpgradeLevel => 0;
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new("boss", 2), new DynamicVar("Frail", 1m)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<FrailPower>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Unplayable];
 

@@ -1,4 +1,6 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -8,11 +10,13 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace LexNinja2.LexNinja2Code.Cards.Curses;
 
-[Pool(typeof(CurseCardPool))]
-public class HamoodKillAll() : LexNinja2Card(1, CardType.Curse, CardRarity.Curse, TargetType.None)
+[RegisterCard(typeof(CurseCardPool))]
+public class HamoodKillAll()
+    : LexNinja2BaseCard(1, CardType.Curse, CardRarity.Curse, TargetType.None)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(999, ValueProp.Unpowered)];

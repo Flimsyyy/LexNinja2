@@ -1,19 +1,13 @@
 {
-  "LEXNINJA2-RENSHU.description": "减少对应[gold]蕾克拉[/gold]以发动额外效果。",
-  "LEXNINJA2-RENSHU.title": "忍术",
+  "LEX_NINJA2_KEYWORD_REN_SHU.description": "减少对应[gold]蕾克拉[/gold]以发动额外效果。",
+  "LEX_NINJA2_KEYWORD_REN_SHU.title": "忍术",
   
-  "LEXNINJA2-HAND.description": "[gold]手系忍术[/gold]的流派。",
-  "LEXNINJA2-HAND.title": "手系忍术",
+  "LEX_NINJA2_KEYWORD_HAND.description": "[gold]手系忍术[/gold]的流派。",
+  "LEX_NINJA2_KEYWORD_HAND.title": "手系忍术",
 
-  "LEXNINJA2-BLADE.description": "[gold]刀系忍术[/gold]的流派。",
-  "LEXNINJA2-BLADE.title": "刀系忍术",
+  "LEX_NINJA2_KEYWORD_BLADE.description": "[gold]刀系忍术[/gold]的流派。",
+  "LEX_NINJA2_KEYWORD_BLADE.title": "刀系忍术",
 
-  "LEXNINJA2-SCIENCE.description": "每点[gold]蕾克拉[/gold]会降低[gold]费用[/gold]，打出时消耗[blue]1[/blue]点[gold]蕾克拉[/gold]。",
-  "LEXNINJA2-SCIENCE.title": "科学忍具",
-  
-  "LEXNINJA2-SANDWALL.description": "Tooltip",
-  "LEXNINJA2-SANDWALL.title": "NAME",
-
-  "LEXNINJA2-SARIRA.description": "当你的生命值将要降低至[blue]0[/blue]或以下时，回复你[green]100%[/green]的生命值。\n效果触发后，花费[red]22000000[/red][gold]金币[/gold]。",
-  "LEXNINJA2-SARIRA.title": "舍利子"
+  "LEX_NINJA2_KEYWORD_SCIENCE.description": "每点[gold]蕾克拉[/gold]会降低[gold]费用[/gold]，打出时消耗[blue]1[/blue]点[gold]蕾克拉[/gold]。",
+  "LEX_NINJA2_KEYWORD_SCIENCE.title": "科学忍具"
 }

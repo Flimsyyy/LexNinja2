@@ -1,4 +1,7 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -17,22 +20,15 @@ public class SariraRevive() : LexNinja2Card(0, CardType.Skill, CardRarity.Rare, 
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new CardsVar(1), new LexKelaVar(2)];
-
-    // protected override bool ShouldGlowGoldInternal => isHitPointLow();
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromKeyword(NinjaKeyword.Sarira)];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
+        [.. HoverTipFactory.FromRelic<Sarira>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/SariraRevive.mp3");
-        await NinjaHelper.AddLexKela(choiceContext, this);
+        await LexKela.Gain(this);
         await CommonActions.Draw(this, choiceContext);
-        // if (isHitPointLow())
-        // {
-        //     await CardPileCmd.Draw(choiceContext,DynamicVars.Cards.BaseValue,Owner);
-        //     await PlayerCmd.GainEnergy(1,Owner);
-        // }
     }
 
     protected override void OnUpgrade()

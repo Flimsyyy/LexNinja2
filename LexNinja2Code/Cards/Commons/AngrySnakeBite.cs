@@ -1,4 +1,6 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -13,13 +15,12 @@ using MegaCrit.Sts2.Core.Models.Powers;
 namespace LexNinja2.LexNinja2Code.Cards.Commons;
 
 public class AngrySnakeBite()
-    : LexNinja2Card(0, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
+    : LexNinja2NinjutsuCard(0, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<PoisonPower>(7), new NinjutsuVar(2)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<PoisonPower>()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -28,7 +29,7 @@ public class AngrySnakeBite()
             await CardPileCmd.AddGeneratedCardToCombat(CreateClone(), PileType.Discard, Owner),
             1f
         );
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
@@ -45,5 +46,4 @@ public class AngrySnakeBite()
     public override string CustomPortraitPath => $"AngrySnakeBite.png".BigCardImagePath();
     public override string PortraitPath => $"AngrySnakeBite.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/AngrySnakeBite.png".CardImagePath();
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

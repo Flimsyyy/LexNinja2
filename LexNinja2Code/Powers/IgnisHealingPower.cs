@@ -1,6 +1,7 @@
-﻿using BaseLib.Abstracts;
+﻿using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -9,12 +10,12 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class IgnisHealingPower : CustomPowerModel
+public class IgnisHealingPower : LexNinja2Power
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override string CustomPackedIconPath => "IgnisHealingPower32.png".PowerImagePath();
+    public override string CustomIconPath => "IgnisHealingPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "IgnisHealingPower84.png".BigPowerImagePath();
 
     public override async Task AfterPlayerTurnStart(

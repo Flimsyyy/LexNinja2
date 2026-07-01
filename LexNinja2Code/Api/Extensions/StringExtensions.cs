@@ -1,4 +1,6 @@
-﻿namespace LexNinja2.LexNinja2Code.Api.Extensions;
+﻿using System.IO;
+
+namespace LexNinja2.LexNinja2Code.Api.Extensions;
 
 //Mostly utilities to get asset paths.
 public static class StringExtensions
@@ -41,5 +43,10 @@ public static class StringExtensions
     public static string CharacterUiPath(this string path)
     {
         return Path.Join(MainFile.ModId, "images", "charui", path);
+    }
+
+    public static string AudioPath(this string path)
+    {
+        return Path.Join(MainFile.ModId, "audio", path);
     }
 }

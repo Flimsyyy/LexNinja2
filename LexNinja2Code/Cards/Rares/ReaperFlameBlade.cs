@@ -1,4 +1,6 @@
-﻿using BaseLib.Extensions;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Extensions;
 using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
@@ -13,16 +15,31 @@ using MegaCrit.Sts2.Core.Models.Powers;
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
 public class ReaperFlameBlade()
-    : LexNinja2Card(7, CardType.Power, CardRarity.Rare, TargetType.AllEnemies)
+    : LexNinja2Card(
+        NinjaHelper.GetValueByChallengeMode(5, 7),
+        CardType.Power,
+        CardRarity.Rare,
+        TargetType.AllEnemies
+    )
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new PowerVar<ReaperFlame>(3), new PowerVar<IntangiblePower>(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars
+    {
+        get
+        {
+            yield return new PowerVar<ReaperFlame>(3);
+            if (!NinjaConfig.IsChallengeMode())
+                yield return new PowerVar<IntangiblePower>(1);
+        }
+    }
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/DeadBurningBladeSmog.mp3");
-        await CommonActions.ApplySelf<IntangiblePower>(choiceContext, this);
+        if (!NinjaConfig.IsChallengeMode())
+        {
+            await CommonActions.ApplySelf<IntangiblePower>(choiceContext, this);
+        }
         await CommonActions.ApplySelf<ReaperFlame>(choiceContext, this);
     }
 
@@ -42,7 +59,14 @@ public class ReaperFlameBlade()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Power<IntangiblePower>().UpgradeValueBy(1);
+        if (NinjaConfig.IsChallengeMode())
+        {
+            EnergyCost.UpgradeBy(-1);
+        }
+        else
+        {
+            DynamicVars.Power<IntangiblePower>().UpgradeValueBy(1);
+        }
     }
 
     public override string CustomPortraitPath => $"DeathGodBlade_p.png".BigCardImagePath();

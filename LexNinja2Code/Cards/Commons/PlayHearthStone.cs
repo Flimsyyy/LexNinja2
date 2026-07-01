@@ -1,8 +1,9 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -14,9 +15,9 @@ namespace LexNinja2.LexNinja2Code.Cards.Commons;
 public class PlayHearthStone()
     : LexNinja2Card(4, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(14, ValueProp.Move)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new BlockVar(NinjaHelper.GetValueByChallengeMode(12, 14), ValueProp.Move)];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Science];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

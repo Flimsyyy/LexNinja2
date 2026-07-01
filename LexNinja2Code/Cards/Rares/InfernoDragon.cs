@@ -1,4 +1,6 @@
-﻿using BaseLib.Extensions;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Extensions;
 using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
@@ -15,8 +17,7 @@ public class InfernoDragon() : LexNinja2Card(5, CardType.Power, CardRarity.Rare,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<InfernoDragonPower>(8)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Science];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)

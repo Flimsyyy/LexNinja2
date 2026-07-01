@@ -1,4 +1,6 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
@@ -13,11 +15,10 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class DarknessShoryuKen()
-    : LexNinja2Card(0, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+    : LexNinja2NinjutsuCard(0, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new NinjutsuVar(1), new DamageVar(8, ValueProp.Move), new PowerVar<WeakPower>(2)];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -25,7 +26,7 @@ public class DarknessShoryuKen()
         NinjaAudio.Play("res://LexNinja2/audio/DarknessShoryuKen.mp3");
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
         await CommonActions.Apply<WeakPower>(choiceContext, this, play);
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
@@ -45,6 +46,4 @@ public class DarknessShoryuKen()
     public override string CustomPortraitPath => $"DarknessShoryuKen_p.png".BigCardImagePath();
     public override string PortraitPath => $"DarknessShoryuKen.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/DarknessShoryuKen.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

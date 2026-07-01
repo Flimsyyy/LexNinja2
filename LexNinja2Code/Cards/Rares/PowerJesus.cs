@@ -1,4 +1,7 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Commands;
@@ -15,45 +18,21 @@ public class PowerJesus() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
-    // protected override async Task OnPlay(
-    //     PlayerChoiceContext choiceContext,
-    //     CardPlay play)
-    // {
-    //     NinjaAudio.Play("res://LexNinja2/audio/PowerJesus.mp3");
-    //     await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-    //     List<PowerModel> originalBuffs = (from p in Owner.Creature.Powers
-    //         where p.TypeForCurrentAmount == PowerType.Buff
-    //         select (PowerModel)p.ClonePreservingMutability()).ToList();
-    //     foreach (PowerModel item in originalBuffs)
-    //     {
-    //         PowerModel powerById = Owner.Creature.GetPowerById(item.Id);
-    //         PowerModel Nong = Owner.Creature.GetPower<BecomeNongPower>();
-    //         PowerModel nightMare = Owner.Creature.GetPower<NightmarePower>();
-    //
-    //         if (powerById != null && !powerById.IsInstanced)
-    //         {
-    //             DoHackyThingsForSpecificPowers(powerById);
-    //             await PowerCmd.ModifyAmount(powerById, item.Amount, base.Owner.Creature, this);
-    //         }
-    //         else if ((Nong!=null && powerById == Nong)||(nightMare!=null && powerById == nightMare))
-    //         {
-    //             DoHackyThingsForSpecificPowers(powerById);
-    //             await PowerCmd.ModifyAmount(powerById, item.Amount, base.Owner.Creature, this);
-    //         }
-    //         else
-    //         {
-    //             PowerModel power = (PowerModel)item.ClonePreservingMutability();
-    //             DoHackyThingsForSpecificPowers(power);
-    //             await PowerCmd.Apply(power, Owner.Creature, item.Amount, base.Owner.Creature, this);
-    //         }
-    //     }
-    // }
-
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
+        if (NinjaConfig.IsChallengeMode())
+        {
+            var list = PileType.Hand.GetPile(Owner).Cards.ToList();
+            foreach (var item in list)
+            {
+                await CardCmd.Exhaust(choiceContext, item);
+            }
+        }
+
         NinjaAudio.Play("res://LexNinja2/audio/PowerJesus.mp3");
         await NinjaAnim.TriggerCastAnim(this);
 
+        await LexKela.Gain(Owner, LexKela.Get(Owner));
         var buffs = Owner
             .Creature.Powers.Where(p => p.TypeForCurrentAmount == PowerType.Buff)
             .Where(p => p.StackType == PowerStackType.Counter)
@@ -105,12 +84,4 @@ public class PowerJesus() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
     public override string CustomPortraitPath => $"PowerJesus_p.png".BigCardImagePath();
     public override string PortraitPath => $"PowerJesus.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/PowerJesus.png".CardImagePath();
-
-    private static void DoHackyThingsForSpecificPowers(PowerModel power)
-    {
-        if (power is ITemporaryPower temporaryPower)
-        {
-            temporaryPower.IgnoreNextInstance();
-        }
-    }
 }

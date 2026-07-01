@@ -1,5 +1,6 @@
-﻿using BaseLib.Abstracts;
+﻿using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -8,7 +9,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class DisappointedPower : CustomPowerModel
+public class DisappointedPower : LexNinja2Power
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
@@ -18,11 +19,12 @@ public class DisappointedPower : CustomPowerModel
     {
         if (cardPlay.Card.Type == CardType.Attack && cardPlay.Card.Owner == Owner.Player)
         {
-            await PowerCmd.Apply<WeakPower>(context, Owner, 1, null, null);
+            var weakSelf = await PowerCmd.Apply<WeakPower>(context, Owner, 1, null, null);
+            weakSelf!.SkipNextDurationTick = false;
             await PowerCmd.Remove(this);
         }
     }
 
-    public override string CustomPackedIconPath => "DisappointedPower32.png".PowerImagePath();
+    public override string CustomIconPath => "DisappointedPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "DisappointedPower84.png".BigPowerImagePath();
 }

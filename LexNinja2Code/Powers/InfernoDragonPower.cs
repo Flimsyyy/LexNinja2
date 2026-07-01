@@ -1,5 +1,8 @@
-﻿using BaseLib.Abstracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -9,29 +12,20 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class InfernoDragonPower : CustomPowerModel
+public class InfernoDragonPower : LexNinja2Power
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new("dian", 0)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
 
-    public override string CustomPackedIconPath => "InfernoDragonPower.png".PowerImagePath();
+    public override string CustomIconPath => "InfernoDragonPower.png".PowerImagePath();
     public override string? CustomBigIconPath => "InfernoDragonPower.png".BigPowerImagePath();
 
     private decimal CalculateExtraDamage()
     {
-        var lexKela = Owner.GetPower<Lexkela>();
-        if (lexKela != null)
-        {
-            decimal kela = lexKela.Amount;
-            DynamicVars["dian"].BaseValue = Amount * kela;
-        }
-        else
-        {
-            DynamicVars["dian"].BaseValue = 0;
-        }
+        decimal kela = LexKela.Get(Owner.Player!);
+        DynamicVars["dian"].BaseValue = Amount * kela;
         return DynamicVars["dian"].BaseValue;
     }
 

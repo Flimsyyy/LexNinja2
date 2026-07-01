@@ -1,4 +1,6 @@
-﻿using BaseLib.Extensions;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Extensions;
 using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
@@ -13,23 +15,23 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace LexNinja2.LexNinja2Code.Cards.Rares;
 
-public class StoneStrong() : LexNinja2Card(1, CardType.Power, CardRarity.Rare, TargetType.Self)
+public class StoneStrong()
+    : LexNinja2NinjutsuCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<StoneStrongPower>(4), new NinjutsuVar(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [
             HoverTipFactory.Static(StaticHoverTip.Block),
-            HoverTipFactory.FromPower<Lexkela>(),
+            LexKela.HoverTip(),
             HoverTipFactory.FromPower<SandWall>(),
         ];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/StoneStrong.mp3");
         await CommonActions.ApplySelf<StoneStrongPower>(choiceContext, this);
-        if (!await Ninjutsu(choiceContext, play))
+        if (!Ninjutsu(play))
         {
             return;
         }
@@ -50,6 +52,4 @@ public class StoneStrong() : LexNinja2Card(1, CardType.Power, CardRarity.Rare, T
     public override string CustomPortraitPath => $"StoneStrong_p.png".BigCardImagePath();
     public override string PortraitPath => $"StoneStrong.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/StoneStrong.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

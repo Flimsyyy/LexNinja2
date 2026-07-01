@@ -1,44 +1,42 @@
-﻿using BaseLib.Abstracts;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using LexNinja2.LexNinja2Code.Api.Hooks;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Models;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class FreeNinjutsuPower : CustomPowerModel, ITryModifyLexKelaCost, IAfterLexKelaSpent
+public class FreeNinjutsuPower : LexNinja2Power, ISecondaryResourceHookListener
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override string CustomPackedIconPath => "DimDeadTreePower32.png".PowerImagePath();
+    public override string CustomIconPath => "DimDeadTreePower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "DimDeadTreePower84.png".BigPowerImagePath();
 
-    public bool TryModifyLexKeLaCost(CardModel card, decimal originalCost, out decimal modifiedCost)
+    public decimal ModifySecondaryResourceCost(SecondaryResourceCostContext context, decimal cost)
     {
-        if (card.Owner.Creature != Owner)
+        if (context.Definition.Id != LexKela.Id)
         {
-            modifiedCost = originalCost;
-            return false;
+            return cost;
         }
-        modifiedCost = 0;
-        return true;
+        var card = context.Card;
+        if (card.Owner.Creature != Owner || !card.Tags.Contains(NinjaTags.Ninjutsu))
+        {
+            return cost;
+        }
+        return 0;
     }
 
-    public async Task AfterLexKelaSpent(
-        PlayerChoiceContext choiceContext,
-        int amount,
-        Player spender
-    )
+    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (spender.Creature != Owner)
-        {
-            return;
-        }
-        if (amount > 0)
+        var card = cardPlay.Card;
+        if (card.Owner.Creature != Owner || !card.Tags.Contains(NinjaTags.Ninjutsu))
         {
             return;
         }

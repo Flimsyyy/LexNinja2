@@ -1,4 +1,6 @@
-﻿using LexNinja2.LexNinja2Code.Api;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using MegaCrit.Sts2.Core.Commands;
@@ -15,6 +17,7 @@ public class MobiusLoopSnake()
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<PoisonPower>(7)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
+
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Snake];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -27,10 +30,6 @@ public class MobiusLoopSnake()
         NinjaAudio.Play("res://LexNinja2/audio/MobiusLoopSnake.mp3");
         NinjaAudio.Play("res://LexNinja2/audio/Mobius.mp3", 0.15f);
         await Cmd.Wait(1f);
-        // if (LastCard().Tags.Contains(NinjaTags.Ninjutsu))
-        // {
-        //     await PowerCmd.Apply<FreeNinjutsuPower>(new ThrowingPlayerChoiceContext(), Owner.Creature, 1, Owner.Creature, this);
-        // }
         await CardCmd.AutoPlay(choiceContext, card.CreateDupe(), null);
     }
 
@@ -43,25 +42,17 @@ public class MobiusLoopSnake()
     public override string PortraitPath => $"MobiusLoopSnake.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/MobiusLoopSnake.png".CardImagePath();
 
-    public override async Task AfterPlayerTurnStart(
+    public override async Task AfterPlayerTurnStartEarly(
         PlayerChoiceContext choiceContext,
         Player player
     )
     {
-        var pile = Pile;
-        if ((pile != null ? (pile.Type != PileType.Exhaust ? 1 : 0) : 1) != 0 || player != Owner)
+        if (player != Owner)
+        {
+            return;
+        }
+        if (Pile is not { Type: PileType.Exhaust })
             return;
         await CardCmd.AutoPlay(choiceContext, this, Owner.Creature);
     }
-
-    // public override async Task AfterCardDrawn(
-    //     PlayerChoiceContext choiceContext,
-    //     CardModel card,
-    //     bool fromHandDraw)
-    // {
-    //     if (Ninjutsu())
-    //     {
-    //         await CardPileCmd.AutoPlayFromDrawPile(choiceContext, Owner, 1, CardPilePosition.Top, false);
-    //     }
-    // }
 }

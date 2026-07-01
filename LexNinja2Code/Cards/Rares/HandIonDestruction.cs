@@ -1,4 +1,6 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using Godot;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
@@ -21,10 +23,9 @@ public class HandIonDestruction()
     : LexNinja2Card(3, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(38, ValueProp.Move), new PowerVar<NoLexkelaPower>(1)];
+        [new DamageVar(33, ValueProp.Move), new PowerVar<NoLexkelaPower>(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -51,16 +52,11 @@ public class HandIonDestruction()
 
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
         await CommonActions.ApplySelf<NoLexkelaPower>(choiceContext, this);
-        if (!Owner.Creature.HasPower<Lexkela>())
-        {
-            return;
-        }
-        await SpendAllLexKela(choiceContext);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(8);
+        DynamicVars.Damage.UpgradeValueBy(11);
     }
 
     public override string CustomPortraitPath => $"HandIonDestruction.png".BigCardImagePath();

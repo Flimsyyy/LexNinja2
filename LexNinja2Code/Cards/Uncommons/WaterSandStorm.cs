@@ -1,4 +1,6 @@
-﻿using BaseLib.Extensions;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Extensions;
 using BaseLib.Utils;
 using Godot;
 using LexNinja2.LexNinja2Code.Api;
@@ -16,7 +18,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class WaterSandStorm()
-    : LexNinja2Card(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
+    : LexNinja2NinjutsuCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
@@ -28,19 +30,18 @@ public class WaterSandStorm()
                 (card, _) =>
                 {
                     var sandWall = card.Owner.Creature.GetPowerAmount<SandWall>();
-                    if (card is not LexNinja2Card ninjaCard || !ninjaCard.CanCastNinjutsu())
+                    if (card is not NinjutsuCard ninjaCard || !ninjaCard.CanCastNinjutsu())
                         return sandWall;
                     sandWall += card.DynamicVars.Power<SandWall>().IntValue;
                     return sandWall;
                 }
             ),
         ];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/WaterSandStorm.mp3");
-        if (await Ninjutsu(choiceContext, play))
+        if (Ninjutsu(play))
         {
             await CommonActions.ApplySelf<SandWall>(choiceContext, this);
         }
@@ -76,7 +77,6 @@ public class WaterSandStorm()
             Node.MethodName.AddChild,
             nRollingBoulderVfx
         );
-        // await signalAwaiter;
         await CommonActions
             .CardAttack(
                 this,
@@ -95,6 +95,4 @@ public class WaterSandStorm()
     public override string CustomPortraitPath => $"WaterSandStorm_p.png".BigCardImagePath();
     public override string PortraitPath => $"WaterSandStorm.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/WaterSandStorm.png".CardImagePath();
-
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
 }

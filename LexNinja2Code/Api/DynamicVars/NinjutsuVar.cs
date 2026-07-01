@@ -1,18 +1,17 @@
-﻿using BaseLib.Extensions;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
+﻿using MegaCrit.Sts2.Core.HoverTips;
+using STS2RitsuLib.Cards.DynamicVars;
+using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace LexNinja2.LexNinja2Code.Api.DynamicVars;
 
-public class NinjutsuVar : DynamicVar
+public class NinjutsuVar : SecondaryResourceVar
 {
-    public const string Key = "Renshu";
+    public const string Key = "RenShu";
+    public bool HasLexKelaCostX { get; init; } = false;
 
     public NinjutsuVar(decimal baseValue)
-        : base(Key, baseValue)
+        : base(Key, LexKela.Id, baseValue)
     {
-        this.WithTooltip(Key.ToUpperInvariant());
+        this.WithTooltip(_ => HoverTipFactory.FromKeyword(NinjaKeyword.RenShu));
     }
-
-    public AbstractModel? GetOwner() => _owner;
 }

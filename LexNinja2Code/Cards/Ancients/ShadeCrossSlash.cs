@@ -1,9 +1,10 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -18,22 +19,21 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LexNinja2.LexNinja2Code.Cards.Ancients;
 
 public class ShadeCrossSlash()
-    : LexNinja2Card(0, CardType.Attack, CardRarity.Ancient, TargetType.AllEnemies)
+    : LexNinja2NinjutsuCard(0, CardType.Attack, CardRarity.Ancient, TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new NinjutsuVar(2), new PowerVar<VulnerablePower>(2), new DamageVar(10, ValueProp.Move)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [
             HoverTipFactory.FromPower<VulnerablePower>(),
             HoverTipFactory.FromKeyword(NinjaKeyword.Blade),
-            HoverTipFactory.FromPower<Lexkela>(),
+            LexKela.HoverTip(),
         ];
-    protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Ninjutsu];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        if (await Ninjutsu(choiceContext, play))
+        if (Ninjutsu(play))
         {
             NinjaAudio.Play("res://LexNinja2/audio/ShadeCrossSlash.mp3");
             var nGrandFinaleVfx = NGrandFinaleVfx.Create(Owner.Creature);
@@ -62,11 +62,9 @@ public class ShadeCrossSlash()
         await CommonActions.Apply<VulnerablePower>(choiceContext, this, play);
     }
 
-    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
-
     protected override void OnUpgrade()
     {
-        DynamicVars.Ninjutsu().UpgradeValueBy(-1);
+        UpgradeNinjutsuValueBy(-1);
         DynamicVars.Vulnerable.UpgradeValueBy(1);
     }
 

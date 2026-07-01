@@ -1,3 +1,4 @@
+using System;
 using MegaCrit.Sts2.Core.Entities.Cards;
 
 namespace LexNinja2.LexNinja2Code.Api.Extensions;

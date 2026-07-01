@@ -1,5 +1,7 @@
-﻿using BaseLib.Abstracts;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -14,14 +16,14 @@ using MegaCrit.Sts2.Core.Rooms;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class GoodNightPower : CustomPowerModel
+public class GoodNightPower : LexNinja2Power
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
     private int flag = 0;
 
-    public override string CustomPackedIconPath => "GoodNightPower32.png".PowerImagePath();
+    public override string CustomIconPath => "GoodNightPower32.png".PowerImagePath();
     public override string? CustomBigIconPath => "GoodNightPower84.png".BigPowerImagePath();
 
     public override async Task AfterSideTurnStart(

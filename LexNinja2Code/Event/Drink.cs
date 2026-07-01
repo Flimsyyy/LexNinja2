@@ -1,4 +1,6 @@
-﻿using BaseLib.Abstracts;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -7,10 +9,13 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Runs;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace LexNinja2.LexNinja2Code.Event;
 
-public class Drink : CustomEventModel
+[RegisterSharedEvent]
+public class Drink : ModEventTemplate
 {
     public override string? CustomInitialPortraitPath => "res://LexNinja2/images/events/Drink.png";
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -60,7 +65,8 @@ public class Drink : CustomEventModel
         return Task.CompletedTask;
     }
 
-    protected override IReadOnlyList<EventOption> GenerateInitialOptions() => [Option(Drink0)];
+    protected override IReadOnlyList<EventOption> GenerateInitialOptions() =>
+        [new(this, Drink0, InitialOptionKey("DRINK0"))];
 
     private async Task Drink0()
     {
@@ -76,8 +82,13 @@ public class Drink : CustomEventModel
         SetEventState(
             PageDescription("DRINK_OR_LEAVE"),
             [
-                Option(MoreDrink, "DRINK_OR_LEAVE", HoverTipFactory.FromCard(RandomCardToLose!)), // 第二个参数代表该选项所在页面
-                Option(Leave, "DRINK_OR_LEAVE"),
+                new EventOption(
+                    this,
+                    MoreDrink,
+                    ModOptionKey("DRINK_OR_LEAVE", "MORE_DRINK"),
+                    HoverTipFactory.FromCard(RandomCardToLose!)
+                ), // 第二个参数代表该选项所在页面
+                new EventOption(this, Leave, ModOptionKey("DRINK_OR_LEAVE", "LEAVE")),
             ]
         );
     }
@@ -114,7 +125,14 @@ public class Drink : CustomEventModel
     {
         SetEventState(
             PageDescription("MORE_DRINK"),
-            [Option(MoreDrink, "MORE_DRINK", HoverTipFactory.FromCard(RandomCardToLose!))]
+            [
+                new EventOption(
+                    this,
+                    MoreDrink,
+                    ModOptionKey("MORE_DRINK", "MORE_DRINK"),
+                    HoverTipFactory.FromCard(RandomCardToLose!)
+                ),
+            ]
         );
     }
 

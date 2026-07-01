@@ -1,8 +1,8 @@
-﻿using BaseLib.Utils;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Relics;
-using LexNinja2.LexNinja2Code.Character;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -14,13 +14,11 @@ using MegaCrit.Sts2.Core.Rooms;
 
 namespace LexNinja2.LexNinja2Code.Relics;
 
-[Pool(typeof(LexNinja2RelicPool))]
-public class XiangPiaoPiao() : LexNinja2Relic
+public class XiangPiaoPiao : LexNinja2Relic
 {
     public override RelicRarity Rarity => RelicRarity.Ancient;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipFactory.FromPower<Lexkela>()];
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
 
     public override async Task AfterRoomEntered(AbstractRoom room)
     {
@@ -45,7 +43,7 @@ public class XiangPiaoPiao() : LexNinja2Relic
             return;
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/XiangPiaoPiao.mp3");
-        await NinjaHelper.AddLexKela(new ThrowingPlayerChoiceContext(), Owner, 2, null);
+        await LexKela.Gain(Owner, 2, null);
     }
 
     public override string PackedIconPath => "XiangPiaoPiao.png".RelicImagePath();
