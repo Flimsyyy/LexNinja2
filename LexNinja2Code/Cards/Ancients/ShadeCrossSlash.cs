@@ -27,7 +27,7 @@ public class ShadeCrossSlash()
         [
             HoverTipFactory.FromPower<VulnerablePower>(),
             HoverTipFactory.FromKeyword(NinjaKeyword.Blade),
-            LexKela.HoverTip(),
+            LexKela.HoverTip()
         ];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 
@@ -62,9 +62,11 @@ public class ShadeCrossSlash()
         await CommonActions.Apply<VulnerablePower>(choiceContext, this, play);
     }
 
+    protected override bool ShouldGlowGoldInternal => CanCastNinjutsu();
+
     protected override void OnUpgrade()
     {
-        UpgradeNinjutsuValueBy(-1);
+        DynamicVars.Ninjutsu().UpgradeValueBy(-1);
         DynamicVars.Vulnerable.UpgradeValueBy(1);
     }
 
