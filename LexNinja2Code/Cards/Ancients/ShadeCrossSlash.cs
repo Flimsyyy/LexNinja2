@@ -27,7 +27,7 @@ public class ShadeCrossSlash()
         [
             HoverTipFactory.FromPower<VulnerablePower>(),
             HoverTipFactory.FromKeyword(NinjaKeyword.Blade),
-            LexKela.HoverTip()
+            LexKela.HoverTip(),
         ];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
 
