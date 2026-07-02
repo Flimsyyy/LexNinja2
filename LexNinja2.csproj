@@ -98,7 +98,7 @@
     </PackageReference>
     <PackageReference Include="Nothing.STS2RitsuLib.ModAnalyzers" Version="0.8.2" />
     <PackageReference Include="SmartFormat" Version="3.3.0" />
-    <PackageReference Include="STS2.RitsuLib" Version="0.4.40" PrivateAssets="All" />
+    <PackageReference Include="STS2.RitsuLib" Version="0.4.46" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
