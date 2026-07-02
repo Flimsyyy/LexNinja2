@@ -25,7 +25,7 @@ public class BurningBlade()
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new DamageVar(NinjaHelper.GetValueByChallengeMode(9, 7), ValueProp.Move),
-            new NinjutsuVar(NinjaHelper.GetValueByChallengeMode(2, 1)),
+            new LexKelaVar(NinjaHelper.GetValueByChallengeMode(2, 1)),
         ];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.Static(StaticHoverTip.ReplayStatic)];
@@ -40,7 +40,7 @@ public class BurningBlade()
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
         // if (!shouldTriggerFatal || !attackCommand.Results.Any<DamageResult>((Func<DamageResult, bool>) (r => r.WasTargetKilled)))
 
-        if (!await LexKela.Spend(Owner, DynamicVars.Ninjutsu().IntValue, this, this))
+        if (!await LexKela.Spend(Owner, DynamicVars.LexKela().IntValue, this, this))
         {
             return;
         }
