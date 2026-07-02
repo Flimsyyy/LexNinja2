@@ -1,0 +1,13 @@
+{
+  "LEX_NINJA2_KEYWORD_REN_SHU.description": "Spend the required [gold]Lexkra[/gold] to activate additional effects.",
+  "LEX_NINJA2_KEYWORD_REN_SHU.title": "Ninjutsu",
+  
+  "LEX_NINJA2_KEYWORD_HAND.description": "A school of [gold]Hand Ninjutsu[/gold].",
+  "LEX_NINJA2_KEYWORD_HAND.title": "Hand Ninjutsu",
+
+  "LEX_NINJA2_KEYWORD_BLADE.description": "A school of [gold]Blade Ninjutsu[/gold].",
+  "LEX_NINJA2_KEYWORD_BLADE.title": "Blade Ninjutsu",
+
+  "LEX_NINJA2_KEYWORD_SCIENCE.description": "Each [gold]Lexkra[/gold] reduces its [gold]cost[/gold]. When played, consumes [blue]1[/blue] [gold]Lexkra[/gold].",
+  "LEX_NINJA2_KEYWORD_SCIENCE.title": "Science Ninja Tool"
+}
