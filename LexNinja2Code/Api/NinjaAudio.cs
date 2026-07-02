@@ -113,9 +113,6 @@ public static class NinjaAudio
 
         foreach (var player in list.ToList())
         {
-            // 断开所有事件，避免循环重新触发
-            player.Finished += null;
-
             if (fadeDuration > 0f)
             {
                 var tween = player.CreateTween();

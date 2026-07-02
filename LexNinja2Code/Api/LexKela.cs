@@ -52,6 +52,15 @@ public class LexKela
                             Size = new Vector2(96, 96),
                             HoverTip = SecondaryResourceHoverTipStyle.Default,
                         },
+                        GainFeedback = new SecondaryResourceCounterGainFeedback
+                        {
+                            Effects =
+                            [
+                                SecondaryResourceCounterGainEffects.StarCounterLikeBurst(
+                                    StsColors.lightGray
+                                ),
+                            ],
+                        },
                     }
                 );
                 var energyCounter = parent.GetNode<Control>("%EnergyCounterContainer");
