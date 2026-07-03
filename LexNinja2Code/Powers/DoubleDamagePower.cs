@@ -44,7 +44,8 @@ public class DoubleDamagePower : LexNinja2Power
         decimal amount,
         ValueProp props,
         Creature? dealer,
-        CardModel? cardSource
+        CardModel? cardSource,
+        CardPlay? cardPlay
     )
     {
         if (cardSource == null || cardSource.Owner.Creature != Owner || !props.IsPoweredAttack())

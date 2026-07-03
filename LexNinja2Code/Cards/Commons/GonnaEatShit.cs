@@ -32,7 +32,9 @@ public class GonnaEatShit() : LexNinja2Card(0, CardType.Attack, CardRarity.Commo
             Owner.Creature,
             DynamicVars.Damage.BaseValue,
             ValueProp.Move | ValueProp.Unblockable,
-            this
+            Owner.Creature,
+            this,
+            play
         );
         if (!NinjaConfig.IsChallengeMode())
         {

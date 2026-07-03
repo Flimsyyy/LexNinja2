@@ -2,6 +2,7 @@
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Powers;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -22,12 +23,25 @@ public class BladePowerUp : LexNinja2Power
     public override string CustomIconPath => "BladePowerUp32.png".PowerImagePath();
     public override string? CustomBigIconPath => "BladePowerUp84.png".BigPowerImagePath();
 
+    public override decimal ModifyDamageMultiplicative(
+        Creature? target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource,
+        CardPlay? cardPlay
+    )
+    {
+        return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
+    }
+
     public override decimal ModifyDamageAdditive(
         Creature? target,
         decimal amount,
         ValueProp props,
         Creature? dealer,
-        CardModel? cardSource
+        CardModel? cardSource,
+        CardPlay? cardPlay
     )
     {
         return
