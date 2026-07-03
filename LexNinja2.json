@@ -4,9 +4,9 @@
   "author": "Flimsy",
   "description": "蕾忍Mod杀戮尖塔2的版本。\n蕾忍以蕾克拉为核心，可以用来施放强力的忍术牌等。\n蕾忍Mod2在原有基础上增加了更多的卡牌、遗物和事件，丰富了游戏内容和策略性。\n（音量与游戏本体的音效同步）",
   "version": "VERSION_PLACEHOLDER",
-  "min_game_version": "0.107.1",
+  "min_game_version": "0.108.0",
   "has_pck": true,
   "has_dll": true,
-  "dependencies": [{ "id": "BaseLib", "min_version": "3.3.0" }, { "id": "STS2-RitsuLib", "min_version": "0.4.46" }],
+  "dependencies": [{ "id": "BaseLib", "min_version": "3.3.2" }, { "id": "STS2-RitsuLib", "min_version": "0.4.48" }],
   "affects_gameplay": true
 }

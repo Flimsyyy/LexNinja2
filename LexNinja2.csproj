@@ -98,7 +98,7 @@
     </PackageReference>
     <PackageReference Include="Nothing.STS2RitsuLib.ModAnalyzers" Version="0.8.2" />
     <PackageReference Include="SmartFormat" Version="3.3.0" />
-    <PackageReference Include="STS2.RitsuLib" Version="0.4.46" PrivateAssets="All" />
+    <PackageReference Include="STS2.RitsuLib" Version="0.4.48" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
@@ -135,7 +135,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="!Exists('$(Sts2DataDir)/sts2.dll')">
-    <PackageReference Include="Book.StS2.RefLib" Version="0.107.1" />
+    <PackageReference Include="Book.StS2.RefLib" Version="0.108.0-beta" />
   </ItemGroup>
 
   <Target Name="GetGitVersion" BeforeTargets="GenerateVersionedManifest">
