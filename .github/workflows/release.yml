@@ -8,12 +8,39 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Validate branch and set isBeta
+        id: check
+        run: |
+          TAG="${{ github.ref_name }}"
+          echo "Detected tag: $TAG"
+          BRANCHES=$(git branch -r --contains "$TAG" | sed 's/^[ ]*//' | sed 's|origin/||' | tr '\n' ' ')
+          echo "Branches containing this tag: $BRANCHES"
+          if [[ "$TAG" == *"-beta" ]]; then
+            EXPECTED="beta"
+            IS_BETA="true"
+          else
+            EXPECTED="master"
+            IS_BETA="false"
+          fi
+          if [[ ! " $BRANCHES " =~ " $EXPECTED " ]]; then
+            echo "❌ Error: Tag '$TAG' must be on branch '$EXPECTED', but found: ${BRANCHES:-none}"
+            exit 1
+          fi
+          echo "✅ Tag is on correct branch: $EXPECTED"
+          echo "isBeta=$IS_BETA" >> $GITHUB_OUTPUT
+
       - name: Publish STS2 Mod
         uses: iouter/iouter_actions/sts2/publish@master
         with:
           project-name: ${{ github.event.repository.name }}
           workshop-item-id: 3747530622
+          is-beta: ${{ steps.check.outputs.isBeta }}
         env:
           STEAM_USERNAME: ${{ secrets.STEAM_USERNAME }}
           STEAM_CONFIG_VDF: ${{ secrets.STEAM_CONFIG_VDF }}
