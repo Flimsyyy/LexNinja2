@@ -16,19 +16,19 @@
   "LEX_NINJA2_RELIC_DIM_DEAD_TREE.title": "Dark Cold Dead Tree",
 
   "LEX_NINJA2_RELIC_REAPER_HAND.description": "Whenever you play a [gold]Hand Ninjutsu[/gold] card, [gold]Summon[/gold] [blue]{Summon}[/blue].",
-  "LEX_NINJA2_RELIC_REAPER_HAND.flavor": "The tale of Reaper vs. Hokage, surely everyone's heard of it?\nThis boss is super tough for me.",
-  "LEX_NINJA2_RELIC_REAPER_HAND.title": "Reaper's Hand",
+  "LEX_NINJA2_RELIC_REAPER_HAND.flavor": "The tale of Bleach vs. Naruto, surely everyone's heard of it?\nThis boss is super tough for me.",
+  "LEX_NINJA2_RELIC_REAPER_HAND.title": "Bleach Hand",
 
   "LEX_NINJA2_RELIC_MACHINE_NINJA.description": "At the start of your turn, your next [gold]Science Ninja Tool[/gold] card is played twice.",
   "LEX_NINJA2_RELIC_MACHINE_NINJA.flavor": "A ninja is not born different, but excels at using tools.",
-  "LEX_NINJA2_RELIC_MACHINE_NINJA.title": "Machine Ninja: Oil-Burning Machine",
+  "LEX_NINJA2_RELIC_MACHINE_NINJA.title": "Mecha Ninja: Diesel Machine",
 
   "LEX_NINJA2_RELIC_SARIRA.description": "When your HP would be reduced to [blue]0[/blue] or below, heal [green]{Heal}%[/green] of your HP.\nAfter this effect triggers, spend [red]22,000,000[/red] [gold]Gold[/gold].",
   "LEX_NINJA2_RELIC_SARIRA.flavor": "The power to overdraw wealth and alter fate lies within...",
   "LEX_NINJA2_RELIC_SARIRA.title": "Sarira",
   
   "LEX_NINJA2_RELIC_THREE_DUUZ.description": "Each turn, the first time you play a [gold]Ninjutsu[/gold] card, draw [blue]2[/blue] cards.",
-  "LEX_NINJA2_RELIC_THREE_DUUZ.flavor": "Ohh, FUMO, so cute, truly the Art of Collecting Rice from the People.",
+  "LEX_NINJA2_RELIC_THREE_DUUZ.flavor": "Ohh, FUMO, still cute, truly wanna pay for it.",
   "LEX_NINJA2_RELIC_THREE_DUUZ.title": "3D Yuyuko",
   
   "LEX_NINJA2_RELIC_TOILET_WATER.description": "Each combat, when you draw the first [blue]{Count}[/blue] [red]Curse[/red] cards, [gold]Exhaust[/gold] them and draw [blue]{Cards}[/blue] cards.",
