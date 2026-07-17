@@ -30,7 +30,7 @@ public class MobiusLoopSnake()
         NinjaAudio.Play("res://LexNinja2/audio/MobiusLoopSnake.mp3");
         NinjaAudio.Play("res://LexNinja2/audio/Mobius.mp3", 0.15f);
         await Cmd.Wait(1f);
-        await CardCmd.AutoPlay(choiceContext, card.CreateDupe(), null);
+        await CardCmd.AutoPlay(choiceContext, card.CreateDupe(Owner), null);
     }
 
     protected override void OnUpgrade()
