@@ -90,14 +90,14 @@
   "LEX_NINJA2_CARD_HEAVEN_CROSS.description": "Whenever you play a [gold]Ninjutsu[/gold] card, gain {lexKelaIcon:secondaryResourceIcons(1)}.",
   "LEX_NINJA2_CARD_HEAVEN_CROSS.title": "Heaven Cross",
 
-  "LEX_NINJA2_CARD_INFINITE_SNAKE_BITES.description": "At the start of your turn, add a [gold]Raging Snake Bite+[/gold] to your hand.",
+  "LEX_NINJA2_CARD_INFINITE_SNAKE_BITES.description": "At the start of your turn, add a [gold]Angry Snake Bite+[/gold] to your hand.",
   "LEX_NINJA2_CARD_INFINITE_SNAKE_BITES.title": "Endless Snakes",
 
   "LEX_NINJA2_CARD_BACK_FOURTH_HAND.selectionScreenPrompt": "Choose 2 cards to put into your hand.",
   "LEX_NINJA2_CARD_BACK_FOURTH_HAND.description": "Gain {Block:diff()} [gold]Block[/gold].\nPut 2 cards from your [gold]discard pile[/gold] into your [gold]hand[/gold].\nDiscard 2 cards.",
   "LEX_NINJA2_CARD_BACK_FOURTH_HAND.title": "Reversing Hand",
 
-  "LEX_NINJA2_CARD_SHARPEN_TO_KILL.description": "Deal {Damage:diff()} damage.\n[gold]Blade Ninjutsu[/gold] deals {BladePowerUp:diff()} additional damage.",
+  "LEX_NINJA2_CARD_SHARPEN_TO_KILL.description": "Deal {Damage:diff()} damage.\n[gold]Bladejutsu[/gold] deals {BladePowerUp:diff()} additional damage.",
   "LEX_NINJA2_CARD_SHARPEN_TO_KILL.title": "Sharpening",
 
   "LEX_NINJA2_CARD_MUMMY_MUMMY.description": "When you spend {lexKelaIcon:secondaryResourceIcons(1)}, gain {MummyPower:diff()} [gold]Block[/gold].",
@@ -106,7 +106,7 @@
   "LEX_NINJA2_CARD_WATER_SAND_STORM.description": "Deal damage to ALL enemies equal to your [gold]Sand Wall[/gold] stacks.\n[gold]Ninjutsu[/gold] {RenShu:renShu()}: Gain {SandWall:diff()} [gold]Sand Wall[/gold] first. {InCombat:\n(Deals {CalculatedDamage:diff()} damage.)|}",
   "LEX_NINJA2_CARD_WATER_SAND_STORM.title": "Sandwall Tides",
 
-  "LEX_NINJA2_CARD_GO_BACK_HANDS.description": "Put all [gold]Hand Ninjutsu[/gold] cards from your [gold]discard pile[/gold] into your hand.\n[gold]Ninjutsu[/gold] {RenShu:renShu()}: Reduce the cost of those cards to 0{energyPrefix:energyIcons(1)} until they are played next.",
+  "LEX_NINJA2_CARD_GO_BACK_HANDS.description": "Put all [gold]Handjutsu[/gold] cards from your [gold]discard pile[/gold] into your hand.\n[gold]Ninjutsu[/gold] {RenShu:renShu()}: Reduce the cost of those cards to 0{energyPrefix:energyIcons(1)} until they are played next.",
   "LEX_NINJA2_CARD_GO_BACK_HANDS.title": "Come Back My Hands",
 
   "LEX_NINJA2_CARD_BLACK_ZI_CANNON.description": "Deal {Damage:diff()} damage.",
@@ -118,11 +118,11 @@
   "LEX_NINJA2_CARD_DARKNESS_SHORYU_KEN.description": "Deal {Damage:diff()} damage.\nApply {WeakPower:diff()} [gold]Weak[/gold].\n[gold]Ninjutsu[/gold] {RenShu:renShu()}: [gold]Exhaust[/gold] a random card.",
   "LEX_NINJA2_CARD_DARKNESS_SHORYU_KEN.title": "Yami Shoryuken",
 
-  "LEX_NINJA2_CARD_SHADOW_BLADE.selectionScreenPrompt": "Choose a card to play as a [gold]Blade Ninjutsu[/gold] and Exhaust it.",
-  "LEX_NINJA2_CARD_SHADOW_BLADE.description": "Deal {Damage:diff()} damage.\nApply {VulnerablePower:diff()} [gold]Vulnerable[/gold].\nChoose a card to play as a [gold]Blade Ninjutsu[/gold] and [gold]Exhaust[/gold] it.",
+  "LEX_NINJA2_CARD_SHADOW_BLADE.selectionScreenPrompt": "Choose a card to play as a [gold]Bladejutsu[/gold] and Exhaust it.",
+  "LEX_NINJA2_CARD_SHADOW_BLADE.description": "Deal {Damage:diff()} damage.\nApply {VulnerablePower:diff()} [gold]Vulnerable[/gold].\nChoose a card to play as a [gold]Bladejutsu[/gold] and [gold]Exhaust[/gold] it.",
   "LEX_NINJA2_CARD_SHADOW_BLADE.title": "Shadow Demon Blade",
 
-  "LEX_NINJA2_CARD_HANDS_TICKLE.description": "For each [gold]Hand Ninjutsu[/gold] card you have, deal {Damage:diff()} damage once. {InCombat:\n(Deals {CalculatedHits:diff()} hits.)|}",
+  "LEX_NINJA2_CARD_HANDS_TICKLE.description": "For each [gold]Handjutsu[/gold] card you have, deal {Damage:diff()} damage. {InCombat:\n(Deals {CalculatedHits:diff()} hits.)|}",
   "LEX_NINJA2_CARD_HANDS_TICKLE.title": "Scratching Hands",
 
   "LEX_NINJA2_CARD_RADIATION_ANNIHILATION.description": "At the end of each enemy's turn, they lose 25% of their [gold]Max HP[/gold].",
@@ -147,16 +147,16 @@
   "LEX_NINJA2_CARD_GOOD_NIGHT.description": "Gain {Kela:secondaryResourceIcons()}.\nEnd your turn.\nAt the start of your next turn, recover 30% of Max HP, but you cannot play cards.",
   "LEX_NINJA2_CARD_GOOD_NIGHT.title": "Zzz",
 
-  "LEX_NINJA2_CARD_SNAKE_SWITCH.description": "Transform {Cards:diff()} cards in your [gold]hand[/gold] into [gold]{IfUpgraded:show:Raging Snake Bite+|Raging Snake Bite}[/gold].\nDraw {Cards:diff()} cards.",
+  "LEX_NINJA2_CARD_SNAKE_SWITCH.description": "Transform {Cards:diff()} cards in your [gold]hand[/gold] into [gold]{IfUpgraded:show:Angry Snake Bite+|Raging Snake Bite}[/gold].\nDraw {Cards:diff()} cards.",
   "LEX_NINJA2_CARD_SNAKE_SWITCH.title": "Serpent Teleportation",
 
-  "LEX_NINJA2_CARD_ECLIPSE_MIST_BLADE.description": "Gain {Block:diff()} [gold]Block[/gold].\n[gold]Exhaust[/gold] all non-[gold]Blade Ninjutsu[/gold] cards in your [gold]hand[/gold]; gain {Kela:secondaryResourceIcons()} for each.",
+  "LEX_NINJA2_CARD_ECLIPSE_MIST_BLADE.description": "Gain {Block:diff()} [gold]Block[/gold].\n[gold]Exhaust[/gold] all non-[gold]Bladejutsu[/gold] cards in your [gold]hand[/gold]; gain {Kela:secondaryResourceIcons()} for each.",
   "LEX_NINJA2_CARD_ECLIPSE_MIST_BLADE.title": "Eclipse Blade",
 
   "LEX_NINJA2_CARD_DARKNESS_CRAWL.description": "Gain {Block:diff()} [gold]Block[/gold] {IfChallengeMode:cond:X|{IfUpgraded:show:X+1|X}} times.\nGain {Kela:secondaryResourceIcons()} {IfChallengeMode:cond:X|{IfUpgraded:show:X+1|X}} times.",
   "LEX_NINJA2_CARD_DARKNESS_CRAWL.title": "Morbid Crawling",
 
-  "LEX_NINJA2_CARD_ANNAI_MASTER.description": "Add a random [gold]Ninjutsu[/gold] card to your hand. It costs 0 this turn.",
+  "LEX_NINJA2_CARD_ANNAI_MASTER.description": "Add a random [gold]Ninjutsu[/gold] card to your hand. It's free to play this turn.",
   "LEX_NINJA2_CARD_ANNAI_MASTER.title": "Master Annai",
 
   "LEX_NINJA2_CARD_PLAY_HEARTH_STONE.description": "Gain {Block:diff()} [gold]Block[/gold].",
@@ -168,7 +168,7 @@
   "LEX_NINJA2_CARD_LAN_BLADE.description": "Deal {Damage:diff()} damage. (Does not trigger [gold]Arashi Storm[/gold].)",
   "LEX_NINJA2_CARD_LAN_BLADE.title": "Arashi Blade",
 
-  "LEX_NINJA2_CARD_LAN_BLADE_CUTTING.description": "Whenever you play a [gold]Blade Ninjutsu[/gold] card, add a {IfUpgraded:show:[gold]Lan Blade+[/gold]|[gold]Lan Blade[/gold]} to your hand.\n[gold]Ninjutsu[/gold] {RenShu:renShu()}: Add a {IfUpgraded:show:[gold]Lan Blade+[/gold]|[gold]Lan Blade[/gold]} to your hand.",
+  "LEX_NINJA2_CARD_LAN_BLADE_CUTTING.description": "Whenever you play a [gold]Bladejutsu[/gold] card, add an {IfUpgraded:show:[gold]Arashi Blade+[/gold]|[gold]Arashi Blade[/gold]} to your hand.\n[gold]Ninjutsu[/gold] {RenShu:renShu()}: Add an {IfUpgraded:show:[gold]Arashi Blade+[/gold]|[gold]Arashi Blade[/gold]} to your hand.",
   "LEX_NINJA2_CARD_LAN_BLADE_CUTTING.title": "Arashi Storm",
 
   "LEX_NINJA2_CARD_TURBINE.description": "Whenever you play a [gold]Kagaku Ningu[/gold] card, draw 1 card.",
@@ -186,7 +186,7 @@
   "LEX_NINJA2_CARD_GET_PEOPLE_TAX.description": "Deal {Damage:diff()} damage to ALL enemies.\n[gold]Ninjutsu[/gold] {RenShu:renShu()}: Gain {Gold:diff()} [gold]Gold[/gold] for each enemy.",
   "LEX_NINJA2_CARD_GET_PEOPLE_TAX.title": "Taxing",
 
-  "LEX_NINJA2_CARD_UBW.description": "[gold]Ninjutsu[/gold] {RenShu:renShu()}: For each [gold]Blade Ninjutsu[/gold] card played this combat, deal {Damage:diff()} damage to a random enemy. {InCombat:\n(Deals {HitCounts:diff()} hits.)|}",
+  "LEX_NINJA2_CARD_UBW.description": "[gold]Ninjutsu[/gold] {RenShu:renShu()}: For each [gold]Bladesjutsu[/gold] card played this combat, deal {Damage:diff()} damage to a random enemy. {InCombat:\n(Deals {HitCounts:diff()} hits.)|}",
   "LEX_NINJA2_CARD_UBW.title": "A Billion Blades",
 
   "LEX_NINJA2_CARD_DARK_SOUL_CUT.description": "{IfChallengeMode:cond:Deal {Damage:inverseDiff()} damage to yourself.\n|}[gold]Ninjutsu[/gold] {RenShu:renShu()}: Deal {Damage:diff()} damage 3 times.\n[gold]Execute[/gold]: Gain Max HP equal to the target's [gold]current HP[/gold].",
@@ -232,13 +232,13 @@
   "LEX_NINJA2_CARD_TWO_MONKS.description": "Take an extra turn.\nThe extra turn is taken over by a clone.",
   "LEX_NINJA2_CARD_TWO_MONKS.title": "Arhat Clone",
 
-  "LEX_NINJA2_CARD_GET_ALL_HANDS.description": "For the rest of this turn after playing this card, whenever you play a [gold]Hand Ninjutsu[/gold] card, draw 1 card and gain {energyPrefix:energyIcons(1)} until you play a non-[gold]Hand Ninjutsu[/gold] card.",
+  "LEX_NINJA2_CARD_GET_ALL_HANDS.description": "For the rest of this turn after playing this card, whenever you play a [gold]Handjutsu[/gold] card, draw 1 card and gain {energyPrefix:energyIcons(1)} until you play a non-[gold]Handjutsu[/gold] card.",
   "LEX_NINJA2_CARD_GET_ALL_HANDS.title": "Omnihand",
 
   "LEX_NINJA2_CARD_BLADE_DEFENCE.description": "After playing this card, whenever you attack this turn, gain {BladeDefencePower:diff()} [gold]Block[/gold].\nWhen you block an attack, gain {lexKelaIcon:secondaryResourceIcons(1)}.",
   "LEX_NINJA2_CARD_BLADE_DEFENCE.title": "Blade Guard",
 
-  "LEX_NINJA2_CARD_PLASMA_ARROW.description": "Deal {Damage:diff()} damage.\nYour next [gold]Ninjutsu[/gold] card costs 0.",
+  "LEX_NINJA2_CARD_PLASMA_ARROW.description": "Deal {Damage:diff()} damage.\nYour next [gold]Ninjutsu[/gold] card is free to play.",
   "LEX_NINJA2_CARD_PLASMA_ARROW.title": "Plasma Arrow",
 
   "LEX_NINJA2_CARD_INFERNO_DRAGON.description": "Your attacks deal {InfernoDragonPower:diff()}% more damage for each {lexKelaIcon:secondaryResourceIcons(1)} you have.",
@@ -296,13 +296,13 @@
   "LEX_NINJA2_CARD_SARIRA_REVIVE.description": "Gain {Kela:secondaryResourceIcons()}.\nDraw {Cards:diff()} cards.\nWhen removed from your deck, obtain a [gold]Sarira[/gold] (max 1).",
   "LEX_NINJA2_CARD_SARIRA_REVIVE.title": "Sarira Revival",
 
-  "LEX_NINJA2_CARD_ITALY_SILVER_SLASH.description": "Deal {Damage:diff()} damage to a random enemy {Repeat:diff()} times.\nDraw {Cards:diff()} cards.\nShuffle {Cards:diff()} [gold]Lan Blade[/gold] into your [gold]draw pile[/gold].",
+  "LEX_NINJA2_CARD_ITALY_SILVER_SLASH.description": "Deal {Damage:diff()} damage to a random enemy {Repeat:diff()} times.\nDraw {Cards:diff()} cards.\nShuffle {Cards:diff()} [gold]Arashi Blades[/gold] into your [gold]draw pile[/gold].",
   "LEX_NINJA2_CARD_ITALY_SILVER_SLASH.title": "Silver Chariot Slash",
 
   "LEX_NINJA2_CARD_ABRASIVE_STRIKE.description": "Deal {Damage:diff()} damage.\nGain {ThornsPower:diff()} [gold]Thorns[/gold].",
   "LEX_NINJA2_CARD_ABRASIVE_STRIKE.title": "Abrasive Strike",
 
-  "LEX_NINJA2_CARD_GENSHIN_STORM.description": "Add a [gold]Hallelujah Little Storm+[/gold] with [gold]Exhaust[/gold] and [gold]Ethereal[/gold] into all other players' [gold]hands[/gold].\n[gold]Ninjutsu[/gold] X: All other players gain X {lexKelaIcon:secondaryResourceIcons(1)}.",
+  "LEX_NINJA2_CARD_GENSHIN_STORM.description": "Add a [gold]Hallelujah Whirlwind+[/gold] with [gold]Exhaust[/gold] and [gold]Ethereal[/gold] into all other players' [gold]hands[/gold].\n[gold]Ninjutsu[/gold] X: All other players gain X {lexKelaIcon:secondaryResourceIcons(1)}.",
   "LEX_NINJA2_CARD_GENSHIN_STORM.title": "Genshin Storm",
   
   "LEX_NINJA2_CARD_ALAN_WALKER.description": "Deal 6 damage to ALL enemies.\nGain 7 [gold]Block[/gold].\n(Unaffected by other effects)\nRepeat these effects for each card you play.",
@@ -311,7 +311,7 @@
   "LEX_NINJA2_CARD_I_SEE_YOU.description": "Transforms after defeating {boss:diff()} Boss enemies.\nAt the end of your turn, if this card is in your [gold]hand[/gold], gain {Frail:diff()} [gold]Frail[/gold].",
   "LEX_NINJA2_CARD_I_SEE_YOU.title": "I See You",
 
-  "LEX_NINJA2_CARD_HAMOOD_KILL_ALL.description": "At the end of your turn, if this card is in your [gold]hand[/gold], ALL players and enemies take {Damage:diff()} damage.\nAdd a '9' to the damage number for each player.",
+  "LEX_NINJA2_CARD_HAMOOD_KILL_ALL.description": "At the end of your turn, if this card is in your [gold]hand[/gold], ALL players and enemies take {Damage:diff()} damage.\nAdd a '9' at the end of the damage number for each player.",
   "LEX_NINJA2_CARD_HAMOOD_KILL_ALL.title": "Hamoodgeddon",
 
   "LEX_NINJA2_CARD_MOSQUITO_HAND.description": "Makes a mosquito noise when played.",
