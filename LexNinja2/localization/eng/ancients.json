@@ -21,7 +21,7 @@
   "DARV.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-1.char": "Hamood Hamood is very tired.",
   "DARV.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-1.next": "Continue",
   "DARV.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-2.ancient": "So things settled down after you left the Spire last time.",
-  "DARV.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.1-0r.ancient": "Oh, it's you. I still have that pea plant you grew.\nCome claim it when it recognizes you.",
+  "DARV.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.1-0r.ancient": "Oh, it's you. I still have that peashooter you grew.\nCome claim it when it recognizes you.",
   "DARV.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-0.ancient": "You're back again. Want something shiny?",
   "DARV.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-0.next": "Answer",
   "DARV.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-1.char": "Can't bear to part with money.",
@@ -48,9 +48,9 @@
   "NONUPEIPE.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-0.next": "React",
   "NONUPEIPE.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-1.char": "Furious! So~~ furious!",
 
-  "OROBAS.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-0.ancient": "Hooded person? Where from?\nOnly half a body? How interesting!!",
+  "OROBAS.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-0.ancient": "Hooded guy? Where from?\nOnly half a body? How interesting!!",
   "OROBAS.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-0.next": "Demonstrate",
-  "OROBAS.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-1.char": "Even a Good Man Lacks Skill!",
+  "OROBAS.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-1.char": "The perfect body!",
   "OROBAS.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-1.next": "Continue",
   "OROBAS.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-2.ancient": "Ninjutsu! So fun! Do another, do another!",
   "OROBAS.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.1-0r.ancient": "Little ninja! I want to see Ninjutsu!\nI have good stuff, so do more!!",
@@ -60,11 +60,11 @@
   "OROBAS.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-1.next": "Drink",
   "OROBAS.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-2.char": "Good water, drank enough.\n[sine]Glug glug glug glug~[/sine]",
 
-  "PAEL.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-0.char": "A milk dragon.",
+  "PAEL.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-0.char": "A Nailoong.",
   "PAEL.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-0.next": "Continue",
-  "PAEL.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-1.ancient": "[thinky_dots]Whatever you say...\ntake a piece for the road...[/thinky_dots]",
+  "PAEL.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-1.ancient": "[thinky_dots]Whatever you say...\ntake a piece from me for your journey...[/thinky_dots]",
   "PAEL.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.1-0r.ancient": "[thinky_dots]Little black thing...\ndon't disturb my sleep...[/thinky_dots]",
-  "PAEL.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-0.char": "Good sleep, good sleep.",
+  "PAEL.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-0.char": "Sleep well, Sleep well.",
   "PAEL.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-0.next": "Continue",
   "PAEL.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-1.ancient": "[thinky_dots]zZZzz...[/thinky_dots]",
 
@@ -78,7 +78,7 @@
   "TANX.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-0.next": "Fight",
   "TANX.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-1.char": "[i][font_size=22]Surely everyone with ninja dynamic vision has already watched this exhilarating karate bout.[/font_size][/i]",
   "TANX.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-1.next": "Continue",
-  "TANX.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-2.ancient": "[b]Even a Good Man Lacks Skill!![/b]",
+  "TANX.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-2.ancient": "[b]What a perfect body!![/b]",
 
   "TEZCATARA.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-0.ancient": "Ohoho, what a rare guest! Hello there, little one~",
   "TEZCATARA.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-0.next": "Respond",
@@ -92,7 +92,7 @@
   "TEZCATARA.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-1.next": "Continue",
   "TEZCATARA.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.2-2.ancient": "Oh dear, don't worry, you can do it.",
 
-  "VAKUU.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-0.ancient": "Oh? The old god killer is back too? This time alone?",
+  "VAKUU.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-0.ancient": "Oh? The killer of the Elder Gods is back too? This time alone?",
   "VAKUU.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-0.next": "Chat",
   "VAKUU.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-1.char": "[jitter][b]Vakuu, you'd better leave now, or I'll annihilate your grandma grandpa!!![/b][/jitter]",
   "VAKUU.talk.LEX_NINJA2_CHARACTER_LEX_NINJA2.0-1.next": "Continue",

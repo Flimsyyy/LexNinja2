@@ -1,7 +1,7 @@
 {
   "LEX_NINJA2_RELIC_LOTUS_BOX.description": "At the start of combat, gain [blue]2[/blue] [gold]Lexkra[/gold].",
   "LEX_NINJA2_RELIC_LOTUS_BOX.flavor": "A magical food that fully replenishes after battle, a classic JRPG trope.",
-  "LEX_NINJA2_RELIC_LOTUS_BOX.title": "Lotus Root Box",
+  "LEX_NINJA2_RELIC_LOTUS_BOX.title": "Lotus Rhizomes",
 
   "LEX_NINJA2_RELIC_XIANG_PIAO_PIAO.description": "At the start of your turn, gain [blue]2[/blue] [gold]Lexkra[/gold].",
   "LEX_NINJA2_RELIC_XIANG_PIAO_PIAO.flavor": "A popular drink among ninjas; it's unclear if it's a secret recipe or just a tradition.",
@@ -15,11 +15,11 @@
   "LEX_NINJA2_RELIC_DIM_DEAD_TREE.flavor": "Rumor has it that Master Annai attained enlightenment beneath the Dark Cold Dead Tree.",
   "LEX_NINJA2_RELIC_DIM_DEAD_TREE.title": "Dark Cold Dead Tree",
 
-  "LEX_NINJA2_RELIC_REAPER_HAND.description": "Whenever you play a [gold]Hand Ninjutsu[/gold] card, [gold]Summon[/gold] [blue]{Summon}[/blue].",
+  "LEX_NINJA2_RELIC_REAPER_HAND.description": "Whenever you play a [gold]Handjutsu[/gold] card, [gold]Summon[/gold] [blue]{Summon}[/blue].",
   "LEX_NINJA2_RELIC_REAPER_HAND.flavor": "The tale of Bleach vs. Naruto, surely everyone's heard of it?\nThis boss is super tough for me.",
   "LEX_NINJA2_RELIC_REAPER_HAND.title": "Bleach Hand",
 
-  "LEX_NINJA2_RELIC_MACHINE_NINJA.description": "At the start of your turn, your next [gold]Science Ninja Tool[/gold] card is played twice.",
+  "LEX_NINJA2_RELIC_MACHINE_NINJA.description": "At the start of your turn, your next [gold]Kagaku Ningu[/gold] card is played twice.",
   "LEX_NINJA2_RELIC_MACHINE_NINJA.flavor": "A ninja is not born different, but excels at using tools.",
   "LEX_NINJA2_RELIC_MACHINE_NINJA.title": "Mecha Ninja: Diesel Machine",
 
