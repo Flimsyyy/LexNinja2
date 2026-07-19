@@ -50,9 +50,11 @@ body:
       label: 版本条件确认
       description: 请确认以下环境要求
       options:
-        - label: "我使用了最新版的蕾忍Mod，并更新到了对应的游戏版本和BaseLib版本"
+        - label: "我确认蕾忍Mod，BaseLib和RitsuLib都更新到了最新版"
           required: true
-        - label: "我已尝试仅安装蕾忍Mod和BaseLib两个Mod，并复现了问题。"
+        - label: "我确认游戏版本与蕾忍Mod版本匹配"
+          required: true
+        - label: "我已尝试仅安装蕾忍Mod，BaseLib和RitsuLib三个Mod，并复现了问题。"
           required: true
 
   - type: textarea
