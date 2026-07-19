@@ -23,7 +23,7 @@ public class BuildSandWall()
             new CalculationBaseVar(0),
             new CalculationExtraVar(1),
             new CalculatedBlockVar(ValueProp.Move).WithMultiplier(
-                (card, target) => card.Owner.Creature.GetPowerAmount<SandWall>()
+                (card, _) => card.Owner.Creature.GetPowerAmount<SandWall>()
             ),
         ];
 
