@@ -6,7 +6,6 @@ using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -18,18 +17,27 @@ public class BuildSandWall()
     : LexNinja2NinjutsuCard(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new NinjutsuVar(1), new PowerVar<BuildSandWallPower>(1)];
+        [
+            new NinjutsuVar(1),
+            new PowerVar<BuildSandWallPower>(1),
+            new CalculationBaseVar(0),
+            new CalculationExtraVar(1),
+            new CalculatedBlockVar(ValueProp.Move).WithMultiplier(
+                (card, target) => card.Owner.Creature.GetPowerAmount<SandWall>()
+            ),
+        ];
+
+    public override bool GainsBlock => true;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/BuildSandWall.mp3");
         await CommonActions.ApplySelf<BuildSandWallPower>(choiceContext, this);
-        var sandWallPower = Owner.Creature.GetPower<SandWall>();
-        if (sandWallPower == null || !Ninjutsu(play))
+        if (!Ninjutsu(play))
         {
             return;
         }
-        await CreatureCmd.GainBlock(Owner.Creature, sandWallPower.Amount, ValueProp.Move, play);
+        await CommonActions.CardBlock(this, play);
     }
 
     protected override void OnUpgrade()

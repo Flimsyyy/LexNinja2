@@ -20,6 +20,7 @@ public class ColdCopper() : LexNinja2BaseCard(0, CardType.Skill, CardRarity.Toke
     protected override HashSet<CardTag> CanonicalTags => [NinjaTags.Food];
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [CardKeyword.Exhaust, CardKeyword.Retain];
+    public override bool GainsBlock => true;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
