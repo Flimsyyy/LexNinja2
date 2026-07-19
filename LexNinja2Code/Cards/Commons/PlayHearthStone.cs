@@ -19,6 +19,7 @@ public class PlayHearthStone()
         [new BlockVar(NinjaHelper.GetValueByChallengeMode(12, 14), ValueProp.Move)];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Science];
+    public override bool GainsBlock => true;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

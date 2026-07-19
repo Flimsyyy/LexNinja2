@@ -18,6 +18,7 @@ public class SaltStealth() : LexNinja2Card(1, CardType.Skill, CardRarity.Common,
     protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(8, ValueProp.Move)];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.Static(StaticHoverTip.Transform)];
+    public override bool GainsBlock => true;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

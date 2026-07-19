@@ -20,6 +20,7 @@ public class BackFourthHand()
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new BlockVar(NinjaHelper.GetValueByChallengeMode(7, 8), ValueProp.Move), new CardsVar(2)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
+    public override bool GainsBlock => true;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

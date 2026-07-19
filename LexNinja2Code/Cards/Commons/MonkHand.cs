@@ -45,6 +45,7 @@ public class MonkHand()
         ];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [LexKela.HoverTip()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Hand];
+    public override bool GainsBlock => true;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
