@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -18,6 +18,7 @@ public class DarknessCrawl()
     protected override bool HasEnergyCostX => true;
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new BlockVar(5, ValueProp.Move), new LexKelaVar(1)];
+    public override bool GainsBlock => true;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -29,7 +30,7 @@ public class DarknessCrawl()
         for (var i = 0; i < evokeCount; ++i)
         {
             NinjaAudio.Play("res://LexNinja2/audio/Crawl.mp3");
-            await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
+            await CommonActions.CardBlock(this, play);
             await LexKela.Gain(this);
         }
     }

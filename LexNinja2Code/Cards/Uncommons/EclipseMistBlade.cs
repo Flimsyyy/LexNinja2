@@ -24,6 +24,7 @@ public class EclipseMistBlade()
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [NinjaKeyword.Blade];
+    public override bool GainsBlock => true;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

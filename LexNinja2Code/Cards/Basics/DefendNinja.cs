@@ -17,6 +17,7 @@ public class DefendNinja() : LexNinja2Card(1, CardType.Skill, CardRarity.Basic, 
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(5, ValueProp.Move)];
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Defend];
+    public override bool GainsBlock => true;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

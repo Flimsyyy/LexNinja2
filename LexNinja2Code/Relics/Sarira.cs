@@ -56,6 +56,13 @@ public class Sarira : LexNinja2Relic
             creature,
             Math.Max(1M, creature.MaxHp * (DynamicVars.Heal.BaseValue / 100M))
         );
-        await PlayerCmd.GainGold(-22000000, Owner);
+        const int lexGold = 22000000;
+        SfxCmd.Play("event:/sfx/ui/gold/gold_1");
+        var entry = Owner.RunState.CurrentMapPointHistoryEntry?.GetEntry(Owner.NetId);
+        if (entry != null)
+        {
+            entry.GoldLost += lexGold;
+        }
+        Owner.Gold -= lexGold;
     }
 }
