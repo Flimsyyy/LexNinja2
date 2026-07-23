@@ -8,6 +8,7 @@ using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -16,6 +17,8 @@ namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 public class BuildSandWall()
     : LexNinja2NinjutsuCard(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
+        [HoverTipFactory.FromPower<SandWall>()];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new NinjutsuVar(1),

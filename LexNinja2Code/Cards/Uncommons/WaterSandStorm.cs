@@ -10,6 +10,7 @@ using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
@@ -20,6 +21,9 @@ namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 public class WaterSandStorm()
     : LexNinja2NinjutsuCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
+        [HoverTipFactory.FromPower<SandWall>()];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new NinjutsuVar(2),
