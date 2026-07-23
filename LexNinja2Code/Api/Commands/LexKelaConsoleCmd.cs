@@ -23,7 +23,7 @@ public class LexKelaConsoleCmd : AbstractConsoleCmd
             return new CmdResult(
                 LexKela.Lose(issuingPlayer, -result),
                 true,
-                $"Lost '{result}' lex kela."
+                $"Lost '{-result}' lex kela."
             );
         return new CmdResult(
             LexKela.Gain(issuingPlayer, result),
