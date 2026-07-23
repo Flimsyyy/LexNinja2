@@ -110,7 +110,7 @@
 
   "LEX_NINJA2_POWER_IGNIS_HEALING_POWER.description": "At the start of your turn, take [blue]5[/blue] damage.",
   "LEX_NINJA2_POWER_IGNIS_HEALING_POWER.smartDescription": "At the start of your turn, take [blue]{HpLoss}[/blue] damage.",
-  "LEX_NINJA2_POWER_IGNIS_HEALING_POWER.title": "Ignis",
+  "LEX_NINJA2_POWER_IGNIS_HEALING_POWER.title": "Ragnaros",
 
   "LEX_NINJA2_POWER_TWO_MONKS_POWER.description": "Gain an [gold]extra turn[/gold] controlled by a clone.",
   "LEX_NINJA2_POWER_TWO_MONKS_POWER.smartDescription": "Gain an [gold]extra turn[/gold] controlled by a clone.",
@@ -138,7 +138,7 @@
 
   "LEX_NINJA2_POWER_BLACK_SNAKE_HEART_POWER.description": "When you play a card with the same name as the last card played, [gold]Exhaust[/gold] it and gain 1 [gold]Intangible[/gold].",
   "LEX_NINJA2_POWER_BLACK_SNAKE_HEART_POWER.smartDescription": "When you play a card with the same name as the last card played, [gold]Exhaust[/gold] it and gain [blue]{Amount}[/blue] [gold]Intangible[/gold]. (Last card played: [gold]{Card}[/gold])",
-  "LEX_NINJA2_POWER_BLACK_SNAKE_HEART_POWER.title": "Dark Snake Heart",
+  "LEX_NINJA2_POWER_BLACK_SNAKE_HEART_POWER.title": "Invisible Snake Heart",
 
   "LEX_NINJA2_POWER_SCIENCE_POWER.description": "Your next [gold]Kagaku Ningu[/gold] card is played twice.",
   "LEX_NINJA2_POWER_SCIENCE_POWER.smartDescription": "Your next [blue]{Amount}[/blue] [gold]Kagaku Ningu[/gold] cards are played twice.",
