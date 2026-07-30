@@ -15,7 +15,7 @@
   "LEX_NINJA2_CARD_SHAKE_SHAKE_HANDS.description": "Apply {WeakPower} [gold]Weak[/gold] to yourself and ALL enemies.\nGain {Kela:secondaryResourceIcons()}.",
   "LEX_NINJA2_CARD_SHAKE_SHAKE_HANDS.title": "Shake Both Hands",
 
-  "LEX_NINJA2_CARD_BURNING_BLADE.description": "Deal {Damage:diff()} damage.\nSpend {lexKelaIcon:secondaryResourceIcons(1)} to give ALL your [gold]Burning Blades[/gold] [gold]Replay[/gold] 1.",
+  "LEX_NINJA2_CARD_BURNING_BLADE.description": "Deal {Damage:diff()} damage.\nSpend {Kela:secondaryResourceIcons()} to give ALL your [gold]Burning Blades[/gold] [gold]Replay[/gold] 1.",
   "LEX_NINJA2_CARD_BURNING_BLADE.title": "Burning Blade",
 
   "LEX_NINJA2_CARD_OI_SHENG_LONG.description": "Deal {Damage:diff()} damage.\nGain {Kela:secondaryResourceIcons()}.",
