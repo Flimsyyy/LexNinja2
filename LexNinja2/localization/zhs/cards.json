@@ -15,7 +15,7 @@
   "LEX_NINJA2_CARD_SHAKE_SHAKE_HANDS.description": "给予自身和所有敌人{WeakPower}层[gold]虚弱[/gold]。\n获得{Kela:secondaryResourceIcons()}。",
   "LEX_NINJA2_CARD_SHAKE_SHAKE_HANDS.title": "握握手，握握双手",
 
-  "LEX_NINJA2_CARD_BURNING_BLADE.description": "造成{Damage:diff()}点伤害。\n花费{lexKelaIcon:secondaryResourceIcons(1)}，使你的所有[gold]一刀一刀燃烧刀[/gold]获得[gold]重放[/gold]1。",
+  "LEX_NINJA2_CARD_BURNING_BLADE.description": "造成{Damage:diff()}点伤害。\n花费{Kela:secondaryResourceIcons()}，使你的所有[gold]一刀一刀燃烧刀[/gold]获得[gold]重放[/gold]1。",
   "LEX_NINJA2_CARD_BURNING_BLADE.title": "一刀一刀燃烧刀",
 
   "LEX_NINJA2_CARD_OI_SHENG_LONG.description": "造成{Damage:diff()}点伤害。\n获得{Kela:secondaryResourceIcons()}。",
