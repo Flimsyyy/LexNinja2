@@ -1,9 +1,12 @@
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using SmartFormat.Core.Extensions;
 using STS2RitsuLib.Cards.FreePlay;
 using STS2RitsuLib.Combat.SecondaryResources;
@@ -14,13 +17,18 @@ namespace LexNinja2.LexNinja2Code.Api.SmartFormatters;
 [RegisterSmartFormatter]
 public class RenShuFormatter : IFormatter
 {
+    private static readonly FieldInfo OwnerField = typeof(DynamicVar).GetField(
+        "_owner",
+        BindingFlags.NonPublic | BindingFlags.Instance
+    )!;
+
     public bool TryEvaluateFormat(IFormattingInfo formattingInfo)
     {
         if (formattingInfo.CurrentValue is not NinjutsuVar renShu)
         {
             return false;
         }
-        var owner = renShu._owner;
+        var owner = GetOwner(renShu);
         if (owner is not NinjutsuCard card)
         {
             return false;
@@ -84,4 +92,7 @@ public class RenShuFormatter : IFormatter
 
         return sb.ToString();
     }
+
+    public static AbstractModel? GetOwner(DynamicVar instance) =>
+        OwnerField.GetValue(instance) as AbstractModel;
 }
