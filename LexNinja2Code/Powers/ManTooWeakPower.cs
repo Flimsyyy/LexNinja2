@@ -27,10 +27,7 @@ public class ManTooWeakPower : LexNinja2Power
     {
         if (side != Owner.Side || Owner.Player == null)
             return;
-        if (!await LexKela.Spend(Owner.Player, Amount, null, this))
-        {
-            return;
-        }
+        await LexKela.Lose(Owner.Player, Amount, this);
         Flash();
         NinjaAudio.Play("res://LexNinja2/audio/ManTooWeak.mp3");
     }
