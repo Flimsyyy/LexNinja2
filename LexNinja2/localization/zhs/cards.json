@@ -69,7 +69,7 @@
   "LEX_NINJA2_CARD_ANGRY_SNAKE_BITE.description": "将一张此牌的复制品加入弃牌堆。\n[gold]忍术[/gold]{RenShu:renShu()}：给予{PoisonPower:diff()}层[gold]中毒[/gold]。",
   "LEX_NINJA2_CARD_ANGRY_SNAKE_BITE.title": "豪蛇怒咬",
 
-  "LEX_NINJA2_CARD_GAMMA_BLADE.description": "对所有敌人造成{Damage:diff()}点伤害。\n给予所有敌人{VulnerablePower:diff()}层[gold]易伤[/gold]。\n给予所有敌人{WeakPower:diff()}层[gold]虚弱[/gold]。",
+  "LEX_NINJA2_CARD_GAMMA_BLADE.description": "对所有敌人造成{Damage:diff()}点伤害。\n给予所有敌人{WeakPower:diff()}层[gold]虚弱[/gold]。\n给予所有敌人{VulnerablePower:diff()}层[gold]易伤[/gold]。",
   "LEX_NINJA2_CARD_GAMMA_BLADE.title": "伽马伽马刀",
 
   "LEX_NINJA2_CARD_MONK_HAND.description": "造成你当前格挡值的伤害。\n[gold]忍术[/gold]{RenShu:renShu()}：先获得{Block:diff()}点[gold]格挡[/gold]。{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}",
@@ -281,7 +281,7 @@
   "LEX_NINJA2_CARD_SPICY_CHICKEN.title": "辣翅",
 
   "LEX_NINJA2_CARD_SALTY_FISH.selectionScreenPrompt": "选择一张牌放入你的手牌。",
-  "LEX_NINJA2_CARD_SALTY_FISH.description": "将你[gold]弃牌堆[/gold]中的一张牌放入你的[gold]手牌[/gold]。这张牌在本回合内耗能降为0{energyPrefix:energyIcons(1)}。",
+  "LEX_NINJA2_CARD_SALTY_FISH.description": "将你[gold]弃牌堆[/gold]中的一张牌放入你的[gold]手牌[/gold]。这张牌在本回合内可以免费打出。",
   "LEX_NINJA2_CARD_SALTY_FISH.title": "咸鱼回转",
 
   "LEX_NINJA2_CARD_GOD_AND_BUDDHA.description": "随机获得一张忍者特有食物。",
