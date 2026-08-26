@@ -19,8 +19,7 @@ namespace LexNinja2.LexNinja2Code.Powers;
 public class GoodNightPower : LexNinja2Power
 {
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Counter;
-    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
+    public override PowerStackType StackType => PowerStackType.Single;
     private int flag = 0;
 
     public override string CustomIconPath => "GoodNightPower32.png".PowerImagePath();

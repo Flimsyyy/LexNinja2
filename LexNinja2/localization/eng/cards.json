@@ -144,7 +144,7 @@
   "LEX_NINJA2_CARD_BLACK_DRAGON_HAND.description": "Apply {WeakPower:diff()} [gold]Weak[/gold], remove [gold]Intangible[/gold] from target.\n[gold]Ninjutsu[/gold] {RenShu:renShu()}: Steal {HpLoss:diff()} Max HP from target.",
   "LEX_NINJA2_CARD_BLACK_DRAGON_HAND.title": "Dementor Hand",
 
-  "LEX_NINJA2_CARD_GOOD_NIGHT.description": "Gain {Kela:secondaryResourceIcons()}.\nEnd your turn.\nAt the start of your next turn, heal 30% of your Max HP, but you cannot play cards.",
+  "LEX_NINJA2_CARD_GOOD_NIGHT.description": "Gain {Kela:secondaryResourceIcons()}.\nEnd your turn.\nNext turn, you [gold]rest[/gold] for one turn and cannot play any cards. (Affected by relics) {InCombat:\n(Recover [blue]{HealAmount}[/blue] HP, etc.)|}",
   "LEX_NINJA2_CARD_GOOD_NIGHT.title": "Zzz",
 
   "LEX_NINJA2_CARD_SNAKE_SWITCH.description": "[gold]Transform[/gold] {Cards:diff()} cards in your [gold]hand[/gold] into [gold]{IfUpgraded:show:Angry Snake Bite+|Angry Snake Bite}[/gold].\nDraw {Cards:diff()} cards.",

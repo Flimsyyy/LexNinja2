@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -49,6 +50,12 @@ public class PowerJesus() : LexNinja2Card(3, CardType.Skill, CardRarity.Rare, Ta
                     Owner.Creature,
                     this
                 );
+                continue;
+            }
+
+            if (buff is BecomeNongPower becomeNongPower)
+            {
+                await becomeNongPower.Apply(choiceContext, becomeNongPower.Amount, this);
                 continue;
             }
             if (buff.ClonePreservingMutability() is not PowerModel buffClone)
