@@ -314,7 +314,7 @@
   "LEX_NINJA2_CARD_HAMOOD_KILL_ALL.description": "At the end of your turn, if this card is in your [gold]hand[/gold], ALL players and enemies take {Damage:diff()} damage.\nAdd a '9' at the end of the damage number for each player.",
   "LEX_NINJA2_CARD_HAMOOD_KILL_ALL.title": "Hamoodgeddon",
 
-  "LEX_NINJA2_CARD_MOSQUITO_HAND.description": "Makes a mosquito noise when played.",
+  "LEX_NINJA2_CARD_MOSQUITO_HAND.description": "If this is not in your [gold]Exhaust Pile[/gold], Any card you play makes a mosquito noise.",
   "LEX_NINJA2_CARD_MOSQUITO_HAND.title": "Mosquito Hand",
 
   "LEX_NINJA2_CARD_TRUE_LEECH_FRIEND.description": "This turn, drain {Leech:diff()} [gold]Strength[/gold] from an ally who played fewer cards than you this turn.",
