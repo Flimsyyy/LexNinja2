@@ -1,8 +1,4 @@
 {
-  "LEX_NINJA2_POWER_LEXKELA.description": "Special energy required to activate [gold]Ninjutsu[/gold]. If you don't spend any [gold]Lexkra[/gold] this turn, gain 1 at the end of your turn.",
-  "LEX_NINJA2_POWER_LEXKELA.smartDescription": "You have [blue]{Amount}[/blue] [gold]Lexkra[/gold] for activating Ninjutsu. If you don't spend any [gold]Lexkra[/gold] this turn, gain [blue]1[/blue] at the end of your turn.",
-  "LEX_NINJA2_POWER_LEXKELA.title": "Lexkra",
-  
   "LEX_NINJA2_POWER_SAND_WALL.description": "At the start of your turn, gain [gold]Block[/gold] equal to your Sand Wall, then halve your Sand Wall.",
   "LEX_NINJA2_POWER_SAND_WALL.smartDescription": "At the start of your turn, gain [blue]{Amount}[/blue] [gold]Block[/gold], then halve your Sand Wall.",
   "LEX_NINJA2_POWER_SAND_WALL.title": "Sand Wall",
@@ -12,7 +8,7 @@
   "LEX_NINJA2_POWER_STONE_STRONG_POWER.title": "Like a Rock",
 
   "LEX_NINJA2_POWER_NUCLEAR_DRAGON_POWER.description": "At the end of your turn, remove all [gold]Lexkra[/gold]. At the start of your turn, gain [gold]Lexkra[/gold].",
-  "LEX_NINJA2_POWER_NUCLEAR_DRAGON_POWER.smartDescription": "At the end of your turn, remove all [gold]Lexkra[/gold]. At the start of your turn, gain [blue]{Amount}[/blue] [gold]Lexkra[/gold].",
+  "LEX_NINJA2_POWER_NUCLEAR_DRAGON_POWER.smartDescription": "At the end of your turn, remove all {lexKelaIcon:secondaryResourceIcons(1)}. At the start of your turn, gain [blue]{Amount}[/blue] {lexKelaIcon:secondaryResourceIcons(1)}.",
   "LEX_NINJA2_POWER_NUCLEAR_DRAGON_POWER.title": "Nucleon Dragon",
 
   "LEX_NINJA2_POWER_PAIN.description": "It's so painful, so painful.",
@@ -24,7 +20,7 @@
   "LEX_NINJA2_POWER_WE_PEACE_POWER.title": "Ceasefire",
 
   "LEX_NINJA2_POWER_SHIT_POWER.description": "So disgusting... Next turn, gain [gold]Lexkra[/gold] and [gold]Energy[/gold].",
-  "LEX_NINJA2_POWER_SHIT_POWER.smartDescription": "So disgusting... Next turn, gain [blue]{Amount}[/blue] [gold]Lexkra[/gold] and [gold]Energy[/gold].",
+  "LEX_NINJA2_POWER_SHIT_POWER.smartDescription": "So disgusting... Next turn, gain [blue]{Amount}[/blue] {lexKelaIcon:secondaryResourceIcons(1)} and [blue]{Energy}[/blue] {energyPrefix:energyIcons(1)}.",
   "LEX_NINJA2_POWER_SHIT_POWER.title": "Feces",
 
   "LEX_NINJA2_POWER_DAMAGE_NEXT_TURN_POWER.description": "Next turn, deal damage to ALL enemies.",
@@ -32,7 +28,7 @@
   "LEX_NINJA2_POWER_DAMAGE_NEXT_TURN_POWER.title": "Next Turn Damage",
 
   "LEX_NINJA2_POWER_HEAVEN_CROSS_POWER.description": "Whenever you play a [gold]Ninjutsu[/gold] card, gain [gold]Lexkra[/gold].",
-  "LEX_NINJA2_POWER_HEAVEN_CROSS_POWER.smartDescription": "Whenever you play a [gold]Ninjutsu[/gold] card, gain [blue]{Amount}[/blue] [gold]Lexkra[/gold].",
+  "LEX_NINJA2_POWER_HEAVEN_CROSS_POWER.smartDescription": "Whenever you play a [gold]Ninjutsu[/gold] card, gain [blue]{Amount}[/blue] {lexKelaIcon:secondaryResourceIcons(1)}.",
   "LEX_NINJA2_POWER_HEAVEN_CROSS_POWER.title": "Heaven Cross",
 
   "LEX_NINJA2_POWER_INFINITE_SNAKE_BITES_POWER.description": "At the start of your turn, add a [gold]Angry Snake Bite+[/gold] to your [gold]Hand[/gold].",
@@ -44,7 +40,7 @@
   "LEX_NINJA2_POWER_BLADE_POWER_UP.title": "Sharpened",
 
   "LEX_NINJA2_POWER_MUMMY_POWER.description": "Whenever you spend [gold]Lexkra[/gold], gain [gold]Block[/gold].",
-  "LEX_NINJA2_POWER_MUMMY_POWER.smartDescription": "Whenever you spend [gold]Lexkra[/gold], gain [blue]{Amount}[/blue] [gold]Block[/gold].",
+  "LEX_NINJA2_POWER_MUMMY_POWER.smartDescription": "Whenever you spend {lexKelaIcon:secondaryResourceIcons(1)}, gain [blue]{Amount}[/blue] [gold]Block[/gold].",
   "LEX_NINJA2_POWER_MUMMY_POWER.title": "Mummified",
 
   "LEX_NINJA2_POWER_RADIATION.description": "At the end of your turn, lose [red]25%[/red] Max HP.",
@@ -52,7 +48,7 @@
   "LEX_NINJA2_POWER_RADIATION.title": "Fallout",
 
   "LEX_NINJA2_POWER_FREE_NINJUTSU_POWER.description": "Your next [gold]Ninjutsu[/gold] costs no [gold]Lexkra[/gold].",
-  "LEX_NINJA2_POWER_FREE_NINJUTSU_POWER.smartDescription": "Your next [gold]Ninjutsu[/gold] costs no [gold]Lexkra[/gold].",
+  "LEX_NINJA2_POWER_FREE_NINJUTSU_POWER.smartDescription": "Your next [gold]Ninjutsu[/gold] costs no {lexKelaIcon:secondaryResourceIcons(1)}.",
   "LEX_NINJA2_POWER_FREE_NINJUTSU_POWER.title": "Free Ninjutsu",
 
   "LEX_NINJA2_POWER_BECOME_NONG_POWER.selectionScreenPrompt": "Choose a card to add a copy of it to your deck.",
@@ -60,12 +56,12 @@
   "LEX_NINJA2_POWER_BECOME_NONG_POWER.smartDescription": "[gold]{Card}[/gold] - grab more good cards. At the end of combat, add [blue]{Amount}[/blue] {Amount:plural:cpoy|copies} to your [gold]deck[/gold].",
   "LEX_NINJA2_POWER_BECOME_NONG_POWER.title": "Mr. Bing Bong",
 
-  "LEX_NINJA2_POWER_DISAPPOINTED_POWER.description": "After playing an Attack, gain [gold]Weak[/gold].",
-  "LEX_NINJA2_POWER_DISAPPOINTED_POWER.smartDescription": "After playing an Attack, gain [gold]Weak[/gold].",
-  "LEX_NINJA2_POWER_DISAPPOINTED_POWER.title": "Disappointed",
+  "LEX_NINJA2_POWER_DISAPPOINTED_POWER.description": "The next Attack you play deals triple damage, After playing the Attack, gain [gold]Weak[/gold].",
+  "LEX_NINJA2_POWER_DISAPPOINTED_POWER.smartDescription": "The next {Amount:plural:Attack you play deals|[blue]{}[/blue] Attacks you play deal} triple damage, After playing the Attack, gain [gold]Weak[/gold].",
+  "LEX_NINJA2_POWER_DISAPPOINTED_POWER.title": "Bocchi not Rock",
 
-  "LEX_NINJA2_POWER_GOOD_NIGHT_POWER.description": "At the start of your turn, recover HP, and you cannot play cards.",
-  "LEX_NINJA2_POWER_GOOD_NIGHT_POWER.smartDescription": "At the start of your turn, recover [blue]{Amount}[/blue] HP, and you cannot play cards.",
+  "LEX_NINJA2_POWER_GOOD_NIGHT_POWER.description": "You [gold]rest[/gold] for one turn and cannot play any cards.",
+  "LEX_NINJA2_POWER_GOOD_NIGHT_POWER.smartDescription": "You [gold]rest[/gold] for one turn and cannot play any cards.",
   "LEX_NINJA2_POWER_GOOD_NIGHT_POWER.title": "Zzz",
   
   "LEX_NINJA2_POWER_WILD_SNAKE_GOD_POWER.description": "Whenever you play a card, randomize the cost of all cards in your [gold]Hand[/gold] [blue]1[/blue] time.",
@@ -81,7 +77,7 @@
   "LEX_NINJA2_POWER_TURBINE_POWER.title": "Turbo",
 
   "LEX_NINJA2_POWER_MAN_TOO_WEAK_POWER.description": "At the start of your turn, lose [gold]Lexkra[/gold].",
-  "LEX_NINJA2_POWER_MAN_TOO_WEAK_POWER.smartDescription": "At the start of your turn, lose [blue]{Amount}[/blue] [gold]Lexkra[/gold].",
+  "LEX_NINJA2_POWER_MAN_TOO_WEAK_POWER.smartDescription": "At the start of your turn, lose [blue]{Amount}[/blue] {lexKelaIcon:secondaryResourceIcons(1)}.",
   "LEX_NINJA2_POWER_MAN_TOO_WEAK_POWER.title": "Perfect Body",
 
   "LEX_NINJA2_POWER_BUILD_SAND_WALL_POWER.description": "Your [gold]Sand Wall[/gold] only reduces by [blue]1[/blue] each time.",
@@ -89,7 +85,7 @@
   "LEX_NINJA2_POWER_BUILD_SAND_WALL_POWER.title": "Lithification",
   
   "LEX_NINJA2_POWER_SHEN_WEI_POWER.description": "At the start of your turn, spend [gold]Lexkra[/gold] to gain [gold]Intangible[/gold].\nWhenever you play an [gold]Attack[/gold] card, lose 1 [gold]Intangible[/gold].",
-  "LEX_NINJA2_POWER_SHEN_WEI_POWER.smartDescription": "At the start of your turn, spend [gold]Lexkra[/gold] to gain [blue]{Amount}[/blue] [gold]Intangible[/gold].\nWhenever you play an [gold]Attack[/gold] card, lose [blue]1[/blue] [gold]Intangible[/gold].",
+  "LEX_NINJA2_POWER_SHEN_WEI_POWER.smartDescription": "At the start of your turn, spend {lexKelaIcon:secondaryResourceIcons(1)} to gain [blue]{Amount}[/blue] [gold]Intangible[/gold].\nWhenever you play an [gold]Attack[/gold] card, lose [blue]1[/blue] [gold]Intangible[/gold].",
   "LEX_NINJA2_POWER_SHEN_WEI_POWER.title": "Kamui",
 
   "LEX_NINJA2_POWER_REAPER_FLAME.description": "Whenever you play a card, ALL enemies lose [blue]2[/blue] HP.",
@@ -97,7 +93,7 @@
   "LEX_NINJA2_POWER_REAPER_FLAME.title": "Ryujin Jakka",
 
   "LEX_NINJA2_POWER_I_REPRESENT_SHINOBI_POWER.description": "{IfChallengeMode:cond:The first time each turn you |}lose [gold]Lexkra[/gold], gain [gold]Energy[/gold].",
-  "LEX_NINJA2_POWER_I_REPRESENT_SHINOBI_POWER.smartDescription": "{IfChallengeMode:cond:The first time each turn you |}lose [gold]Lexkra[/gold], gain [blue]{Amount}[/blue] [gold]Energy[/gold].",
+  "LEX_NINJA2_POWER_I_REPRESENT_SHINOBI_POWER.smartDescription": "{IfChallengeMode:cond:The first time each turn you |}lose {lexKelaIcon:secondaryResourceIcons(1)}, gain [blue]{Amount}[/blue] [gold]Energy[/gold].",
   "LEX_NINJA2_POWER_I_REPRESENT_SHINOBI_POWER.title": "I am SHINOBI",
 
   "LEX_NINJA2_POWER_DOUBLE_DAMAGE_POWER.description": "Your next Attack deals double damage.",
@@ -117,11 +113,11 @@
   "LEX_NINJA2_POWER_TWO_MONKS_POWER.title": "Arhat Clone",
 
   "LEX_NINJA2_POWER_GET_ALL_HANDS_POWER.description": "Whenever you play a [gold]Handjutsu[/gold] card, draw 1 card and gain 1 [gold]Energy[/gold].",
-  "LEX_NINJA2_POWER_GET_ALL_HANDS_POWER.smartDescription": "Whenever you play a [gold]Handjutsu[/gold] card, draw 1 card and gain 1 [gold]Energy[/gold].",
+  "LEX_NINJA2_POWER_GET_ALL_HANDS_POWER.smartDescription": "Whenever you play a [gold]Handjutsu[/gold] card, draw 1 card and gain 1 {energyPrefix:energyIcons(1)}.",
   "LEX_NINJA2_POWER_GET_ALL_HANDS_POWER.title": "Omnihand",
 
   "LEX_NINJA2_POWER_BLADE_DEFENCE_POWER.description": "Whenever you attack, gain [gold]Block[/gold]. Whenever you block an attack, gain [blue]1[/blue] [gold]Lexkra[/gold].",
-  "LEX_NINJA2_POWER_BLADE_DEFENCE_POWER.smartDescription": "Whenever you attack, gain [blue]{Amount}[/blue] [gold]Block[/gold]. Whenever you block an attack, gain [blue]{Kela}[/blue] [gold]Lexkra[/gold].",
+  "LEX_NINJA2_POWER_BLADE_DEFENCE_POWER.smartDescription": "Whenever you attack, gain [blue]{Amount}[/blue] [gold]Block[/gold]. Whenever you block an attack, gain [blue]{Kela}[/blue] {lexKelaIcon:secondaryResourceIcons(1)}.",
   "LEX_NINJA2_POWER_BLADE_DEFENCE_POWER.title": "Blade Guard",
   
   "LEX_NINJA2_POWER_PLASMA_ARROW_POWER.description": "Your next [blue]{Amount}[/blue] [gold]Ninjutsu[/gold] are free.",
@@ -129,12 +125,11 @@
   "LEX_NINJA2_POWER_PLASMA_ARROW_POWER.title": "Plasma Arrow",
 
   "LEX_NINJA2_POWER_INFERNO_DRAGON_POWER.description": "[gold]Lexkra[/gold] makes you deal extra damage.",
-  "LEX_NINJA2_POWER_INFERNO_DRAGON_POWER.smartDescription": "Each [gold]Lexkra[/gold] makes you deal [blue]{Amount}%[/blue] more damage.\nTotal extra damage: [red]{dian}%[/red].",
+  "LEX_NINJA2_POWER_INFERNO_DRAGON_POWER.smartDescription": "Each {lexKelaIcon:secondaryResourceIcons(1)} makes you deal [blue]{Amount}%[/blue] more damage.\nTotal extra damage: [red]{dian}%[/red].",
   "LEX_NINJA2_POWER_INFERNO_DRAGON_POWER.title": "Inferno Dragon",
 
   "LEX_NINJA2_POWER_SEAL_POWER.description": "At the end of turn, gain [blue]50[/blue] [gold]Block[/gold] and become [gold]Stunned[/gold]. Removed upon taking unblocked damage.",
   "LEX_NINJA2_POWER_SEAL_POWER.smartDescription": "For [blue]{Amount}[/blue] {Amount:plural:turn|turns}, at the end of turn, gain [blue]50[/blue] [gold]Block[/gold] and become [gold]Stunned[/gold]. Removed upon taking unblocked damage.",
-
   "LEX_NINJA2_POWER_SEAL_POWER.title": "Southern Cross",
 
   "LEX_NINJA2_POWER_BLACK_SNAKE_HEART_POWER.description": "Whenever you play a card with the same name as the last card played, [gold]Exhaust[/gold] it and gain 1 [gold]Intangible[/gold].",
@@ -153,7 +148,7 @@
   "LEX_NINJA2_POWER_ALAN_WALKER_POWER.smartDescription": "Whenever you play a card, deal [blue]6[/blue] damage to ALL enemies and gain [blue]7[/blue] [gold]Block[/gold].",
   "LEX_NINJA2_POWER_ALAN_WALKER_POWER.title": "Alan Walker",
 
-  "LEX_NINJA2_POWER_NO_LEXKELA_POWER.description": "Cannot gain Lexkra for [blue]1[/blue] turn.",
-  "LEX_NINJA2_POWER_NO_LEXKELA_POWER.smartDescription": "Cannot gain Lexkra for [blue]{Amount}[/blue] {Amount:plural:turn|turns}.",
+  "LEX_NINJA2_POWER_NO_LEXKELA_POWER.description": "Cannot gain [gold]Lexkra[/gold] for [blue]1[/blue] turn.",
+  "LEX_NINJA2_POWER_NO_LEXKELA_POWER.smartDescription": "Cannot gain {lexKelaIcon:secondaryResourceIcons(1)} for [blue]{Amount}[/blue] {Amount:plural:turn|turns}.",
   "LEX_NINJA2_POWER_NO_LEXKELA_POWER.title": "Cannot Gain Lexkra"
 }

@@ -17,7 +17,7 @@ public class DisappointedAfterBocchi()
     : LexNinja2Card(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new PowerVar<GigantificationPower>(1), new PowerVar<DisappointedPower>(1)];
+        [new PowerVar<DisappointedPower>(1)];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         [HoverTipFactory.FromPower<WeakPower>()];
@@ -25,7 +25,6 @@ public class DisappointedAfterBocchi()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         NinjaAudio.Play("res://LexNinja2/audio/DisappointedAfterBocchi.mp3");
-        await CommonActions.ApplySelf<GigantificationPower>(choiceContext, this);
         await CommonActions.ApplySelf<DisappointedPower>(choiceContext, this);
     }
 
