@@ -144,7 +144,7 @@
   "LEX_NINJA2_CARD_BLACK_DRAGON_HAND.description": "Apply {WeakPower:diff()} [gold]Weak[/gold], remove [gold]Intangible[/gold] from target.\n[gold]Ninjutsu[/gold] {RenShu:renShu()}: Steal {HpLoss:diff()} Max HP from target.",
   "LEX_NINJA2_CARD_BLACK_DRAGON_HAND.title": "Dementor Hand",
 
-  "LEX_NINJA2_CARD_GOOD_NIGHT.description": "Gain {Kela:secondaryResourceIcons()}.\nEnd your turn.\nAt the start of your next turn, heal 30% of your Max HP, but you cannot play cards.",
+  "LEX_NINJA2_CARD_GOOD_NIGHT.description": "Gain {Kela:secondaryResourceIcons()}.\nEnd your turn.\nNext turn, you [gold]rest[/gold] for one turn and cannot play any cards. (Affected by relics) {InCombat:\n(Recover [blue]{HealAmount}[/blue] HP, etc.)|}",
   "LEX_NINJA2_CARD_GOOD_NIGHT.title": "Zzz",
 
   "LEX_NINJA2_CARD_SNAKE_SWITCH.description": "[gold]Transform[/gold] {Cards:diff()} cards in your [gold]hand[/gold] into [gold]{IfUpgraded:show:Angry Snake Bite+|Angry Snake Bite}[/gold].\nDraw {Cards:diff()} cards.",
@@ -314,7 +314,7 @@
   "LEX_NINJA2_CARD_HAMOOD_KILL_ALL.description": "At the end of your turn, if this card is in your [gold]hand[/gold], ALL players and enemies take {Damage:diff()} damage.\nAdd a '9' at the end of the damage number for each player.",
   "LEX_NINJA2_CARD_HAMOOD_KILL_ALL.title": "Hamoodgeddon",
 
-  "LEX_NINJA2_CARD_MOSQUITO_HAND.description": "Makes a mosquito noise when played.",
+  "LEX_NINJA2_CARD_MOSQUITO_HAND.description": "If this is not in your [gold]Exhaust Pile[/gold], Any card you play makes a mosquito noise.",
   "LEX_NINJA2_CARD_MOSQUITO_HAND.title": "Mosquito Hand",
 
   "LEX_NINJA2_CARD_TRUE_LEECH_FRIEND.description": "This turn, drain {Leech:diff()} [gold]Strength[/gold] from an ally who played fewer cards than you this turn.",

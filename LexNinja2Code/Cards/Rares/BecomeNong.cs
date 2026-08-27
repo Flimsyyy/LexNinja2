@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using BaseLib.Extensions;
 using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
@@ -41,8 +42,13 @@ public class BecomeNong() : LexNinja2Card(1, CardType.Power, CardRarity.Rare, Ta
         {
             return;
         }
-        var power = await CommonActions.ApplySelf<BecomeNongPower>(choiceContext, this);
-        power?.SetSelectedCard(card);
+        await BecomeNongPower.Apply(
+            choiceContext,
+            Owner,
+            DynamicVars.Power<BecomeNongPower>().BaseValue,
+            card,
+            this
+        );
     }
 
     protected override void OnUpgrade()
