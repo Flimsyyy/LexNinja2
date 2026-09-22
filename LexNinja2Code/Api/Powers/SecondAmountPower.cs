@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BaseLib.Abstracts;
-using BaseLib.Extensions;
 using LexNinja2.LexNinja2Code.Api.Interface;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -24,7 +23,7 @@ public abstract class SecondAmountPower : ModPowerTemplate, IHasSecondAmount
     protected void UpgradeVar(DynamicVar v, decimal addend)
     {
         NinjaHelper.UpgradeDynamicVarValue(v, addend);
-        this.InvokeSecondAmountChanged();
+        InvokeDisplayAmountChanged();
     }
 
     protected void ApplyProportionalUpgrade(decimal ratio)
@@ -34,7 +33,7 @@ public abstract class SecondAmountPower : ModPowerTemplate, IHasSecondAmount
             var v = DynamicVars[key];
             NinjaHelper.UpgradeDynamicVarValue(v, ratio * v.IntValue);
         }
-        this.InvokeSecondAmountChanged();
+        InvokeDisplayAmountChanged();
     }
 
     public override Task AfterPowerAmountChanged(
