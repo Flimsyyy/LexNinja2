@@ -19,22 +19,34 @@ public class HamoodKillAll()
     : LexNinja2BaseCard(1, CardType.Curse, CardRarity.Curse, TargetType.None)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(999, ValueProp.Unpowered)];
+        [
+            new CalculationBaseVar(0),
+            new ExtraDamageVar(1),
+            new CalculatedDamageVar(ValueProp.Unpowered).WithMultiplier(
+                (card, _) =>
+                {
+                    var baseDamage = 999;
+                    if (card.Owner.Creature.CombatState == null)
+                        return baseDamage;
+                    for (var i = 1; i < card.Owner.Creature.CombatState.RunState.Players.Count; i++)
+                    {
+                        baseDamage *= 10;
+                        baseDamage += 9;
+                    }
+                    return baseDamage;
+                }
+            ),
+        ];
     public override int MaxUpgradeLevel => 0;
 
     protected override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
     {
-        for (var i = 1; i < Owner.Creature.CombatState!.RunState.Players.Count; i++)
-        {
-            DynamicVars.Damage.BaseValue *= 10;
-            DynamicVars.Damage.BaseValue += 9;
-        }
-
         NinjaAudio.Play("res://LexNinja2/audio/KillAll.mp3");
         await CreatureCmd.Damage(
             choiceContext,
-            Owner.Creature.CombatState.Creatures.Where(c => !c.IsPet),
-            DynamicVars.Damage,
+            Owner.Creature.CombatState!.Creatures.Where(c => !c.IsPet),
+            DynamicVars.CalculatedDamage.Calculate(null),
+            DynamicVars.CalculatedDamage.Props,
             Owner.Creature // need not null
         );
         NinjaAudio.Play("res://LexNinja2/audio/Kill!@#A%ll.mp3");

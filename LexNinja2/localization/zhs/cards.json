@@ -311,7 +311,7 @@
   "LEX_NINJA2_CARD_I_SEE_YOU.description": "击败{boss:diff()}个Boss敌人后发生变化。\n在你的回合结束时，如果这张牌在你的[gold]手牌[/gold]中，则获得{Frail:diff()}层[gold]脆弱[/gold]。",
   "LEX_NINJA2_CARD_I_SEE_YOU.title": "I See You",
 
-  "LEX_NINJA2_CARD_HAMOOD_KILL_ALL.description": "在你的回合结束时，如果这张牌在你的[gold]手牌[/gold]中, 所有玩家和敌人受到{Damage:diff()}点伤害。\n每有一个玩家，伤害数字多一个9。",
+  "LEX_NINJA2_CARD_HAMOOD_KILL_ALL.description": "在你的回合结束时，如果这张牌在你的[gold]手牌[/gold]中, 所有玩家和敌人受到{CalculatedDamage:diff()}点伤害。\n每有一个玩家，伤害数字多一个9。",
   "LEX_NINJA2_CARD_HAMOOD_KILL_ALL.title": "哈姆杀所有",
 
   "LEX_NINJA2_CARD_MOSQUITO_HAND.description": "如果这张牌不在[gold]消耗牌堆[/gold]中，出牌时会有蚊子叫。",

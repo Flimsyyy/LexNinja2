@@ -311,7 +311,7 @@
   "LEX_NINJA2_CARD_I_SEE_YOU.description": "Transforms after defeating {boss:diff()} Boss enemies.\nAt the end of your turn, if this card is in your [gold]Hand[/gold], gain {Frail:diff()} [gold]Frail[/gold].",
   "LEX_NINJA2_CARD_I_SEE_YOU.title": "I See You",
 
-  "LEX_NINJA2_CARD_HAMOOD_KILL_ALL.description": "At the end of your turn, if this card is in your [gold]hand[/gold], ALL players and enemies take {Damage:diff()} damage.\nAdd a '9' at the end of the damage number for each player.",
+  "LEX_NINJA2_CARD_HAMOOD_KILL_ALL.description": "At the end of your turn, if this card is in your [gold]hand[/gold], ALL players and enemies take {CalculatedDamage:diff()} damage.\nAdd a '9' at the end of the damage number for each player.",
   "LEX_NINJA2_CARD_HAMOOD_KILL_ALL.title": "Hamoodgeddon",
 
   "LEX_NINJA2_CARD_MOSQUITO_HAND.description": "If this is not in your [gold]Exhaust Pile[/gold], Any card you play makes a mosquito noise.",
