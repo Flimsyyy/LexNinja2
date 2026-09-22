@@ -5,6 +5,8 @@ using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Interface;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using LexNinja2.LexNinja2Code.Cards.Tokens;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -17,7 +19,8 @@ using MegaCrit.Sts2.Core.Models;
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
 public class LanBladeCutting()
-    : LexNinja2NinjutsuCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+    : LexNinja2NinjutsuCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self),
+        ISecondAmountPowerUpgradeProvider
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new NinjutsuVar(1), new PowerVar<LanBladePower>(1)];
@@ -40,6 +43,21 @@ public class LanBladeCutting()
             CardCmd.Upgrade(card);
         }
         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
+    }
+
+    public bool TryUpgradeSecondAmount(SecondAmountPower power)
+    {
+        if (power is not LanBladePower lanBladePower)
+            return false;
+        if (IsUpgraded)
+        {
+            lanBladePower.UpgradeUpgradedLanBladeValue(1);
+        }
+        else
+        {
+            lanBladePower.UpgradeBaseLanBladeValue(1);
+        }
+        return true;
     }
 
     public override string CustomPortraitPath => $"LanBladeCutting_p.png".BigCardImagePath();
