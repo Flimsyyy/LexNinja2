@@ -1,9 +1,9 @@
 {
-  "LEX_NINJA2_RELIC_LOTUS_BOX.description": "进入战斗时，你获得[blue]2[/blue]点[gold]蕾克拉[/gold]。",
+  "LEX_NINJA2_RELIC_LOTUS_BOX.description": "进入战斗时，你获得{Kela:secondaryResourceIcons()}。",
   "LEX_NINJA2_RELIC_LOTUS_BOX.flavor": "依旧实际JRPG特有的战斗结束就会补满的神奇食品。",
   "LEX_NINJA2_RELIC_LOTUS_BOX.title": "藕盒",
 
-  "LEX_NINJA2_RELIC_XIANG_PIAO_PIAO.description": "回合开始时，获得[blue]2[/blue]点[gold]蕾克拉[/gold]。",
+  "LEX_NINJA2_RELIC_XIANG_PIAO_PIAO.description": "回合开始时，获得{Kela:secondaryResourceIcons()}。",
   "LEX_NINJA2_RELIC_XIANG_PIAO_PIAO.flavor": "忍者之间流行的饮品，不知是某种秘方还是约定俗成的习惯",
   "LEX_NINJA2_RELIC_XIANG_PIAO_PIAO.title": "香飘飘热饮",
 
@@ -11,7 +11,7 @@
   "LEX_NINJA2_RELIC_KFC.flavor": "流行于Mortal之间的快餐品牌，适应忍者的口味推出了许多新品。",
   "LEX_NINJA2_RELIC_KFC.title": "肯德基",
 
-  "LEX_NINJA2_RELIC_DIM_DEAD_TREE.description": "回合开始时，下一次释放[gold]忍术[/gold]不消耗[gold]蕾克拉[/gold]。",
+  "LEX_NINJA2_RELIC_DIM_DEAD_TREE.description": "回合开始时，下一次释放[gold]忍术[/gold]不消耗{lexKelaIcon:secondaryResourceIcons(1)}。",
   "LEX_NINJA2_RELIC_DIM_DEAD_TREE.flavor": "传闻，安奈师傅曾于暗寒死树下悟道。",
   "LEX_NINJA2_RELIC_DIM_DEAD_TREE.title": "暗寒死树",
 
