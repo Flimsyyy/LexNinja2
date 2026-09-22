@@ -4,6 +4,8 @@ using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.DynamicVars;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Interface;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -13,7 +15,9 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LexNinja2.LexNinja2Code.Cards.Commons;
 
-public class GonnaEatShit() : LexNinja2Card(0, CardType.Attack, CardRarity.Common, TargetType.Self)
+public class GonnaEatShit()
+    : LexNinja2Card(0, CardType.Attack, CardRarity.Common, TargetType.Self),
+        ISecondAmountPowerUpgradeProvider
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
@@ -49,6 +53,14 @@ public class GonnaEatShit() : LexNinja2Card(0, CardType.Attack, CardRarity.Commo
             Owner.Creature,
             this
         );
+    }
+
+    public bool TryUpgradeSecondAmount(SecondAmountPower power)
+    {
+        if (power is not ShitPower)
+            return false;
+        power.UpgradeSecondAmount(1);
+        return true;
     }
 
     protected override void OnUpgrade()

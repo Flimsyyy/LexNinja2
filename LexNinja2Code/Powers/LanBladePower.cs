@@ -1,15 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using BaseLib.Abstracts;
-using BaseLib.Extensions;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Powers;
 using LexNinja2.LexNinja2Code.Cards.Tokens;
-using LexNinja2.LexNinja2Code.Cards.Uncommons;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -18,7 +14,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
-public class LanBladePower : LexNinja2Power, IHasSecondAmount
+public class LanBladePower : LexNinja2SecondAmountPower
 {
     private const string Base = "LanBlade";
     private const string Upgraded = "LanBladeUpgraded";
@@ -85,39 +81,10 @@ public class LanBladePower : LexNinja2Power, IHasSecondAmount
     public void UpgradeUpgradedLanBladeValue(decimal addend)
     {
         NinjaHelper.UpgradeDynamicVarValue(DynamicVars[Upgraded], addend);
-        this.InvokeSecondAmountChanged();
+        InvokeDisplayAmountChanged();
     }
 
-    public override Task AfterPowerAmountChanged(
-        PlayerChoiceContext choiceContext,
-        PowerModel power,
-        decimal amount,
-        Creature? applier,
-        CardModel? cardSource
-    )
-    {
-        if (power != this)
-        {
-            return Task.CompletedTask;
-        }
-        if (cardSource is LanBladeCutting)
-        {
-            if (cardSource.IsUpgraded)
-            {
-                UpgradeUpgradedLanBladeValue(1);
-            }
-            else
-            {
-                UpgradeBaseLanBladeValue(1);
-            }
-            return Task.CompletedTask;
-        }
-
-        var ratio = amount / (Amount - amount);
-        UpgradeBaseLanBladeValue(ratio * DynamicVars[Base].IntValue);
-        UpgradeUpgradedLanBladeValue(ratio * DynamicVars[Upgraded].IntValue);
-        return Task.CompletedTask;
-    }
+    protected override IReadOnlyList<string> GetDisplayAmountVarKeys() => [Upgraded, Base];
 
     private bool IsTargetCard(CardModel card)
     {
@@ -130,10 +97,5 @@ public class LanBladePower : LexNinja2Power, IHasSecondAmount
     private class Data
     {
         public readonly Dictionary<CardModel, (int, int)> AmountsForPlayedCards = new();
-    }
-
-    public string GetSecondAmount()
-    {
-        return $"{DynamicVars[Upgraded].IntValue}";
     }
 }

@@ -5,6 +5,8 @@ using BaseLib.Utils;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Cards;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Interface;
+using LexNinja2.LexNinja2Code.Api.Powers;
 using LexNinja2.LexNinja2Code.Powers;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -12,7 +14,9 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace LexNinja2.LexNinja2Code.Cards.Uncommons;
 
-public class BladeDefence() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public class BladeDefence()
+    : LexNinja2Card(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self),
+        ISecondAmountPowerUpgradeProvider
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<BladeDefencePower>(2)];
@@ -22,6 +26,14 @@ public class BladeDefence() : LexNinja2Card(0, CardType.Skill, CardRarity.Uncomm
     {
         NinjaAudio.Play("res://LexNinja2/audio/BladeDefence.mp3");
         await CommonActions.ApplySelf<BladeDefencePower>(choiceContext, this);
+    }
+
+    public bool TryUpgradeSecondAmount(SecondAmountPower power)
+    {
+        if (power is not BladeDefencePower)
+            return false;
+        power.UpgradeSecondAmount(1);
+        return true;
     }
 
     protected override void OnUpgrade()
