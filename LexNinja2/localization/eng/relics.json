@@ -1,9 +1,9 @@
 {
-  "LEX_NINJA2_RELIC_LOTUS_BOX.description": "At the start of combat, gain [blue]2[/blue] [gold]Lexkra[/gold].",
+  "LEX_NINJA2_RELIC_LOTUS_BOX.description": "At the start of combat, gain {Kela:secondaryResourceIcons()}.",
   "LEX_NINJA2_RELIC_LOTUS_BOX.flavor": "A magical food that fully replenishes after battle, a classic JRPG trope.",
   "LEX_NINJA2_RELIC_LOTUS_BOX.title": "Lotus Rhizomes",
 
-  "LEX_NINJA2_RELIC_XIANG_PIAO_PIAO.description": "At the start of your turn, gain [blue]2[/blue] [gold]Lexkra[/gold].",
+  "LEX_NINJA2_RELIC_XIANG_PIAO_PIAO.description": "At the start of your turn, gain {Kela:secondaryResourceIcons()}.",
   "LEX_NINJA2_RELIC_XIANG_PIAO_PIAO.flavor": "A popular drink among ninjas; it's unclear if it's a secret recipe or just a tradition.",
   "LEX_NINJA2_RELIC_XIANG_PIAO_PIAO.title": "Xiang Piao Piao Hot Drink",
 
@@ -11,7 +11,7 @@
   "LEX_NINJA2_RELIC_KFC.flavor": "A fast food brand popular among Mortals, which has introduced many new items tailored to ninja tastes.",
   "LEX_NINJA2_RELIC_KFC.title": "KFC",
 
-  "LEX_NINJA2_RELIC_DIM_DEAD_TREE.description": "At the start of your turn, your next [gold]Ninjutsu[/gold] costs no [gold]Lexkra[/gold].",
+  "LEX_NINJA2_RELIC_DIM_DEAD_TREE.description": "At the start of your turn, your next [gold]Ninjutsu[/gold] costs no {lexKelaIcon:secondaryResourceIcons(1)}.",
   "LEX_NINJA2_RELIC_DIM_DEAD_TREE.flavor": "Rumor has it that Master Annai attained enlightenment beneath the Dark Cold Dead Tree.",
   "LEX_NINJA2_RELIC_DIM_DEAD_TREE.title": "Dark Cold Dead Tree",
 

@@ -319,17 +319,4 @@
 
   "LEX_NINJA2_CARD_TRUE_LEECH_FRIEND.description": "This turn, drain {Leech:diff()} [gold]Strength[/gold] from an ally who played fewer cards than you this turn.",
   "LEX_NINJA2_CARD_TRUE_LEECH_FRIEND.title": "Backstabbing Drain",
-  
-  "手系忍术": "[gold]Handjutsu[/gold]",
-  "刀系忍术": "[gold]Bladejutsu[/gold]",
-  "科学忍具": "[gold]Kagaku Ningu[/gold]",
-  "忍术": "\n[gold]Ninjutsu[/gold] {RenShu:renShu()}: ",
-  "蕾克拉": "[gold]Lexkra[/gold]",
-  "获得蕾克拉": "Gain {Kela:secondaryResourceIcons()}.",
-  "能量": "Gain {Energy:energyIcons()}",
-  "伤害": "Deal {Damage:diff()} damage",
-  "格挡": "Gain {Block:diff()} [gold]Block[/gold]",
-  "抽牌": "Draw {Cards:diff()} cards",
-  "中毒": "Apply {PoisonPower:diff()} [gold]Poison[/gold].",
-  "金色": "[gold][/gold]"
 }
