@@ -125,7 +125,7 @@
   "LEX_NINJA2_POWER_PLASMA_ARROW_POWER.title": "Plasma Arrow",
 
   "LEX_NINJA2_POWER_INFERNO_DRAGON_POWER.description": "[gold]Lexkra[/gold] makes you deal extra damage.",
-  "LEX_NINJA2_POWER_INFERNO_DRAGON_POWER.smartDescription": "Each {lexKelaIcon:secondaryResourceIcons(1)} makes you deal [blue]{Amount}%[/blue] more damage.\nTotal extra damage: [red]{dian}%[/red].",
+  "LEX_NINJA2_POWER_INFERNO_DRAGON_POWER.smartDescription": "Each {lexKelaIcon:secondaryResourceIcons(1)} makes you deal [blue]{Amount}%[/blue] more damage.\nTotal extra damage: [red]{BuffAmount}%[/red].",
   "LEX_NINJA2_POWER_INFERNO_DRAGON_POWER.title": "Inferno Dragon",
 
   "LEX_NINJA2_POWER_SEAL_POWER.description": "At the end of turn, gain [blue]50[/blue] [gold]Block[/gold] and become [gold]Stunned[/gold]. Removed upon taking unblocked damage.",
