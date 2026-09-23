@@ -125,7 +125,7 @@
   "LEX_NINJA2_POWER_PLASMA_ARROW_POWER.title": "射离子矢",
 
   "LEX_NINJA2_POWER_INFERNO_DRAGON_POWER.description": "[gold]蕾克拉[/gold]使你造成额外伤害",
-  "LEX_NINJA2_POWER_INFERNO_DRAGON_POWER.smartDescription": "每点{lexKelaIcon:secondaryResourceIcons(1)}使你额外造成[blue]{Amount}%[/blue]伤害。\n一共额外造成[red]{dian}%[/red]的伤害。",
+  "LEX_NINJA2_POWER_INFERNO_DRAGON_POWER.smartDescription": "每点{lexKelaIcon:secondaryResourceIcons(1)}使你额外造成[blue]{Amount}%[/blue]伤害。\n一共额外造成[red]{BuffAmount}%[/red]的伤害。",
   "LEX_NINJA2_POWER_INFERNO_DRAGON_POWER.title": "火龙炎神",
 
   "LEX_NINJA2_POWER_SEAL_POWER.description": "回合结束时获得[blue]50[/blue]点[gold]格挡[/gold]并被[gold]击晕[/gold]，受到未被[gold]格挡[/gold]的伤害后移除。",
