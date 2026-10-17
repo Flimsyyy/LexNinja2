@@ -30,7 +30,10 @@ public class ShakeShakeHands()
     {
         NinjaAudio.Play("res://LexNinja2/audio/ShakeShakeHand.mp3");
         var weakSelf = await CommonActions.ApplySelf<WeakPower>(choiceContext, this);
-        weakSelf!.SkipNextDurationTick = false;
+        if (weakSelf != null)
+        {
+            weakSelf.SkipNextDurationTick = false;
+        }
         await CommonActions.Apply<WeakPower>(choiceContext, this, play);
         await LexKela.Gain(this);
     }

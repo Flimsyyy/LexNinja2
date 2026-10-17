@@ -31,10 +31,12 @@ public class DisappointedPower : LexNinja2Power
         {
             return;
         }
-
         internalData.CardPlayed = null;
         var weakSelf = await PowerCmd.Apply<WeakPower>(context, Owner, 1, null, null);
-        weakSelf!.SkipNextDurationTick = false;
+        if (weakSelf != null)
+        {
+            weakSelf.SkipNextDurationTick = false;
+        }
         await PowerCmd.Decrement(this);
     }
 
