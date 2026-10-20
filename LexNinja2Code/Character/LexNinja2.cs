@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Godot;
 using LexNinja2.LexNinja2Code.Api.Extensions;
+using LexNinja2.LexNinja2Code.Api.Interface;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -12,7 +13,8 @@ namespace LexNinja2.LexNinja2Code.Character;
 
 [RegisterCharacter]
 public class LexNinja2
-    : ModCharacterTemplate<LexNinja2CardPool, LexNinja2RelicPool, LexNinja2PotionPool>
+    : ModCharacterTemplate<LexNinja2CardPool, LexNinja2RelicPool, LexNinja2PotionPool>,
+        ILexKelaPlayer
 {
     public const string CharacterId = "LexNinja2";
     public static readonly Color Color = new("252525");
