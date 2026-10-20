@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
+using LexNinja2.LexNinja2Code.Api.Interface;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Rooms;
 using STS2RitsuLib.Combat.SecondaryResources;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Models;
@@ -22,9 +25,8 @@ public class LexKelaSingleton()
     public override Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
         _usedLexKela[player] = false;
-        if (_isActive.ContainsKey(player))
-            return Task.CompletedTask;
-        _isActive[player] = player.Character is Character.LexNinja2;
+        if (!_isActive.ContainsKey(player))
+            _isActive[player] = player.Character is ILexKelaPlayer;
         return Task.CompletedTask;
     }
 
@@ -38,7 +40,7 @@ public class LexKelaSingleton()
         _isActive[player] = true;
         if (context.Delta < 0)
         {
-            _usedLexKela[context.Player] = true;
+            _usedLexKela[player] = true;
         }
         return Task.CompletedTask;
     }
@@ -56,6 +58,10 @@ public class LexKelaSingleton()
 
         foreach (var player in CurrentCombatState!.Players)
         {
+            if (player.Creature.IsDead)
+            {
+                continue;
+            }
             if (_usedLexKela[player])
             {
                 _usedLexKela[player] = false;
@@ -66,5 +72,14 @@ public class LexKelaSingleton()
                 await LexKela.Gain(player, 1, this);
             }
         }
+    }
+
+    public override Task AfterCombatVictory(CombatRoom room)
+    {
+        foreach (var player in _isActive.Keys.ToList())
+        {
+            _isActive[player] = player.Character is ILexKelaPlayer;
+        }
+        return Task.CompletedTask;
     }
 }
