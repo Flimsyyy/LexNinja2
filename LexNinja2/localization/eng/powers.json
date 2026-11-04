@@ -105,7 +105,7 @@
   "LEX_NINJA2_POWER_SCARE_POWER.title": "Frightenlization Form",
 
   "LEX_NINJA2_POWER_IGNIS_HEALING_POWER.description": "At the start of your turn, take [blue]5[/blue] damage.",
-  "LEX_NINJA2_POWER_IGNIS_HEALING_POWER.smartDescription": "At the start of your turn, take [blue]{HpLoss}[/blue] damage.",
+  "LEX_NINJA2_POWER_IGNIS_HEALING_POWER.smartDescription": "At the start of your turn, take [blue]{Amount}[/blue] damage.",
   "LEX_NINJA2_POWER_IGNIS_HEALING_POWER.title": "Ragnaros",
 
   "LEX_NINJA2_POWER_TWO_MONKS_POWER.description": "Gain an [gold]Extra Turn[/gold] played by a clone.",

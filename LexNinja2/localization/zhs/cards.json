@@ -51,7 +51,7 @@
   "LEX_NINJA2_CARD_DARKNESS_SNAKE_HAND.description": "获得{Kela:secondaryResourceIcons()}，抽{Cards:diff()}张牌，随机化你[gold]手牌[/gold]中所有牌的耗能。",
   "LEX_NINJA2_CARD_DARKNESS_SNAKE_HAND.title": "暗秽蛇手",
   
-  "LEX_NINJA2_CARD_RACING_AGAINST_MESSI.description": "抽{Cards:diff()}张牌。\n[gold]忍术[/gold]{RenShu:renShu()}：打出后再抽{ExtraCards:diff()}张",
+  "LEX_NINJA2_CARD_RACING_AGAINST_MESSI.description": "抽{Cards:diff()}张牌。\n[gold]忍术[/gold]{RenShu:renShu()}：打出后再抽{ExtraCards:diff()}张。",
   "LEX_NINJA2_CARD_RACING_AGAINST_MESSI.title": "我和梅西赛跑",
 
   "LEX_NINJA2_CARD_GONNA_EAT_SHIT.description": "对自身造成{Damage:diff()}点无法格挡的伤害。\n{IfChallengeMode:cond:下回合|}获得{Kela:secondaryResourceIcons()}和{Energy:energyIcons()}{IfChallengeMode:cond:|，下回合再获得一次}。",

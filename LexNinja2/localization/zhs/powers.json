@@ -105,7 +105,7 @@
   "LEX_NINJA2_POWER_SCARE_POWER.title": "受惊形态",
 
   "LEX_NINJA2_POWER_IGNIS_HEALING_POWER.description": "回合开始时受到[blue]5[/blue]点伤害。",
-  "LEX_NINJA2_POWER_IGNIS_HEALING_POWER.smartDescription": "回合开始时受到[blue]{HpLoss}[/blue]点伤害。",
+  "LEX_NINJA2_POWER_IGNIS_HEALING_POWER.smartDescription": "回合开始时受到[blue]{Amount}[/blue]点伤害。",
   "LEX_NINJA2_POWER_IGNIS_HEALING_POWER.title": "火神",
 
   "LEX_NINJA2_POWER_TWO_MONKS_POWER.description": "获得被分身接管的[gold]额外回合[/gold]。",
