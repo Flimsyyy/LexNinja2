@@ -19,7 +19,7 @@ namespace LexNinja2.LexNinja2Code.Cards.Basics;
 [RegisterCharacterStarterCard(typeof(Character.LexNinja2), Order = 2)]
 [RegisterArchaicToothTranscendence(typeof(ShadeCrossSlash))]
 public class YiCut()
-    : LexNinja2NinjutsuCard(0, CardType.Attack, CardRarity.Basic, TargetType.AllEnemies)
+    : LexNinja2NinjutsuCard(0, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new NinjutsuVar(2), new PowerVar<VulnerablePower>(1), new DamageVar(10, ValueProp.Move)];

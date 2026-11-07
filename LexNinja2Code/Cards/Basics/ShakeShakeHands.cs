@@ -16,7 +16,7 @@ namespace LexNinja2.LexNinja2Code.Cards.Basics;
 
 [RegisterCharacterStarterCard(typeof(Character.LexNinja2), Order = 3)]
 public class ShakeShakeHands()
-    : LexNinja2Card(0, CardType.Skill, CardRarity.Basic, TargetType.AllEnemies)
+    : LexNinja2Card(0, CardType.Skill, CardRarity.Basic, TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<WeakPower>(1), new LexKelaVar(1)];

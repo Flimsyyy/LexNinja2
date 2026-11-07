@@ -6,13 +6,13 @@
   "LEX_NINJA2_CARD_DEFEND_NINJA.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
   "LEX_NINJA2_CARD_DEFEND_NINJA.title": "防御",
 
-  "LEX_NINJA2_CARD_YI_CUT.description": "给予所有敌人{VulnerablePower}层[gold]易伤[/gold]。\n[gold]忍术[/gold]{RenShu:renShu()}：先对所有敌人造成{Damage:diff()}点伤害。",
+  "LEX_NINJA2_CARD_YI_CUT.description": "给予{VulnerablePower}层[gold]易伤[/gold]。\n[gold]忍术[/gold]{RenShu:renShu()}：先造成{Damage:diff()}点伤害。",
   "LEX_NINJA2_CARD_YI_CUT.title": "一字切",
 
   "LEX_NINJA2_CARD_SHADE_CROSS_SLASH.description": "对所有敌人造成{Damage:diff()}点伤害。\n给予所有敌人{VulnerablePower:diff()}层[gold]易伤[/gold]。\n[gold]忍术[/gold]{RenShu:renShu()}：额外造成2次伤害。",
   "LEX_NINJA2_CARD_SHADE_CROSS_SLASH.title": "影分身十字斩",
   
-  "LEX_NINJA2_CARD_SHAKE_SHAKE_HANDS.description": "给予自身和所有敌人{WeakPower}层[gold]虚弱[/gold]。\n获得{Kela:secondaryResourceIcons()}。",
+  "LEX_NINJA2_CARD_SHAKE_SHAKE_HANDS.description": "给予自身和敌人{WeakPower}层[gold]虚弱[/gold]。\n获得{Kela:secondaryResourceIcons()}。",
   "LEX_NINJA2_CARD_SHAKE_SHAKE_HANDS.title": "握握手，握握双手",
 
   "LEX_NINJA2_CARD_BURNING_BLADE.description": "造成{Damage:diff()}点伤害。\n花费{Kela:secondaryResourceIcons()}，使你的所有[gold]一刀一刀燃烧刀[/gold]获得[gold]重放[/gold]1。",

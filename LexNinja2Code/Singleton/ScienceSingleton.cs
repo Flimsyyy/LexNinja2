@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -34,6 +35,16 @@ public class ScienceSingleton() : HookedSingletonModel(HookType.Combat)
         {
             return;
         }
-        await LexKela.Spend(card.Owner, 1, card);
+        if (IsCardFree(card))
+        {
+            return;
+        }
+        var delta = card.EnergyCost._base - card.EnergyCost.GetResolved();
+        await LexKela.Spend(card.Owner, delta / 2, card);
+    }
+
+    private static bool IsCardFree(CardModel cardModel)
+    {
+        return cardModel.EnergyCost._localModifiers.Any(modifier => modifier.Amount == 0);
     }
 }
