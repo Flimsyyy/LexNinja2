@@ -36,7 +36,9 @@ public class GonnaEatShit()
             Owner.Creature,
             DynamicVars.Damage.BaseValue,
             ValueProp.Move | ValueProp.Unblockable,
-            this
+            Owner.Creature,
+            this,
+            play
         );
         if (!NinjaConfig.IsChallengeMode())
         {

@@ -4,6 +4,7 @@ using BaseLib.Cards.Variables;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
 using LexNinja2.LexNinja2Code.Api.Powers;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -44,7 +45,8 @@ public class InfernoDragonPower : LexNinja2Power
         decimal amount,
         ValueProp props,
         Creature? dealer,
-        CardModel? cardSource
+        CardModel? cardSource,
+        CardPlay? cardPlay
     )
     {
         var extraDamage = CalculateExtraDamage(this) / 100;

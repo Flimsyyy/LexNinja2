@@ -50,7 +50,7 @@ public class ScarePower : LexNinja2Power
             }
             // if (!(Owner.HasPower<WePeacePower>()&&card.Type==CardType.Attack))
             // {
-            await CardCmd.AutoPlay(choiceContext, card.CreateDupe(), null);
+            await CardCmd.AutoPlay(choiceContext, card.CreateDupe(player), null);
             // }
         }
     }

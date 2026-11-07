@@ -50,7 +50,7 @@ public sealed class TheSpectre : ModEventTemplate
     // 事件结束后的逻辑。这里是允许玩家移除药水
     protected override void OnEventFinished()
     {
-        Owner!.CanRemovePotions = true;
+        Owner!.CanUseOrRemovePotions = true;
         NinjaAudio.Stop("res://LexNinja2/audio/TheSpectre.mp3", 15f);
     }
 
