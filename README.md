@@ -1,5 +1,13 @@
 # LexNinja2
-蕾忍Mod杀戮尖塔2的版本
+
+**English** · [简体中文](README.zh-CN.md)
+
+[![Release](https://img.shields.io/github/v/release/Flimsyyy/LexNinja2?include_prereleases&sort=semver&label=release)](https://github.com/Flimsyyy/LexNinja2/releases)
+[![License](https://img.shields.io/badge/license-MIT-2e7d32)](LICENSE)
+[![Game](https://img.shields.io/badge/Slay%20the%20Spire%202-0.111.0%2B-6a1b9a)](#development)
+[![Steam Workshop](https://img.shields.io/badge/Steam%20Workshop-subscribe-1b2838)](https://steamcommunity.com/sharedfiles/filedetails/?id=3747530622)
+
+The Slay the Spire 2 version of the Lex Ninja (蕾忍) mod. Downloads and gameplay: [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3747530622).
 
 ## Development
 
@@ -12,8 +20,8 @@
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd LittleWizard
+   git clone https://github.com/Flimsyyy/LexNinja2.git
+   cd LexNinja2
    ```
 
 2. Restore NuGet packages:
@@ -45,7 +53,7 @@
 
 6. Start Developing:
    - Use `dotnet build` to compile only the DLL files
-   - Use `dotnet release` to not only compile DLLs, but also export PCK files and copy JSON files, PDB files (if DebugMode is enabled) to the Slay the Spire 2 mod directory
+   - Use `dotnet publish -c ExportRelease` to not only compile DLLs, but also export PCK files and copy JSON files (PDB files are not copied for `ExportRelease`) to the Slay the Spire 2 mod directory
 
 7. Versioning:
    - The version number is automatically generated from Git tags.
@@ -57,3 +65,11 @@
    - **How to Enable Debugger**: https://github.com/Alchyr/ModTemplate-StS2/wiki/Testing-and-Debugging#attaching-a-debugger
    - **Slay the Spire 2 Mod Template Setup Guide**: https://github.com/Alchyr/ModTemplate-StS2/wiki
    - **BaseLib Wiki**: https://alchyr.github.io/BaseLib-Wiki/
+
+## License
+
+The mod's source code is released under the [MIT License](LICENSE). Slay the Spire 2 assets and third-party libraries remain under their respective licenses.
+
+## Links
+
+- [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3747530622) · [Issues](https://github.com/Flimsyyy/LexNinja2/issues) · [Releases](https://github.com/Flimsyyy/LexNinja2/releases)
