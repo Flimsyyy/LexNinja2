@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using LexNinja2.LexNinja2Code.Api;
 using LexNinja2.LexNinja2Code.Api.Extensions;
@@ -28,18 +29,13 @@ public class ScarePower : LexNinja2Power
         if (player != Owner.Player)
             return;
         NinjaAudio.Play("res://LexNinja2/audio/吓我一跳释放忍术.mp3");
+        var cards = GetNinjutsuCards(Owner.Player);
         for (var i = 0; i < Amount; i++)
         {
             var card = CardFactory
                 .GetDistinctForCombat(
                     Owner.Player,
-                    ModelDb
-                        .Character<Character.LexNinja2>()
-                        .CardPool.GetUnlockedCards(
-                            Owner.Player.UnlockState,
-                            Owner.Player.RunState.CardMultiplayerConstraint
-                        )
-                        .Where(c => c.Tags.Contains(NinjaTags.Ninjutsu)),
+                    cards,
                     1,
                     Owner.Player.RunState.Rng.CombatCardGeneration
                 )
@@ -53,5 +49,18 @@ public class ScarePower : LexNinja2Power
             await CardCmd.AutoPlay(choiceContext, card.CreateDupe(player), null);
             // }
         }
+    }
+
+    private static List<CardModel> GetNinjutsuFromPool(CardPoolModel pool, Player player) =>
+        pool.GetUnlockedCards(player.UnlockState, player.RunState.CardMultiplayerConstraint)
+            .Where(c => c.Tags.Contains(NinjaTags.Ninjutsu))
+            .ToList();
+
+    private static List<CardModel> GetNinjutsuCards(Player player)
+    {
+        var cards = GetNinjutsuFromPool(player.Character.CardPool, player);
+        return cards.Count > 0
+            ? cards
+            : GetNinjutsuFromPool(ModelDb.Character<Character.LexNinja2>().CardPool, player);
     }
 }
