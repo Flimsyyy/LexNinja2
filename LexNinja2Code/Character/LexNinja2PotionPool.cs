@@ -9,6 +9,6 @@ public class LexNinja2PotionPool : TypeListPotionPoolModel
     public override string EnergyColorName => LexNinja2.CharacterId;
     public override Color LabOutlineColor => LexNinja2.Color;
 
-    public override string BigEnergyIconPath => "charui/NINJAOrb.png".ImagePath();
-    public override string TextEnergyIconPath => "charui/energyOrb.png".ImagePath();
+    public override string BigEnergyIconPath => LexNinja2.BigEnergyIconPath;
+    public override string TextEnergyIconPath => LexNinja2.EnergyIconPath;
 }

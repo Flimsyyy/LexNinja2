@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bf6lcj1y1q8sx"
-path="res://.godot/imported/energyOrb.png-5a6ccaa4ec3b6c0bc67a4fce4792e2d8.ctex"
+uid="uid://c84hmnbvxu5dl"
+path="res://.godot/imported/Lexninja_energy_orb_layer_2.png-ca1df1b3e30dd0e7d881088b22259a8d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://LexNinja2/images/charui/energyOrb.png"
-dest_files=["res://.godot/imported/energyOrb.png-5a6ccaa4ec3b6c0bc67a4fce4792e2d8.ctex"]
+source_file="res://LexNinja2/images/charui/energy/Lexninja_energy_orb_layer_2.png"
+dest_files=["res://.godot/imported/Lexninja_energy_orb_layer_2.png-ca1df1b3e30dd0e7d881088b22259a8d.ctex"]
 
 [params]
 
