@@ -11,8 +11,8 @@ public class LexNinja2CardPool : TypeListCardPoolModel, IModColorfulPhilosophers
     public override string Title => LexNinja2.CharacterId; //This is not a display name.
     public override string EnergyColorName => LexNinja2.CharacterId;
 
-    public override string BigEnergyIconPath => "charui/NINJAOrb.png".ImagePath();
-    public override string TextEnergyIconPath => "charui/energyOrb.png".ImagePath();
+    public override string BigEnergyIconPath => LexNinja2.BigEnergyIconPath;
+    public override string TextEnergyIconPath => LexNinja2.EnergyIconPath;
 
     private static readonly Material? _poolFrameMaterial = MaterialUtils.CreateHsvShaderMaterial(
         0.1f,

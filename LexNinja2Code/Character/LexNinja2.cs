@@ -18,6 +18,10 @@ public class LexNinja2
 {
     public const string CharacterId = "LexNinja2";
     public static readonly Color Color = new("252525");
+    public const string EnergyIconPath =
+        "res://LexNinja2/images/charui/energy_icons/ninja_energy.png";
+    public const string BigEnergyIconPath =
+        "res://LexNinja2/images/charui/energy_icons/ninja_energy_big.png";
 
     public override Color NameColor => Color;
     public override Color EnergyLabelOutlineColor => Color;
@@ -34,7 +38,8 @@ public class LexNinja2
                 Scenes: new CharacterSceneAssetSet(
                     VisualsPath: "res://LexNinja2/scenes/NinjaCharacter.tscn",
                     MerchantAnimPath: "res://LexNinja2/scenes/Ninja_merchant.tscn",
-                    RestSiteAnimPath: "res://LexNinja2/scenes/Ninja_rest_site.tscn"
+                    RestSiteAnimPath: "res://LexNinja2/scenes/Ninja_rest_site.tscn",
+                    EnergyCounterPath: "res://LexNinja2/scenes/Ninja_energy_counter.tscn"
                 ),
                 Ui: new CharacterUiAssetSet(
                     IconTexturePath: "Ninja2.png".CharacterUiPath(),
