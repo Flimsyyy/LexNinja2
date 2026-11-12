@@ -12,7 +12,7 @@ public class NinjaSelectPatch : IPatchMethod
     public static bool IsCritical => false;
 
     public static ModPatchTarget[] GetTargets() =>
-        [new(typeof(NCharacterSelectScreen), "SelectCharacter")];
+        [new(typeof(NCharacterSelectScreen), nameof(NCharacterSelectScreen.SelectCharacter))];
 
     public static void Prefix(NCharacterSelectButton charSelectButton)
     {
