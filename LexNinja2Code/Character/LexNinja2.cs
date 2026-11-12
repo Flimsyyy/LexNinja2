@@ -27,6 +27,8 @@ public class LexNinja2
     public override Color EnergyLabelOutlineColor => Color;
     public override Color MapDrawingColor => Color;
 
+    public override Color DreadNameColor => new("757575");
+
     public override CharacterGender Gender => CharacterGender.Masculine;
     public override int StartingHp => 68;
     public override int StartingGold => 99;
