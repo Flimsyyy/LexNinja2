@@ -53,7 +53,7 @@ public class LexNinja2
                 ),
                 Audio: new CharacterAudioAssetSet(
                     DeathSfx: "res://LexNinja2/audio/Cry.mp3",
-                    // CharacterSelectSfx: "res://LexNinja2/audio/pick.mp3",
+                    CharacterSelectSfx: "res://LexNinja2/audio/pick.mp3",
                     CharacterTransitionSfx: "event:/sfx/ui/wipe_ironclad"
                 ),
                 Multiplayer: new CharacterMultiplayerAssetSet(
