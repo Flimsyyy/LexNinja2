@@ -6,12 +6,10 @@ using Godot;
 using Godot.Bridge;
 using HarmonyLib;
 using LexNinja2.LexNinja2Code.Api;
-using LexNinja2.LexNinja2Code.Api.Patch;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
 using STS2RitsuLib;
 using STS2RitsuLib.Interop;
-using STS2RitsuLib.Patching.Core;
 using Logger = MegaCrit.Sts2.Core.Logging.Logger;
 
 namespace LexNinja2.LexNinja2Code;
@@ -41,7 +39,6 @@ public partial class MainFile : Node
         LexKela.Register();
 
         var patcher = RitsuLibFramework.CreatePatcher(ModId, "ninja-patches");
-        patcher.RegisterPatch<NinjaSelectPatch>();
 
         if (!patcher.PatchAll())
             throw new InvalidOperationException("Critical patches failed.");
