@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace LexNinja2.LexNinja2Code.Powers;
 
@@ -66,7 +67,12 @@ public class TwoMonksPower : LexNinja2Power
         }
         var combatState = player.Creature.CombatState;
         Flash();
-        using (CardSelectCmd.PushSelector(new VakuuCardSelector()))
+        using (
+            RunManager.Instance.CardSelectorStack.PushSelector(
+                Owner.Player,
+                new VakuuCardSelector()
+            )
+        )
         {
             int cardsPlayed;
             for (cardsPlayed = 0; cardsPlayed < 30; cardsPlayed++)

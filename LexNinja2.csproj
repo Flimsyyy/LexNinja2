@@ -90,16 +90,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.4.5" PrivateAssets="All" />
+    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.4.8" PrivateAssets="All" />
     <AdditionalFiles Include="LexNinja2/localization/**/*.json" />
-    <PackageReference Include="Book.StS2.RefLib" Version="0.111.0-beta" />
+    <PackageReference Include="Book.StS2.RefLib" Version="0.113.0-beta" />
     <PackageReference Include="CSharpier.MsBuild" Version="1.2.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Nothing.STS2RitsuLib.ModAnalyzers" Version="0.8.2" />
+    <PackageReference Include="Miooowo.STS2RitsuLib.ModAnalyzers" Version="0.0.1" />
     <PackageReference Include="SmartFormat" Version="3.3.0" />
-    <PackageReference Include="STS2.RitsuLib" Version="0.5.12" PrivateAssets="All" />
+    <PackageReference Include="STS2.RitsuLib" Version="0.6.11" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

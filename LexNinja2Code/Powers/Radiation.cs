@@ -30,7 +30,7 @@ public class Radiation : LexNinja2Power
             return;
         Flash();
         var radiation = (decimal)Owner.MaxHp * Amount / 100;
-        await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), Owner, radiation, false);
+        await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), Owner, radiation, null);
     }
 
     private decimal CalculateMaxHp()
