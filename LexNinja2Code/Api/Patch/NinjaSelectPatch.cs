@@ -14,11 +14,9 @@ public class NinjaSelectPatch : IPatchMethod
     public static ModPatchTarget[] GetTargets() =>
         [new(typeof(NCharacterSelectScreen), "SelectCharacter")];
 
-    public static void Prefix(
-        NCharacterSelectButton charSelectButton,
-        CharacterModel characterModel
-    )
+    public static void Prefix(NCharacterSelectButton charSelectButton)
     {
+        var characterModel = charSelectButton.Character;
         if (characterModel != ModelDb.Character<Character.LexNinja2>())
             return;
         Cmd.Wait(0.3f);
