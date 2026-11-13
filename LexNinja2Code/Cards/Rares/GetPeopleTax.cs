@@ -27,6 +27,7 @@ public class GetPeopleTax()
         ];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     public override bool CanBeGeneratedInCombat => false;
+    public override bool IsAllowedInBlitz => false;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
